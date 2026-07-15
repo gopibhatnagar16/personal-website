@@ -95,60 +95,62 @@ function fmtTime() {
   }).format(new Date());
 }
 
-/* ---------------- draggable canvas ---------------- */
+/* ---------------- draggable canvas (infinite pan) ---------------- */
 function DraggableCanvas({ items, height, hint, variant }) {
   const canvasRef = useRef(null);
   const drag = useRef(null);
+  const panDrag = useRef(null);
   const zTop = useRef(items.length);
   const [pos, setPos] = useState(() => {
     const o = {};
     items.forEach((it, i) => (o[it.id] = { x: it.x, y: it.y, z: i + 1 }));
     return o;
   });
+  const [pan, setPan] = useState({ x: 0, y: 0 });
 
-  // keep items inside the canvas on first paint + resize
-  useEffect(() => {
-    const clamp = () => {
-      const r = canvasRef.current && canvasRef.current.getBoundingClientRect();
-      if (!r) return;
-      setPos((s) => {
-        const o = { ...s };
-        items.forEach((it) => {
-          o[it.id] = {
-            ...o[it.id],
-            x: Math.max(0, Math.min(o[it.id].x, r.width - it.w)),
-            y: Math.max(0, Math.min(o[it.id].y, r.height - it.h)),
-          };
-        });
-        return o;
-      });
-    };
-    clamp();
-    window.addEventListener("resize", clamp);
-    return () => window.removeEventListener("resize", clamp);
-  }, []); // eslint-disable-line
-
+  // card drag — world-space coordinates, independent of the current pan
   const onDown = (e, id) => {
+    e.stopPropagation();
     e.currentTarget.setPointerCapture && e.currentTarget.setPointerCapture(e.pointerId);
     const r = canvasRef.current.getBoundingClientRect();
-    drag.current = { id, ox: e.clientX - r.left - pos[id].x, oy: e.clientY - r.top - pos[id].y };
+    const screenX = pos[id].x + pan.x;
+    const screenY = pos[id].y + pan.y;
+    drag.current = { id, ox: e.clientX - r.left - screenX, oy: e.clientY - r.top - screenY };
     zTop.current += 1;
     setPos((s) => ({ ...s, [id]: { ...s[id], z: zTop.current } }));
   };
   const onMove = (e) => {
     if (!drag.current) return;
     const r = canvasRef.current.getBoundingClientRect();
-    const it = items.find((i) => i.id === drag.current.id);
-    let x = e.clientX - r.left - drag.current.ox;
-    let y = e.clientY - r.top - drag.current.oy;
-    x = Math.max(0, Math.min(x, r.width - it.w));
-    y = Math.max(0, Math.min(y, r.height - it.h));
+    const x = e.clientX - r.left - drag.current.ox - pan.x;
+    const y = e.clientY - r.top - drag.current.oy - pan.y;
     setPos((s) => ({ ...s, [drag.current.id]: { ...s[drag.current.id], x, y } }));
   };
   const onUp = () => (drag.current = null);
 
+  // background drag — pans the whole mat, unbounded in every direction
+  const onCanvasDown = (e) => {
+    e.currentTarget.setPointerCapture && e.currentTarget.setPointerCapture(e.pointerId);
+    panDrag.current = { x: e.clientX, y: e.clientY, panX: pan.x, panY: pan.y };
+  };
+  const onCanvasMove = (e) => {
+    if (!panDrag.current) return;
+    const dx = e.clientX - panDrag.current.x;
+    const dy = e.clientY - panDrag.current.y;
+    setPan({ x: panDrag.current.panX + dx, y: panDrag.current.panY + dy });
+  };
+  const onCanvasUp = () => (panDrag.current = null);
+
   return (
-    <div className={"canvas" + (variant ? " " + variant : "")} style={{ height }} ref={canvasRef}>
+    <div
+      className={"canvas" + (variant ? " " + variant : "")}
+      style={{ height, "--pan-x": pan.x + "px", "--pan-y": pan.y + "px" }}
+      ref={canvasRef}
+      onPointerDown={onCanvasDown}
+      onPointerMove={onCanvasMove}
+      onPointerUp={onCanvasUp}
+      onPointerCancel={onCanvasUp}
+    >
       {hint && (
         <span className="canvas-hint">
           <Move size={13} strokeWidth={1.75} /> {hint}
@@ -159,7 +161,7 @@ function DraggableCanvas({ items, height, hint, variant }) {
           key={it.id}
           className={"ci ci-" + it.kind}
           style={{
-            left: pos[it.id].x, top: pos[it.id].y, zIndex: pos[it.id].z,
+            left: pos[it.id].x + pan.x, top: pos[it.id].y + pan.y, zIndex: pos[it.id].z,
             width: it.w, height: it.h,
             ...(it.emoji
               ? { background: it.bg, transform: `rotate(${it.rot || 0}deg)` }
@@ -390,13 +392,13 @@ export default function AboutTemplate() {
         {/* TIDBITS — draggable canvas */}
         <section className="section" id="tidbits">
           <span className="section-label">Tidbits</span>
-          <DraggableCanvas items={CONFIG.tidbits} height={400} hint="drag to move" variant="mat" />
+          <DraggableCanvas items={CONFIG.tidbits} height={400} hint="drag cards · drag mat to pan" variant="mat" />
         </section>
 
         {/* PERSONAL — sticker sheet */}
         <section className="section" id="personal">
           <span className="section-label">personal</span>
-          <DraggableCanvas items={CONFIG.stickers} height={340} hint="drag to move" />
+          <DraggableCanvas items={CONFIG.stickers} height={340} hint="drag stickers · drag to pan" />
         </section>
       </div>
 
@@ -618,11 +620,13 @@ const css = `
 .wp-img{display:block;width:100%;height:100%;background-size:cover;background-position:center;}
 @keyframes wpin{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
 
-/* draggable canvas */
+/* draggable canvas — infinite pan: --pan-x/--pan-y drive the background scroll */
 .canvas{position:relative;width:100%;border:1px solid var(--line);border-radius:18px;overflow:hidden;
   background-color:var(--canvas-bg);
   background-image:radial-gradient(var(--dot) 1px, transparent 1px);background-size:22px 22px;
-  touch-action:none;user-select:none;-webkit-user-select:none;}
+  background-position:var(--pan-x,0px) var(--pan-y,0px);
+  cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none;}
+.canvas:active{cursor:grabbing;}
 .canvas-hint{position:absolute;left:16px;bottom:14px;z-index:1;display:inline-flex;align-items:center;gap:6px;
   font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
   color:var(--faint);pointer-events:none;}
@@ -645,15 +649,20 @@ const css = `
     linear-gradient(rgba(255,255,255,.14) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255,255,255,.14) 1px, transparent 1px);
   background-size:120px 120px,120px 120px,24px 24px,24px 24px;
-  background-position:-1px -1px,-1px -1px,-1px -1px,-1px -1px;
+  background-position:
+    calc(-1px + var(--pan-x,0px)) calc(-1px + var(--pan-y,0px)),
+    calc(-1px + var(--pan-x,0px)) calc(-1px + var(--pan-y,0px)),
+    calc(-1px + var(--pan-x,0px)) calc(-1px + var(--pan-y,0px)),
+    calc(-1px + var(--pan-x,0px)) calc(-1px + var(--pan-y,0px));
   box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
 }
 .canvas.mat::before{
   content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
-  background:
+  background-image:
     linear-gradient(135deg, transparent calc(50% - 1px), rgba(255,255,255,.16) 50%, transparent calc(50% + 1px)),
     linear-gradient(45deg, transparent calc(50% - 1px), rgba(255,255,255,.16) 50%, transparent calc(50% + 1px));
   background-size:240px 240px,240px 240px;
+  background-position:var(--pan-x,0px) var(--pan-y,0px),var(--pan-x,0px) var(--pan-y,0px);
   background-repeat:repeat;
   mask-image:radial-gradient(circle at 0 0, black, transparent 70%);
 }
