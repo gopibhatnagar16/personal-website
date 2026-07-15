@@ -58,16 +58,16 @@ const CONFIG = {
     { id: "p7", x: 560, y: 288, w: 140, h: 96, kind: "rect", g: 6 },
   ],
 
-  // sticker sheet — scattered, draggable
+  // sticker sheet — scattered edge-to-edge across the full-bleed canvas
   stickers: [
-    { id: "s1", x: 40, y: 30, w: 92, h: 92, kind: "sticker", emoji: "✌️", bg: "#F5A623", rot: -8 },
-    { id: "s2", x: 210, y: 80, w: 82, h: 82, kind: "sticker", emoji: "☕", bg: "#3395FF", rot: 6 },
-    { id: "s3", x: 360, y: 24, w: 96, h: 96, kind: "sticker", emoji: "🎧", bg: "#4B47E5", rot: -4 },
-    { id: "s4", x: 520, y: 96, w: 80, h: 80, kind: "sticker", emoji: "🌱", bg: "#00998F", rot: 10 },
-    { id: "s5", x: 650, y: 30, w: 100, h: 100, kind: "sticker", emoji: "⭐", bg: "#E4181C", rot: -12 },
-    { id: "s6", x: 120, y: 210, w: 88, h: 88, kind: "sticker", emoji: "📷", bg: "#FF4E7A", rot: 7 },
-    { id: "s7", x: 320, y: 220, w: 92, h: 92, kind: "sticker", emoji: "🎮", bg: "#C77B30", rot: -6 },
-    { id: "s8", x: 500, y: 208, w: 84, h: 84, kind: "sticker", emoji: "🔥", bg: "#8A5CF6", rot: 9 },
+    { id: "s1", x: 10, y: 20, w: 92, h: 92, kind: "sticker", emoji: "✌️", bg: "#F5A623", rot: -8 },
+    { id: "s2", x: 170, y: 120, w: 82, h: 82, kind: "sticker", emoji: "☕", bg: "#3395FF", rot: 6 },
+    { id: "s3", x: 340, y: 10, w: 100, h: 100, kind: "sticker", emoji: "🎧", bg: "#4B47E5", rot: -4 },
+    { id: "s4", x: 520, y: 140, w: 80, h: 80, kind: "sticker", emoji: "🌱", bg: "#00998F", rot: 10 },
+    { id: "s5", x: 700, y: 30, w: 104, h: 104, kind: "sticker", emoji: "⭐", bg: "#E4181C", rot: -12 },
+    { id: "s6", x: 880, y: 150, w: 90, h: 90, kind: "sticker", emoji: "📷", bg: "#FF4E7A", rot: 7 },
+    { id: "s7", x: 1050, y: 20, w: 96, h: 96, kind: "sticker", emoji: "🎮", bg: "#C77B30", rot: -6 },
+    { id: "s8", x: 1220, y: 140, w: 86, h: 86, kind: "sticker", emoji: "🔥", bg: "#8A5CF6", rot: 9 },
   ],
 
   photos: [], // avatar fan (last = front)
@@ -396,11 +396,15 @@ export default function AboutTemplate() {
         </section>
 
         {/* PERSONAL — sticker sheet */}
-        <section className="section" id="personal">
+        <section className="section section-tight" id="personal">
           <span className="section-label">personal</span>
-          <DraggableCanvas items={CONFIG.stickers} height={340} hint="drag stickers · drag to pan" />
         </section>
       </div>
+
+        {/* full-bleed — breaks out of the centered column */}
+        <div className="bleed">
+          <DraggableCanvas items={CONFIG.stickers} height={340} hint="drag stickers · drag to pan" variant="open" />
+        </div>
 
         {(veil || fanned) && <div className="blur-veil" aria-hidden="true" />}
       </div>
@@ -562,6 +566,7 @@ const css = `
 
 /* sections */
 .section{padding:clamp(22px,3.5vh,38px) 0;}
+.section-tight{padding-bottom:0;}
 .section-label{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;
   text-transform:uppercase;letter-spacing:.16em;color:var(--faint);margin-bottom:26px;}
 .section-intro{color:var(--muted);font-size:clamp(1rem,1.5vw,1.1rem);line-height:1.55;
@@ -669,6 +674,11 @@ const css = `
 .canvas.mat .canvas-hint{color:rgba(255,255,255,.72);}
 .gp[data-theme="dark"] .canvas.mat{background-color:#33493B;}
 
+/* open variant — no panel chrome, used full-bleed */
+.canvas.open{border:none;background:none;border-radius:0;}
+
+/* full-bleed breakout — escapes the centered .col, spans the viewport */
+.bleed{width:100%;margin:4px 0 44px;}
 
 /* sticky pill dock */
 .pilldock{position:fixed;left:50%;transform:translateX(-50%);bottom:22px;z-index:70;
