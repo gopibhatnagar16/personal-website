@@ -411,7 +411,14 @@ export default function AboutTemplate() {
         onMouseLeave={() => setEyes((s) => ({ ...s, show: false }))}
       >
         <div className="ft-inner">
-          <div className="ft-note" aria-hidden="true" />
+          <div className="ft-note">
+            <span className="ft-note-date">{CONFIG.lastUpdated}</span>
+            <p className="ft-note-body">
+              Hey — thanks for scrolling all the way down. If something here made you pause, or
+              you just want to talk shop, my inbox is always open.
+            </p>
+            <span className="ft-note-sign">— {CONFIG.name}</span>
+          </div>
 
           <div className="ft-veil" aria-hidden="true" />
 
@@ -689,7 +696,15 @@ const css = `
 .ft-v{font-family:'Hanken Grotesk',sans-serif;font-weight:500;font-size:15px;}
 .ft-note{width:min(560px,88%);height:210px;background:#1B1915;border-radius:16px;margin-top:auto;
   box-shadow:0 26px 60px rgba(0,0,0,.28);
-  background-image:repeating-linear-gradient(#1B1915 0 33px, rgba(255,255,255,.05) 33px 34px);}
+  background-image:repeating-linear-gradient(#1B1915 0 33px, rgba(255,255,255,.05) 33px 34px);
+  display:flex;flex-direction:column;align-items:flex-start;text-align:left;
+  padding:26px 30px 22px;box-sizing:border-box;}
+.ft-note-date{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:rgba(245,244,240,.5);}
+.ft-note-body{font-family:'Hanken Grotesk',sans-serif;font-weight:500;letter-spacing:-.005em;
+  font-size:clamp(1rem,2vw,1.15rem);line-height:1.6;color:#F5F4F0;margin:16px 0 auto;max-width:44ch;}
+.ft-note-sign{font-family:'Hanken Grotesk',sans-serif;font-weight:700;font-size:15px;
+  color:#F5F4F0;align-self:flex-end;}
 
 /* focus veil — blurs the footer behind the tiles on hover */
 .ft-veil{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;
@@ -711,8 +726,8 @@ const css = `
 
 @media (max-width:640px){
   .canvas{height:360px !important;}
-  .gp{--footH:470px;}
-  .ft-note{height:180px;}
+  .gp{--footH:540px;}
+  .ft-note{height:240px;padding:22px 22px 20px;}
   .ft-chip{width:82px;height:82px;border-radius:22px;}
 }
 @media (max-width:420px){
