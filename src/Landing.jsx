@@ -84,7 +84,7 @@ function fmtTime() {
 }
 
 /* ---------------- draggable canvas ---------------- */
-function DraggableCanvas({ items, height, hint, bare }) {
+function DraggableCanvas({ items, height, hint, variant }) {
   const canvasRef = useRef(null);
   const drag = useRef(null);
   const zTop = useRef(items.length);
@@ -136,7 +136,7 @@ function DraggableCanvas({ items, height, hint, bare }) {
   const onUp = () => (drag.current = null);
 
   return (
-    <div className={"canvas" + (bare ? " bare" : "")} style={{ height }} ref={canvasRef}>
+    <div className={"canvas" + (variant ? " " + variant : "")} style={{ height }} ref={canvasRef}>
       {hint && (
         <span className="canvas-hint">
           <Move size={13} strokeWidth={1.75} /> {hint}
@@ -373,7 +373,7 @@ export default function AboutTemplate() {
         {/* TIDBITS — draggable canvas */}
         <section className="section" id="tidbits">
           <span className="section-label">Tidbits</span>
-          <DraggableCanvas items={CONFIG.tidbits} height={400} hint="drag to move" bare />
+          <DraggableCanvas items={CONFIG.tidbits} height={400} hint="drag to move" variant="mat" />
         </section>
 
         {/* PERSONAL — space reserved, content TBD */}
@@ -607,7 +607,31 @@ const css = `
 .ci:hover{box-shadow:0 10px 24px rgba(0,0,0,.2);}
 .ci:active{cursor:grabbing;box-shadow:0 16px 32px rgba(0,0,0,.26);}
 .ci-circle{border-radius:50%;}
-.canvas.bare{border:none;background:none;}
+
+/* cutting-mat variant — for the Tidbits canvas */
+.canvas.mat{
+  border-color:rgba(0,0,0,.14);
+  background-color:#4B6B57;
+  background-image:
+    linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.14) 1px, transparent 1px);
+  background-size:120px 120px,120px 120px,24px 24px,24px 24px;
+  background-position:-1px -1px,-1px -1px,-1px -1px,-1px -1px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+}
+.canvas.mat::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:
+    linear-gradient(135deg, transparent calc(50% - 1px), rgba(255,255,255,.16) 50%, transparent calc(50% + 1px)),
+    linear-gradient(45deg, transparent calc(50% - 1px), rgba(255,255,255,.16) 50%, transparent calc(50% + 1px));
+  background-size:240px 240px,240px 240px;
+  background-repeat:repeat;
+  mask-image:radial-gradient(circle at 0 0, black, transparent 70%);
+}
+.canvas.mat .canvas-hint{color:rgba(255,255,255,.72);}
+.gp[data-theme="dark"] .canvas.mat{background-color:#33493B;}
 
 /* reserved empty space for the personal section */
 .personal-space{min-height:360px;}
