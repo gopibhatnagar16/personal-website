@@ -6,6 +6,7 @@
 export const caseStudies = {
   "subscriptions": {
     kind: "Work",
+    password: "loremipsum",
     title: "Subscriptions",
     tagline:
       "A mandatory ₹399/month plan for low-GMV, unregistered merchants — designed so the trade-off reads as honest, not punitive.",
@@ -39,6 +40,7 @@ export const caseStudies = {
 
   "growth-experiments": {
     kind: "Work",
+    password: "loremipsum",
     title: "Growth experiments",
     tagline:
       "Small, fast bets on Razorpay's merchant growth surface — shipping to learn, not to be right.",

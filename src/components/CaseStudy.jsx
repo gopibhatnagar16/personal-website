@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { caseStudies } from "../data/caseStudies.js";
 
@@ -41,11 +42,42 @@ const css = `
   background:linear-gradient(135deg,#F0EFEA,#E1E0D9);}
 
 .cs-foot{margin:66px 0 0;padding-top:28px;border-top:1px solid var(--line);}
+
+.cs-lock-col{padding-top:64px;}
+.cs-lock-form{display:flex;gap:10px;margin:28px 0 0;max-width:360px;}
+.cs-lock-input{flex:1;font-family:'Inter',system-ui,sans-serif;font-size:15px;color:var(--ink);
+  background:#FFFFFF;border:1px solid var(--line);border-radius:10px;padding:11px 14px;outline:none;
+  transition:border-color .18s ease;}
+.cs-lock-input:focus{border-color:var(--muted);}
+.cs-lock-btn{font-family:'Inter',system-ui,sans-serif;font-weight:600;font-size:14px;color:#FFFFFF;
+  background:var(--ink);border:none;border-radius:10px;padding:0 20px;cursor:pointer;transition:opacity .18s ease;}
+.cs-lock-btn:hover{opacity:.86;}
+.cs-lock-error{font-size:13px;color:#C43D3D;margin:14px 0 0;}
 `;
 
 export default function CaseStudy() {
   const { slug } = useParams();
   const cs = caseStudies[slug];
+  const locked = !!(cs && cs.password);
+  const storageKey = `cs-unlocked-${slug}`;
+
+  const [unlocked, setUnlocked] = useState(() => {
+    if (!locked) return true;
+    try { return sessionStorage.getItem(storageKey) === "1"; } catch (e) { return false; }
+  });
+  const [pwd, setPwd] = useState("");
+  const [error, setError] = useState(false);
+
+  const handleUnlock = (e) => {
+    e.preventDefault();
+    if (pwd === cs.password) {
+      setUnlocked(true);
+      setError(false);
+      try { sessionStorage.setItem(storageKey, "1"); } catch (e) {}
+    } else {
+      setError(true);
+    }
+  };
 
   if (!cs) {
     return (
@@ -59,6 +91,35 @@ export default function CaseStudy() {
           <h1 className="cs-title">Nothing here yet</h1>
           <p className="cs-tagline">That case study doesn’t exist. Head back home.</p>
           <div className="cs-foot"><Link className="cs-back" to="/">← Back to home</Link></div>
+        </div>
+      </div>
+    );
+  }
+
+  if (locked && !unlocked) {
+    return (
+      <div className="cs">
+        <style>{css}</style>
+        <header className="cs-bar">
+          <Link className="cs-back" to="/">← Gopi Bhatnagar</Link>
+          <span className="cs-kind">{cs.kind}</span>
+        </header>
+        <div className="cs-col cs-lock-col">
+          <span className="cs-eyebrow">Protected</span>
+          <h1 className="cs-title">{cs.title}</h1>
+          <p className="cs-tagline">This case study is password protected. Enter the password to continue.</p>
+          <form className="cs-lock-form" onSubmit={handleUnlock}>
+            <input
+              type="password"
+              className="cs-lock-input"
+              placeholder="Password"
+              value={pwd}
+              onChange={(e) => { setPwd(e.target.value); setError(false); }}
+              autoFocus
+            />
+            <button type="submit" className="cs-lock-btn">Unlock</button>
+          </form>
+          {error && <p className="cs-lock-error">Wrong password — try again.</p>}
         </div>
       </div>
     );
