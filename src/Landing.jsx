@@ -58,6 +58,18 @@ const CONFIG = {
     { id: "p7", x: 560, y: 288, w: 140, h: 96, kind: "rect", g: 6 },
   ],
 
+  // sticker sheet — scattered, draggable
+  stickers: [
+    { id: "s1", x: 40, y: 30, w: 92, h: 92, kind: "sticker", emoji: "✌️", bg: "#F5A623", rot: -8 },
+    { id: "s2", x: 210, y: 80, w: 82, h: 82, kind: "sticker", emoji: "☕", bg: "#3395FF", rot: 6 },
+    { id: "s3", x: 360, y: 24, w: 96, h: 96, kind: "sticker", emoji: "🎧", bg: "#4B47E5", rot: -4 },
+    { id: "s4", x: 520, y: 96, w: 80, h: 80, kind: "sticker", emoji: "🌱", bg: "#00998F", rot: 10 },
+    { id: "s5", x: 650, y: 30, w: 100, h: 100, kind: "sticker", emoji: "⭐", bg: "#E4181C", rot: -12 },
+    { id: "s6", x: 120, y: 210, w: 88, h: 88, kind: "sticker", emoji: "📷", bg: "#FF4E7A", rot: 7 },
+    { id: "s7", x: 320, y: 220, w: 92, h: 92, kind: "sticker", emoji: "🎮", bg: "#C77B30", rot: -6 },
+    { id: "s8", x: 500, y: 208, w: 84, h: 84, kind: "sticker", emoji: "🔥", bg: "#8A5CF6", rot: 9 },
+  ],
+
   photos: [], // avatar fan (last = front)
 };
 
@@ -148,13 +160,18 @@ function DraggableCanvas({ items, height, hint, variant }) {
           className={"ci ci-" + it.kind}
           style={{
             left: pos[it.id].x, top: pos[it.id].y, zIndex: pos[it.id].z,
-            width: it.w, height: it.h, backgroundImage: SHAPE_GREYS[it.g % SHAPE_GREYS.length],
+            width: it.w, height: it.h,
+            ...(it.emoji
+              ? { background: it.bg, transform: `rotate(${it.rot || 0}deg)` }
+              : { backgroundImage: SHAPE_GREYS[it.g % SHAPE_GREYS.length] }),
           }}
           onPointerDown={(e) => onDown(e, it.id)}
           onPointerMove={onMove}
           onPointerUp={onUp}
           onPointerCancel={onUp}
-        />
+        >
+          {it.emoji && <span className="ci-emoji">{it.emoji}</span>}
+        </div>
       ))}
     </div>
   );
@@ -376,10 +393,10 @@ export default function AboutTemplate() {
           <DraggableCanvas items={CONFIG.tidbits} height={400} hint="drag to move" variant="mat" />
         </section>
 
-        {/* PERSONAL — space reserved, content TBD */}
+        {/* PERSONAL — sticker sheet */}
         <section className="section" id="personal">
           <span className="section-label">personal</span>
-          <div className="personal-space" aria-hidden="true" />
+          <DraggableCanvas items={CONFIG.stickers} height={340} hint="drag to move" />
         </section>
       </div>
 
@@ -607,6 +624,9 @@ const css = `
 .ci:hover{box-shadow:0 10px 24px rgba(0,0,0,.2);}
 .ci:active{cursor:grabbing;box-shadow:0 16px 32px rgba(0,0,0,.26);}
 .ci-circle{border-radius:50%;}
+.ci-sticker{border-radius:50%;border:4px solid var(--bg);display:grid;place-items:center;
+  box-shadow:0 6px 16px rgba(0,0,0,.22);}
+.ci-emoji{font-size:32px;line-height:1;pointer-events:none;user-select:none;}
 
 /* cutting-mat variant — for the Tidbits canvas */
 .canvas.mat{
@@ -633,8 +653,6 @@ const css = `
 .canvas.mat .canvas-hint{color:rgba(255,255,255,.72);}
 .gp[data-theme="dark"] .canvas.mat{background-color:#33493B;}
 
-/* reserved empty space for the personal section */
-.personal-space{min-height:360px;}
 
 /* sticky pill dock */
 .pilldock{position:fixed;left:50%;transform:translateX(-50%);bottom:22px;z-index:70;
