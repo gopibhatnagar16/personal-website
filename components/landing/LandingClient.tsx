@@ -5,7 +5,6 @@ import { EyesProvider } from "@/components/shared/EyesCursor";
 import { DraggableCanvas } from "@/components/canvas/DraggableCanvas";
 import { TopBar } from "@/components/layout/TopBar";
 import { SiteFooter } from "@/components/layout/SiteFooter";
-import { PillDock } from "@/components/layout/PillDock";
 import { Hero } from "./Hero";
 import { ExperienceRow } from "./ExperienceRow";
 import { WorkList, type WorkRow } from "./WorkList";
@@ -57,7 +56,6 @@ export function LandingClient({ work, writing }: Props) {
         </div>
 
         <SiteFooter />
-        <PillDock />
       </div>
     </EyesProvider>
   );
