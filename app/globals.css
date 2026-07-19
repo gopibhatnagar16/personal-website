@@ -275,7 +275,7 @@ body {
   transition:background-color .35s ease,color .35s ease;}
 .cs *{box-sizing:border-box;}
 
-.cs-bar{max-width:900px;margin:0 auto;padding:26px clamp(20px,5vw,32px);
+.cs-bar{max-width:940px;margin:0 auto;padding:26px clamp(20px,5vw,32px);
   display:flex;justify-content:space-between;align-items:center;}
 .cs-back{font-family:var(--font-jetbrains),monospace;font-size:12px;text-transform:uppercase;
   letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .18s ease;}
@@ -283,7 +283,7 @@ body {
 .cs-kind{font-family:var(--font-jetbrains),monospace;font-size:11px;text-transform:uppercase;
   letter-spacing:.16em;color:var(--faint);}
 
-.cs-col{max-width:760px;margin:0 auto;padding:16px clamp(20px,5vw,32px) 120px;}
+.cs-col{max-width:940px;margin:0 auto;padding:16px clamp(20px,5vw,32px) 120px;}
 .cs-eyebrow{font-family:var(--font-jetbrains),monospace;font-size:11px;text-transform:uppercase;
   letter-spacing:.16em;color:var(--faint);}
 .cs-title{font-family:var(--font-hanken),sans-serif;font-weight:800;letter-spacing:-.02em;
@@ -300,6 +300,7 @@ body {
 .cs-hero{height:clamp(220px,42vw,420px);border-radius:16px;margin:36px 0 8px;
   background:linear-gradient(135deg,#EDEDE8,#D9D8D1);}
 [data-theme="dark"] .cs-hero{background:linear-gradient(135deg,#22221D,#191914);}
+.cs-body{max-width:720px;}
 .cs-body h2{font-family:var(--font-hanken),sans-serif;font-weight:700;letter-spacing:-.01em;
   font-size:1.5rem;margin:44px 0 14px;}
 .cs-body p{font-size:1.05rem;line-height:1.65;color:var(--body);margin:0 0 16px;}
