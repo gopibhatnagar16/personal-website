@@ -1,30 +1,98 @@
 ---
-title: Subscriptions
-tagline: A mandatory ₹399/month plan for low-GMV, unregistered merchants — designed so the trade-off reads as honest, not punitive.
-role: Product Design
-year: "2026"
-team: Razorpay · PG Growth
+title: Giving new merchants a choice beyond the standard rate
+tagline: A subscription-pricing journey for registered businesses that replaced one default rate with a clearer, optional plan choice during onboarding.
+role: Product Designer II
+year: "2025"
+team: Razorpay · Product, Design, Marketing, Engineering
 protected: true
 ---
 
-## Overview
+## Context
 
-Razorpay rolled out a flat monthly subscription for a specific cohort of low-GMV merchants. I owned the dashboard surfaces and the communication strategy that introduced the change across the product.
+Most Razorpay products are charged at standard transaction rates. One standard rate was simple, but it gave payment-ready businesses little reason to choose or deepen their use of Razorpay. The product goal: give businesses a clear route — stay on the standard rate, or choose a subscription plan they can manage later.
 
-The real problem was trust. A new mandatory fee can feel like something being taken away, so every surface had to earn the change by explaining the 'why' plainly — and only ever make claims that actually held up.
+The subscription opportunity sits just after onboarding, when the business has given us enough context but has not yet formed a regular payment habit. The intended route: understand the business → offer a clear pricing route → help it make a first payment → support regular payment use over time. The existing journey offered one standard rate and no self-serve pricing choice, leaving committed businesses to switch gateways, contact Sales, or postpone the decision.
+
+<ImagePlaceholder />
+
+## Problem
+
+After a registered business completed onboarding, the product still showed one standard rate — even though we had enough context to offer a more relevant next step. High-value merchants could request custom pricing through Contact Sales; everyone else saw 2% and nothing more.
+
+The opportunity sat in the short window after setup: the product understood the business, but did not yet use that understanding to help it choose how to start. If pricing stayed unclear, merchants could leave before forming a transaction habit.
+
+## Discovery
+
+Onboarding captured useful business details, but every eligible business still saw the same rate. Context was collected, then ignored. The decision point after onboarding — when a business is ready to start but still deciding where to take its first payment — was the moment to show a clear next step: keep Standard available, and make a relevant plan easy to understand and revisit later.
+
+To explain what the funnel couldn't, we called around **120 merchants** and had **30 meaningful conversations** across merchants who paused, stayed on the default path, and chose a paid plan. Four situations kept repeating:
+
+- **Cautious starters** — "I am just starting out. I will upgrade later if needed."
+- **Value-conscious comparers** — "The rate is better, but I do not remember the exact calculation."
+- **Confused buyers** — "Do I need to pay to start accepting payments?"
+- **Setup-blocked merchants** — "I was still stuck on setup, so the plan did not matter yet."
+
+That translated directly into design requirements: make it explicit that Standard remains available, show how a plan connects to expected payment volume, and let merchants return and manage the decision later.
 
 <ImagePlaceholder />
 
-## Approach
+## How might we
 
-Cohort-based messaging, so each merchant saw language that matched their situation instead of a one-size-fits-all announcement.
+> Help a new business choose the right pricing option with confidence.
 
-A consistent honesty guardrail: savings language appeared only where the math genuinely worked out for that merchant.
+Three directions shaped the solution: **clear choice** (Standard and optional plans as distinct, understandable routes), **visible fit** (connect expected payment volume to savings a business can judge), and **flexible control** (start now, then revisit, change, or cancel as needs evolve).
 
-A multi-surface system — WhatsApp, email, an in-product navbar chip, settlement notes, and a homepage banner — each doing one job at the right moment in the journey.
+## Iterations
 
-## Outcome
+We changed the amount of choice, the value frame, and the payment model to learn which explanation felt easiest to understand:
 
-[Add the headline result here once the numbers are in — e.g. adoption within the cohort, churn, or the change in support tickets after launch.]
+- **Four distinct offerings** — a broader comparison made value visible, but made the decision heavier when volume was unclear.
+- **Savings-first hierarchy** — savings sparked interest, but merchants still needed the plan to feel right for their volume.
+- **Prepaid vs postpaid** — payment timing turned out to be part of the decision, not just the commercial model.
+- **Volume-led recommendation** — a recommendation helps when the volume assumption is transparent and easy to revisit.
+- **0% platform-fee framing** — a strong hook earns attention, but boundaries must be clear enough to build trust.
+- **One plan + top-ups** — simplicity works when the future path remains visible and under the merchant's control.
 
 <ImagePlaceholder />
+
+## MVP experiment
+
+We tested pricing frames in a controlled onboarding MVP: a softer savings frame (Variant A), a stronger value contrast (Variant B), and plan-order changes (Variant C) — across a simpler three-plan choice, savings language, volume relevance, monthly and annual billing, and recommendation states.
+
+Variant B — the stronger contrast — was the clearest winner for plan selection, especially among registered businesses. The qualitative read mattered just as much: presentation worked, but drop-off was mixed (pricing confusion, setup blockers, and low intent were different problems), and businesses needed to know that a paid plan was optional. The whitelisted rollout also exposed a lifecycle gap: changing or cancelling a plan still required manual support.
+
+The decision: scale the strongest pricing frame, then build the touchpoints and self-serve controls around it.
+
+<ImagePlaceholder />
+
+## Final solution
+
+We made pricing an explicit step after onboarding. Before taking a first payment, every eligible business chooses a route: stay on the standard rate or select a subscription plan. **The decision is required; a paid plan is not.**
+
+The plan story then lives wherever a business already works, across six touchpoints, each answering a different question:
+
+- **Home page** — a full-width banner on the highest-traffic surface, for plan awareness from the first login.
+- **Top navigation** — a persistent Get Plus action that disappears once the business upgrades.
+- **Profile dropdown** — answers "what plan am I on?" in one click.
+- **Transactions page** — a single-line banner that lets businesses judge better pricing against their own usage, not an abstract estimate.
+- **In-product nudges** — dismissible cards after a business starts processing payments, testing social proof and value framing at the relevant moment.
+- **Account & settings** — a permanent Manage Plans home combining utilization, the full plan ladder, and change/cancel/reactivate controls.
+
+The final solution had to act like a bridge, not a gate: it helped merchants compare value during onboarding and still gave them control later through dashboard plan management.
+
+<ImagePlaceholder />
+
+## Results
+
+**1,900 merchants chose subscriptions. Early cohorts grew payment volume by 61%.**
+
+The clearest outcome was merchant action: more businesses selected a plan, generated recurring subscription revenue, and processed more payments with Razorpay.
+
+## My learnings
+
+- **A lift is a signal** — pair conversion movement with research before deciding why a design worked.
+- **The journey is the design** — a winning screen is only useful when discovery, first use, and plan management work together.
+- **Growth still needs trust** — keeping the standard rate explicit made the nudge persuasive without making payment feel mandatory.
+- **Designers should know the metric** — understanding cohorts, events, and guardrails shaped the strategy, not only the interface.
+
+In one line: I turned a one-rate onboarding moment into a clearer subscription journey that helps a new business understand its options, choose with confidence, and manage its plan later.

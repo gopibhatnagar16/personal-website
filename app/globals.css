@@ -321,6 +321,17 @@ body {
 .cs-body h2{font-family:var(--font-hanken),sans-serif;font-weight:700;letter-spacing:-.01em;
   font-size:1.5rem;margin:44px 0 14px;}
 .cs-body p{font-size:1.05rem;line-height:1.65;color:var(--body);margin:0 0 16px;}
+.cs-body strong{font-weight:600;color:var(--ink);}
+.cs-body em{font-style:italic;}
+.cs-body a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--faint);}
+.cs-body a:hover{text-decoration-color:var(--ink);}
+.cs-body ul{list-style:none;margin:0 0 18px;padding:0;}
+.cs-body li{position:relative;padding-left:22px;margin-bottom:11px;
+  font-size:1.02rem;line-height:1.6;color:var(--body);}
+.cs-body li::before{content:"";position:absolute;left:2px;top:.7em;width:6px;height:1px;background:var(--faint);}
+.cs-body blockquote{margin:28px 0;padding:4px 0 4px 22px;border-left:2px solid var(--ink);}
+.cs-body blockquote p{font-family:var(--font-hanken),sans-serif;font-weight:500;
+  font-size:1.25rem;line-height:1.45;color:var(--ink);margin:0;}
 .cs-img{height:clamp(200px,36vw,360px);border-radius:14px;margin:26px 0 16px;
   background:linear-gradient(135deg,#F0EFEA,#E1E0D9);}
 [data-theme="dark"] .cs-img{background:linear-gradient(135deg,#22221D,#191914);}
