@@ -1,0 +1,102 @@
+---
+title: Growth experiments
+tagline: Growth experiments across the merchant journey — helping merchants engage with the product, complete key actions, and become active users of the Razorpay ecosystem.
+role: Product Designer II
+year: "2026"
+team: Razorpay · Growth, Product, Engineering, Analytics, Marketing
+protected: true
+---
+
+## Context
+
+These were not one large project. They were three focused initiatives at different moments of the merchant journey: after setup, during onboarding, and before signup. The scope covered journey design, experiment concepts, UX flows, and rollout support.
+
+The goal was simple: understand where merchants were getting stuck, design an intervention for that moment, take it live, and measure whether it helped them move further into Razorpay. The journey we were working across:
+
+- **Visitor** — compares pricing, products, and credibility signals.
+- **Signup** — creates an account but may not understand value yet.
+- **Onboarding** — completes setup, KYC, dashboard tasks, or offer steps.
+- **Activation** — starts accepting payments and needs transaction momentum.
+- **Growth** — returns, transacts again, claims value, and scales usage.
+
+<ImagePlaceholder />
+
+## Experiment 01 — Gamification
+
+A progress-and-reward journey to help merchants build transaction momentum after setup.
+
+- **Problem** — merchants reached setup or payment enablement, but still lacked a clear reason to keep transacting.
+- **OKR** — increase MTU and GMV by helping payment-enabled merchants complete meaningful transactions.
+- **Success signal** — positive experiment read across 5 of 7 early tests, followed by scaled GMV impact in April.
+
+> How might we make the next transaction visible, achievable, and worth returning for?
+
+**Why we did it:** payment enablement did not guarantee transaction momentum — merchants needed a clear next action after setup. **How:** challenge framing, visible progress, time pressure, and reward anticipation, scaled only after positive reads. **What was implemented:** FTUX entry, transaction states, reward moments, Plotline surfaces, and dashboard, WhatsApp, and email re-entry.
+
+The journey we wanted:
+
+- **FTUX complete** — the merchant reaches a point where they can accept payments. *Ready to transact, but not moving yet.*
+- **Challenge starts** — the dashboard frames the next goal as eligible transactions. *Make the next action visible.*
+- **Progress updates** — transaction count, time left, and milestone proximity stay visible. *Show momentum after every transaction.*
+- **Reward moment** — the merchant reaches a claim, reveal, no-reward, or completed state. *Make the reward feel earned.*
+- **Re-entry** — dashboard, WhatsApp, and email bring the merchant back. *Don't lose the journey after one visit.*
+
+<ImagePlaceholder />
+
+**Result: 5 of 7 early experiments were positive.** The early tests generated ₹45.3 lakh incremental GMV from 595 incremental merchants. The April scale-up reported **₹22.3 crore incremental GMV**, ₹23.9 lakh incremental NR, and **1.3 lakh incremental transactions** across 18 experiments.
+
+## Experiment 02 — Free PG for new merchants
+
+A free-credit offer journey for new merchants from signup to go-live.
+
+- **Problem** — cost hesitation and offer invisibility could slow merchants during signup, onboarding, and go-live.
+- **OKR** — increase new merchant activation by giving eligible PG merchants a visible free-credit offer.
+- **Success signal** — credit assignment reached 100% ramp with 95.7% successful assignment across processed requests.
+
+> How might we make the free-credit offer clear at every step from signup to go-live?
+
+**Why we did it:** cost hesitation and offer invisibility could slow a new merchant before they started accepting payments. **How:** we mapped the offer across signup, onboarding, setup, and dashboard moments, then simplified surfaces with engineering feedback. **What was implemented:** ₹5 lakh in free credits for 90 days, visible through signup, onboarding, checklist, dashboard, balance, and campaign states.
+
+The journey we wanted:
+
+- **Signup** — introduce the benefit while the merchant is creating an account. *Show value before hesitation starts.*
+- **Onboarding form** — keep the message visible while the merchant completes business setup. *Keep the benefit in context.*
+- **Setup checklist** — connect the offer to the action of going live. *Tie the offer to progress.*
+- **Top bar / menu** — keep the benefit retrievable after go-live without interrupting work. *Make it easy to find again.*
+- **Campaign banner** — use lifecycle reminders when the merchant needs a nudge back. *Remind without interrupting.*
+
+<ImagePlaceholder />
+
+**Result: credit assignment reached 95.7% success at 100% ramp.** 1,238 of 1,294 activation requests received credits successfully, while 56 expected eligibility rejections were classified correctly. This validates rollout health; revenue, GMV, and retention impact remain follow-up reads.
+
+## Experiment 03 — Smart Assist on the pricing page
+
+A pricing-page assistant to help visitors decide before signup.
+
+- **Problem** — pricing visitors had questions a static page could not answer, but AI widgets had to prove real lift.
+- **OKR** — improve visitor-to-signup conversion on the pricing page by reducing decision uncertainty.
+- **Success signal** — initial Smart Assist lift was promising, then stricter validation clarified the real confidence level.
+
+> How might we help pricing-page visitors resolve uncertainty before signup?
+
+**Why we did it:** static pricing content could not answer every visitor's product, fee, fit, and trust question. **How:** we benchmarked Smart Assist and Spotinfo against control, improved the prompt, and designed a chat fallback for mic friction. **What was implemented:** pricing-page assistant variants, voice and chat states, Ray fallback, instrumentation, and stricter experiment validation.
+
+The journey we wanted:
+
+- **Static pricing** — the visitor arrives with product, pricing, or trust questions. *The questions start before signup.*
+- **Assistant exposure** — Smart Assist or Spotinfo appears as an interactive help layer. *Help should appear in context.*
+- **Conversation** — the visitor asks questions through chat or voice. *Resolve uncertainty before asking for commitment.*
+- **Fallback** — mic-blocked users move toward chat with Ray. *Voice will not work for everyone.*
+- **Signup** — the visitor proceeds if the assistant resolves uncertainty. *Confidence should lead to action.*
+
+<ImagePlaceholder />
+
+**Result: the early lift became a validation lesson.** Smart Assist initially showed 6.7% signup versus 5.9% control — a +14% signal. A later 33/33/34 split showed 4.7% versus 4.4% with overlapping confidence intervals, so there was no clear winner. Mic permission remained a major friction, with about 44% declining.
+
+## What I would carry forward
+
+- Growth design worked best when it reduced uncertainty at a real user decision point, not when it simply added another nudge.
+- The strongest case-study moments are the decisions behind the screens: why a banner is persistent, why a reward needs re-entry, why a voice widget needs a chat fallback.
+- Measurement design matters as much as visual design. Smart Assist is a useful example of how early lift can turn into sharper learning after better validation.
+
+[Design directions](https://www.figma.com/design/CgmBuWSXG4CfgIIuSUvnaG/Gopi-2026?node-id=421-9&t=OOMTgPaIrbJ1GJkw-1) · [Gamification journey](https://www.figma.com/design/VeXIPFXbRsIzdfjYjhB9fE/%F0%9F%8E%81-Streak-Gamification--Design-?node-id=485-38130&t=8OhJC0p9ZJzhIkiE-1) · [Free PG direction](https://www.figma.com/design/MSXcrRiBMNVT9nW6s9rCsQ/New-Merchant-Offer?node-id=282-11252&t=yODmMFHQLCOx8ZGw-1)
