@@ -215,24 +215,6 @@ body {
 /* full-bleed breakout — escapes the centered .col, spans the viewport */
 .bleed{width:100%;margin:4px 0 44px;}
 
-/* sticky pill dock */
-.pilldock{position:fixed;left:50%;transform:translateX(-50%);bottom:22px;z-index:70;
-  display:inline-flex;align-items:center;gap:8px;padding:8px;
-  background:var(--panel);border:1px solid var(--line);border-radius:999px;
-  box-shadow:0 14px 34px rgba(0,0,0,.16), 0 2px 6px rgba(0,0,0,.06);
-  transition:opacity .3s ease,transform .3s ease;}
-.pilldock.hidden{opacity:0;transform:translateX(-50%) translateY(26px);pointer-events:none;}
-.pd-btn{position:relative;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;
-  background:transparent;color:var(--ink);
-  transition:background .2s ease,transform .2s ease;}
-.pd-btn:hover{background:var(--kbd-bg);transform:translateY(-2px);}
-.pd-tip{position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(6px);
-  background:var(--ink);color:var(--bg);font-family:var(--font-jetbrains),monospace;font-size:10px;
-  letter-spacing:.14em;text-transform:uppercase;padding:6px 10px;border-radius:8px;white-space:nowrap;
-  box-shadow:0 6px 16px rgba(0,0,0,.2);
-  opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;}
-.pd-btn:hover .pd-tip{opacity:1;transform:translateX(-50%) translateY(0);}
-
 /* emoji-cursor zones — hide the native cursor entirely */
 .ava, .ava *, .exp-item, .exp-item *, .rowx, .rowx *, .wrow, .wrow *,
 .site-footer, .site-footer *{cursor:none;}
