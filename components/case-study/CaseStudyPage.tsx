@@ -37,7 +37,14 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
 
   const body = await getContentBody(kind, slug);
   if (body === null) notFound();
-  const { content } = await compileMDX({ source: body, components: mdxComponents });
+  // blockJS:false re-enables JSX expression props ({...}) which v6 strips
+  // by default — safe here because the source is our own committed content,
+  // never user input; blockDangerousJS stays on as a guard.
+  const { content } = await compileMDX({
+    source: body,
+    components: mdxComponents,
+    options: { blockJS: false },
+  });
 
   return (
     <div className="cs">
