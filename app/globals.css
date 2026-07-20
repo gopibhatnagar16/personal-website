@@ -310,7 +310,6 @@ body {
 .cs-hero{height:clamp(220px,42vw,420px);border-radius:16px;margin:36px 0 8px;
   background:linear-gradient(135deg,#EDEDE8,#D9D8D1);}
 [data-theme="dark"] .cs-hero{background:linear-gradient(135deg,#22221D,#191914);}
-.cs-body{max-width:720px;}
 .cs-body h2{font-family:var(--font-geist-sans),sans-serif;font-weight:700;letter-spacing:-.01em;
   font-size:1.5rem;margin:44px 0 14px;}
 .cs-body p{font-size:1.05rem;line-height:1.65;color:var(--body);margin:0 0 16px;}
