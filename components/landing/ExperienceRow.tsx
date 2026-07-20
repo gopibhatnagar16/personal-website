@@ -42,7 +42,8 @@ export function ExperienceRow() {
         {(CONFIG.experience as Exp[]).map((c) => (
           <span className="exp-item" key={c.name} {...bind("💼")}>
             <span className="exp-tip">
-              {c.name} · {c.year}
+              <span className="et-name">{c.name}</span>
+              <span className="et-yr">{c.year}</span>
             </span>
             <Badge c={c} />
           </span>

@@ -44,7 +44,10 @@ export function Hero() {
     <main className="about">
       <div
         className={"ava" + (fanned ? " open" : "")}
-        onClick={() => setFanned((v) => !v)}
+        onClick={() => {
+          setFanned((v) => !v);
+          document.getElementById("personal")?.scrollIntoView({ behavior: "smooth" });
+        }}
         onMouseEnter={(e) => { eyesHandlers.onMouseEnter(e); setVeil(true); }}
         onMouseMove={eyesHandlers.onMouseMove}
         onMouseLeave={() => { setFanned(false); eyesHandlers.onMouseLeave(); setVeil(false); }}

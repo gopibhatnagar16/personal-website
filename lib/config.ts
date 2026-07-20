@@ -19,7 +19,7 @@ export interface CanvasItem {
 
 export const CONFIG = {
   name: "Gopi Bhatnagar",
-  email: "hello@gopibhatnagar.com", // ← change me
+  email: "gopibhatnagar@gmail.com", // ← change me
   socials: { linkedin: "#", twitter: "#" }, // ← add your URLs
   timeZone: "Asia/Kolkata",
   tzLabel: "GMT+5:30",
