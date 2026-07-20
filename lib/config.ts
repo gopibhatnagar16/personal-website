@@ -47,7 +47,9 @@ export const CONFIG = {
   ],
 
   // rows shown in Work without a case-study page yet
-  upcomingWork: [{ title: "Onboarding" }],
+  upcomingWork: [
+    { title: "Onboarding", thumb: "/work/onboarding-mini.png", preview: "/work/onboarding-maxi.png" },
+  ],
 
   // draggable placeholders — swap the greys for images/embeds later
   tidbits: [

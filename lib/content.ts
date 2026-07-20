@@ -16,6 +16,8 @@ export interface ContentMeta {
   team: string;
   readTime?: string;
   protected?: boolean;
+  thumb?: string;
+  preview?: string;
 }
 
 const SLUG_RE = /^[a-z0-9-]+$/;
@@ -31,6 +33,8 @@ function toMeta(kind: ContentKind, slug: string, data: Record<string, unknown>):
     team: String(data.team ?? ""),
     readTime: data.readTime ? String(data.readTime) : undefined,
     protected: data.protected === true,
+    thumb: data.thumb ? String(data.thumb) : undefined,
+    preview: data.preview ? String(data.preview) : undefined,
   };
 }
 
