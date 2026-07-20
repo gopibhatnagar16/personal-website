@@ -7,7 +7,8 @@ import { SHAPE_GREYS, type CanvasItem } from "@/lib/config";
 interface Props {
   items: CanvasItem[];
   height: number;
-  variant?: "mat" | "open";
+  hint?: string;
+  variant?: "mat" | "board";
 }
 
 const MAT_COLORS = [
@@ -83,54 +84,48 @@ export function DraggableCanvas({ items, height, variant }: Props) {
       onPointerUp={onCanvasUp}
       onPointerCancel={onCanvasUp}
     >
-      <div className="canvas-controls" onPointerDown={(e) => e.stopPropagation()}>
-        {variant === "mat" && (
-          <div className="canvas-colors" role="group" aria-label="Cutting mat color">
-            {MAT_COLORS.map((c) => (
-              <button
-                key={c.id}
-                type="button"
-                className={"canvas-swatch" + (c.id === matColor.id ? " active" : "")}
-                style={{ background: c.light }}
-                aria-label={`${c.label} mat`}
-                aria-pressed={c.id === matColor.id}
-                onClick={() => setMatColor(c)}
-              />
-            ))}
+      {hint && (
+        <span className="canvas-hint">
+          <Move size={13} strokeWidth={1.75} /> {hint}
+        </span>
+      )}
+      {items.map((it) => {
+        const isPolaroid = it.kind === "polaroid";
+        return (
+          <div
+            key={it.id}
+            className={"ci ci-" + it.kind}
+            style={{
+              left: pos[it.id].x + pan.x,
+              top: pos[it.id].y + pan.y,
+              zIndex: pos[it.id].z,
+              width: it.w,
+              height: it.h,
+              transform: it.rot ? `rotate(${it.rot}deg)` : undefined,
+              ...(it.emoji
+                ? { background: it.bg }
+                : isPolaroid
+                ? {}
+                : { backgroundImage: SHAPE_GREYS[(it.g || 0) % SHAPE_GREYS.length] }),
+            }}
+            onPointerDown={(e) => onDown(e, it.id)}
+            onPointerMove={onMove}
+            onPointerUp={onUp}
+            onPointerCancel={onUp}
+          >
+            {it.emoji && <span className="ci-emoji">{it.emoji}</span>}
+            {isPolaroid && (
+              <>
+                <span
+                  className="ci-photo"
+                  style={{ backgroundImage: SHAPE_GREYS[(it.g || 0) % SHAPE_GREYS.length] }}
+                />
+                {it.caption && <span className="ci-cap">{it.caption}</span>}
+              </>
+            )}
           </div>
-        )}
-        <button
-          type="button"
-          className={"canvas-reset" + (isPanned ? " visible" : "")}
-          onClick={() => setPan({ x: 0, y: 0 })}
-          aria-label="Reset canvas position"
-          tabIndex={isPanned ? 0 : -1}
-        >
-          <RotateCcw size={13} strokeWidth={1.9} />
-        </button>
-      </div>
-      {items.map((it) => (
-        <div
-          key={it.id}
-          className={"ci ci-" + it.kind}
-          style={{
-            left: pos[it.id].x + pan.x,
-            top: pos[it.id].y + pan.y,
-            zIndex: pos[it.id].z,
-            width: it.w,
-            height: it.h,
-            ...(it.emoji
-              ? { background: it.bg, transform: `rotate(${it.rot || 0}deg)` }
-              : { backgroundImage: SHAPE_GREYS[(it.g || 0) % SHAPE_GREYS.length] }),
-          }}
-          onPointerDown={(e) => onDown(e, it.id)}
-          onPointerMove={onMove}
-          onPointerUp={onUp}
-          onPointerCancel={onUp}
-        >
-          {it.emoji && <span className="ci-emoji">{it.emoji}</span>}
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
