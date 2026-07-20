@@ -1,18 +1,24 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { Move } from "lucide-react";
+import { RotateCcw } from "lucide-react";
 import { SHAPE_GREYS, type CanvasItem } from "@/lib/config";
 
 interface Props {
   items: CanvasItem[];
   height: number;
-  hint?: string;
   variant?: "mat" | "open";
 }
 
+const MAT_COLORS = [
+  { id: "green", label: "Green", light: "#4B6B57", dark: "#33493B" },
+  { id: "blue", label: "Blue", light: "#35566B", dark: "#24384A" },
+  { id: "rose", label: "Rose", light: "#6B3550", dark: "#452336" },
+  { id: "clay", label: "Clay", light: "#6B4F35", dark: "#453121" },
+] as const;
+
 /* draggable canvas (infinite pan) */
-export function DraggableCanvas({ items, height, hint, variant }: Props) {
+export function DraggableCanvas({ items, height, variant }: Props) {
   const canvasRef = useRef<HTMLDivElement>(null);
   const drag = useRef<{ id: string; ox: number; oy: number } | null>(null);
   const panDrag = useRef<{ x: number; y: number; panX: number; panY: number } | null>(null);
@@ -23,6 +29,7 @@ export function DraggableCanvas({ items, height, hint, variant }: Props) {
     return o;
   });
   const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [matColor, setMatColor] = useState<(typeof MAT_COLORS)[number]>(MAT_COLORS[0]);
 
   // card drag — world-space coordinates, independent of the current pan
   const onDown = (e: React.PointerEvent, id: string) => {
@@ -57,21 +64,51 @@ export function DraggableCanvas({ items, height, hint, variant }: Props) {
   };
   const onCanvasUp = () => (panDrag.current = null);
 
+  const isPanned = pan.x !== 0 || pan.y !== 0;
+
   return (
     <div
       className={"canvas" + (variant ? " " + variant : "")}
-      style={{ height, "--pan-x": pan.x + "px", "--pan-y": pan.y + "px" } as React.CSSProperties}
+      style={
+        {
+          height: height + 20,
+          "--pan-x": pan.x + "px",
+          "--pan-y": pan.y + "px",
+          ...(variant === "mat" ? { "--mat-color": matColor.light, "--mat-color-dark": matColor.dark } : {}),
+        } as React.CSSProperties
+      }
       ref={canvasRef}
       onPointerDown={onCanvasDown}
       onPointerMove={onCanvasMove}
       onPointerUp={onCanvasUp}
       onPointerCancel={onCanvasUp}
     >
-      {hint && (
-        <span className="canvas-hint">
-          <Move size={13} strokeWidth={1.75} /> {hint}
-        </span>
-      )}
+      <div className="canvas-controls" onPointerDown={(e) => e.stopPropagation()}>
+        {variant === "mat" && (
+          <div className="canvas-colors" role="group" aria-label="Cutting mat color">
+            {MAT_COLORS.map((c) => (
+              <button
+                key={c.id}
+                type="button"
+                className={"canvas-swatch" + (c.id === matColor.id ? " active" : "")}
+                style={{ background: c.light }}
+                aria-label={`${c.label} mat`}
+                aria-pressed={c.id === matColor.id}
+                onClick={() => setMatColor(c)}
+              />
+            ))}
+          </div>
+        )}
+        <button
+          type="button"
+          className={"canvas-reset" + (isPanned ? " visible" : "")}
+          onClick={() => setPan({ x: 0, y: 0 })}
+          aria-label="Reset canvas position"
+          tabIndex={isPanned ? 0 : -1}
+        >
+          <RotateCcw size={13} strokeWidth={1.9} />
+        </button>
+      </div>
       {items.map((it) => (
         <div
           key={it.id}

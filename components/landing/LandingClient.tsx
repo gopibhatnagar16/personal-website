@@ -30,12 +30,7 @@ export function LandingClient({ work, writing }: Props) {
             {/* TIDBITS — draggable canvas */}
             <section className="section" id="tidbits">
               <span className="section-label">Tidbits</span>
-              <DraggableCanvas
-                items={CONFIG.tidbits}
-                height={400}
-                hint="drag cards · drag mat to pan"
-                variant="mat"
-              />
+              <DraggableCanvas items={CONFIG.tidbits} height={400} variant="mat" />
             </section>
 
             {/* PERSONAL — sticker sheet */}
@@ -46,12 +41,7 @@ export function LandingClient({ work, writing }: Props) {
 
           {/* full-bleed — breaks out of the centered column */}
           <div className="bleed">
-            <DraggableCanvas
-              items={CONFIG.stickers}
-              height={340}
-              hint="drag stickers · drag to pan"
-              variant="open"
-            />
+            <DraggableCanvas items={CONFIG.stickers} height={340} variant="open" />
           </div>
         </div>
 
