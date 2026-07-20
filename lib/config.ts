@@ -9,11 +9,12 @@ export interface CanvasItem {
   y: number;
   w: number;
   h: number;
-  kind: "card" | "circle" | "rect" | "square" | "sticker";
+  kind: "card" | "circle" | "rect" | "square" | "sticker" | "polaroid";
   g?: number;
   emoji?: string;
   bg?: string;
   rot?: number;
+  caption?: string;
 }
 
 const logoFor = (domain: string) =>
@@ -33,6 +34,9 @@ export const CONFIG = {
     "I care about craft more than category. Whether it's a Figma frame or a component in the codebase, I sweat the same details — the easing on a transition, the tension in a wordmark, the reason a flow feels effortless when nobody can say why.",
     "Good work is mostly patience: the unglamorous back-and-forth of making something feel obvious. I like living close to the pixels and close to the code, because that's where the craft actually happens.",
   ],
+
+  personalIntro:
+    "Outside of work I'm usually chasing a sunrise hike, pulling a bad shot of coffee, or losing an evening to a game I have no business being this invested in. This is a rough pinboard of that half of my life — drag things around.",
 
   // logo: each company's own favicon, normalized to 128px PNG by
   // Google's favicon service — no binary assets to keep in the repo.
@@ -58,16 +62,19 @@ export const CONFIG = {
     { id: "t5", x: 440, y: 246, w: 160, h: 112, kind: "card", g: 4 },
   ] as CanvasItem[],
 
-  // sticker sheet — scattered edge-to-edge across the full-bleed canvas
-  stickers: [
-    { id: "s1", x: 10, y: 20, w: 92, h: 92, kind: "sticker", emoji: "✌️", bg: "#F5A623", rot: -8 },
-    { id: "s2", x: 170, y: 120, w: 82, h: 82, kind: "sticker", emoji: "☕", bg: "#3395FF", rot: 6 },
-    { id: "s3", x: 340, y: 10, w: 100, h: 100, kind: "sticker", emoji: "🎧", bg: "#4B47E5", rot: -4 },
-    { id: "s4", x: 520, y: 140, w: 80, h: 80, kind: "sticker", emoji: "🌱", bg: "#00998F", rot: 10 },
-    { id: "s5", x: 700, y: 30, w: 104, h: 104, kind: "sticker", emoji: "⭐", bg: "#E4181C", rot: -12 },
-    { id: "s6", x: 880, y: 150, w: 90, h: 90, kind: "sticker", emoji: "📷", bg: "#FF4E7A", rot: 7 },
-    { id: "s7", x: 1050, y: 20, w: 96, h: 96, kind: "sticker", emoji: "🎮", bg: "#C77B30", rot: -6 },
-    { id: "s8", x: 1220, y: 140, w: 86, h: 86, kind: "sticker", emoji: "🔥", bg: "#8A5CF6", rot: 9 },
+  // pegboard — polaroids + stickers pinned to the Personal board,
+  // sized to sit inside the same column width as the sections above
+  pegboard: [
+    { id: "p1", x: 20, y: 26, w: 148, h: 182, kind: "polaroid", g: 0, rot: -7, caption: "sunrise hike" },
+    { id: "p2", x: 336, y: 118, w: 148, h: 182, kind: "polaroid", g: 4, rot: -4, caption: "studio days" },
+    { id: "p3", x: 632, y: 20, w: 148, h: 182, kind: "polaroid", g: 2, rot: 6, caption: "morning brew" },
+
+    { id: "s1", x: 210, y: 40, w: 88, h: 88, kind: "sticker", emoji: "✌️", bg: "#F5A623", rot: -8 },
+    { id: "s2", x: 56, y: 236, w: 92, h: 92, kind: "sticker", emoji: "🎧", bg: "#4B47E5", rot: -10 },
+    { id: "s3", x: 500, y: 208, w: 82, h: 82, kind: "sticker", emoji: "☕", bg: "#3395FF", rot: 6 },
+    { id: "s4", x: 210, y: 232, w: 80, h: 80, kind: "sticker", emoji: "🌱", bg: "#00998F", rot: 5 },
+    { id: "s5", x: 792, y: 150, w: 86, h: 86, kind: "sticker", emoji: "⭐", bg: "#E4181C", rot: 9 },
+    { id: "s6", x: 620, y: 236, w: 78, h: 78, kind: "sticker", emoji: "🔥", bg: "#8A5CF6", rot: -6 },
   ] as CanvasItem[],
 
   photos: [] as string[], // avatar fan (last = front)
