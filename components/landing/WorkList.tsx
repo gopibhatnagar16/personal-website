@@ -10,11 +10,13 @@ export interface WorkRow {
   title: string;
   year?: string;
   upcoming?: boolean;
+  thumb?: string;
+  preview?: string;
 }
 
 export function WorkList({ items }: { items: WorkRow[] }) {
   const bind = useEyes();
-  const [prev, setPrev] = useState({ show: false, x: 0, y: 0, g: 0 });
+  const [prev, setPrev] = useState({ show: false, x: 0, y: 0, g: 0, preview: "" });
 
   return (
     <section className="section" id="work">
@@ -24,11 +26,11 @@ export function WorkList({ items }: { items: WorkRow[] }) {
           const eyes = bind("📑");
           const handlers = {
             onMouseEnter: (e: React.MouseEvent) => {
-              setPrev({ show: true, x: e.clientX, y: e.clientY, g: i });
+              setPrev({ show: true, x: e.clientX, y: e.clientY, g: i, preview: w.preview ?? "" });
               eyes.onMouseEnter(e);
             },
             onMouseMove: (e: React.MouseEvent) => {
-              setPrev({ show: true, x: e.clientX, y: e.clientY, g: i });
+              setPrev({ show: true, x: e.clientX, y: e.clientY, g: i, preview: w.preview ?? "" });
               eyes.onMouseMove(e);
             },
             onMouseLeave: () => {
@@ -40,7 +42,9 @@ export function WorkList({ items }: { items: WorkRow[] }) {
             <>
               <span
                 className="thumb"
-                style={{ backgroundImage: SHAPE_GREYS[i % SHAPE_GREYS.length] }}
+                style={{
+                  backgroundImage: w.thumb ? `url(${w.thumb})` : SHAPE_GREYS[i % SHAPE_GREYS.length],
+                }}
               />
               <span className="rx-title">{w.title}</span>
               {w.upcoming ? (
@@ -67,12 +71,14 @@ export function WorkList({ items }: { items: WorkRow[] }) {
           className="work-preview"
           style={{
             left: Math.min(prev.x + 24, window.innerWidth - 284),
-            top: Math.max(14, prev.y - 92),
+            top: Math.max(14, prev.y - 124),
           }}
         >
           <span
             className="wp-img"
-            style={{ backgroundImage: SHAPE_GREYS[prev.g % SHAPE_GREYS.length] }}
+            style={{
+              backgroundImage: prev.preview ? `url(${prev.preview})` : SHAPE_GREYS[prev.g % SHAPE_GREYS.length],
+            }}
           />
         </div>
       )}

@@ -9,8 +9,8 @@ export default async function Home() {
   ]);
 
   const work = [
-    ...workEntries.map((w) => ({ slug: w.slug, title: w.title, year: w.year })),
-    ...CONFIG.upcomingWork.map((w) => ({ title: w.title, upcoming: true })),
+    ...workEntries.map((w) => ({ slug: w.slug, title: w.title, year: w.year, thumb: w.thumb, preview: w.preview })),
+    ...CONFIG.upcomingWork.map((w) => ({ title: w.title, upcoming: true, thumb: w.thumb, preview: w.preview })),
   ];
   const writing = writingEntries.map((a) => ({
     slug: a.slug,
