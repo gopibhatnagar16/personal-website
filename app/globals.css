@@ -110,22 +110,22 @@ body {
 /* experience — brand logos + name */
 .exp-row{display:flex;flex-wrap:wrap;gap:18px;}
 .exp-item{position:relative;cursor:none;}
-.exp-badge{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;overflow:hidden;
-  color:#fff;font-family:var(--font-geist-sans),sans-serif;font-weight:800;font-size:20px;
-  cursor:default;
-  transition:transform .28s ease,box-shadow .28s ease;}
-.exp-badge img{width:60%;height:60%;object-fit:contain;}
+.exp-badge{width:35px;height:35px;border-radius:10px;display:grid;place-items:center;overflow:hidden;
+  color:#fff;font-family:var(--font-geist-sans),sans-serif;font-weight:800;font-size:14px;
+  cursor:default;}
+.exp-badge img{width:100%;height:100%;object-fit:contain;}
 .exp-badge.has-logo{background:var(--panel);border:1px solid var(--line);}
-.exp-item:hover .exp-badge{transform:translateY(-4px) scale(1.05);
-  box-shadow:0 8px 20px rgba(0,0,0,.18);}
-.exp-item:hover .exp-badge.has-logo{border-color:var(--faint);}
 .exp-tip{position:absolute;bottom:calc(100% + 12px);left:50%;
-  transform:translateX(-50%) translateY(5px);
-  background:var(--ink);color:var(--bg);font-family:var(--font-geist-mono),monospace;font-size:10px;
-  letter-spacing:.14em;text-transform:uppercase;padding:6px 10px;border-radius:8px;white-space:nowrap;
+  transform:translateX(-50%) translateY(8px) scale(.92);transform-origin:bottom center;
+  background:var(--ink);color:var(--bg);padding:9px 13px 8px;border-radius:11px;white-space:nowrap;
+  box-shadow:0 12px 30px rgba(0,0,0,.22);
+  display:flex;flex-direction:column;gap:3px;align-items:center;text-align:center;
   opacity:0;pointer-events:none;z-index:5;
-  transition:opacity .2s ease,transform .2s ease;}
-.exp-item:hover .exp-tip{opacity:1;transform:translateX(-50%) translateY(0);}
+  transition:opacity .18s ease,transform .28s cubic-bezier(.34,1.56,.64,1);}
+.exp-tip .et-name{font-family:var(--font-geist-sans),sans-serif;font-weight:600;font-size:13px;letter-spacing:.01em;}
+.exp-tip .et-yr{font-family:var(--font-geist-mono),monospace;font-size:10.5px;letter-spacing:.08em;
+  text-transform:uppercase;color:color-mix(in srgb, var(--bg), transparent 35%);}
+.exp-item:hover .exp-tip{opacity:1;transform:translateX(-50%) translateY(0) scale(1);}
 
 /* thumbnail rows — work */
 .list{border-top:1px solid var(--line);}
