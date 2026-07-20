@@ -153,10 +153,10 @@ body {
   font-size:13px;color:var(--faint);white-space:nowrap;}
 
 /* work hover preview */
-.work-preview{position:fixed;z-index:80;pointer-events:none;width:260px;height:168px;
+.work-preview{position:fixed;z-index:80;pointer-events:none;width:260px;aspect-ratio:731/699;
   border-radius:14px;overflow:hidden;border:4px solid var(--panel);
   box-shadow:0 22px 50px rgba(0,0,0,.30);animation:wpin .18s ease;}
-.wp-img{display:block;width:100%;height:100%;background-size:cover;background-position:center;}
+.wp-img{display:block;width:100%;height:100%;background-size:contain;background-repeat:no-repeat;background-position:center;}
 @keyframes wpin{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
 
 /* draggable canvas — infinite pan: --pan-x/--pan-y drive the background scroll */

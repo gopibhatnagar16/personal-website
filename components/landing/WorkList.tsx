@@ -71,7 +71,7 @@ export function WorkList({ items }: { items: WorkRow[] }) {
           className="work-preview"
           style={{
             left: Math.min(prev.x + 24, window.innerWidth - 284),
-            top: Math.max(14, prev.y - 92),
+            top: Math.max(14, prev.y - 124),
           }}
         >
           <span
