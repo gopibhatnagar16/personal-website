@@ -30,24 +30,14 @@ export function LandingClient({ work, writing }: Props) {
             {/* TIDBITS — draggable canvas */}
             <section className="section" id="tidbits">
               <span className="section-label">Tidbits</span>
-              <DraggableCanvas
-                items={CONFIG.tidbits}
-                height={400}
-                hint="drag cards · drag mat to pan"
-                variant="mat"
-              />
+              <DraggableCanvas items={CONFIG.tidbits} height={400} variant="mat" />
             </section>
 
             {/* PERSONAL — pegboard */}
             <section className="section" id="personal">
               <span className="section-label">Personal</span>
               <p className="section-intro">{CONFIG.personalIntro}</p>
-              <DraggableCanvas
-                items={CONFIG.pegboard}
-                height={380}
-                hint="drag stickers · drag to pan"
-                variant="board"
-              />
+              <DraggableCanvas items={CONFIG.pegboard} height={380} variant="board" />
             </section>
           </div>
         </div>
