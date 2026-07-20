@@ -36,7 +36,27 @@ Mapping the current journey made the gaps explicit:
 
 ## Discovery
 
-Onboarding captured useful business details, but every eligible business still saw the same rate. **Why:** context was collected, then ignored — onboarding showed who the business was, while pricing stayed identical for everyone. **How:** use the decision point after onboarding, when the business is ready to start but still deciding where to take its first payment. **What:** show a clear next step — keep Standard available, and make a relevant plan easy to understand and revisit later.
+Onboarding captured useful business details, but every eligible business still saw the same rate.
+
+<WhyHowWhat
+  items={[
+    {
+      k: "Why",
+      title: "Context was collected, then ignored.",
+      body: "Onboarding showed who the business was, while pricing stayed identical for everyone.",
+    },
+    {
+      k: "How",
+      title: "Use the decision point after onboarding.",
+      body: "The business was ready to start, but was still deciding where to take its first payment.",
+    },
+    {
+      k: "What",
+      title: "Show a clear next step.",
+      body: "Keep Standard available and make a relevant plan easy to understand and revisit later.",
+    },
+  ]}
+/>
 
 A composite from merchant calls made the moment concrete. Meet **Arjun**: he has completed onboarding for his online apparel business and is ready to take payments. Before choosing a pricing route, he needs to know what is optional, what fits his expected volume, and whether he can change his mind later. His journey through the decision:
 
@@ -49,7 +69,36 @@ A composite from merchant calls made the moment concrete. Meet **Arjun**: he has
 
 <ImagePlaceholder />
 
-To explain what the funnel couldn't, Ishan and I called around **120 merchants** and had **30 meaningful conversations** across merchants who paused, stayed on the default path, and chose a paid plan. We used calls because the funnel only showed what happened, not why — and we deliberately spoke to drop-offs, free-plan choosers, and paid choosers so the research did not become only a drop-off audit. Four situations kept repeating:
+To explain what the funnel couldn't, Ishan and I called around **120 merchants** and had **30 meaningful conversations** across merchants who paused, stayed on the default path, and chose a paid plan. We used calls because the funnel only showed what happened, not why — and we deliberately spoke to drop-offs, free-plan choosers, and paid choosers so the research did not become only a drop-off audit.
+
+<ResearchFlow
+  steps={[
+    {
+      value: "120",
+      label: "reach-outs",
+      sub: "Across every funnel outcome",
+      dots: 120,
+      caption: "We contacted merchants across every funnel outcome.",
+    },
+    {
+      value: "30",
+      label: "conversations",
+      sub: "Where intent became readable",
+      dots: 30,
+      caption: "30 conversations were detailed enough to separate value, understanding, and setup issues.",
+    },
+    {
+      value: "4",
+      label: "merchant situations",
+      sub: "Patterns that kept repeating",
+      dots: 30,
+      cards: ["Cautious starter", "Value comparer", "Confused buyer", "Setup blocked"],
+      caption: "The conversations revealed four distinct merchant situations.",
+    },
+  ]}
+/>
+
+Four situations kept repeating:
 
 - **Cautious starters** — "I am just starting out. I will upgrade later if needed."
 - **Value-conscious comparers** — "The rate is better, but I do not remember the exact calculation."
@@ -79,19 +128,67 @@ We changed the amount of choice, the value frame, and the payment model to learn
 - **0% platform-fee framing** — led with the fee a merchant could avoid. A strong hook earns attention, but boundaries must be clear enough to build trust.
 - **One plan + top-ups** — collapsed the comparison into one personalised plan with included usage. Simplicity works when the future path remains visible and under the merchant's control.
 
-<ImagePlaceholder />
+<MediaSwitcher
+  slides={[
+    {
+      label: "Four distinct offerings",
+      caption: "Four-plan subscription-pricing exploration with transaction limits, reduced rates, benefits, and monthly or yearly prices.",
+    },
+    {
+      label: "Savings-first hierarchy",
+      caption: "Savings-led hierarchy with the recommended plan made easier to notice.",
+    },
+    {
+      label: "Prepaid vs postpaid",
+      caption: "Postpaid settlement deductions framed against a prepaid plan.",
+    },
+    {
+      label: "Volume-led recommendation",
+      caption: "Expected-volume input revealing a recommendation or relevant plan.",
+    },
+    {
+      label: "0% platform-fee framing",
+      caption: "0% platform fee as the primary message, with clear boundaries on where it applied.",
+    },
+    {
+      label: "One plan + top-ups",
+      caption: "One personalised plan with included usage and top-ups.",
+    },
+  ]}
+/>
 
 ## MVP experiment
 
-We tested pricing frames in a controlled onboarding MVP: a softer savings frame (**Variant A** — standard option kept close to paid plans, modest savings labels), a stronger value contrast (**Variant B** — savings contrast and recommended option made prominent), and plan-order changes (**Variant C** — hierarchy and ordering rather than price). Across the variants, the experiment tested five things:
+We tested pricing frames in a controlled onboarding MVP: a softer savings frame (**Variant A** — standard option kept close to paid plans, modest savings labels), a stronger value contrast (**Variant B** — savings contrast and recommended option made prominent), and plan-order changes (**Variant C** — hierarchy and ordering rather than price).
 
-- **Plan architecture** — a simpler three-plan choice against the earlier four-plan baseline.
-- **Value framing** — softer savings language against a stronger lower-fee contrast.
-- **Payment-volume relevance** — whether expected transaction volume made plan value easier to judge.
-- **Commitment choice** — monthly and annual billing, including the annual savings frame.
-- **Decision support** — recommendations, modal states, and responsive desktop and mobile views.
+<Accordion
+  title="What the first experiment tested"
+  items={[
+    {
+      title: "Plan architecture",
+      body: "A simpler three-plan choice against the earlier four-plan baseline.",
+    },
+    {
+      title: "Value framing",
+      body: "Softer savings language against a stronger lower-fee contrast.",
+    },
+    {
+      title: "Payment-volume relevance",
+      body: "Whether expected transaction volume made plan value easier to judge.",
+    },
+    {
+      title: "Commitment choice",
+      body: "Monthly and annual billing, including the annual savings frame.",
+    },
+    {
+      title: "Decision support",
+      body: "Recommendations, modal states, and responsive desktop and mobile views.",
+    },
+  ]}
+  note="The whitelisted rollout also exposed a lifecycle gap: changing or cancelling a plan still required manual support."
+/>
 
-Variant B was the strongest direction for plan selection, especially among registered businesses. The qualitative read mattered just as much: presentation worked (fewer plans and stronger value framing increased selection), but drop-off was mixed — pricing confusion, setup blockers, and low intent were different problems — and businesses needed to know what they gained and that a paid plan was optional. The whitelisted rollout also exposed a lifecycle gap: changing or cancelling a plan still required manual support.
+Variant B was the strongest direction for plan selection, especially among registered businesses. The qualitative read mattered just as much: presentation worked (fewer plans and stronger value framing increased selection), but drop-off was mixed — pricing confusion, setup blockers, and low intent were different problems — and businesses needed to know what they gained and that a paid plan was optional.
 
 The decision: scale the strongest pricing frame, then build the touchpoints and self-serve controls around it.
 
@@ -123,6 +220,19 @@ The final solution had to act like a bridge, not a gate: it helped merchants com
 **1,900 merchants chose subscriptions. Early cohorts grew payment volume by 61%.**
 
 The clearest outcome was merchant action: more businesses selected a plan, generated recurring subscription revenue, and processed more payments with Razorpay.
+
+<ResultsViz
+  baseDots={190}
+  legend="The grid is the 1,900 subscribed merchants (190 dots). Other metrics highlight their share of this base. Monthly revenue uses its own scale: 1 dot = Rs. 10K."
+  metrics={[
+    { label: "Subscribed merchants", value: "1,900", dots: 190, sub: "Each dot = 10 merchants · all 190 dots" },
+    { label: "Annual merchants", value: "200", dots: 20, sub: "Each dot = 10 merchants · 20 dots" },
+    { label: "Monthly revenue", value: "Rs. 6.2L/mo", dots: 62, sub: "Each dot = Rs. 10K · 62 dots" },
+    { label: "Eligible-base adoption", value: "9%", dots: 17, sub: "9% of the eligible base, shown on the grid" },
+    { label: "Net revenue movement", value: "+81%", dots: 154, sub: "81% of the grid, as a relative movement" },
+    { label: "Payment-volume movement", value: "+61%", dots: 116, sub: "61% of the grid, as a relative movement" },
+  ]}
+/>
 
 ## My learnings
 
