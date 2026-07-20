@@ -11,8 +11,8 @@
   --panel: #ffffff;
   --canvas-bg: #fbfbf9;
   --dot: rgba(20, 20, 15, 0.07);
-  --accent: #c0692f;
-  --accent-soft: rgba(192, 105, 47, 0.13);
+  --accent: #9e2c6a;
+  --accent-soft: rgba(158, 44, 106, 0.12);
   --dot-off: rgba(20, 20, 15, 0.09);
 }
 
@@ -27,7 +27,7 @@
   --panel: #191914;
   --canvas-bg: #141410;
   --dot: rgba(255, 255, 255, 0.07);
-  --accent: #d9945a;
-  --accent-soft: rgba(217, 148, 90, 0.16);
+  --accent: #d675a9;
+  --accent-soft: rgba(214, 117, 169, 0.16);
   --dot-off: rgba(255, 255, 255, 0.12);
 }

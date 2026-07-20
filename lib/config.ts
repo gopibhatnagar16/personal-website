@@ -16,6 +16,9 @@ export interface CanvasItem {
   rot?: number;
 }
 
+const logoFor = (domain: string) =>
+  `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+
 export const CONFIG = {
   name: "Gopi Bhatnagar",
   email: "hello@gopibhatnagar.com", // ← change me
@@ -31,13 +34,16 @@ export const CONFIG = {
     "Good work is mostly patience: the unglamorous back-and-forth of making something feel obvious. I like living close to the pixels and close to the code, because that's where the craft actually happens.",
   ],
 
+  // logo: each company's own favicon, normalized to 128px PNG by
+  // Google's favicon service — no binary assets to keep in the repo.
+  // initial stays as the fallback if a logo ever fails to load.
   experience: [
-    { name: "Razorpay", color: "#3395FF", initial: "R", year: "2023 — NOW" },
-    { name: "Scaler", color: "#4B47E5", initial: "S", year: "2022 — 2023" },
-    { name: "Kidzovo", color: "#F5A623", initial: "K", year: "2022" },
-    { name: "TCS", color: "#E4181C", initial: "T", year: "2021" },
-    { name: "Wongdoody", color: "#FF4E7A", initial: "W", year: "2021" },
-    { name: "Ciena", color: "#00998F", initial: "C", year: "2020" },
+    { name: "Razorpay", color: "#3395FF", initial: "R", year: "2023 — NOW", logo: logoFor("razorpay.com") },
+    { name: "Scaler", color: "#4B47E5", initial: "S", year: "2022 — 2023", logo: logoFor("scaler.com") },
+    { name: "Kidzovo", color: "#F5A623", initial: "K", year: "2022", logo: logoFor("kidzovo.com") },
+    { name: "TCS", color: "#E4181C", initial: "T", year: "2021", logo: logoFor("tcs.com") },
+    { name: "Wongdoody", color: "#FF4E7A", initial: "W", year: "2021", logo: logoFor("wongdoody.com") },
+    { name: "Ciena", color: "#00998F", initial: "C", year: "2020", logo: logoFor("ciena.com") },
   ],
 
   // rows shown in Work without a case-study page yet

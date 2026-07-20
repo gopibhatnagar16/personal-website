@@ -1,7 +1,36 @@
 "use client";
 
+import { useState } from "react";
 import { CONFIG } from "@/lib/config";
 import { useEyes } from "@/components/shared/EyesCursor";
+
+interface Exp {
+  name: string;
+  color: string;
+  initial: string;
+  year: string;
+  logo?: string;
+}
+
+function Badge({ c }: { c: Exp }) {
+  // fall back to the lettered circle if the remote logo fails to load
+  const [failed, setFailed] = useState(false);
+  const showLogo = c.logo && !failed;
+
+  return (
+    <span
+      className={"exp-badge" + (showLogo ? " has-logo" : "")}
+      style={showLogo ? undefined : { background: c.color }}
+    >
+      {showLogo ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={c.logo} alt={`${c.name} logo`} loading="lazy" onError={() => setFailed(true)} />
+      ) : (
+        c.initial
+      )}
+    </span>
+  );
+}
 
 export function ExperienceRow() {
   const bind = useEyes();
@@ -10,15 +39,17 @@ export function ExperienceRow() {
       <span className="section-label">Experience</span>
       <p className="section-intro">I have 3+ years of work experience, some of which are:</p>
       <div className="exp-row">
-        {CONFIG.experience.map((c) => (
+        {(CONFIG.experience as Exp[]).map((c) => (
           <span className="exp-item" key={c.name} {...bind("💼")}>
             <span className="exp-tip">
-              <span className="et-name">{c.name}</span>
+              <span className="et-row">
+                <span className="et-dot" style={{ background: c.color }} aria-hidden="true" />
+                <span className="et-name">{c.name}</span>
+              </span>
               <span className="et-yr">{c.year}</span>
+              <span className="et-arrow" aria-hidden="true" />
             </span>
-            <span className="exp-badge" style={{ background: c.color }}>
-              {c.initial}
-            </span>
+            <Badge c={c} />
           </span>
         ))}
       </div>
