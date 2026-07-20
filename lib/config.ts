@@ -17,9 +17,6 @@ export interface CanvasItem {
   caption?: string;
 }
 
-const logoFor = (domain: string) =>
-  `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
-
 export const CONFIG = {
   name: "Gopi Bhatnagar",
   email: "hello@gopibhatnagar.com", // ← change me
@@ -38,16 +35,15 @@ export const CONFIG = {
   personalIntro:
     "Outside of work I'm usually chasing a sunrise hike, pulling a bad shot of coffee, or losing an evening to a game I have no business being this invested in. This is a rough pinboard of that half of my life — drag things around.",
 
-  // logo: each company's own favicon, normalized to 128px PNG by
-  // Google's favicon service — no binary assets to keep in the repo.
+  // logo: each company's own brand mark, exported from Figma.
   // initial stays as the fallback if a logo ever fails to load.
   experience: [
-    { name: "Razorpay", color: "#3395FF", initial: "R", year: "2023 — NOW", logo: logoFor("razorpay.com") },
-    { name: "Scaler", color: "#4B47E5", initial: "S", year: "2022 — 2023", logo: logoFor("scaler.com") },
-    { name: "Kidzovo", color: "#F5A623", initial: "K", year: "2022", logo: logoFor("kidzovo.com") },
-    { name: "TCS", color: "#E4181C", initial: "T", year: "2021", logo: logoFor("tcs.com") },
-    { name: "Wongdoody", color: "#FF4E7A", initial: "W", year: "2021", logo: logoFor("wongdoody.com") },
-    { name: "Ciena", color: "#00998F", initial: "C", year: "2020", logo: logoFor("ciena.com") },
+    { name: "Razorpay", color: "#3395FF", initial: "R", year: "2023 — NOW", logo: "/logos/razorpay.png" },
+    { name: "Scaler", color: "#4B47E5", initial: "S", year: "2022 — 2023", logo: "/logos/scaler.png" },
+    { name: "Kidzovo", color: "#F5A623", initial: "K", year: "2022", logo: "/logos/kidzovo.png" },
+    { name: "TCS", color: "#E4181C", initial: "T", year: "2021", logo: "/logos/tcs.png" },
+    { name: "Wongdoody", color: "#FF4E7A", initial: "W", year: "2021", logo: "/logos/wongdoody.png" },
+    { name: "Ciena", color: "#00998F", initial: "C", year: "2020", logo: "/logos/ciena.png" },
   ],
 
   // rows shown in Work without a case-study page yet

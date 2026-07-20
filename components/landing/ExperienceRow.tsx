@@ -42,12 +42,7 @@ export function ExperienceRow() {
         {(CONFIG.experience as Exp[]).map((c) => (
           <span className="exp-item" key={c.name} {...bind("💼")}>
             <span className="exp-tip">
-              <span className="et-row">
-                <span className="et-dot" style={{ background: c.color }} aria-hidden="true" />
-                <span className="et-name">{c.name}</span>
-              </span>
-              <span className="et-yr">{c.year}</span>
-              <span className="et-arrow" aria-hidden="true" />
+              {c.name} · {c.year}
             </span>
             <Badge c={c} />
           </span>
