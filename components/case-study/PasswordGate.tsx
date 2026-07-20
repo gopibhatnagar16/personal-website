@@ -35,19 +35,31 @@ export function PasswordGate() {
   return (
     <>
       <form className="cs-lock-form" onSubmit={handleUnlock}>
-        <input
-          type="password"
-          className="cs-lock-input"
-          placeholder="Password"
-          value={pwd}
-          onChange={(e) => { setPwd(e.target.value); setError(false); }}
-          autoFocus
-        />
-        <button type="submit" className="cs-lock-btn" disabled={busy}>
-          {busy ? "…" : "Unlock"}
+        <div className={`cs-lock-input-wrap${error ? " is-error" : ""}`}>
+          <svg className="cs-lock-input-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <rect x="5" y="11" width="14" height="10" rx="2.5" stroke="currentColor" strokeWidth="2" />
+            <path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+          </svg>
+          <input
+            type="password"
+            className="cs-lock-input"
+            placeholder="Enter password"
+            value={pwd}
+            onChange={(e) => { setPwd(e.target.value); setError(false); }}
+            autoFocus
+            aria-invalid={error}
+            aria-describedby={error ? "cs-lock-error-msg" : undefined}
+          />
+        </div>
+        <button type="submit" className="cs-lock-btn" disabled={busy || !pwd}>
+          {busy ? <span className="cs-lock-spinner" aria-hidden="true" /> : "Unlock"}
         </button>
       </form>
-      {error && <p className="cs-lock-error">Wrong password — try again.</p>}
+      {error && (
+        <p className="cs-lock-error" id="cs-lock-error-msg" role="alert">
+          Wrong password — try again.
+        </p>
+      )}
     </>
   );
 }
