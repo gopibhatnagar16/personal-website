@@ -37,12 +37,7 @@ export function LandingClient({ work, writing }: Props) {
             <section className="section" id="personal">
               <span className="section-label">Personal</span>
               <p className="section-intro">{CONFIG.personalIntro}</p>
-              <DraggableCanvas
-                items={CONFIG.pegboard}
-                height={380}
-                hint="drag stickers · drag to pan"
-                variant="board"
-              />
+              <DraggableCanvas items={CONFIG.pegboard} height={380} variant="board" />
             </section>
           </div>
         </div>

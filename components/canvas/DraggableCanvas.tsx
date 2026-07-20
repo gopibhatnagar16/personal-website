@@ -7,7 +7,6 @@ import { SHAPE_GREYS, type CanvasItem } from "@/lib/config";
 interface Props {
   items: CanvasItem[];
   height: number;
-  hint?: string;
   variant?: "mat" | "board";
 }
 
@@ -84,11 +83,32 @@ export function DraggableCanvas({ items, height, variant }: Props) {
       onPointerUp={onCanvasUp}
       onPointerCancel={onCanvasUp}
     >
-      {hint && (
-        <span className="canvas-hint">
-          <Move size={13} strokeWidth={1.75} /> {hint}
-        </span>
-      )}
+      <div className="canvas-controls" onPointerDown={(e) => e.stopPropagation()}>
+        {variant === "mat" && (
+          <div className="canvas-colors" role="group" aria-label="Cutting mat color">
+            {MAT_COLORS.map((c) => (
+              <button
+                key={c.id}
+                type="button"
+                className={"canvas-swatch" + (c.id === matColor.id ? " active" : "")}
+                style={{ background: c.light }}
+                aria-label={`${c.label} mat`}
+                aria-pressed={c.id === matColor.id}
+                onClick={() => setMatColor(c)}
+              />
+            ))}
+          </div>
+        )}
+        <button
+          type="button"
+          className={"canvas-reset" + (isPanned ? " visible" : "")}
+          onClick={() => setPan({ x: 0, y: 0 })}
+          aria-label="Reset canvas position"
+          tabIndex={isPanned ? 0 : -1}
+        >
+          <RotateCcw size={13} strokeWidth={1.9} />
+        </button>
+      </div>
       {items.map((it) => {
         const isPolaroid = it.kind === "polaroid";
         return (
