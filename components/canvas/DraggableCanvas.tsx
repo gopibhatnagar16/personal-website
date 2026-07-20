@@ -8,7 +8,7 @@ interface Props {
   items: CanvasItem[];
   height: number;
   hint?: string;
-  variant?: "mat" | "open";
+  variant?: "mat" | "board";
 }
 
 /* draggable canvas (infinite pan) */
@@ -72,28 +72,43 @@ export function DraggableCanvas({ items, height, hint, variant }: Props) {
           <Move size={13} strokeWidth={1.75} /> {hint}
         </span>
       )}
-      {items.map((it) => (
-        <div
-          key={it.id}
-          className={"ci ci-" + it.kind}
-          style={{
-            left: pos[it.id].x + pan.x,
-            top: pos[it.id].y + pan.y,
-            zIndex: pos[it.id].z,
-            width: it.w,
-            height: it.h,
-            ...(it.emoji
-              ? { background: it.bg, transform: `rotate(${it.rot || 0}deg)` }
-              : { backgroundImage: SHAPE_GREYS[(it.g || 0) % SHAPE_GREYS.length] }),
-          }}
-          onPointerDown={(e) => onDown(e, it.id)}
-          onPointerMove={onMove}
-          onPointerUp={onUp}
-          onPointerCancel={onUp}
-        >
-          {it.emoji && <span className="ci-emoji">{it.emoji}</span>}
-        </div>
-      ))}
+      {items.map((it) => {
+        const isPolaroid = it.kind === "polaroid";
+        return (
+          <div
+            key={it.id}
+            className={"ci ci-" + it.kind}
+            style={{
+              left: pos[it.id].x + pan.x,
+              top: pos[it.id].y + pan.y,
+              zIndex: pos[it.id].z,
+              width: it.w,
+              height: it.h,
+              transform: it.rot ? `rotate(${it.rot}deg)` : undefined,
+              ...(it.emoji
+                ? { background: it.bg }
+                : isPolaroid
+                ? {}
+                : { backgroundImage: SHAPE_GREYS[(it.g || 0) % SHAPE_GREYS.length] }),
+            }}
+            onPointerDown={(e) => onDown(e, it.id)}
+            onPointerMove={onMove}
+            onPointerUp={onUp}
+            onPointerCancel={onUp}
+          >
+            {it.emoji && <span className="ci-emoji">{it.emoji}</span>}
+            {isPolaroid && (
+              <>
+                <span
+                  className="ci-photo"
+                  style={{ backgroundImage: SHAPE_GREYS[(it.g || 0) % SHAPE_GREYS.length] }}
+                />
+                {it.caption && <span className="ci-cap">{it.caption}</span>}
+              </>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }

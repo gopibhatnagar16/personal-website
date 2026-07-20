@@ -38,20 +38,17 @@ export function LandingClient({ work, writing }: Props) {
               />
             </section>
 
-            {/* PERSONAL — sticker sheet */}
-            <section className="section section-tight" id="personal">
-              <span className="section-label">personal</span>
+            {/* PERSONAL — pegboard */}
+            <section className="section" id="personal">
+              <span className="section-label">Personal</span>
+              <p className="section-intro">{CONFIG.personalIntro}</p>
+              <DraggableCanvas
+                items={CONFIG.pegboard}
+                height={380}
+                hint="drag stickers · drag to pan"
+                variant="board"
+              />
             </section>
-          </div>
-
-          {/* full-bleed — breaks out of the centered column */}
-          <div className="bleed">
-            <DraggableCanvas
-              items={CONFIG.stickers}
-              height={340}
-              hint="drag stickers · drag to pan"
-              variant="open"
-            />
           </div>
         </div>
 
