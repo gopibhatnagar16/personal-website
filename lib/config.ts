@@ -62,19 +62,20 @@ export const CONFIG = {
     { id: "t5", x: 440, y: 246, w: 160, h: 112, kind: "card", g: 4 },
   ] as CanvasItem[],
 
-  // pegboard — polaroids + stickers pinned to the Personal board,
-  // sized to sit inside the same column width as the sections above
+  // pegboard — polaroids + stickers pinned to a fixed Personal board (not an
+  // infinite-pan canvas). x/y are percentages of the board's own width/height
+  // so the layout holds regardless of the board's rendered size; w/h stay px.
   pegboard: [
-    { id: "p1", x: 20, y: 26, w: 148, h: 182, kind: "polaroid", g: 0, rot: -7, caption: "sunrise hike" },
-    { id: "p2", x: 336, y: 118, w: 148, h: 182, kind: "polaroid", g: 4, rot: -4, caption: "studio days" },
-    { id: "p3", x: 632, y: 20, w: 148, h: 182, kind: "polaroid", g: 2, rot: 6, caption: "morning brew" },
+    { id: "p1", x: 2, y: 5, w: 148, h: 182, kind: "polaroid", g: 0, rot: -7, caption: "sunrise hike" },
+    { id: "p2", x: 37, y: 8, w: 148, h: 182, kind: "polaroid", g: 4, rot: -4, caption: "studio days" },
+    { id: "p3", x: 72, y: 3, w: 148, h: 182, kind: "polaroid", g: 2, rot: 6, caption: "morning brew" },
 
-    { id: "s1", x: 210, y: 40, w: 88, h: 88, kind: "sticker", emoji: "✌️", bg: "#F5A623", rot: -8 },
-    { id: "s2", x: 56, y: 236, w: 92, h: 92, kind: "sticker", emoji: "🎧", bg: "#4B47E5", rot: -10 },
-    { id: "s3", x: 500, y: 208, w: 82, h: 82, kind: "sticker", emoji: "☕", bg: "#3395FF", rot: 6 },
-    { id: "s4", x: 210, y: 232, w: 80, h: 80, kind: "sticker", emoji: "🌱", bg: "#00998F", rot: 5 },
-    { id: "s5", x: 792, y: 150, w: 86, h: 86, kind: "sticker", emoji: "⭐", bg: "#E4181C", rot: 9 },
-    { id: "s6", x: 620, y: 236, w: 78, h: 78, kind: "sticker", emoji: "🔥", bg: "#8A5CF6", rot: -6 },
+    { id: "s1", x: 2, y: 65, w: 88, h: 88, kind: "sticker", emoji: "✌️", bg: "#F5A623", rot: -8 },
+    { id: "s2", x: 19, y: 69, w: 92, h: 92, kind: "sticker", emoji: "🎧", bg: "#4B47E5", rot: -10 },
+    { id: "s3", x: 36, y: 63, w: 80, h: 80, kind: "sticker", emoji: "🌱", bg: "#00998F", rot: 5 },
+    { id: "s4", x: 53, y: 71, w: 82, h: 82, kind: "sticker", emoji: "☕", bg: "#3395FF", rot: 6 },
+    { id: "s5", x: 70, y: 64, w: 86, h: 86, kind: "sticker", emoji: "⭐", bg: "#E4181C", rot: 9 },
+    { id: "s6", x: 87, y: 68, w: 78, h: 78, kind: "sticker", emoji: "🔥", bg: "#8A5CF6", rot: -6 },
   ] as CanvasItem[],
 
   photos: [] as string[], // avatar fan (last = front)

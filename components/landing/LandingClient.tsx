@@ -45,8 +45,8 @@ export function LandingClient({ work, writing }: Props) {
               <DraggableCanvas
                 items={CONFIG.pegboard}
                 height={380}
-                hint="drag stickers · drag to pan"
                 variant="board"
+                pannable={false}
               />
             </section>
           </div>

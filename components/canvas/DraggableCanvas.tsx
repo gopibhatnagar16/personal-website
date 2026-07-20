@@ -9,10 +9,15 @@ interface Props {
   height: number;
   hint?: string;
   variant?: "mat" | "board";
+  // false = a fixed board: items are positioned in % and clamped to stay
+  // on it, no background panning. true (default) = infinite pan, world-space px.
+  pannable?: boolean;
 }
 
-/* draggable canvas (infinite pan) */
-export function DraggableCanvas({ items, height, hint, variant }: Props) {
+const clamp = (v: number, min: number, max: number) => Math.min(Math.max(v, min), max);
+
+/* draggable canvas — infinite pan (mat) or a fixed, bounded board */
+export function DraggableCanvas({ items, height, hint, variant, pannable = true }: Props) {
   const canvasRef = useRef<HTMLDivElement>(null);
   const drag = useRef<{ id: string; ox: number; oy: number } | null>(null);
   const panDrag = useRef<{ x: number; y: number; panX: number; panY: number } | null>(null);
@@ -24,27 +29,45 @@ export function DraggableCanvas({ items, height, hint, variant }: Props) {
   });
   const [pan, setPan] = useState({ x: 0, y: 0 });
 
-  // card drag — world-space coordinates, independent of the current pan
+  // card drag — world-space px when pannable, else % of the board, clamped to its bounds
   const onDown = (e: React.PointerEvent, id: string) => {
     e.stopPropagation();
     (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
     const r = canvasRef.current!.getBoundingClientRect();
-    const screenX = pos[id].x + pan.x;
-    const screenY = pos[id].y + pan.y;
-    drag.current = { id, ox: e.clientX - r.left - screenX, oy: e.clientY - r.top - screenY };
+    if (pannable) {
+      const screenX = pos[id].x + pan.x;
+      const screenY = pos[id].y + pan.y;
+      drag.current = { id, ox: e.clientX - r.left - screenX, oy: e.clientY - r.top - screenY };
+    } else {
+      const curX = (pos[id].x / 100) * r.width;
+      const curY = (pos[id].y / 100) * r.height;
+      drag.current = { id, ox: e.clientX - r.left - curX, oy: e.clientY - r.top - curY };
+    }
     zTop.current += 1;
     setPos((s) => ({ ...s, [id]: { ...s[id], z: zTop.current } }));
   };
   const onMove = (e: React.PointerEvent) => {
     if (!drag.current) return;
     const r = canvasRef.current!.getBoundingClientRect();
-    const x = e.clientX - r.left - drag.current.ox - pan.x;
-    const y = e.clientY - r.top - drag.current.oy - pan.y;
-    setPos((s) => ({ ...s, [drag.current!.id]: { ...s[drag.current!.id], x, y } }));
+    const id = drag.current.id;
+    if (pannable) {
+      const x = e.clientX - r.left - drag.current.ox - pan.x;
+      const y = e.clientY - r.top - drag.current.oy - pan.y;
+      setPos((s) => ({ ...s, [id]: { ...s[id], x, y } }));
+    } else {
+      const it = items.find((i) => i.id === id)!;
+      const xPx = e.clientX - r.left - drag.current.ox;
+      const yPx = e.clientY - r.top - drag.current.oy;
+      const wPct = (it.w / r.width) * 100;
+      const hPct = (it.h / r.height) * 100;
+      const xPct = clamp((xPx / r.width) * 100, 0, 100 - wPct);
+      const yPct = clamp((yPx / r.height) * 100, 0, 100 - hPct);
+      setPos((s) => ({ ...s, [id]: { ...s[id], x: xPct, y: yPct } }));
+    }
   };
   const onUp = () => (drag.current = null);
 
-  // background drag — pans the whole mat, unbounded in every direction
+  // background drag — pans the whole mat, unbounded in every direction (pannable only)
   const onCanvasDown = (e: React.PointerEvent) => {
     (e.currentTarget as HTMLElement).setPointerCapture?.(e.pointerId);
     panDrag.current = { x: e.clientX, y: e.clientY, panX: pan.x, panY: pan.y };
@@ -62,10 +85,10 @@ export function DraggableCanvas({ items, height, hint, variant }: Props) {
       className={"canvas" + (variant ? " " + variant : "")}
       style={{ height, "--pan-x": pan.x + "px", "--pan-y": pan.y + "px" } as React.CSSProperties}
       ref={canvasRef}
-      onPointerDown={onCanvasDown}
-      onPointerMove={onCanvasMove}
-      onPointerUp={onCanvasUp}
-      onPointerCancel={onCanvasUp}
+      onPointerDown={pannable ? onCanvasDown : undefined}
+      onPointerMove={pannable ? onCanvasMove : undefined}
+      onPointerUp={pannable ? onCanvasUp : undefined}
+      onPointerCancel={pannable ? onCanvasUp : undefined}
     >
       {hint && (
         <span className="canvas-hint">
@@ -79,8 +102,8 @@ export function DraggableCanvas({ items, height, hint, variant }: Props) {
             key={it.id}
             className={"ci ci-" + it.kind}
             style={{
-              left: pos[it.id].x + pan.x,
-              top: pos[it.id].y + pan.y,
+              left: pannable ? pos[it.id].x + pan.x : pos[it.id].x + "%",
+              top: pannable ? pos[it.id].y + pan.y : pos[it.id].y + "%",
               zIndex: pos[it.id].z,
               width: it.w,
               height: it.h,
