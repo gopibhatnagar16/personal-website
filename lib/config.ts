@@ -9,10 +9,8 @@ export interface CanvasItem {
   y: number;
   w: number;
   h: number;
-  kind: "card" | "circle" | "rect" | "square" | "sticker" | "polaroid" | "magnet";
+  kind: "card" | "circle" | "rect" | "square" | "polaroid" | "sticker";
   g?: number;
-  emoji?: string;
-  bg?: string;
   rot?: number;
   caption?: string;
   // real media — src (image) shows as-is; video (mp4/webm) autoplays muted/looped,
@@ -109,29 +107,36 @@ export const CONFIG = {
     },
   ] as CanvasItem[],
 
-  // pegboard — polaroids, fridge magnets, and stickers pinned to a fixed
-  // Personal board (not an infinite-pan canvas). x/y are percentages of the
-  // board's own width/height so the layout holds regardless of the board's
-  // rendered size; w/h stay px. src (image) or video (mp4/webm) is resolved
-  // from /public/personal/.
+  // pegboard — polaroids + laptop-sticker cutouts pinned to a fixed Personal
+  // board (not an infinite-pan canvas). x/y are percentages of the board's
+  // own width/height so the layout holds regardless of the board's rendered
+  // size; w/h stay px. src (image) or video (mp4/webm) is resolved from
+  // /public/personal/. Positions are hand-scattered (not a grid) for an
+  // organic, pinned-to-a-corkboard feel.
   pegboard: [
-    { id: "p1", x: 2, y: 5, w: 148, h: 182, kind: "polaroid", rot: -7, src: "/personal/closing-time.jpg", caption: "closing time" },
-    { id: "p2", x: 37, y: 8, w: 148, h: 182, kind: "polaroid", rot: -4, src: "/personal/long-table.jpg", caption: "long table" },
-    { id: "p3", x: 72, y: 3, w: 148, h: 182, kind: "polaroid", rot: 6, src: "/personal/morning-brew.jpg", caption: "morning brew" },
+    { id: "p1", x: 2, y: 4, w: 105, h: 130, kind: "polaroid", rot: -7, src: "/personal/closing-time.jpg", caption: "closing time" },
+    { id: "p2", x: 35, y: 6, w: 105, h: 130, kind: "polaroid", rot: 8, src: "/personal/long-table.jpg", caption: "long table" },
+    { id: "p3", x: 68, y: 2, w: 105, h: 130, kind: "polaroid", rot: -5, src: "/personal/morning-brew.jpg", caption: "morning brew" },
 
-    { id: "m1", x: 4, y: 48, w: 96, h: 96, kind: "magnet", rot: -6, src: "/personal/lunch-break.jpg" },
-    { id: "m2", x: 23, y: 53, w: 88, h: 88, kind: "magnet", rot: 5, src: "/personal/quiet-dusk.jpg" },
-    { id: "m3", x: 41, y: 46, w: 100, h: 100, kind: "magnet", rot: -3, src: "/personal/studio-days.jpg" },
-    { id: "m4", x: 60, y: 52, w: 86, h: 86, kind: "magnet", rot: 7, src: "/personal/match-day.jpg" },
-    { id: "m5", x: 78, y: 48, w: 96, h: 96, kind: "magnet", rot: -5, video: "/personal/one-more-turn.mp4" },
+    { id: "p4", x: 18, y: 37, w: 105, h: 130, kind: "polaroid", rot: 6, src: "/personal/lunch-break.jpg", caption: "lunch break" },
+    { id: "p5", x: 50, y: 34, w: 105, h: 130, kind: "polaroid", rot: -8, src: "/personal/quiet-dusk.jpg", caption: "quiet dusk" },
+    { id: "p6", x: 83, y: 38, w: 105, h: 130, kind: "polaroid", rot: 4, src: "/personal/studio-days.jpg", caption: "studio days" },
 
-    { id: "s1", x: 1, y: 79, w: 76, h: 76, kind: "sticker", emoji: "✌️", bg: "#F5A623", rot: -8 },
-    { id: "s2", x: 15, y: 84, w: 78, h: 78, kind: "sticker", emoji: "🎧", bg: "#4B47E5", rot: -10 },
-    { id: "s3", x: 29, y: 77, w: 68, h: 68, kind: "sticker", emoji: "🌱", bg: "#00998F", rot: 5 },
-    { id: "s4", x: 43, y: 84, w: 70, h: 70, kind: "sticker", emoji: "☕", bg: "#3395FF", rot: 6 },
-    { id: "s5", x: 57, y: 78, w: 74, h: 74, kind: "sticker", emoji: "⭐", bg: "#E4181C", rot: 9 },
-    { id: "s6", x: 71, y: 84, w: 66, h: 66, kind: "sticker", emoji: "🔥", bg: "#8A5CF6", rot: -6 },
-    { id: "s7", x: 85, y: 77, w: 78, h: 78, kind: "sticker", rot: 4, video: "/personal/side-project.mp4" },
+    { id: "p7", x: 5, y: 65, w: 105, h: 130, kind: "polaroid", rot: -6, src: "/personal/match-day.jpg", caption: "match day" },
+    { id: "p8", x: 38, y: 68, w: 105, h: 130, kind: "polaroid", rot: 7, video: "/personal/one-more-turn.mp4", caption: "one more turn" },
+    { id: "p9", x: 71, y: 64, w: 105, h: 130, kind: "polaroid", rot: -4, src: "/personal/window-flowers.png", caption: "window sill" },
+
+    // laptop-sticker cutouts — transparent die-cut PNGs, no card/frame, just
+    // the image + a drop shadow (see .ci-sticker), scattered in the gaps
+    // between the polaroid rows.
+    { id: "s1", x: 20, y: 3, w: 80, h: 110, kind: "sticker", rot: 10, src: "/personal/tote-bag.png" },
+    { id: "s2", x: 52, y: 8, w: 108, h: 92, kind: "sticker", rot: -9, src: "/personal/balloon-letters.png" },
+    { id: "s3", x: 87, y: 8, w: 86, h: 86, kind: "sticker", rot: 6, src: "/personal/latte-art.png" },
+    { id: "s4", x: 3, y: 22, w: 60, h: 107, kind: "sticker", rot: -8, src: "/personal/sandwich.png" },
+    { id: "s5", x: 30, y: 20, w: 62, h: 110, kind: "sticker", rot: 9, src: "/personal/coffee-note.png" },
+    { id: "s6", x: 60, y: 18, w: 80, h: 107, kind: "sticker", rot: -6, src: "/personal/rose-bouquet.png" },
+    { id: "s7", x: 2, y: 48, w: 136, h: 51, kind: "sticker", rot: 5, src: "/personal/sneakers.png" },
+    { id: "s8", x: 62, y: 50, w: 124, h: 47, kind: "sticker", rot: -4, src: "/personal/team-note.png" },
   ] as CanvasItem[],
 
   photos: [
