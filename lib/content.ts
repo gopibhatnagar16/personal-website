@@ -19,6 +19,7 @@ export interface ContentMeta {
   thumb?: string;
   preview?: string;
   cover?: string;
+  order?: number;
 }
 
 const SLUG_RE = /^[a-z0-9-]+$/;
@@ -37,6 +38,7 @@ function toMeta(kind: ContentKind, slug: string, data: Record<string, unknown>):
     thumb: data.thumb ? String(data.thumb) : undefined,
     preview: data.preview ? String(data.preview) : undefined,
     cover: data.cover ? String(data.cover) : undefined,
+    order: typeof data.order === "number" ? data.order : undefined,
   };
 }
 
@@ -78,5 +80,7 @@ export async function listContent(kind: ContentKind): Promise<ContentMeta[]> {
         return toMeta(kind, f.replace(/\.mdx$/, ""), matter(raw).data);
       })
   );
-  return items.sort((a, b) => b.year.localeCompare(a.year));
+  // manual order wins when set (lets a row be pinned regardless of year);
+  // entries without one fall back to newest-first.
+  return items.sort((a, b) => (a.order ?? Infinity) - (b.order ?? Infinity) || b.year.localeCompare(a.year));
 }
