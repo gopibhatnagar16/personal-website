@@ -9,12 +9,16 @@ export interface CanvasItem {
   y: number;
   w: number;
   h: number;
-  kind: "card" | "circle" | "rect" | "square" | "sticker" | "polaroid";
+  kind: "card" | "circle" | "rect" | "square" | "sticker" | "polaroid" | "magnet";
   g?: number;
   emoji?: string;
   bg?: string;
   rot?: number;
   caption?: string;
+  // real media — src (image) shows as-is; video (mp4/webm) autoplays muted/looped,
+  // with src used as its poster frame if both are set.
+  src?: string;
+  video?: string;
 }
 
 export const CONFIG = {
@@ -52,10 +56,12 @@ export const CONFIG = {
 
   // rows shown in Work without a case-study page yet
   upcomingWork: [
-    { title: "Onboarding", thumb: "/work/onboarding-mini.png", preview: "/work/onboarding-maxi.png" },
+    { title: "Onboarding", thumb: "/work/onboarding/thumb.png", preview: "/work/onboarding/preview.png" },
   ],
 
-  // draggable placeholders — swap the greys for images/embeds later
+  // draggable placeholders — add src (image) or video (mp4/webm) from
+  // /public/tidbits/ to swap the grey card for real media, e.g.
+  // { ...t1, src: "/tidbits/photo.jpg" } or { ...t2, video: "/tidbits/clip.mp4" }
   tidbits: [
     { id: "t1", x: 24, y: 44, w: 210, h: 140, kind: "card", g: 0 },
     { id: "t2", x: 300, y: 24, w: 178, h: 208, kind: "card", g: 1 },
@@ -64,20 +70,29 @@ export const CONFIG = {
     { id: "t5", x: 440, y: 246, w: 160, h: 112, kind: "card", g: 4 },
   ] as CanvasItem[],
 
-  // pegboard — polaroids + stickers pinned to a fixed Personal board (not an
-  // infinite-pan canvas). x/y are percentages of the board's own width/height
-  // so the layout holds regardless of the board's rendered size; w/h stay px.
+  // pegboard — polaroids, fridge magnets, and stickers pinned to a fixed
+  // Personal board (not an infinite-pan canvas). x/y are percentages of the
+  // board's own width/height so the layout holds regardless of the board's
+  // rendered size; w/h stay px. src (image) or video (mp4/webm) is resolved
+  // from /public/personal/.
   pegboard: [
-    { id: "p1", x: 2, y: 5, w: 148, h: 182, kind: "polaroid", g: 0, rot: -7, caption: "sunrise hike" },
-    { id: "p2", x: 37, y: 8, w: 148, h: 182, kind: "polaroid", g: 4, rot: -4, caption: "studio days" },
-    { id: "p3", x: 72, y: 3, w: 148, h: 182, kind: "polaroid", g: 2, rot: 6, caption: "morning brew" },
+    { id: "p1", x: 2, y: 5, w: 148, h: 182, kind: "polaroid", rot: -7, src: "/personal/closing-time.jpg", caption: "closing time" },
+    { id: "p2", x: 37, y: 8, w: 148, h: 182, kind: "polaroid", rot: -4, src: "/personal/long-table.jpg", caption: "long table" },
+    { id: "p3", x: 72, y: 3, w: 148, h: 182, kind: "polaroid", rot: 6, src: "/personal/morning-brew.jpg", caption: "morning brew" },
 
-    { id: "s1", x: 2, y: 65, w: 88, h: 88, kind: "sticker", emoji: "✌️", bg: "#F5A623", rot: -8 },
-    { id: "s2", x: 19, y: 69, w: 92, h: 92, kind: "sticker", emoji: "🎧", bg: "#4B47E5", rot: -10 },
-    { id: "s3", x: 36, y: 63, w: 80, h: 80, kind: "sticker", emoji: "🌱", bg: "#00998F", rot: 5 },
-    { id: "s4", x: 53, y: 71, w: 82, h: 82, kind: "sticker", emoji: "☕", bg: "#3395FF", rot: 6 },
-    { id: "s5", x: 70, y: 64, w: 86, h: 86, kind: "sticker", emoji: "⭐", bg: "#E4181C", rot: 9 },
-    { id: "s6", x: 87, y: 68, w: 78, h: 78, kind: "sticker", emoji: "🔥", bg: "#8A5CF6", rot: -6 },
+    { id: "m1", x: 4, y: 48, w: 96, h: 96, kind: "magnet", rot: -6, src: "/personal/lunch-break.jpg" },
+    { id: "m2", x: 23, y: 53, w: 88, h: 88, kind: "magnet", rot: 5, src: "/personal/quiet-dusk.jpg" },
+    { id: "m3", x: 41, y: 46, w: 100, h: 100, kind: "magnet", rot: -3, src: "/personal/studio-days.jpg" },
+    { id: "m4", x: 60, y: 52, w: 86, h: 86, kind: "magnet", rot: 7, src: "/personal/match-day.jpg" },
+    { id: "m5", x: 78, y: 48, w: 96, h: 96, kind: "magnet", rot: -5, video: "/personal/one-more-turn.mp4" },
+
+    { id: "s1", x: 1, y: 79, w: 76, h: 76, kind: "sticker", emoji: "✌️", bg: "#F5A623", rot: -8 },
+    { id: "s2", x: 15, y: 84, w: 78, h: 78, kind: "sticker", emoji: "🎧", bg: "#4B47E5", rot: -10 },
+    { id: "s3", x: 29, y: 77, w: 68, h: 68, kind: "sticker", emoji: "🌱", bg: "#00998F", rot: 5 },
+    { id: "s4", x: 43, y: 84, w: 70, h: 70, kind: "sticker", emoji: "☕", bg: "#3395FF", rot: 6 },
+    { id: "s5", x: 57, y: 78, w: 74, h: 74, kind: "sticker", emoji: "⭐", bg: "#E4181C", rot: 9 },
+    { id: "s6", x: 71, y: 84, w: 66, h: 66, kind: "sticker", emoji: "🔥", bg: "#8A5CF6", rot: -6 },
+    { id: "s7", x: 85, y: 77, w: 78, h: 78, kind: "sticker", rot: 4, video: "/personal/side-project.mp4" },
   ] as CanvasItem[],
 
   photos: [] as string[], // avatar fan (last = front)

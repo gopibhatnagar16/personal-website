@@ -134,6 +134,10 @@ export function DraggableCanvas({ items, height, variant, pannable = true }: Pro
       </div>
       {items.map((it) => {
         const isPolaroid = it.kind === "polaroid";
+        const isMagnet = it.kind === "magnet";
+        // polaroids and magnets frame their media in an inner .ci-photo box
+        // (clip/pin + optional caption) instead of a plain background-image.
+        const isFramed = isPolaroid || isMagnet;
         return (
           <div
             key={it.id}
@@ -145,9 +149,13 @@ export function DraggableCanvas({ items, height, variant, pannable = true }: Pro
               width: it.w,
               height: it.h,
               transform: it.rot ? `rotate(${it.rot}deg)` : undefined,
-              ...(it.emoji
+              ...(it.video && !isFramed
+                ? {}
+                : it.src && !isFramed
+                ? { backgroundImage: `url(${it.src})` }
+                : it.emoji
                 ? { background: it.bg }
-                : isPolaroid
+                : isFramed
                 ? {}
                 : { backgroundImage: SHAPE_GREYS[(it.g || 0) % SHAPE_GREYS.length] }),
             }}
@@ -157,15 +165,21 @@ export function DraggableCanvas({ items, height, variant, pannable = true }: Pro
             onPointerCancel={onUp}
           >
             {it.emoji && <span className="ci-emoji">{it.emoji}</span>}
-            {isPolaroid && (
-              <>
+            {it.video && !isFramed && (
+              <video className="ci-video" src={it.video} poster={it.src} muted autoPlay loop playsInline />
+            )}
+            {isFramed &&
+              (it.video ? (
+                <video className="ci-photo" src={it.video} poster={it.src} muted autoPlay loop playsInline />
+              ) : (
                 <span
                   className="ci-photo"
-                  style={{ backgroundImage: SHAPE_GREYS[(it.g || 0) % SHAPE_GREYS.length] }}
+                  style={{
+                    backgroundImage: it.src ? `url(${it.src})` : SHAPE_GREYS[(it.g || 0) % SHAPE_GREYS.length],
+                  }}
                 />
-                {it.caption && <span className="ci-cap">{it.caption}</span>}
-              </>
-            )}
+              ))}
+            {isPolaroid && it.caption && <span className="ci-cap">{it.caption}</span>}
           </div>
         );
       })}

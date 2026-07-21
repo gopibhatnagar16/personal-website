@@ -5,15 +5,15 @@ role: Design Engineering
 year: "2025"
 team: Razorpay · PG Growth
 readTime: 7 m
-cover: /writing/framer-cover.png
-preview: /writing/framer-cover.png
+cover: /writing/framer/cover.png
+preview: /writing/framer/cover.png
 ---
 
 ## Overview
 
 The pages people saw are only half the story — the system underneath is the real one. The shipped surfaces came out of a production path that ran: **requirements → Figma handoff → engineering → QA → launch**. This piece is about what it took to make that path fast and safe at Razorpay's scale.
 
-<CaseImage src="/writing/framer-design-exploration.png" alt="Exploration board of landing-page folds, hero variants, and layout patterns" />
+<CaseImage src="/writing/framer/design-exploration.png" alt="Exploration board of landing-page folds, hero variants, and layout patterns" />
 
 ## Context
 
@@ -21,7 +21,7 @@ Razorpay's landing pages are the main funnel for acquisition. Millions of visito
 
 The intent was to move this surface to Framer so the team could ship faster. But the moment we started moving, a deeper issue became visible: there was no defined structure for how a Razorpay landing page should be built.
 
-<CaseImage src="/writing/framer-landing-page-example.png" alt="A Razorpay Payment Links landing page shown across desktop, annotated, and mobile-web states" />
+<CaseImage src="/writing/framer/landing-page-example.png" alt="A Razorpay Payment Links landing page shown across desktop, annotated, and mobile-web states" />
 
 ## Problem
 
@@ -45,15 +45,15 @@ I built three connected systems. Each solved the bottleneck created by the previ
 
 **1. Design-system foundation.** To make Framer usable beyond a few specialists, I built the reusable foundation: components, tokens, patterns, fold templates, and a quality bar for what a Razorpay landing page should feel like. Designers were no longer starting from an empty canvas or rebuilding the same sections from memory.
 
-<CaseImage src="/writing/framer-component-system.png" alt="Button and link component states, plus an FAQ accordion checked across desktop, tablet, and phone breakpoints" />
+<CaseImage src="/writing/framer/component-system.png" alt="Button and link component states, plus an FAQ accordion checked across desktop, tablet, and phone breakpoints" />
 
 **2. Learning system.** Once the design system existed, the next gap was learning. People could see the components, but they still needed the decisions behind them: which fold to use, how motion should behave, what to avoid, and how to judge launch readiness. So I turned walkthroughs, jam sessions, and repeated explanations into a reusable learning system — zoom out to the full page flow, zoom in to fold decisions, motion rules, content checks, and review notes.
 
-<CaseImage src="/writing/framer-learning-sop.png" alt="The Framer SOP video library — onboarding, landing-page walkthroughs, and go-live readiness checks" />
+<CaseImage src="/writing/framer/learning-sop.png" alt="The Framer SOP video library — onboarding, landing-page walkthroughs, and go-live readiness checks" />
 
 **3. Tooling system.** The learning system unlocked scale — and a new risk. With more people publishing, unintentional breakages became easier: the wrong version going live, unclear deployment ownership, no shared log of what changed. So I built a Slack bot and pre-flight tooling around launch. Every deployment created visibility for the team, and every page had to clear the launch checklist before it went live.
 
-<CaseImage src="/writing/framer-editor-system.png" alt="The production Framer file — page structure, navbar variants by market, and responsive breakpoints" />
+<CaseImage src="/writing/framer/editor-system.png" alt="The production Framer file — page structure, navbar variants by market, and responsive breakpoints" />
 
 ## Outcomes
 
