@@ -25,8 +25,6 @@ export function SiteFooter() {
           <a
             className="ft-chip r1"
             href={`mailto:${CONFIG.email}`}
-            target="_blank"
-            rel="noopener noreferrer"
             aria-label="Email"
           >
             <span className="ft-label">Email</span>
