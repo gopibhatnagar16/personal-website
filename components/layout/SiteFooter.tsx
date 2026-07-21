@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Mail, Linkedin, Twitter, FileText } from "lucide-react";
+import { Mail, Linkedin, Twitter, FileText, Sun } from "lucide-react";
 import { CONFIG } from "@/lib/config";
 import { useEyes } from "@/components/shared/EyesCursor";
 
@@ -37,6 +37,7 @@ export function SiteFooter() {
           <div className="ft-meta-block ft-meta-right">
             <span className="ft-meta-label">Currently</span>
             <span className="ft-meta-value">
+              <Sun size={14} strokeWidth={2} />
               {CONFIG.location}
               {now ? `, ${now}` : ""}
             </span>
@@ -46,8 +47,12 @@ export function SiteFooter() {
         <div className="ft-note">
           <span className="ft-note-label">Note from {CONFIG.name.split(" ")[0]}</span>
           <p className="ft-note-body">
-            Hey — thanks for scrolling all the way down. If something here made you pause, or
-            you just want to talk shop, my inbox is always open.
+            Hey — thanks for scrolling all the way down. If something here made you pause, say hi
+            at{" "}
+            <a className="ft-note-mail" href={`mailto:${CONFIG.email}`}>
+              {CONFIG.email}
+            </a>
+            .
           </p>
           <span className="ft-note-sign">— {CONFIG.name}</span>
         </div>
@@ -59,7 +64,7 @@ export function SiteFooter() {
             aria-label="Email"
           >
             <span className="ft-label">Email</span>
-            <Mail size={36} strokeWidth={2} />
+            <Mail size={28} strokeWidth={2} />
           </a>
           <a
             className="ft-chip r2"
@@ -69,7 +74,7 @@ export function SiteFooter() {
             aria-label="LinkedIn"
           >
             <span className="ft-label">LinkedIn</span>
-            <Linkedin size={36} strokeWidth={2} />
+            <Linkedin size={28} strokeWidth={2} />
           </a>
           <a
             className="ft-chip r3"
@@ -79,7 +84,7 @@ export function SiteFooter() {
             aria-label="Twitter"
           >
             <span className="ft-label">Twitter</span>
-            <Twitter size={36} strokeWidth={2} />
+            <Twitter size={28} strokeWidth={2} />
           </a>
           <a
             className="ft-chip r4"
@@ -89,7 +94,7 @@ export function SiteFooter() {
             aria-label="Resume"
           >
             <span className="ft-label">Resume</span>
-            <FileText size={36} strokeWidth={2} />
+            <FileText size={28} strokeWidth={2} />
           </a>
         </div>
       </div>

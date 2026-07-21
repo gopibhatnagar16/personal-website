@@ -31,7 +31,7 @@ export const CONFIG = {
   },
   timeZone: "Asia/Kolkata",
   tzLabel: "GMT+5:30",
-  location: "Chennai", // ← shown in the footer "Currently"
+  location: "Bangalore", // ← shown in the footer "Currently"
   lastUpdated: "July 2026", // ← footer "Last updated"
   title: "Design Builder.",
   titleLine2: "Partly in canvas, partly in codebase.",
