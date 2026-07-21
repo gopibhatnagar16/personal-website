@@ -12,13 +12,13 @@ cover: /work/subscriptions/cover.png
 
 ## Context
 
-Most Razorpay products are charged at standard transaction rates. **Business goal:** one standard rate was simple, but gave payment-ready businesses little reason to choose or deepen their use of Razorpay. **Product goal:** give businesses a clear route — stay on the standard rate, or choose a subscription plan they can manage later.
+Most Razorpay products are charged at standard transaction rates. **Business goal:** one standard rate was simple, but gave payment-ready businesses little reason to choose or deepen their use of Razorpay. **Product goal:** give businesses a clear route: stay on the standard rate, or choose a subscription plan they can manage later.
 
 The final shape of that route was a three-plan choice during onboarding, with Standard always available and no commitment required:
 
-- **Standard — 2%.** Start with the default rate and change later.
-- **Plus — 1.9%** *(recommended)*. Lower fees as payment volume begins to grow.
-- **Pro — 1.8%.** More value for businesses expecting higher volume.
+- **Standard: 2%.** Start with the default rate and change later.
+- **Plus: 1.9%** *(recommended)*. Lower fees as payment volume begins to grow.
+- **Pro: 1.8%.** More value for businesses expecting higher volume.
 
 The subscription opportunity sits just after onboarding, when the business has given us enough context but has not yet formed a regular payment habit. The intended route: understand the business → offer a clear pricing route → help it make a first payment → support regular payment use over time. The existing journey offered one standard rate and no self-serve pricing choice, leaving committed businesses to switch gateways, contact Sales, or postpone the decision.
 
@@ -30,16 +30,16 @@ The subscription opportunity sits just after onboarding, when the business has g
 
 ## Problem
 
-After a registered business completed onboarding, the product still showed one standard rate — even though we had enough context to offer a more relevant next step. In the existing design, only high-value merchants could request customized pricing through Contact Sales; everyone else saw 2% and nothing more.
+After a registered business completed onboarding, the product still showed one standard rate, even though we had enough context to offer a more relevant next step. In the existing design, only high-value merchants could request customized pricing through Contact Sales; everyone else saw 2% and nothing more.
 
 The opportunity sat in the short window after setup: the product understood the business, but did not yet use that understanding to help it choose how to start. If pricing stayed unclear, merchants could leave before forming a transaction habit.
 
 Mapping the current journey made the gaps explicit:
 
-- **Discover / Sign up** — the business compares providers, creates an account, begins setup.
-- **Onboarding** — it shares business details and expects a relevant next step. *Gap: context collected, then unused.*
-- **Setup** — it sees only the standard rate before taking payments. *Gap: no plan choice.*
-- **Dashboard** — it cannot easily revisit or manage pricing later. *Gap: no lifecycle.*
+- **Discover / Sign up:** the business compares providers, creates an account, begins setup.
+- **Onboarding:** it shares business details and expects a relevant next step. *Gap: context collected, then unused.*
+- **Setup:** it sees only the standard rate before taking payments. *Gap: no plan choice.*
+- **Dashboard:** it cannot easily revisit or manage pricing later. *Gap: no lifecycle.*
 
 <CaseImage
   src="/work/subscriptions/journey-gaps.png"
@@ -73,20 +73,20 @@ Onboarding captured useful business details, but every eligible business still s
 
 A composite from merchant calls made the moment concrete. Meet **Arjun**: he has completed onboarding for his online apparel business and is ready to take payments. Before choosing a pricing route, he needs to know what is optional, what fits his expected volume, and whether he can change his mind later. His journey through the decision:
 
-- **Relieved** — setup complete, ready to begin taking payments.
-- **Unsure** — "Is 2% my only choice?" One standard rate gives him no way to judge a better route.
-- **Comparing** — Standard and a relevant subscription need to appear as clear alternatives.
-- **Understanding** — volume cues make the value of each plan easier to judge.
-- **Confident** — Standard stays valid alongside optional pricing routes.
-- **In control** — he can revisit or manage the choice once real payment use grows.
+- **Relieved:** setup complete, ready to begin taking payments.
+- **Unsure:** "Is 2% my only choice?" One standard rate gives him no way to judge a better route.
+- **Comparing:** Standard and a relevant subscription need to appear as clear alternatives.
+- **Understanding:** volume cues make the value of each plan easier to judge.
+- **Confident:** Standard stays valid alongside optional pricing routes.
+- **In control:** he can revisit or manage the choice once real payment use grows.
 
 <CaseImage
   src="/work/subscriptions/journey-map.png"
   alt="Merchant journey mapped by stage and emotion, from Discovery through Dashboard"
-  caption="Arjun's journey mapped by stage and emotion — confidence drops after Setup, where only the flat rate appears, and stays low through Dashboard."
+  caption="Arjun's journey mapped by stage and emotion: confidence drops after Setup, where only the flat rate appears, and stays low through Dashboard."
 />
 
-To explain what the funnel couldn't, Ishan and I called around **120 merchants** and had **30 meaningful conversations** across merchants who paused, stayed on the default path, and chose a paid plan. We used calls because the funnel only showed what happened, not why — and we deliberately spoke to drop-offs, free-plan choosers, and paid choosers so the research did not become only a drop-off audit.
+To explain what the funnel couldn't, Ishan and I called around **120 merchants** and had **30 meaningful conversations** across merchants who paused, stayed on the default path, and chose a paid plan. We used calls because the funnel only showed what happened, not why. We deliberately spoke to drop-offs, free-plan choosers, and paid choosers so the research did not become only a drop-off audit.
 
 <ResearchFlow
   steps={[
@@ -117,10 +117,10 @@ To explain what the funnel couldn't, Ishan and I called around **120 merchants**
 
 Four situations kept repeating:
 
-- **Cautious starters** — "I am just starting out. I will upgrade later if needed."
-- **Value-conscious comparers** — "The rate is better, but I do not remember the exact calculation."
-- **Confused buyers** — "Do I need to pay to start accepting payments?"
-- **Setup-blocked merchants** — "I was still stuck on setup, so the plan did not matter yet."
+- **Cautious starters:** "I am just starting out. I will upgrade later if needed."
+- **Value-conscious comparers:** "The rate is better, but I do not remember the exact calculation."
+- **Confused buyers:** "Do I need to pay to start accepting payments?"
+- **Setup-blocked merchants:** "I was still stuck on setup, so the plan did not matter yet."
 
 That translated into three shifts the design had to make:
 
@@ -138,12 +138,12 @@ Three directions shaped the solution: **clear choice** (show Standard and option
 
 We changed the amount of choice, the value frame, and the payment model to learn which explanation felt easiest to understand:
 
-- **Four distinct offerings** — tested free limits, discounted rates, benefits, and monthly or yearly prices. The range made value visible, but made the decision heavier when volume was unclear.
-- **Savings-first hierarchy** — prioritised the amount saved and made the recommended plan easier to notice. Savings sparked interest, but merchants still needed the plan to feel right for their volume.
-- **Prepaid vs postpaid** — framed one route as postpaid settlement deductions and another as a prepaid plan. Payment timing turned out to be part of the decision, not just the commercial model.
-- **Volume-led recommendation** — asked for expected volume, then revealed a recommendation. It helps when the volume assumption is transparent and easy to revisit.
-- **0% platform-fee framing** — led with the fee a merchant could avoid. A strong hook earns attention, but boundaries must be clear enough to build trust.
-- **One plan + top-ups** — collapsed the comparison into one personalised plan with included usage. Simplicity works when the future path remains visible and under the merchant's control.
+- **Four distinct offerings:** tested free limits, discounted rates, benefits, and monthly or yearly prices. The range made value visible, but made the decision heavier when volume was unclear.
+- **Savings-first hierarchy:** prioritised the amount saved and made the recommended plan easier to notice. Savings sparked interest, but merchants still needed the plan to feel right for their volume.
+- **Prepaid vs postpaid:** framed one route as postpaid settlement deductions and another as a prepaid plan. Payment timing turned out to be part of the decision, not just the commercial model.
+- **Volume-led recommendation:** asked for expected volume, then revealed a recommendation. It helps when the volume assumption is transparent and easy to revisit.
+- **0% platform-fee framing:** led with the fee a merchant could avoid. A strong hook earns attention, but boundaries must be clear enough to build trust.
+- **One plan + top-ups:** collapsed the comparison into one personalised plan with included usage. Simplicity works when the future path remains visible and under the merchant's control.
 
 <MediaSwitcher
   slides={[
@@ -188,7 +188,7 @@ We changed the amount of choice, the value frame, and the payment model to learn
 
 ## MVP experiment
 
-We tested pricing frames in a controlled onboarding MVP: a softer savings frame (**Variant A** — standard option kept close to paid plans, modest savings labels), a stronger value contrast (**Variant B** — savings contrast and recommended option made prominent), and plan-order changes (**Variant C** — hierarchy and ordering rather than price).
+We tested pricing frames in a controlled onboarding MVP: a softer savings frame (**Variant A:** standard option kept close to paid plans, modest savings labels), a stronger value contrast (**Variant B:** savings contrast and recommended option made prominent), and plan-order changes (**Variant C:** hierarchy and ordering rather than price).
 
 <Accordion
   title="What the first experiment tested"
@@ -217,7 +217,7 @@ We tested pricing frames in a controlled onboarding MVP: a softer savings frame 
   note="The whitelisted rollout also exposed a lifecycle gap: changing or cancelling a plan still required manual support."
 />
 
-Variant B was the strongest direction for plan selection, especially among registered businesses. The qualitative read mattered just as much: presentation worked (fewer plans and stronger value framing increased selection), but drop-off was mixed — pricing confusion, setup blockers, and low intent were different problems — and businesses needed to know what they gained and that a paid plan was optional.
+Variant B was the strongest direction for plan selection, especially among registered businesses. The qualitative read mattered just as much: presentation worked (fewer plans and stronger value framing increased selection), but drop-off was mixed (pricing confusion, setup blockers, and low intent were different problems), and businesses needed to know what they gained and that a paid plan was optional.
 
 The decision: scale the strongest pricing frame, then build the touchpoints and self-serve controls around it.
 
@@ -239,12 +239,12 @@ We made pricing an explicit step after onboarding. Before taking a first payment
 
 The plan story then lives wherever a business already works, across six touchpoints, each answering a different question:
 
-- **Home page** — a full-width banner on the highest-traffic surface, after alerts and quick actions: plan awareness from the first login, without requiring a pricing-page visit.
-- **Top navigation** — a persistent Get Plus action for businesses on Standard. The upgrade stays one click away, but disappears after the business upgrades.
-- **Profile dropdown** — shows the current plan and a direct management link, answering "what plan am I on?" in one click.
-- **Transactions page** — a subtle single-line banner beneath the payments overview, so businesses judge better pricing against their own usage, not an abstract estimate.
-- **In-product nudges** — dismissible cards after a business starts processing payments, testing social proof and value framing against real transaction intent.
-- **Account & settings** — a permanent Manage Plans home combining utilization, the full plan ladder, and compare/upgrade/change/cancel controls — no contacting a team.
+- **Home page:** a full-width banner on the highest-traffic surface, after alerts and quick actions: plan awareness from the first login, without requiring a pricing-page visit.
+- **Top navigation:** a persistent Get Plus action for businesses on Standard. The upgrade stays one click away, but disappears after the business upgrades.
+- **Profile dropdown:** shows the current plan and a direct management link, answering "what plan am I on?" in one click.
+- **Transactions page:** a subtle single-line banner beneath the payments overview, so businesses judge better pricing against their own usage, not an abstract estimate.
+- **In-product nudges:** dismissible cards after a business starts processing payments, testing social proof and value framing against real transaction intent.
+- **Account & settings:** a permanent Manage Plans home combining utilization, the full plan ladder, and compare/upgrade/change/cancel controls, with no need to contact a team.
 
 How this supports the business goal: **prompt a real decision** (every eligible business considers pricing before its first payment), **scale beyond onboarding** (stage-based touchpoints reach businesses again when plan value becomes more relevant), and **retain more value** (self-serve controls reduce manual dependency and support longer-term payment use).
 
@@ -264,7 +264,7 @@ The final solution had to act like a bridge, not a gate: it helped merchants com
       label: "Top navigation",
       src: "/work/subscriptions/top-nav-get-plus.png",
       alt: "Persistent Get Plus action in the top navigation, shown only to Standard-plan users",
-      caption: "A persistent Get Plus action for businesses on Standard — one click away, gone once they upgrade.",
+      caption: "A persistent Get Plus action for businesses on Standard: one click away, gone once they upgrade.",
     },
     {
       label: "Profile dropdown",
@@ -279,16 +279,16 @@ The final solution had to act like a bridge, not a gate: it helped merchants com
       caption: "A subtle single-line banner beneath the payments overview, judged against real usage.",
     },
     {
-      label: "Account & settings — utilization",
+      label: "Account & settings: utilization",
       src: "/work/subscriptions/account-settings-utilization.png",
       alt: "Manage Plans page showing plan utilization and an upgrade prompt",
       caption: "A permanent Manage Plans home, starting with utilization against the current plan.",
     },
     {
-      label: "Account & settings — plan ladder",
+      label: "Account & settings: plan ladder",
       src: "/work/subscriptions/account-settings-plan-ladder.png",
       alt: "Manage Plans page showing the full Plus, Pro, and Enterprise plan ladder",
-      caption: "The full plan ladder alongside compare, upgrade, change, and cancel controls — no contacting a team.",
+      caption: "The full plan ladder alongside compare, upgrade, change, and cancel controls, with no need to contact a team.",
     },
   ]}
 />
@@ -316,9 +316,9 @@ The clearest outcome was merchant action: more businesses selected a plan, gener
 
 My role went beyond designing pricing cards. I used analytics to frame the opportunity, merchant conversations to explain the funnel, and product strategy to turn a winning variant into a journey that could scale.
 
-- **A lift is a signal** — pair conversion movement with research before deciding why a design worked.
-- **The journey is the design** — a winning screen is only useful when discovery, first use, and plan management work together.
-- **Growth still needs trust** — keeping the standard rate explicit made the nudge persuasive without making payment feel mandatory.
-- **Designers should know the metric** — understanding cohorts, events, and guardrails helped me shape the strategy, not only the interface.
+- **A lift is a signal:** pair conversion movement with research before deciding why a design worked.
+- **The journey is the design:** a winning screen is only useful when discovery, first use, and plan management work together.
+- **Growth still needs trust:** keeping the standard rate explicit made the nudge persuasive without making payment feel mandatory.
+- **Designers should know the metric:** understanding cohorts, events, and guardrails helped me shape the strategy, not only the interface.
 
 In one line: I turned a one-rate onboarding moment into a clearer subscription journey that helps a new business understand its options, choose with confidence, and manage its plan later.

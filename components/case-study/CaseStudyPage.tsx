@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { compileMDX } from "next-mdx-remote/rsc";
-import { getContentBody, getContentMeta, type ContentKind } from "@/lib/content";
+import { getContentBody, getContentMeta, listContent, type ContentKind } from "@/lib/content";
 import { isUnlocked } from "@/lib/auth";
 import { mdxComponents } from "@/lib/mdx-components";
 import { PasswordGate } from "./PasswordGate";
@@ -90,6 +90,11 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
 
   const body = await getContentBody(kind, slug);
   if (body === null) notFound();
+
+  const siblings = await listContent(kind);
+  const index = siblings.findIndex((s) => s.slug === slug);
+  const prev = index > 0 ? siblings[index - 1] : null;
+  const next = index >= 0 && index < siblings.length - 1 ? siblings[index + 1] : null;
   // blockJS:false re-enables JSX expression props ({...}) which v6 strips
   // by default — safe here because the source is our own committed content,
   // never user input; blockDangerousJS stays on as a guard.
@@ -129,9 +134,24 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
 
         <div className="cs-body">{content}</div>
 
-        <div className="cs-foot">
-          <Link className="cs-back" href="/">← Back to home</Link>
-        </div>
+        {(prev || next) && (
+          <div className="cs-foot">
+            <nav className="cs-nav" aria-label="Case study navigation">
+              {prev && (
+                <Link className="cs-nav-link cs-nav-prev" href={`/${kind}/${prev.slug}`}>
+                  <span className="cs-nav-dir">← Previous</span>
+                  <span className="cs-nav-title">{prev.title}</span>
+                </Link>
+              )}
+              {next && (
+                <Link className="cs-nav-link cs-nav-next" href={`/${kind}/${next.slug}`}>
+                  <span className="cs-nav-dir">Next →</span>
+                  <span className="cs-nav-title">{next.title}</span>
+                </Link>
+              )}
+            </nav>
+          </div>
+        )}
       </div>
     </div>
   );

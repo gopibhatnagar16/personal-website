@@ -407,7 +407,7 @@ body {
   letter-spacing:.14em;color:var(--faint);}
 .cs-mv{font-size:14px;font-weight:500;}
 
-.cs-hero{height:clamp(220px,42vw,420px);border-radius:16px;margin:0 0 36px;
+.cs-hero{height:clamp(220px,42vw,420px);border-radius:16px;margin:0 0 36px;border:1px solid var(--line);
   background-image:linear-gradient(135deg,#EDEDE8,#D9D8D1);background-size:cover;background-position:center;}
 [data-theme="dark"] .cs-hero{background-image:linear-gradient(135deg,#22221D,#191914);}
 .cs-body h2{font-family:var(--font-geist-sans),sans-serif;font-weight:700;letter-spacing:-.01em;
@@ -424,11 +424,19 @@ body {
 .cs-body blockquote{margin:28px 0;padding:4px 0 4px 22px;border-left:2px solid var(--ink);}
 .cs-body blockquote p{font-family:var(--font-geist-sans),sans-serif;font-weight:500;
   font-size:1.25rem;line-height:1.45;color:var(--ink);margin:0;}
-.cs-img{height:clamp(200px,36vw,360px);border-radius:14px;margin:26px 0 16px;
+.cs-img{height:clamp(200px,36vw,360px);border-radius:14px;margin:26px 0 16px;border:1px solid var(--line);
   background:linear-gradient(135deg,#F0EFEA,#E1E0D9);}
 [data-theme="dark"] .cs-img{background:linear-gradient(135deg,#22221D,#191914);}
 
 .cs-foot{margin:66px 0 0;padding-top:28px;border-top:1px solid var(--line);}
+.cs-nav{display:flex;gap:20px;}
+.cs-nav-link{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px;padding:18px;
+  border:1px solid var(--line);border-radius:14px;text-decoration:none;transition:border-color .18s ease,background-color .18s ease;}
+.cs-nav-link:hover{border-color:var(--muted);background:var(--panel);}
+.cs-nav-next{align-items:flex-end;text-align:right;}
+.cs-nav-dir{font-family:var(--font-geist-mono),monospace;font-size:11px;text-transform:uppercase;
+  letter-spacing:.12em;color:var(--faint);}
+.cs-nav-title{font-size:1.02rem;font-weight:600;color:var(--ink);line-height:1.35;}
 
 /* ---- case-study blocks ---- */
 .cs-figcap{font-family:var(--font-geist-mono),monospace;font-size:11px;letter-spacing:.04em;
@@ -436,7 +444,7 @@ body {
 .cs-fig{margin:26px 0 16px;}
 .cs-fig .cs-img{margin:0;}
 .cs-fig-btn{display:block;width:100%;padding:0;border:none;background:none;cursor:zoom-in;}
-.cs-fig-img{display:block;width:100%;border-radius:14px;
+.cs-fig-img{display:block;width:100%;border-radius:14px;border:1px solid var(--line);
   background:linear-gradient(135deg,#EDEDE8,#D9D8D1);
   opacity:0;filter:blur(10px);transition:opacity .5s ease,filter .5s ease;}
 .cs-fig-img.img-loaded{opacity:1;filter:blur(0);}
