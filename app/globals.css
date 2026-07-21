@@ -236,18 +236,27 @@ body {
 .ci-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit;pointer-events:none;}
 
 /* polaroid — for the Personal pegboard: photo + printed caption strip, clipped to the board */
-.ci-polaroid{border-radius:8px;background:#F9F8F4;background-image:none;padding:10px 10px 30px;
+.ci-polaroid{border-radius:7px;background:#F9F8F4;background-image:none;padding:7px 7px 22px;
   display:flex;box-shadow:0 10px 24px -6px rgba(0,0,0,.16),0 2px 6px rgba(0,0,0,.08);}
 .ci-polaroid:active{box-shadow:0 14px 30px -6px rgba(0,0,0,.2),0 4px 8px rgba(0,0,0,.1);}
-.ci-polaroid::before{content:"";position:absolute;top:-11px;left:50%;transform:translateX(-50%);
-  width:22px;height:22px;border-radius:50%;
+.ci-polaroid::before{content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%);
+  width:17px;height:17px;border-radius:50%;
   background:radial-gradient(circle at 32% 28%,#fff,#dedcd4 70%,#c3c1b8);
   box-shadow:0 3px 7px rgba(0,0,0,.2);pointer-events:none;}
 [data-theme="dark"] .ci-polaroid::before{background:radial-gradient(circle at 32% 28%,#57564e,#37362f 70%,#232320);}
 .ci-photo{flex:1;border-radius:4px;background-size:cover;background-position:center;object-fit:cover;pointer-events:none;}
-.ci-cap{position:absolute;left:10px;right:10px;bottom:6px;font-family:var(--font-caveat),cursive;
-  font-size:19px;font-weight:600;letter-spacing:.01em;color:#524e42;text-align:center;white-space:nowrap;
+.ci-cap{position:absolute;left:7px;right:7px;bottom:4px;font-family:var(--font-caveat),cursive;
+  font-size:15px;font-weight:600;letter-spacing:.01em;color:#524e42;text-align:center;white-space:nowrap;
   overflow:hidden;text-overflow:ellipsis;pointer-events:none;}
+
+/* sticker — laptop-sticker style photo cutouts pinned to the Personal pegboard:
+   transparent die-cut PNGs, no card/frame, just the image + a shape-hugging
+   drop shadow instead of the default box-shadow (which would show a hard
+   rectangle around the transparent edges). */
+.ci-sticker{background-size:contain;background-repeat:no-repeat;background-position:center;
+  border-radius:0;box-shadow:none;filter:drop-shadow(0 6px 14px rgba(0,0,0,.22));}
+.ci-sticker:hover{box-shadow:none;filter:drop-shadow(0 9px 20px rgba(0,0,0,.28));}
+.ci-sticker:active{box-shadow:none;filter:drop-shadow(0 12px 24px rgba(0,0,0,.32));}
 
 /* cutting-mat variant — for the Tidbits canvas. surface + grid colors are exact
    presets from https://cutting-mat-generator.vercel.app/, swapped via --mat-color/--mat-grid */
