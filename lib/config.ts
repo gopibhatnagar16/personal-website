@@ -73,7 +73,17 @@ export const CONFIG = {
     { id: "t4", x: -380, y: 380, w: 250, h: 210, kind: "card", src: "/tidbits/alphabet.png", rot: 5 },
     { id: "t5", x: 980, y: 520, w: 280, h: 230, kind: "card", src: "/tidbits/comic.png", rot: -7 },
     { id: "t6", x: 180, y: 480, w: 230, h: 230, kind: "card", src: "/tidbits/expression-poster.png", rot: 6 },
-    { id: "t7", x: 800, y: -220, w: 230, h: 230, kind: "card", src: "/tidbits/spiral.png", rot: -9 },
+    {
+      id: "t7",
+      x: 800,
+      y: -220,
+      w: 230,
+      h: 230,
+      kind: "card",
+      video: "/tidbits/spiral.mp4",
+      src: "/tidbits/spiral-poster.jpg",
+      rot: -9,
+    },
     {
       id: "t8",
       x: 1220,

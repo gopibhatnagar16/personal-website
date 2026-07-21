@@ -31,7 +31,7 @@ export const MAT_COLORS = [
 
 export type MatColor = (typeof MAT_COLORS)[number];
 
-const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 const RESET_MS = 380;
 
 // shared pan + mat-color state for one canvas instance, lifted out of
@@ -57,7 +57,7 @@ export function useCanvasControls() {
     const start = performance.now();
     const tick = (now: number) => {
       const t = Math.min((now - start) / RESET_MS, 1);
-      const e = easeOutCubic(t);
+      const e = easeInOutCubic(t);
       setPan({ x: from.x * (1 - e), y: from.y * (1 - e) });
       rafRef.current = t < 1 ? requestAnimationFrame(tick) : null;
     };
