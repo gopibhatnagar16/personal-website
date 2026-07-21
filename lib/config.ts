@@ -59,36 +59,39 @@ export const CONFIG = {
     { title: "Onboarding", thumb: "/work/onboarding/thumb.png", preview: "/work/onboarding/preview.png" },
   ],
 
-  // pinned to the cutting mat — sketches, renders and clips pulled from Figma
+  // pinned to the cutting mat — sketches, renders and clips pulled from Figma.
+  // sizes/rotation/position are deliberately scattered and oversized, and several
+  // sit beyond the mat's default viewport on purpose — dragging the mat (or the
+  // pieces themselves) pans them into view, like digging through a real pile.
   tidbits: [
-    { id: "t1", x: 20, y: 36, w: 210, h: 104, kind: "card", src: "/tidbits/sketches.png", rot: -2 },
-    { id: "t2", x: 250, y: 14, w: 170, h: 113, kind: "card", src: "/tidbits/device-render.png", rot: 3 },
-    { id: "t3", x: 440, y: 36, w: 230, h: 58, kind: "card", src: "/tidbits/spotify-strip.png", rot: -1 },
-    { id: "t4", x: 36, y: 150, w: 170, h: 134, kind: "card", src: "/tidbits/alphabet.png", rot: 2 },
-    { id: "t5", x: 560, y: 110, w: 190, h: 140, kind: "card", src: "/tidbits/comic.png", rot: -3 },
-    { id: "t6", x: 240, y: 160, w: 150, h: 155, kind: "card", src: "/tidbits/expression-poster.png", rot: 4 },
-    { id: "t7", x: 420, y: 140, w: 150, h: 156, kind: "card", src: "/tidbits/spiral.png", rot: -2 },
+    { id: "t1", x: 10, y: 40, w: 280, h: 190, kind: "card", src: "/tidbits/sketches.png", rot: -6 },
+    { id: "t2", x: 330, y: -50, w: 230, h: 200, kind: "card", src: "/tidbits/device-render.png", rot: 9 },
+    { id: "t3", x: 600, y: 55, w: 270, h: 100, kind: "card", src: "/tidbits/spotify-strip.png", rot: -4 },
+    { id: "t4", x: 40, y: 270, w: 250, h: 210, kind: "card", src: "/tidbits/alphabet.png", rot: 5 },
+    { id: "t5", x: 670, y: 230, w: 280, h: 230, kind: "card", src: "/tidbits/comic.png", rot: -7 },
+    { id: "t6", x: 320, y: 250, w: 230, h: 230, kind: "card", src: "/tidbits/expression-poster.png", rot: 6 },
+    { id: "t7", x: 600, y: -70, w: 230, h: 230, kind: "card", src: "/tidbits/spiral.png", rot: -9 },
     {
       id: "t8",
-      x: 560,
-      y: 10,
-      w: 190,
-      h: 90,
+      x: 980,
+      y: 30,
+      w: 260,
+      h: 150,
       kind: "card",
       video: "/tidbits/adventure.mp4",
       src: "/tidbits/adventure-poster.jpg",
-      rot: 2,
+      rot: 4,
     },
     {
       id: "t9",
-      x: 40,
-      y: 275,
-      w: 170,
-      h: 113,
+      x: -260,
+      y: 480,
+      w: 240,
+      h: 170,
       kind: "card",
       video: "/tidbits/paper-boat.mp4",
       src: "/tidbits/paper-boat-poster.jpg",
-      rot: -3,
+      rot: -5,
     },
   ] as CanvasItem[],
 

@@ -13,11 +13,12 @@ interface Props {
   pannable?: boolean;
 }
 
+// exact presets from https://cutting-mat-generator.vercel.app/ — mat surface + grid/guide color
 const MAT_COLORS = [
-  { id: "green", label: "Green", light: "#4B6B57", dark: "#33493B" },
-  { id: "blue", label: "Blue", light: "#35566B", dark: "#24384A" },
-  { id: "rose", label: "Rose", light: "#6B3550", dark: "#452336" },
-  { id: "clay", label: "Clay", light: "#6B4F35", dark: "#453121" },
+  { id: "classic", label: "Classic", bg: "#00332A", grid: "#E5E55A" },
+  { id: "blue", label: "Blue", bg: "#002F9E", grid: "#EDEEFD" },
+  { id: "red", label: "Dark Red", bg: "#3D0000", grid: "#FF2E2E" },
+  { id: "teal", label: "Teal", bg: "#095848", grid: "#30F8AB" },
 ] as const;
 
 const clamp = (v: number, min: number, max: number) => Math.min(Math.max(v, min), max);
@@ -97,7 +98,7 @@ export function DraggableCanvas({ items, height, variant, pannable = true }: Pro
           height: height + 20,
           "--pan-x": pan.x + "px",
           "--pan-y": pan.y + "px",
-          ...(variant === "mat" ? { "--mat-color": matColor.light, "--mat-color-dark": matColor.dark } : {}),
+          ...(variant === "mat" ? { "--mat-color": matColor.bg, "--mat-grid": matColor.grid } : {}),
         } as React.CSSProperties
       }
       ref={canvasRef}
@@ -114,7 +115,7 @@ export function DraggableCanvas({ items, height, variant, pannable = true }: Pro
                 key={c.id}
                 type="button"
                 className={"canvas-swatch" + (c.id === matColor.id ? " active" : "")}
-                style={{ background: c.light }}
+                style={{ background: c.bg }}
                 aria-label={`${c.label} mat`}
                 aria-pressed={c.id === matColor.id}
                 onClick={() => setMatColor(c)}
