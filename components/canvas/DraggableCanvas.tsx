@@ -18,9 +18,9 @@ interface Props {
 // from the personal-site Figma color system.
 const MAT_COLORS = [
   { id: "classic", label: "Classic", bg: "#00332A", grid: "#E5E55A" },
-  { id: "pink", label: "Pink", bg: "#F0A0E8", grid: "#C4279C" },
+  { id: "pink", label: "Pink", bg: "#C4279C", grid: "#F0A0E8" },
   { id: "coral", label: "Coral", bg: "#EE4028", grid: "#FBDFDA" },
-  { id: "mint", label: "Mint", bg: "#A3E8AC", grid: "#2A6B40" },
+  { id: "mint", label: "Mint", bg: "#2A6B40", grid: "#A3E8AC" },
   { id: "blue", label: "Blue", bg: "#28579E", grid: "#BFE1FA" },
 ] as const;
 
@@ -199,23 +199,25 @@ export function DraggableCanvas({ items, height, variant, pannable = true }: Pro
           <div
             key={it.id}
             className={"ci ci-" + it.kind}
-            style={{
-              left: pannable ? pos[it.id].x + pan.x : pos[it.id].x + "%",
-              top: pannable ? pos[it.id].y + pan.y : pos[it.id].y + "%",
-              zIndex: pos[it.id].z,
-              width: it.w,
-              height: it.h,
-              transform: it.rot ? `rotate(${it.rot}deg)` : undefined,
-              ...(it.video && !isFramed
-                ? {}
-                : it.src && !isFramed
-                ? { backgroundImage: `url(${it.src})` }
-                : it.emoji
-                ? { background: it.bg }
-                : isFramed
-                ? {}
-                : { backgroundImage: SHAPE_GREYS[(it.g || 0) % SHAPE_GREYS.length] }),
-            }}
+            style={
+              {
+                left: pannable ? pos[it.id].x + pan.x : pos[it.id].x + "%",
+                top: pannable ? pos[it.id].y + pan.y : pos[it.id].y + "%",
+                zIndex: pos[it.id].z,
+                width: it.w,
+                height: it.h,
+                ...(it.rot ? { "--rot": `${it.rot}deg` } : {}),
+                ...(it.video && !isFramed
+                  ? {}
+                  : it.src && !isFramed
+                  ? { backgroundImage: `url(${it.src})` }
+                  : it.emoji
+                  ? { background: it.bg }
+                  : isFramed
+                  ? {}
+                  : { backgroundImage: SHAPE_GREYS[(it.g || 0) % SHAPE_GREYS.length] }),
+              } as React.CSSProperties
+            }
             onPointerDown={(e) => onDown(e, it.id)}
             onPointerMove={onMove}
             onPointerUp={onUp}

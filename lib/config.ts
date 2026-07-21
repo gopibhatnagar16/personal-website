@@ -61,13 +61,14 @@ export const CONFIG = {
   ],
 
   // pinned to the cutting mat — sketches, renders and clips pulled from Figma.
-  // sizes/rotation/position are deliberately scattered, oversized and loosely
-  // spaced, and most sit beyond the mat's default viewport on purpose —
-  // dragging the mat (or the pieces themselves) pans them into view, like
-  // digging through a real pile instead of seeing it all laid out at once.
+  // sizes/rotation/position are deliberately scattered and oversized, and
+  // most still sit beyond the mat's default viewport on purpose — dragging
+  // the mat (or the pieces themselves) pans them into view, like digging
+  // through a real pile. t1/t2/t9 are placed to land fully in view on load
+  // so the mat doesn't read empty before anyone's touched it.
   tidbits: [
     { id: "t1", x: -80, y: 60, w: 280, h: 190, kind: "card", src: "/tidbits/sketches.png", rot: -6 },
-    { id: "t2", x: 520, y: -180, w: 230, h: 200, kind: "card", src: "/tidbits/device-render.png", rot: 9 },
+    { id: "t2", x: 520, y: 55, w: 230, h: 200, kind: "card", src: "/tidbits/device-render.png", rot: 9 },
     { id: "t3", x: 900, y: 120, w: 270, h: 100, kind: "card", src: "/tidbits/spotify-strip.png", rot: -4 },
     { id: "t4", x: -380, y: 380, w: 250, h: 210, kind: "card", src: "/tidbits/alphabet.png", rot: 5 },
     { id: "t5", x: 980, y: 520, w: 280, h: 230, kind: "card", src: "/tidbits/comic.png", rot: -7 },
@@ -86,8 +87,8 @@ export const CONFIG = {
     },
     {
       id: "t9",
-      x: -420,
-      y: -40,
+      x: 270,
+      y: 210,
       w: 240,
       h: 170,
       kind: "card",
