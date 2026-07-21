@@ -205,6 +205,12 @@ body {
 .ci:hover{box-shadow:0 4px 10px rgba(0,0,0,.13);}
 .ci:active{cursor:grabbing;box-shadow:0 7px 16px rgba(0,0,0,.17);}
 .ci-circle{border-radius:50%;}
+
+/* card — sticker-style cutout for the Tidbits mat: thick white stroke standing in
+   for a die-cut edge, plus a heavier lift shadow than the plain .ci default */
+.ci-card{border-radius:10px;border:7px solid #fff;box-shadow:0 8px 20px rgba(0,0,0,.28);}
+.ci-card:hover{box-shadow:0 10px 24px rgba(0,0,0,.32);}
+.ci-card:active{box-shadow:0 14px 30px rgba(0,0,0,.36);}
 .ci-sticker{border-radius:50%;border:4px solid var(--bg);display:grid;place-items:center;
   box-shadow:0 3px 8px rgba(0,0,0,.15);}
 .ci-emoji{font-size:32px;line-height:1;pointer-events:none;user-select:none;}
@@ -252,16 +258,19 @@ body {
   box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
   transition:background-color .35s ease;
 }
-.canvas.mat::before{
-  content:"";position:absolute;inset:0;pointer-events:none;z-index:0;
-  background-image:
-    linear-gradient(135deg, transparent calc(50% - 1px), color-mix(in srgb, var(--mat-grid,#E5E55A) 28%, transparent) 50%, transparent calc(50% + 1px)),
-    linear-gradient(45deg, transparent calc(50% - 1px), color-mix(in srgb, var(--mat-grid,#E5E55A) 28%, transparent) 50%, transparent calc(50% + 1px));
-  background-size:240px 240px,240px 240px;
-  background-position:var(--pan-x,0px) var(--pan-y,0px),var(--pan-x,0px) var(--pan-y,0px);
-  background-repeat:repeat;
-  mask-image:radial-gradient(circle at 0 0, black, transparent 70%);
-}
+/* ruler numbers along the top/left edges of the mat, and a corner protractor —
+   both rendered as real DOM nodes in DraggableCanvas so they can pan (in JS)
+   with the same --pan-x/--pan-y offsets that drive the grid background above */
+.mat-ruler{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.mat-ruler-x,.mat-ruler-y{position:absolute;font-family:var(--font-geist-mono),monospace;
+  font-size:10px;letter-spacing:.02em;white-space:nowrap;
+  color:color-mix(in srgb, var(--mat-grid,#E5E55A) 78%, transparent);}
+.mat-ruler-x{top:6px;transform:translateX(-50%);}
+.mat-ruler-y{left:6px;transform:translateY(-50%);}
+.mat-protractor{position:absolute;pointer-events:none;z-index:0;overflow:visible;}
+.mat-protractor svg{display:block;}
+.mat-protractor line,.mat-protractor path{stroke:var(--mat-grid,#E5E55A);}
+.mat-protractor text{fill:var(--mat-grid,#E5E55A);font-family:var(--font-geist-mono),monospace;}
 
 /* pegboard variant — a fixed board (no pan) for the Personal canvas, styled
    after a real perforated pegboard: light panel, rows of slot-shaped holes */

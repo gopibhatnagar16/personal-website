@@ -13,15 +13,49 @@ interface Props {
   pannable?: boolean;
 }
 
-// exact presets from https://cutting-mat-generator.vercel.app/ — mat surface + grid/guide color
+// mat surface + grid/guide color presets — classic is the exact
+// cutting-mat-generator.vercel.app default, the rest match the palette pairs
+// from the personal-site Figma color system.
 const MAT_COLORS = [
   { id: "classic", label: "Classic", bg: "#00332A", grid: "#E5E55A" },
-  { id: "blue", label: "Blue", bg: "#002F9E", grid: "#EDEEFD" },
-  { id: "red", label: "Dark Red", bg: "#3D0000", grid: "#FF2E2E" },
-  { id: "teal", label: "Teal", bg: "#095848", grid: "#30F8AB" },
+  { id: "pink", label: "Pink", bg: "#F0A0E8", grid: "#C4279C" },
+  { id: "coral", label: "Coral", bg: "#EE4028", grid: "#FBDFDA" },
+  { id: "mint", label: "Mint", bg: "#A3E8AC", grid: "#2A6B40" },
+  { id: "blue", label: "Blue", bg: "#28579E", grid: "#BFE1FA" },
 ] as const;
 
 const clamp = (v: number, min: number, max: number) => Math.min(Math.max(v, min), max);
+
+// ruler + protractor decoration for the mat variant — px-per-unit and the
+// major-line spacing match the grid background drawn in globals.css (24px/120px).
+const RULER_UNIT_PX = 24;
+const RULER_MAJOR_PX = RULER_UNIT_PX * 5;
+const RULER_RANGE = Array.from({ length: 60 }, (_, i) => i - 10); // -10..49, in units of 5
+const PROTRACTOR_SIZE = 240;
+const PROTRACTOR_ORIGIN = { x: -90, y: 250 }; // world px — a clear pocket between the tidbits cards
+
+function protractorSvg() {
+  const cx = 0;
+  const cy = PROTRACTOR_SIZE;
+  const rad = (deg: number) => (deg * Math.PI) / 180;
+  const pt = (deg: number, r: number) => ({ x: cx + r * Math.cos(rad(deg)), y: cy - r * Math.sin(rad(deg)) });
+  const angles = [0, 15, 30, 45, 60, 75, 90];
+  const lines = angles.map((a) => {
+    const p = pt(a, PROTRACTOR_SIZE - 5);
+    return `<line x1="${cx}" y1="${cy}" x2="${p.x.toFixed(1)}" y2="${p.y.toFixed(1)}" stroke-width="1" stroke-dasharray="3 5" opacity=".38"/>`;
+  });
+  const arcs = [70, 140].map((r) => {
+    const a = pt(0, r);
+    const b = pt(90, r);
+    return `<path d="M ${a.x.toFixed(1)} ${a.y.toFixed(1)} A ${r} ${r} 0 0 0 ${b.x.toFixed(1)} ${b.y.toFixed(1)}" fill="none" stroke-width="1" stroke-dasharray="2 4" opacity=".32"/>`;
+  });
+  const labels = [15, 30, 45, 60].map((a) => {
+    const p = pt(a, 84);
+    return `<text x="${p.x.toFixed(1)}" y="${p.y.toFixed(1)}" font-size="9" opacity=".85" text-anchor="middle">${a}°</text>`;
+  });
+  return `<svg viewBox="0 0 ${PROTRACTOR_SIZE} ${PROTRACTOR_SIZE}" width="${PROTRACTOR_SIZE}" height="${PROTRACTOR_SIZE}" xmlns="http://www.w3.org/2000/svg">${lines.join("")}${arcs.join("")}${labels.join("")}</svg>`;
+}
+const PROTRACTOR_SVG = protractorSvg();
 
 /* draggable canvas — infinite pan (mat) or a fixed, bounded board */
 export function DraggableCanvas({ items, height, variant, pannable = true }: Props) {
@@ -133,6 +167,28 @@ export function DraggableCanvas({ items, height, variant, pannable = true }: Pro
           <RotateCcw size={13} strokeWidth={1.9} />
         </button>
       </div>
+      {variant === "mat" && (
+        <>
+          <div className="mat-ruler" aria-hidden="true">
+            {RULER_RANGE.filter((n) => n > 0).map((n) => (
+              <span key={"rx" + n} className="mat-ruler-x" style={{ left: n * RULER_MAJOR_PX + pan.x }}>
+                {n * 5}
+              </span>
+            ))}
+            {RULER_RANGE.filter((n) => n > 0).map((n) => (
+              <span key={"ry" + n} className="mat-ruler-y" style={{ top: n * RULER_MAJOR_PX + pan.y }}>
+                {n * 5}
+              </span>
+            ))}
+          </div>
+          <div
+            className="mat-protractor"
+            aria-hidden="true"
+            style={{ left: PROTRACTOR_ORIGIN.x + pan.x, top: PROTRACTOR_ORIGIN.y + pan.y }}
+            dangerouslySetInnerHTML={{ __html: PROTRACTOR_SVG }}
+          />
+        </>
+      )}
       {items.map((it) => {
         const isPolaroid = it.kind === "polaroid";
         const isMagnet = it.kind === "magnet";
