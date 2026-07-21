@@ -16,23 +16,6 @@ Almost every product at Razorpay asks the user to *finish a journey* at some poi
 
 For years, every team built their own version of "steps." They looked different, behaved differently, and meant slightly different things. **Step Group** is the one component that replaces all of them. The two weeks I spent building it taught me what designing for a system actually involves. When you design a product, you ship one good answer. When you design for a system, that answer has to hold up for every team in the org, including the ones whose use case you haven't seen yet.
 
-<MediaSwitcher
-  slides={[
-    {
-      label: "Product audit",
-      src: "/work/step-group/audit-1.png",
-      alt: "A wall of every step-like component found across Razorpay products",
-      caption: "Every step-like component pulled from across Razorpay products: different names, markers, and state logic for the same job.",
-    },
-    {
-      label: "Close-up examples",
-      src: "/work/step-group/audit-2.png",
-      alt: "Close-up of existing approval and installment timelines",
-      caption: "Close-ups: existing approval and installment timelines, each with its own state logic and visual language.",
-    },
-  ]}
-/>
-
 ## 01. Auditing products
 
 I went product by product, screen by screen, and pulled every step-like component I could find. The pattern was everywhere, but no two implementations agreed:
@@ -43,6 +26,18 @@ I went product by product, screen by screen, and pulled every step-like componen
 - **Different orientations:** built one-off for horizontal *or* vertical, rarely both
 
 Same job. A dozen answers. That inconsistency was the problem worth solving.
+
+<CaseImage
+  src="/work/step-group/audit-1.png"
+  alt="A wall of every step-like component found across Razorpay products"
+  caption="A dozen products, a dozen different steppers."
+/>
+
+<CaseImage
+  src="/work/step-group/audit-2.png"
+  alt="Close-up of existing approval and installment timelines"
+  caption="Approval and installment timelines, each built differently."
+/>
 
 ## 02. Component research
 
@@ -56,21 +51,16 @@ Then I looked outside, at how mature systems (Material, Polaris, Carbon, Ant, At
 
 The goal was never to copy. It was to understand the problem fully before committing to an API.
 
-<MediaSwitcher
-  slides={[
-    {
-      label: "External systems",
-      src: "/work/step-group/research-1.png",
-      alt: "How Material, Ant, Carbon, PatternFly, and other systems structure their step components",
-      caption: "How Material, Polaris/Garden, Carbon, Ant, PatternFly, and others name, structure, and expose their step and progress components.",
-    },
-    {
-      label: "Pattern breakdown",
-      src: "/work/step-group/research-2.png",
-      alt: "Breaking a base design system's progress patterns into listed and stepped variants",
-      caption: "Breaking a base system's progress patterns into listed and stepped variants to see what each config surface looked like.",
-    },
-  ]}
+<CaseImage
+  src="/work/step-group/research-1.png"
+  alt="How Material, Ant, Carbon, PatternFly, and other systems structure their step components"
+  caption="How Material, Polaris, Carbon, and Ant structure theirs."
+/>
+
+<CaseImage
+  src="/work/step-group/research-2.png"
+  alt="Breaking a base design system's progress patterns into listed and stepped variants"
+  caption="Listed vs. stepped variants, broken down."
 />
 
 ## 03. API design
@@ -88,42 +78,26 @@ One option I rejected was combining all three into a single component behind a *
 
 > Expose enough to be useful, hide enough to stay consistent.
 
-<MediaSwitcher
-  slides={[
-    {
-      label: "Component definitions",
-      src: "/work/step-group/api-1.png",
-      alt: "Timeline, Step Group, and Stepped Progress Bar compared side by side",
-      caption: "Timeline, Step Group, and Stepped Progress Bar mapped side by side: what each is for, and where their prop surfaces overlap.",
-    },
-    {
-      label: "Prop surface",
-      src: "/work/step-group/api-2.png",
-      alt: "The Step Item, Step Line, Step Label Group, and Trailing prop surface",
-      caption: "The Step Item, Step Line, Step Label Group, and Trailing props that Step Group's API was built from.",
-    },
-  ]}
+<CaseImage
+  src="/work/step-group/api-2.png"
+  alt="The Step Item, Step Line, Step Label Group, and Trailing prop surface"
+  caption="The final prop surface: Item, Line, Label Group, Trailing."
 />
 
 ## 04. Proof of concept
 
 With the API locked, the POC came quickly: structure first, polish later. The point wasn't to admire it; it was to have something concrete enough to argue with. I covered the core states (completed / active / pending) and the edge cases the audit had surfaced: optional steps, branched steps, long labels, and trailing elements.
 
-<MediaSwitcher
-  slides={[
-    {
-      label: "Structure & branching",
-      src: "/work/step-group/poc-1.png",
-      alt: "Early Step Group structure explorations, including branched steps and prop lists",
-      caption: "Early structure explorations: labelled groups, vertical and horizontal layouts, and branched steps.",
-    },
-    {
-      label: "Timeline vs Step Group",
-      src: "/work/step-group/poc-2.png",
-      alt: "Timeline and Interactive Step Group POCs in vertical and horizontal orientations",
-      caption: "Timeline and Interactive Step Group POCs in vertical and horizontal orientations, covering the core completed / active / pending states.",
-    },
-  ]}
+<CaseImage
+  src="/work/step-group/poc-1.png"
+  alt="Early Step Group structure explorations, including branched steps and prop lists"
+  caption="Early explorations: groups, orientations, branching."
+/>
+
+<CaseImage
+  src="/work/step-group/poc-2.png"
+  alt="Timeline and Interactive Step Group POCs in vertical and horizontal orientations"
+  caption="Timeline vs. Step Group, both orientations, core states."
 />
 
 ## 05. Review loop
@@ -133,32 +107,33 @@ Internal design review checked hierarchy, states, and edge cases. Engineering re
 <CaseImage
   src="/work/step-group/review-blade-advocate.png"
   alt="Slack message sharing Step Group redesigns with the Blade Advocates channel for feedback"
-  caption="Sharing Step Group redesigns of real product use cases with Blade Advocates in Slack for feedback before sign-off."
+  caption="Sharing redesigns with Blade Advocates for feedback."
 />
 
 ## 06. Picking a name
 
 We chose **Step Group** because the component is a group of step items, not a timeline or a generic progress bar. The name also gave Timeline and Stepped Progress Bar room to stay as separate patterns.
 
+<CaseImage
+  src="/work/step-group/api-1.png"
+  alt="Timeline, Step Group, and Stepped Progress Bar compared side by side"
+  caption="Timeline, Step Group, and Stepped Progress Bar, side by side."
+/>
+
 ## 07. Final component set
 
 Once the POC had gone through review, I iterated on structure, states, spacing, and edge cases until the direction was stable. The final set used Blade's existing foundations and tokens, so theme behaviour was handled by the system instead of custom styling. The same component works across **Payment Light** and **Banking Dark** with the right token mapping.
 
-<MediaSwitcher
-  slides={[
-    {
-      label: "Docs, light & dark",
-      src: "/work/step-group/final-component-1.png",
-      alt: "Step Group and Timeline documentation pages in Payment Light and Banking Dark themes",
-      caption: "The shipped Step Group and Timeline variants documented side by side, in both Payment Light and Banking Dark.",
-    },
-    {
-      label: "In product",
-      src: "/work/step-group/final-component-2.png",
-      alt: "Step Group live in a dispute-resolution timeline",
-      caption: "Step Group live in a dispute-resolution flow, using the same states and tokens shown in the documentation.",
-    },
-  ]}
+<CaseImage
+  src="/work/step-group/final-component-1.png"
+  alt="Step Group and Timeline documentation pages in Payment Light and Banking Dark themes"
+  caption="Shipped docs, in Payment Light and Banking Dark."
+/>
+
+<CaseImage
+  src="/work/step-group/final-component-2.png"
+  alt="Step Group live in a dispute-resolution timeline"
+  caption="Step Group live in a dispute-resolution flow."
 />
 
 ## 08. Documentation & motion
@@ -171,18 +146,27 @@ Motion mattered more than I expected. A static progress tracker just shows a sta
 
 After the review fixes, Step Group went live in the Figma library and the React package together. Designers and engineers could start from the same component, instead of rebuilding progress patterns one product at a time.
 
-<ImagePlaceholder />
+<span className="cs-golive-links">
+  <a href="https://blade.razorpay.com/?path=/story/components-kitchensink-stepgroup--step-group" target="_blank" rel="noopener noreferrer">Try it on Storybook</a> · <a href="https://www.figma.com/community/file/1341658976127676210/blade-design-system" target="_blank" rel="noopener noreferrer">Figma file</a>
+</span>
+
+<CaseVideo
+  src="/work/step-group/go-live.mp4"
+  alt="Step Group shipping in the Figma library and Storybook documentation"
+  caption="Live in the Figma library and Storybook."
+/>
 
 ## Outcomes
 
-- [N+] product teams migrated their custom step components to Step Group
-- [N] custom implementations retired across Razorpay
-- One canonical progress experience across the org, in both themes
+One canonical progress experience across the org, in both themes.
+
+<OutcomeCards items={[
+  { stat: "[N+] product teams", description: "migrated their custom step components to Step Group." },
+  { stat: "[N] implementations", description: "retired across Razorpay, replaced by the shared component." },
+]} />
 
 ## What I learned
 
 - **Designing for a system means designing beyond one team.** The component has to hold up across use cases I may never personally see.
 - **The API is part of the experience.** Props, defaults, and constraints shape how every product adopts the component.
 - **System work is negotiated.** Designers, engineers, and advocates shaped the final component together.
-
-[Try it on Storybook](https://blade.razorpay.com/?path=/story/components-kitchensink-stepgroup--step-group) · [Figma file](https://www.figma.com/design/jubmQL9Z8V7881ayUD95ps/Blade-DSL?m=auto&node-id=86886-47103)
