@@ -80,7 +80,12 @@ export const CONFIG = {
     { id: "s6", x: 87, y: 68, w: 78, h: 78, kind: "sticker", emoji: "🔥", bg: "#8A5CF6", rot: -6 },
   ] as CanvasItem[],
 
-  photos: [] as string[], // avatar fan (last = front)
+  photos: [
+    "/photos/hero-closeup.jpg",
+    "/photos/hero-speaking.jpg",
+    "/photos/hero-mirror.jpg",
+    "/photos/hero-thumbsup.jpg",
+  ] as string[], // avatar fan (last = front)
 };
 
 export const AVATAR_GREYS = [
