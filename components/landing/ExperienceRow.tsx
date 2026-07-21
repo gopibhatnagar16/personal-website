@@ -12,6 +12,13 @@ interface Exp {
   logo?: string;
 }
 
+interface TipState {
+  index: number | null; // item currently hovered — null hides the tooltip
+  shown: number; // last non-null index — keeps content painted while fading out
+  x: number; // center of the target item, relative to .exp-row
+  dir: 1 | -1; // which way the content slides in from
+}
+
 function Badge({ c }: { c: Exp }) {
   // fall back to the lettered circle if the remote logo fails to load
   const [failed, setFailed] = useState(false);
@@ -49,20 +56,65 @@ function Badge({ c }: { c: Exp }) {
 
 export function ExperienceRow() {
   const bind = useEyes();
+  const items = CONFIG.experience as Exp[];
+  const rowRef = useRef<HTMLDivElement>(null);
+  const itemRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const [tip, setTip] = useState<TipState>({ index: null, shown: 0, x: 0, dir: 1 });
+
+  const moveTo = (i: number) => {
+    const row = rowRef.current;
+    const item = itemRefs.current[i];
+    if (!row || !item) return;
+    const rowRect = row.getBoundingClientRect();
+    const itemRect = item.getBoundingClientRect();
+    const x = itemRect.left - rowRect.left + itemRect.width / 2;
+    setTip((prev) => ({
+      index: i,
+      shown: i,
+      x,
+      dir: prev.shown === i ? prev.dir : i > prev.shown ? 1 : -1,
+    }));
+  };
+
+  const c = items[tip.shown];
+
   return (
     <section className="section" id="experience">
       <span className="section-label">Experience</span>
       <p className="section-intro">I have 3+ years of work experience, some of which are:</p>
-      <div className="exp-row">
-        {(CONFIG.experience as Exp[]).map((c) => (
-          <span className="exp-item" key={c.name} {...bind("💼")}>
-            <span className="exp-tip">
-              <span className="et-name">{c.name}</span>
-              <span className="et-yr">{c.year}</span>
+      <div className="exp-row" ref={rowRef} onMouseLeave={() => setTip((prev) => ({ ...prev, index: null }))}>
+        {items.map((item, i) => {
+          const eyes = bind("💼");
+          return (
+            <span
+              className="exp-item"
+              key={item.name}
+              ref={(el) => {
+                itemRefs.current[i] = el;
+              }}
+              onMouseEnter={(e) => {
+                moveTo(i);
+                eyes.onMouseEnter(e);
+              }}
+              onMouseMove={(e) => {
+                moveTo(i);
+                eyes.onMouseMove(e);
+              }}
+              onMouseLeave={eyes.onMouseLeave}
+            >
+              <Badge c={item} />
             </span>
-            <Badge c={c} />
+          );
+        })}
+        <span
+          className={"exp-tip" + (tip.index !== null ? " is-visible" : "")}
+          style={{ transform: `translateX(${tip.x}px) translateX(-50%) translateY(${tip.index !== null ? 0 : 8}px) scale(${tip.index !== null ? 1 : 0.92})` }}
+        >
+          <span className="exp-tip-inner" key={tip.shown} data-dir={tip.dir}>
+            <span className="et-name">{c.name}</span>
+            <span className="et-yr">{c.year}</span>
           </span>
-        ))}
+        </span>
       </div>
     </section>
   );
