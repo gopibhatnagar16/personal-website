@@ -59,15 +59,37 @@ export const CONFIG = {
     { title: "Onboarding", thumb: "/work/onboarding/thumb.png", preview: "/work/onboarding/preview.png" },
   ],
 
-  // draggable placeholders — add src (image) or video (mp4/webm) from
-  // /public/tidbits/ to swap the grey card for real media, e.g.
-  // { ...t1, src: "/tidbits/photo.jpg" } or { ...t2, video: "/tidbits/clip.mp4" }
+  // pinned to the cutting mat — sketches, renders and clips pulled from Figma
   tidbits: [
-    { id: "t1", x: 24, y: 44, w: 210, h: 140, kind: "card", g: 0 },
-    { id: "t2", x: 300, y: 24, w: 178, h: 208, kind: "card", g: 1 },
-    { id: "t3", x: 540, y: 66, w: 220, h: 150, kind: "card", g: 2 },
-    { id: "t4", x: 150, y: 224, w: 190, h: 120, kind: "card", g: 3 },
-    { id: "t5", x: 440, y: 246, w: 160, h: 112, kind: "card", g: 4 },
+    { id: "t1", x: 20, y: 36, w: 210, h: 104, kind: "card", src: "/tidbits/sketches.png", rot: -2 },
+    { id: "t2", x: 250, y: 14, w: 170, h: 113, kind: "card", src: "/tidbits/device-render.png", rot: 3 },
+    { id: "t3", x: 440, y: 36, w: 230, h: 58, kind: "card", src: "/tidbits/spotify-strip.png", rot: -1 },
+    { id: "t4", x: 36, y: 150, w: 170, h: 134, kind: "card", src: "/tidbits/alphabet.png", rot: 2 },
+    { id: "t5", x: 560, y: 110, w: 190, h: 140, kind: "card", src: "/tidbits/comic.png", rot: -3 },
+    { id: "t6", x: 240, y: 160, w: 150, h: 155, kind: "card", src: "/tidbits/expression-poster.png", rot: 4 },
+    { id: "t7", x: 420, y: 140, w: 150, h: 156, kind: "card", src: "/tidbits/spiral.png", rot: -2 },
+    {
+      id: "t8",
+      x: 560,
+      y: 10,
+      w: 190,
+      h: 90,
+      kind: "card",
+      video: "/tidbits/adventure.mp4",
+      src: "/tidbits/adventure-poster.jpg",
+      rot: 2,
+    },
+    {
+      id: "t9",
+      x: 40,
+      y: 275,
+      w: 170,
+      h: 113,
+      kind: "card",
+      video: "/tidbits/paper-boat.mp4",
+      src: "/tidbits/paper-boat-poster.jpg",
+      rot: -3,
+    },
   ] as CanvasItem[],
 
   // pegboard — polaroids, fridge magnets, and stickers pinned to a fixed
