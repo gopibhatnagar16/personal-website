@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { CONFIG } from "@/lib/config";
 import { useEyes } from "@/components/shared/EyesCursor";
 
@@ -59,7 +59,16 @@ export function ExperienceRow() {
   const items = CONFIG.experience as Exp[];
   const rowRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const measureRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const [tip, setTip] = useState<TipState>({ index: null, shown: 0, x: 0, dir: 1 });
+  // widths of each tooltip's content, measured once from hidden clones so the
+  // tooltip can transition its width to an exact target instead of the box
+  // just snapping to the new content's size.
+  const [widths, setWidths] = useState<number[]>([]);
+
+  useLayoutEffect(() => {
+    setWidths(measureRefs.current.map((el) => el?.getBoundingClientRect().width ?? 0));
+  }, []);
 
   const moveTo = (i: number) => {
     const row = rowRef.current;
@@ -77,6 +86,7 @@ export function ExperienceRow() {
   };
 
   const c = items[tip.shown];
+  const width = widths[tip.shown];
 
   return (
     <section className="section" id="experience">
@@ -106,9 +116,32 @@ export function ExperienceRow() {
             </span>
           );
         })}
+
+        {/* hidden clones, measured once on mount — give the live tooltip an
+            exact pixel width to transition to, instead of one it can only
+            snap to, so the box resizes evenly from both sides. */}
+        {items.map((item, i) => (
+          <span
+            className="exp-tip exp-tip-measure"
+            key={item.name}
+            aria-hidden="true"
+            ref={(el) => {
+              measureRefs.current[i] = el;
+            }}
+          >
+            <span className="exp-tip-inner">
+              <span className="et-name">{item.name}</span>
+              <span className="et-yr">{item.year}</span>
+            </span>
+          </span>
+        ))}
+
         <span
           className={"exp-tip" + (tip.index !== null ? " is-visible" : "")}
-          style={{ transform: `translateX(${tip.x}px) translateX(-50%) translateY(${tip.index !== null ? 0 : 8}px) scale(${tip.index !== null ? 1 : 0.92})` }}
+          style={{
+            transform: `translateX(${tip.x}px) translateX(-50%) translateY(${tip.index !== null ? 0 : 8}px) scale(${tip.index !== null ? 1 : 0.92})`,
+            width: width ? `${width}px` : undefined,
+          }}
         >
           <span className="exp-tip-inner" key={tip.shown} data-dir={tip.dir}>
             <span className="et-name">{c.name}</span>
