@@ -60,21 +60,22 @@ export const CONFIG = {
   ],
 
   // pinned to the cutting mat — sketches, renders and clips pulled from Figma.
-  // sizes/rotation/position are deliberately scattered and oversized, and several
-  // sit beyond the mat's default viewport on purpose — dragging the mat (or the
-  // pieces themselves) pans them into view, like digging through a real pile.
+  // sizes/rotation/position are deliberately scattered, oversized and loosely
+  // spaced, and most sit beyond the mat's default viewport on purpose —
+  // dragging the mat (or the pieces themselves) pans them into view, like
+  // digging through a real pile instead of seeing it all laid out at once.
   tidbits: [
-    { id: "t1", x: 10, y: 40, w: 280, h: 190, kind: "card", src: "/tidbits/sketches.png", rot: -6 },
-    { id: "t2", x: 330, y: -50, w: 230, h: 200, kind: "card", src: "/tidbits/device-render.png", rot: 9 },
-    { id: "t3", x: 600, y: 55, w: 270, h: 100, kind: "card", src: "/tidbits/spotify-strip.png", rot: -4 },
-    { id: "t4", x: 40, y: 270, w: 250, h: 210, kind: "card", src: "/tidbits/alphabet.png", rot: 5 },
-    { id: "t5", x: 670, y: 230, w: 280, h: 230, kind: "card", src: "/tidbits/comic.png", rot: -7 },
-    { id: "t6", x: 320, y: 250, w: 230, h: 230, kind: "card", src: "/tidbits/expression-poster.png", rot: 6 },
-    { id: "t7", x: 600, y: -70, w: 230, h: 230, kind: "card", src: "/tidbits/spiral.png", rot: -9 },
+    { id: "t1", x: -80, y: 60, w: 280, h: 190, kind: "card", src: "/tidbits/sketches.png", rot: -6 },
+    { id: "t2", x: 520, y: -180, w: 230, h: 200, kind: "card", src: "/tidbits/device-render.png", rot: 9 },
+    { id: "t3", x: 900, y: 120, w: 270, h: 100, kind: "card", src: "/tidbits/spotify-strip.png", rot: -4 },
+    { id: "t4", x: -380, y: 380, w: 250, h: 210, kind: "card", src: "/tidbits/alphabet.png", rot: 5 },
+    { id: "t5", x: 980, y: 520, w: 280, h: 230, kind: "card", src: "/tidbits/comic.png", rot: -7 },
+    { id: "t6", x: 180, y: 480, w: 230, h: 230, kind: "card", src: "/tidbits/expression-poster.png", rot: 6 },
+    { id: "t7", x: 800, y: -220, w: 230, h: 230, kind: "card", src: "/tidbits/spiral.png", rot: -9 },
     {
       id: "t8",
-      x: 980,
-      y: 30,
+      x: 1220,
+      y: 260,
       w: 260,
       h: 150,
       kind: "card",
@@ -84,8 +85,8 @@ export const CONFIG = {
     },
     {
       id: "t9",
-      x: -260,
-      y: 480,
+      x: -420,
+      y: -40,
       w: 240,
       h: 170,
       kind: "card",
