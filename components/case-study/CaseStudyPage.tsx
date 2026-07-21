@@ -6,6 +6,7 @@ import { isUnlocked } from "@/lib/auth";
 import { mdxComponents } from "@/lib/mdx-components";
 import { PasswordGate } from "./PasswordGate";
 import { CONFIG } from "@/lib/config";
+import { absoluteUrl } from "@/lib/seo";
 
 /* Server component shared by /work/[slug] and /writing/[slug].
    The auth check happens BEFORE the body is read or compiled — a locked
@@ -15,10 +16,24 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
   if (!meta) notFound();
 
   const kindLabel = kind === "work" ? "Work" : "Writing";
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    name: meta.title,
+    description: meta.tagline,
+    url: absoluteUrl(`/${kind}/${slug}`),
+    datePublished: meta.year,
+    author: { "@type": "Person", name: CONFIG.name },
+    ...(meta.cover ? { image: absoluteUrl(meta.cover) } : {}),
+  };
 
   if (meta.protected && !(await isUnlocked())) {
     return (
       <div className="cs">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <header className="cs-bar">
           <Link className="cs-back" href="/">← {CONFIG.name}</Link>
           <span className="cs-kind">{kindLabel}</span>
@@ -86,6 +101,10 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
 
   return (
     <div className="cs">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <header className="cs-bar">
         <Link className="cs-back" href="/">← {CONFIG.name}</Link>
         <span className="cs-kind">{kindLabel}</span>
