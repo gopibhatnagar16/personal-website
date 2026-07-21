@@ -250,10 +250,8 @@ export function DraggableCanvas({ items, height, variant, pannable = true, pan, 
       )}
       {items.map((it) => {
         const isPolaroid = it.kind === "polaroid";
-        const isMagnet = it.kind === "magnet";
-        // polaroids and magnets frame their media in an inner .ci-photo box
-        // (clip/pin + optional caption) instead of a plain background-image.
-        const isFramed = isPolaroid || isMagnet;
+        // polaroids frame their media in an inner .ci-photo box (clip/pin +
+        // optional caption) instead of a plain background-image.
         return (
           <div
             key={it.id}
@@ -266,13 +264,11 @@ export function DraggableCanvas({ items, height, variant, pannable = true, pan, 
                 width: it.w,
                 height: it.h,
                 ...(it.rot ? { "--rot": `${it.rot}deg` } : {}),
-                ...(it.video && !isFramed
+                ...(it.video && !isPolaroid
                   ? {}
-                  : it.src && !isFramed
+                  : it.src && !isPolaroid
                   ? { backgroundImage: `url(${it.src})` }
-                  : it.emoji
-                  ? { background: it.bg }
-                  : isFramed
+                  : isPolaroid
                   ? {}
                   : { backgroundImage: SHAPE_GREYS[(it.g || 0) % SHAPE_GREYS.length] }),
               } as React.CSSProperties
@@ -282,11 +278,10 @@ export function DraggableCanvas({ items, height, variant, pannable = true, pan, 
             onPointerUp={onUp}
             onPointerCancel={onUp}
           >
-            {it.emoji && <span className="ci-emoji">{it.emoji}</span>}
-            {it.video && !isFramed && (
+            {it.video && !isPolaroid && (
               <video className="ci-video" src={it.video} poster={it.src} muted autoPlay loop playsInline />
             )}
-            {isFramed &&
+            {isPolaroid &&
               (it.video ? (
                 <video className="ci-photo" src={it.video} poster={it.src} muted autoPlay loop playsInline />
               ) : (
