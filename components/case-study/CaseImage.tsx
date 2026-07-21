@@ -13,6 +13,7 @@ interface Props {
    to close). */
 export function CaseImage({ src, alt = "", caption }: Props) {
   const [open, setOpen] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     if (!open) return;
@@ -37,7 +38,13 @@ export function CaseImage({ src, alt = "", caption }: Props) {
           aria-label={alt ? `Expand image: ${alt}` : "Expand image"}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="cs-fig-img" src={src} alt={alt} loading="lazy" />
+          <img
+            className={"cs-fig-img" + (loaded ? " img-loaded" : "")}
+            src={src}
+            alt={alt}
+            loading="lazy"
+            onLoad={() => setLoaded(true)}
+          />
         </button>
       ) : (
         <div className="cs-img" aria-hidden="true" />
@@ -61,7 +68,7 @@ export function CaseImage({ src, alt = "", caption }: Props) {
             ×
           </button>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img className="cs-lightbox-img" src={src} alt={alt} />
+          <img className={"cs-lightbox-img" + (loaded ? " img-loaded" : "")} src={src} alt={alt} />
           {caption && <span className="cs-lightbox-cap">{caption}</span>}
         </div>
       )}

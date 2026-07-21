@@ -15,6 +15,7 @@ interface Exp {
 function Badge({ c }: { c: Exp }) {
   // fall back to the lettered circle if the remote logo fails to load
   const [failed, setFailed] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const showLogo = c.logo && !failed;
 
   return (
@@ -24,7 +25,14 @@ function Badge({ c }: { c: Exp }) {
     >
       {showLogo ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={c.logo} alt={`${c.name} logo`} loading="lazy" onError={() => setFailed(true)} />
+        <img
+          className={loaded ? "img-loaded" : ""}
+          src={c.logo}
+          alt={`${c.name} logo`}
+          loading="lazy"
+          onLoad={() => setLoaded(true)}
+          onError={() => setFailed(true)}
+        />
       ) : (
         c.initial
       )}
