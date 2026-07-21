@@ -1,6 +1,6 @@
 ---
 title: Building a Step Group component for Blade
-tagline: One component, every progress story — two weeks building the Step Group that replaced a dozen custom steppers across Razorpay.
+tagline: One component, every progress story. Two weeks building the Step Group that replaced a dozen custom steppers across Razorpay.
 role: Designer, Blade Design System
 year: "2024"
 team: Razorpay · Blade
@@ -13,7 +13,7 @@ cover: /work/step-group/cover.png
 
 Almost every product at Razorpay asks the user to *finish a journey* at some point. Onboard. Verify. Set up. Reconcile. Pay out.
 
-For years, every team built their own version of "steps." They looked different, behaved differently, and meant slightly different things. **Step Group** is the one component that replaces all of them — and the two weeks I spent building it taught me what designing for a system actually involves. When you design a product, you ship one good answer. When you design for a system, that answer has to hold up for every team in the org — including the ones whose use case you haven't seen yet.
+For years, every team built their own version of "steps." They looked different, behaved differently, and meant slightly different things. **Step Group** is the one component that replaces all of them. The two weeks I spent building it taught me what designing for a system actually involves. When you design a product, you ship one good answer. When you design for a system, that answer has to hold up for every team in the org, including the ones whose use case you haven't seen yet.
 
 <MediaSwitcher
   slides={[
@@ -21,7 +21,7 @@ For years, every team built their own version of "steps." They looked different,
       label: "Product audit",
       src: "/work/step-group/audit-1.png",
       alt: "A wall of every step-like component found across Razorpay products",
-      caption: "Every step-like component pulled from across Razorpay products — different names, markers, and state logic for the same job.",
+      caption: "Every step-like component pulled from across Razorpay products: different names, markers, and state logic for the same job.",
     },
     {
       label: "Close-up examples",
@@ -32,26 +32,26 @@ For years, every team built their own version of "steps." They looked different,
   ]}
 />
 
-## 01 — Auditing products
+## 01. Auditing products
 
 I went product by product, screen by screen, and pulled every step-like component I could find. The pattern was everywhere, but no two implementations agreed:
 
-- **Different names** — stepper, progress tracker, step progress, timeline
-- **Different markers** — some used numbers, some icons, some plain dots
-- **Different state logic** — no shared definition of what "active" or "completed" even looked like
-- **Different orientations** — built one-off for horizontal *or* vertical, rarely both
+- **Different names:** stepper, progress tracker, step progress, timeline
+- **Different markers:** some used numbers, some icons, some plain dots
+- **Different state logic:** no shared definition of what "active" or "completed" even looked like
+- **Different orientations:** built one-off for horizontal *or* vertical, rarely both
 
 Same job. A dozen answers. That inconsistency was the problem worth solving.
 
-## 02 — Component research
+## 02. Component research
 
-Then I looked outside, at how mature systems — Material, Polaris, Carbon, Ant, Atlassian — handle steppers, timelines, and progress bars. What I was really mapping:
+Then I looked outside, at how mature systems (Material, Polaris, Carbon, Ant, Atlassian) handle steppers, timelines, and progress bars. What I was really mapping:
 
 - What each system *calls* the component
 - Which states they support, and how they name them
 - Where labels, descriptions, markers, and trailing elements sit
 - How they handle horizontal vs. vertical
-- What they expose as props — and, more tellingly, what they *don't*
+- What they expose as props, and, more tellingly, what they *don't*
 
 The goal was never to copy. It was to understand the problem fully before committing to an API.
 
@@ -72,16 +72,16 @@ The goal was never to copy. It was to understand the problem fully before commit
   ]}
 />
 
-## 03 — API design
+## 03. API design
 
 The hardest decision wasn't how it looked. It was whether it was one component or three. This took longer than every other step combined, and it's the part I'm proudest of.
 
 The audit had surfaced three patterns that *looked* different but did overlapping jobs: a **Timeline**, a **Step Group**, and a **Stepped Progress Bar**. So I mapped the full prop surface for each, deliberately split into two levels:
 
-- **Item-level props** — the building block of a single step: *Intent* (Positive / Negative / Notice / Information / Neutral / Primary), *Marker* (Icon / Indicator / Number), *stepType* (Start / Middle / End), *label*, *subTitle*, *slot*, *trailingItem* (Badge / Text / Chevron), plus edge cases like *isBranchedStep* and *isOptional*.
-- **Group-level props** — what governs the whole set: *size*, *Marker*, and *orientation* (Horizontal / Vertical).
+- **Item-level props:** the building block of a single step: *Intent* (Positive / Negative / Notice / Information / Neutral / Primary), *Marker* (Icon / Indicator / Number), *stepType* (Start / Middle / End), *label*, *subTitle*, *slot*, *trailingItem* (Badge / Text / Chevron), plus edge cases like *isBranchedStep* and *isOptional*.
+- **Group-level props:** what governs the whole set: *size*, *Marker*, and *orientation* (Horizontal / Vertical).
 
-Splitting Item from Group was the unlock: it showed exactly how much these three "different" components shared at the building-block level — which was almost everything.
+Splitting Item from Group was the unlock: it showed exactly how much these three "different" components shared at the building-block level, which was almost everything.
 
 One option I rejected was combining all three into a single component behind a *variant* prop. It looked efficient, but the API became harder to explain: some props applied only to certain variants, orientation rules changed by use case, and behaviour became less predictable for consumers. We kept Step Group focused, and let Timeline and Stepped Progress Bar remain separate patterns.
 
@@ -93,7 +93,7 @@ One option I rejected was combining all three into a single component behind a *
       label: "Component definitions",
       src: "/work/step-group/api-1.png",
       alt: "Timeline, Step Group, and Stepped Progress Bar compared side by side",
-      caption: "Timeline, Step Group, and Stepped Progress Bar mapped side by side — what each is for, and where their prop surfaces overlap.",
+      caption: "Timeline, Step Group, and Stepped Progress Bar mapped side by side: what each is for, and where their prop surfaces overlap.",
     },
     {
       label: "Prop surface",
@@ -104,9 +104,9 @@ One option I rejected was combining all three into a single component behind a *
   ]}
 />
 
-## 04 — Proof of concept
+## 04. Proof of concept
 
-With the API locked, the POC came quickly — structure first, polish later. The point wasn't to admire it; it was to have something concrete enough to argue with. I covered the core states (completed / active / pending) and the edge cases the audit had surfaced: optional steps, branched steps, long labels, and trailing elements.
+With the API locked, the POC came quickly: structure first, polish later. The point wasn't to admire it; it was to have something concrete enough to argue with. I covered the core states (completed / active / pending) and the edge cases the audit had surfaced: optional steps, branched steps, long labels, and trailing elements.
 
 <MediaSwitcher
   slides={[
@@ -114,7 +114,7 @@ With the API locked, the POC came quickly — structure first, polish later. The
       label: "Structure & branching",
       src: "/work/step-group/poc-1.png",
       alt: "Early Step Group structure explorations, including branched steps and prop lists",
-      caption: "Early structure explorations — labelled groups, vertical and horizontal layouts, and branched steps.",
+      caption: "Early structure explorations: labelled groups, vertical and horizontal layouts, and branched steps.",
     },
     {
       label: "Timeline vs Step Group",
@@ -125,7 +125,7 @@ With the API locked, the POC came quickly — structure first, polish later. The
   ]}
 />
 
-## 05 — Review loop
+## 05. Review loop
 
 Internal design review checked hierarchy, states, and edge cases. Engineering review checked prop clarity, accessibility, and React feasibility. Feedback from both loops went back into the same place: the API and the POC.
 
@@ -135,13 +135,13 @@ Internal design review checked hierarchy, states, and edge cases. Engineering re
   caption="Sharing Step Group redesigns of real product use cases with Blade Advocates in Slack for feedback before sign-off."
 />
 
-## 06 — Picking a name
+## 06. Picking a name
 
 We chose **Step Group** because the component is a group of step items, not a timeline or a generic progress bar. The name also gave Timeline and Stepped Progress Bar room to stay as separate patterns.
 
-## 07 — Final component set
+## 07. Final component set
 
-Once the POC had gone through review, I iterated on structure, states, spacing, and edge cases until the direction was stable. The final set used Blade's existing foundations and tokens, so theme behaviour was handled by the system instead of custom styling — the same component works across **Payment Light** and **Banking Dark** with the right token mapping.
+Once the POC had gone through review, I iterated on structure, states, spacing, and edge cases until the direction was stable. The final set used Blade's existing foundations and tokens, so theme behaviour was handled by the system instead of custom styling. The same component works across **Payment Light** and **Banking Dark** with the right token mapping.
 
 <MediaSwitcher
   slides={[
@@ -160,13 +160,13 @@ Once the POC had gone through review, I iterated on structure, states, spacing, 
   ]}
 />
 
-## 08 — Documentation & motion
+## 08. Documentation & motion
 
-Every Blade component ships with a full docs page — props, variants, usage do's and don'ts, accessibility, and motion guidelines.
+Every Blade component ships with a full docs page: props, variants, usage do's and don'ts, accessibility, and motion guidelines.
 
 Motion mattered more than I expected. A static progress tracker just shows a state; an animated one makes progress *feel* earned. I defined the *pending → active → completed* transition and the connector fill using Blade's motion tokens, so timing and easing stay consistent with every other interactive component in the system.
 
-## 09 — Go live
+## 09. Go live
 
 After the review fixes, Step Group went live in the Figma library and the React package together. Designers and engineers could start from the same component, instead of rebuilding progress patterns one product at a time.
 
