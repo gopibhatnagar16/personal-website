@@ -315,7 +315,7 @@ body {
 
 /* scroll-reveal footer */
 .site-footer{position:fixed;left:0;right:0;bottom:0;height:var(--footH,410px);z-index:1;
-  background:var(--accent);
+  --fp:#7c2359;background:var(--fp);
   color:#fff;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.16);
   display:flex;align-items:stretch;justify-content:center;}
 .ft-inner{position:relative;width:100%;max-width:1040px;height:100%;padding:32px clamp(20px,5vw,40px) 34px;
@@ -330,7 +330,7 @@ body {
   letter-spacing:-.01em;color:#fff;display:inline-flex;align-items:center;gap:6px;}
 .ft-meta-value svg{flex:0 0 auto;opacity:.85;}
 
-.ft-note{width:min(560px,100%);flex:0 0 auto;margin:auto 0;background:#17151b;border-radius:18px;
+.ft-note{width:min(560px,100%);flex:0 0 auto;margin:auto;background:#17151b;border-radius:18px;
   box-shadow:0 30px 70px rgba(0,0,0,.32),0 0 0 1px rgba(255,255,255,.06);position:relative;overflow:hidden;
   background-image:repeating-linear-gradient(#17151b 0 33px, rgba(255,255,255,.05) 33px 34px);
   display:flex;flex-direction:column;align-items:flex-start;text-align:left;
@@ -349,13 +349,22 @@ a.ft-note-mail:hover{text-decoration-color:#fff;}
 .ft-note-sign{font-family:var(--font-hanken),sans-serif;font-weight:700;font-size:14px;
   color:rgba(245,244,240,.7);margin-top:14px;}
 
-.ft-social{display:flex;gap:4px;width:min(560px,100%);margin:0 auto;flex:0 0 auto;}
+.ft-social{display:flex;width:min(560px,100%);margin:0 auto;flex:0 0 auto;}
 .ft-chip{position:relative;flex:1;aspect-ratio:1;max-height:170px;border-radius:22px;
-  border:5px solid #fff;background:var(--accent);
+  border:3px solid #fff;background:var(--fp);
   color:#fff;display:grid;place-items:center;box-shadow:0 10px 24px rgba(0,0,0,.2);
   transition:transform .28s cubic-bezier(.34,1.56,.64,1),box-shadow .28s ease,background .28s ease;}
-.ft-chip:hover{transform:translateY(-8px);z-index:3;
-  background:color-mix(in srgb, var(--accent), #000 8%);
+.ft-chip + .ft-chip{margin-left:-16px;}
+.ft-chip.r1{transform:rotate(-5deg);}
+.ft-chip.r2{transform:rotate(4deg);}
+.ft-chip.r3{transform:rotate(-3deg);}
+.ft-chip.r4{transform:rotate(5deg);}
+.ft-chip.r1:hover{transform:rotate(-5deg) translateY(-8px);}
+.ft-chip.r2:hover{transform:rotate(4deg) translateY(-8px);}
+.ft-chip.r3:hover{transform:rotate(-3deg) translateY(-8px);}
+.ft-chip.r4:hover{transform:rotate(5deg) translateY(-8px);}
+.ft-chip:hover{z-index:3;
+  background:color-mix(in srgb, var(--fp), #000 8%);
   box-shadow:0 18px 34px rgba(0,0,0,.3),0 0 0 4px rgba(255,255,255,.2);}
 .ft-chip svg{transition:transform .3s cubic-bezier(.34,1.56,.64,1);}
 .ft-chip:hover svg{transform:scale(1.1);}
@@ -371,7 +380,8 @@ a.ft-note-mail:hover{text-decoration-color:#fff;}
   .gp{--footH:480px;}
   .ft-inner{gap:16px;}
   .ft-note{padding:20px 20px 18px;}
-  .ft-chip{max-height:76px;border-radius:16px;border-width:3px;}
+  .ft-chip{max-height:76px;border-radius:16px;border-width:2px;}
+  .ft-chip + .ft-chip{margin-left:-10px;}
 }
 @media (max-width:420px){
   .bar{gap:8px;} .bar-right{gap:10px;} .name{letter-spacing:.08em;} .clock{min-width:0;}
