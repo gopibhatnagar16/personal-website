@@ -23,7 +23,36 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
           <Link className="cs-back" href="/">← {CONFIG.name}</Link>
           <span className="cs-kind">{kindLabel}</span>
         </header>
-        <div className="cs-lock-wrap">
+
+        {/* Real chrome + metadata behind the modal, so it reads as the actual
+            case-study page rather than a blank placeholder. The compiled MDX
+            body is never sent while locked, so it's stubbed with skeleton
+            blocks — inert and unselectable since there's nothing to read. */}
+        <div className="cs-col cs-locked-preview" aria-hidden="true" inert>
+          <div
+            className="cs-hero"
+            style={meta.cover ? { backgroundImage: `url(${meta.cover})` } : undefined}
+          />
+          <span className="cs-eyebrow">{meta.role} · {meta.year}</span>
+          <h1 className="cs-title">{meta.title}</h1>
+          <p className="cs-tagline">{meta.tagline}</p>
+          <div className="cs-meta">
+            <div className="cs-m"><span className="cs-mk">Role</span><span className="cs-mv">{meta.role}</span></div>
+            <div className="cs-m"><span className="cs-mk">Year</span><span className="cs-mv">{meta.year}</span></div>
+            <div className="cs-m"><span className="cs-mk">Team</span><span className="cs-mv">{meta.team}</span></div>
+          </div>
+          <div className="cs-skel">
+            <span className="cs-skel-line" style={{ width: "94%" }} />
+            <span className="cs-skel-line" style={{ width: "88%" }} />
+            <span className="cs-skel-line" style={{ width: "60%" }} />
+            <span className="cs-skel-block" />
+            <span className="cs-skel-line" style={{ width: "91%" }} />
+            <span className="cs-skel-line" style={{ width: "82%" }} />
+            <span className="cs-skel-line" style={{ width: "70%" }} />
+          </div>
+        </div>
+
+        <div className="cs-lock-overlay">
           <div className="cs-lock-card">
             <div className="cs-lock-icon" aria-hidden="true">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
