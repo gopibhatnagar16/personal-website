@@ -18,6 +18,7 @@ export interface ContentMeta {
   protected?: boolean;
   thumb?: string;
   preview?: string;
+  cover?: string;
 }
 
 const SLUG_RE = /^[a-z0-9-]+$/;
@@ -35,6 +36,7 @@ function toMeta(kind: ContentKind, slug: string, data: Record<string, unknown>):
     protected: data.protected === true,
     thumb: data.thumb ? String(data.thumb) : undefined,
     preview: data.preview ? String(data.preview) : undefined,
+    cover: data.cover ? String(data.cover) : undefined,
   };
 }
 

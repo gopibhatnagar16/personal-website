@@ -63,6 +63,12 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
       </header>
 
       <div className="cs-col">
+        <div
+          className="cs-hero"
+          aria-hidden={meta.cover ? undefined : "true"}
+          style={meta.cover ? { backgroundImage: `url(${meta.cover})` } : undefined}
+        />
+
         <span className="cs-eyebrow">{meta.role} · {meta.year}</span>
         <h1 className="cs-title">{meta.title}</h1>
         <p className="cs-tagline">{meta.tagline}</p>
@@ -72,8 +78,6 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
           <div className="cs-m"><span className="cs-mk">Year</span><span className="cs-mv">{meta.year}</span></div>
           <div className="cs-m"><span className="cs-mk">Team</span><span className="cs-mv">{meta.team}</span></div>
         </div>
-
-        <div className="cs-hero" aria-hidden="true" />
 
         <div className="cs-body">{content}</div>
 
