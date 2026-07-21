@@ -478,18 +478,23 @@ body {
   text-align:center;font-size:.98rem;color:var(--muted);}
 
 /* media switcher */
-.cs-switcher{margin:28px 0;}
-.cs-sw-tabs{display:grid;grid-template-columns:repeat(3,1fr);}
-.cs-sw-tab{display:flex;align-items:baseline;gap:9px;padding:13px 10px;text-align:left;
-  border:none;border-bottom:1px solid var(--line);background:none;cursor:pointer;min-width:0;}
+.cs-switcher{margin:28px 0;display:grid;grid-template-columns:minmax(200px,280px) 1fr;
+  gap:8px 32px;align-items:start;}
+.cs-sw-tabs{display:flex;flex-direction:column;}
+.cs-sw-tab{display:flex;align-items:baseline;gap:9px;padding:13px 0 13px 16px;text-align:left;
+  border:none;border-left:2px solid var(--line);background:none;cursor:pointer;min-width:0;
+  position:relative;}
 .cs-sw-num{font-family:var(--font-geist-mono),monospace;font-size:11px;color:var(--faint);flex:0 0 auto;}
-.cs-sw-label{font-size:.98rem;color:var(--muted);transition:color .2s;overflow:hidden;
-  text-overflow:ellipsis;white-space:nowrap;}
+.cs-sw-label{font-size:.98rem;color:var(--muted);transition:color .2s;line-height:1.35;}
 .cs-sw-tab:hover .cs-sw-label{color:var(--ink);}
-.cs-sw-tab.active{border-bottom:2px solid var(--accent);margin-bottom:-1px;}
 .cs-sw-tab.active .cs-sw-label{color:var(--accent);font-weight:500;}
 .cs-sw-tab.active .cs-sw-num{color:var(--accent);}
-.cs-sw-panel{margin-top:18px;animation:rfIn .25s ease;}
+.cs-sw-track{position:absolute;left:-2px;top:0;bottom:0;width:2px;}
+.cs-sw-fill{display:block;width:100%;height:0;background:var(--accent);
+  animation-name:swFill;animation-timing-function:linear;animation-fill-mode:forwards;}
+.cs-sw-fill.static{height:100%;}
+@keyframes swFill{from{height:0}to{height:100%}}
+.cs-sw-panel{animation:rfIn .25s ease;min-width:0;}
 
 /* accordion */
 .cs-acc{border:1px solid var(--line);border-radius:12px;background:var(--panel);margin:28px 0;}
@@ -540,7 +545,7 @@ body {
   .cs-rf-cluster.faded{display:none;}
   .cs-rf-visual{min-height:190px;}
   .cs-rf-cards{max-width:none;}
-  .cs-sw-tabs{grid-template-columns:1fr 1fr;}
+  .cs-switcher{grid-template-columns:1fr;gap:18px;}
   .cs-viz{grid-template-columns:1fr;}
   .cs-viz-list{flex-direction:row;flex-wrap:wrap;}
   .cs-viz-metric{flex:1 1 40%;}

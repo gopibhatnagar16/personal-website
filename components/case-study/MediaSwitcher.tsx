@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CaseImage } from "./CaseImage";
 
 interface Slide {
@@ -10,15 +10,34 @@ interface Slide {
   alt?: string;
 }
 
-/* Numbered tab switcher over an image/figure area — one tab per
-   exploration/variant, active tab underlined in the accent color. */
+const AUTOPLAY_MS = 5000;
+
+/* Left/right media switcher — numbered vertical tab list on the left (each
+   with an autoplay progress indicator), image/figure panel on the right.
+   Clicking a tab jumps directly and resets the timer; hovering the tab
+   list pauses autoplay. */
 export function MediaSwitcher({ slides }: { slides: Slide[] }) {
   const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
   const current = slides[active];
+  const autoplay = slides.length > 1;
+
+  useEffect(() => {
+    if (!autoplay || paused) return;
+    const id = setTimeout(() => {
+      setActive((i) => (i + 1) % slides.length);
+    }, AUTOPLAY_MS);
+    return () => clearTimeout(id);
+  }, [active, paused, autoplay, slides.length]);
 
   return (
     <div className="cs-switcher">
-      <div className="cs-sw-tabs" role="tablist">
+      <div
+        className="cs-sw-tabs"
+        role="tablist"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+      >
         {slides.map((s, i) => (
           <button
             key={s.label}
@@ -30,6 +49,22 @@ export function MediaSwitcher({ slides }: { slides: Slide[] }) {
           >
             <span className="cs-sw-num">{String(i + 1).padStart(2, "0")}</span>
             <span className="cs-sw-label">{s.label}</span>
+            <span className="cs-sw-track" aria-hidden="true">
+              {i === active && (
+                <span
+                  key={active}
+                  className={"cs-sw-fill" + (autoplay ? "" : " static")}
+                  style={
+                    autoplay
+                      ? {
+                          animationDuration: `${AUTOPLAY_MS}ms`,
+                          animationPlayState: paused ? "paused" : "running",
+                        }
+                      : undefined
+                  }
+                />
+              )}
+            </span>
           </button>
         ))}
       </div>
