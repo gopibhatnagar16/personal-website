@@ -23,7 +23,7 @@ export function WorkList({ items }: { items: WorkRow[] }) {
       <span className="section-label">work</span>
       <div className="list">
         {items.map((w, i) => {
-          const eyes = bind("📑");
+          const eyes = bind(w.upcoming ? "🔒" : "📑");
           const handlers = {
             onMouseEnter: (e: React.MouseEvent) => {
               setPrev({ show: true, x: e.clientX, y: e.clientY, g: i, preview: w.preview ?? "" });
@@ -59,7 +59,7 @@ export function WorkList({ items }: { items: WorkRow[] }) {
               {inner}
             </Link>
           ) : (
-            <div className="rowx" key={w.title} {...handlers}>
+            <div className={"rowx" + (w.upcoming ? " rowx-disabled" : "")} key={w.title} {...handlers}>
               {inner}
             </div>
           );
