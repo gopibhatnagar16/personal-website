@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CONFIG } from "@/lib/config";
 import { useEyes } from "@/components/shared/EyesCursor";
 
@@ -16,7 +16,14 @@ function Badge({ c }: { c: Exp }) {
   // fall back to the lettered circle if the remote logo fails to load
   const [failed, setFailed] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
   const showLogo = c.logo && !failed;
+
+  // a cached image can finish loading before the onLoad handler is attached,
+  // which left badges blank until a hard reload — check .complete on mount too
+  useEffect(() => {
+    if (imgRef.current?.complete) setLoaded(true);
+  }, [c.logo]);
 
   return (
     <span
@@ -26,10 +33,10 @@ function Badge({ c }: { c: Exp }) {
       {showLogo ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
+          ref={imgRef}
           className={loaded ? "img-loaded" : ""}
           src={c.logo}
           alt={`${c.name} logo`}
-          loading="lazy"
           onLoad={() => setLoaded(true)}
           onError={() => setFailed(true)}
         />
