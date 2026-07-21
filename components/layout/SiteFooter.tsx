@@ -64,7 +64,7 @@ export function SiteFooter() {
             aria-label="Email"
           >
             <span className="ft-label">Email</span>
-            <Mail size={42} strokeWidth={1.75} />
+            <Mail size={28} strokeWidth={2} />
           </a>
           <a
             className="ft-chip r2"
@@ -74,7 +74,7 @@ export function SiteFooter() {
             aria-label="LinkedIn"
           >
             <span className="ft-label">LinkedIn</span>
-            <Linkedin size={42} strokeWidth={1.75} />
+            <Linkedin size={28} strokeWidth={2} />
           </a>
           <a
             className="ft-chip r3"
@@ -84,7 +84,7 @@ export function SiteFooter() {
             aria-label="Twitter"
           >
             <span className="ft-label">Twitter</span>
-            <Twitter size={42} strokeWidth={1.75} />
+            <Twitter size={28} strokeWidth={2} />
           </a>
           <a
             className="ft-chip r4"
@@ -94,7 +94,7 @@ export function SiteFooter() {
             aria-label="Resume"
           >
             <span className="ft-label">Resume</span>
-            <FileText size={42} strokeWidth={1.75} />
+            <FileText size={28} strokeWidth={2} />
           </a>
         </div>
       </div>
