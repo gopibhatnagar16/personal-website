@@ -22,7 +22,11 @@ The final shape of that route was a three-plan choice during onboarding, with St
 
 The subscription opportunity sits just after onboarding, when the business has given us enough context but has not yet formed a regular payment habit. The intended route: understand the business → offer a clear pricing route → help it make a first payment → support regular payment use over time. The existing journey offered one standard rate and no self-serve pricing choice, leaving committed businesses to switch gateways, contact Sales, or postpone the decision.
 
-<ImagePlaceholder />
+<CaseImage
+  src="/work/subscriptions/opportunity-window.png"
+  alt="Merchant journey diagram with the Setup step highlighted as the pricing decision moment for committed merchants"
+  caption="The subscription opportunity sits right after onboarding, in the Setup step, before a habit forms."
+/>
 
 ## Problem
 
@@ -36,6 +40,12 @@ Mapping the current journey made the gaps explicit:
 - **Onboarding** — it shares business details and expects a relevant next step. *Gap: context collected, then unused.*
 - **Setup** — it sees only the standard rate before taking payments. *Gap: no plan choice.*
 - **Dashboard** — it cannot easily revisit or manage pricing later. *Gap: no lifecycle.*
+
+<CaseImage
+  src="/work/subscriptions/journey-gaps.png"
+  alt="Merchant journey diagram with gaps marked at Onboarding, Setup, and Dashboard"
+  caption="The same journey with the gaps marked: context collected at Onboarding went unused, Setup showed no plan choice, Dashboard offered no lifecycle."
+/>
 
 ## Discovery
 
@@ -70,7 +80,11 @@ A composite from merchant calls made the moment concrete. Meet **Arjun**: he has
 - **Confident** — Standard stays valid alongside optional pricing routes.
 - **In control** — he can revisit or manage the choice once real payment use grows.
 
-<ImagePlaceholder />
+<CaseImage
+  src="/work/subscriptions/journey-map.png"
+  alt="Merchant journey mapped by stage and emotion, from Discovery through Dashboard"
+  caption="Arjun's journey mapped by stage and emotion — confidence drops after Setup, where only the flat rate appears, and stays low through Dashboard."
+/>
 
 To explain what the funnel couldn't, Ishan and I called around **120 merchants** and had **30 meaningful conversations** across merchants who paused, stayed on the default path, and chose a paid plan. We used calls because the funnel only showed what happened, not why — and we deliberately spoke to drop-offs, free-plan choosers, and paid choosers so the research did not become only a drop-off audit.
 
@@ -135,26 +149,38 @@ We changed the amount of choice, the value frame, and the payment model to learn
   slides={[
     {
       label: "Four distinct offerings",
+      src: "/work/subscriptions/iteration-four-plan-tiers.png",
+      alt: "Four-plan pricing cards: Trial, Basic, Plus, and Pro",
       caption: "Four-plan subscription-pricing exploration with transaction limits, reduced rates, benefits, and monthly or yearly prices.",
     },
     {
       label: "Savings-first hierarchy",
+      src: "/work/subscriptions/iteration-savings-popup.png",
+      alt: "Pricing cards with a savings breakdown popup over the recommended Plus plan",
       caption: "Savings-led hierarchy with the recommended plan made easier to notice.",
     },
     {
       label: "Prepaid vs postpaid",
+      src: "/work/subscriptions/iteration-postpaid-vs-prepaid.png",
+      alt: "Postpaid versus Prepaid Plus platform-fee comparison",
       caption: "Postpaid settlement deductions framed against a prepaid plan.",
     },
     {
       label: "Volume-led recommendation",
+      src: "/work/subscriptions/iteration-volume-slider.png",
+      alt: "Monthly business volume slider revealing a recommended Plus plan",
       caption: "Expected-volume input revealing a recommendation or relevant plan.",
     },
     {
       label: "0% platform-fee framing",
+      src: "/work/subscriptions/iteration-platform-fee-framing.png",
+      alt: "Plans framed around 0% platform fee by payment method",
       caption: "0% platform fee as the primary message, with clear boundaries on where it applied.",
     },
     {
       label: "One plan + top-ups",
+      src: "/work/subscriptions/iteration-personalised-plan.png",
+      alt: "Personalised pricing plan with selectable fee items and top-ups",
       caption: "One personalised plan with included usage and top-ups.",
     },
   ]}
@@ -195,11 +221,21 @@ Variant B was the strongest direction for plan selection, especially among regis
 
 The decision: scale the strongest pricing frame, then build the touchpoints and self-serve controls around it.
 
-<ImagePlaceholder />
+<CaseImage
+  src="/work/subscriptions/final-plan-cards.png"
+  alt="Final three-plan pricing cards: Standard, Plus, and Pro"
+  caption="The scaled direction: Standard, Plus, and Pro, with Plus recommended and savings shown against Standard."
+/>
 
 ## Final solution
 
 We made pricing an explicit step after onboarding. Before taking a first payment, every eligible business chooses a route: stay on the standard rate or select a subscription plan. **The decision is required; a paid plan is not.** The final journey: a relevant pricing route prepared from business details → an explicit choice, Standard or a plan, upfront → usage nudges, with change or cancel anytime.
+
+<CaseImage
+  src="/work/subscriptions/solution-flow.png"
+  alt="Merchant journey diagram annotated with the final solution: relevant route, explicit choice, and usage nudges"
+  caption="A relevant pricing route prepared from business details, an explicit choice upfront, then usage nudges with change or cancel anytime."
+/>
 
 The plan story then lives wherever a business already works, across six touchpoints, each answering a different question:
 
@@ -216,7 +252,46 @@ In practice the solution worked across five moments: introduce the optional choi
 
 The final solution had to act like a bridge, not a gate: it helped merchants compare value during onboarding and still gave them control later through dashboard plan management.
 
-<ImagePlaceholder />
+<MediaSwitcher
+  slides={[
+    {
+      label: "Home page",
+      src: "/work/subscriptions/homepage-banner.png",
+      alt: "Full-width Plus plan banner on the Razorpay Home dashboard",
+      caption: "A full-width banner on the highest-traffic surface, after alerts and quick actions.",
+    },
+    {
+      label: "Top navigation",
+      src: "/work/subscriptions/top-nav-get-plus.png",
+      alt: "Persistent Get Plus action in the top navigation, shown only to Standard-plan users",
+      caption: "A persistent Get Plus action for businesses on Standard — one click away, gone once they upgrade.",
+    },
+    {
+      label: "Profile dropdown",
+      src: "/work/subscriptions/profile-dropdown.png",
+      alt: "Profile dropdown showing the current plan and a Manage link",
+      caption: "The current plan and a direct management link, answering \"what plan am I on?\" in one click.",
+    },
+    {
+      label: "Transactions page",
+      src: "/work/subscriptions/transactions-banner.png",
+      alt: "Subtle single-line Plus plan banner beneath the transactions overview",
+      caption: "A subtle single-line banner beneath the payments overview, judged against real usage.",
+    },
+    {
+      label: "Account & settings — utilization",
+      src: "/work/subscriptions/account-settings-utilization.png",
+      alt: "Manage Plans page showing plan utilization and an upgrade prompt",
+      caption: "A permanent Manage Plans home, starting with utilization against the current plan.",
+    },
+    {
+      label: "Account & settings — plan ladder",
+      src: "/work/subscriptions/account-settings-plan-ladder.png",
+      alt: "Manage Plans page showing the full Plus, Pro, and Enterprise plan ladder",
+      caption: "The full plan ladder alongside compare, upgrade, change, and cancel controls — no contacting a team.",
+    },
+  ]}
+/>
 
 ## Results
 
