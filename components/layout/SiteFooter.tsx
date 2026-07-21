@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, Linkedin, Twitter } from "lucide-react";
+import { Mail, Linkedin, Twitter, FileText } from "lucide-react";
 import { CONFIG } from "@/lib/config";
 import { useEyes } from "@/components/shared/EyesCursor";
 
@@ -22,17 +22,45 @@ export function SiteFooter() {
         <div className="ft-veil" aria-hidden="true" />
 
         <div className="ft-social">
-          <a className="ft-chip r1" href={`mailto:${CONFIG.email}`} aria-label="Email">
+          <a
+            className="ft-chip r1"
+            href={`mailto:${CONFIG.email}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Email"
+          >
             <span className="ft-label">Email</span>
             <Mail size={36} strokeWidth={2} />
           </a>
-          <a className="ft-chip r2" href={CONFIG.socials.linkedin} aria-label="LinkedIn">
+          <a
+            className="ft-chip r2"
+            href={CONFIG.socials.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+          >
             <span className="ft-label">LinkedIn</span>
             <Linkedin size={36} strokeWidth={2} />
           </a>
-          <a className="ft-chip r3" href={CONFIG.socials.twitter} aria-label="Twitter">
+          <a
+            className="ft-chip r3"
+            href={CONFIG.socials.twitter}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Twitter"
+          >
             <span className="ft-label">Twitter</span>
             <Twitter size={36} strokeWidth={2} />
+          </a>
+          <a
+            className="ft-chip r4"
+            href={CONFIG.socials.resume}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Resume"
+          >
+            <span className="ft-label">Resume</span>
+            <FileText size={36} strokeWidth={2} />
           </a>
         </div>
       </div>

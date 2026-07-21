@@ -20,7 +20,11 @@ export interface CanvasItem {
 export const CONFIG = {
   name: "Gopi Bhatnagar",
   email: "gopibhatnagar@gmail.com", // ← change me
-  socials: { linkedin: "#", twitter: "#" }, // ← add your URLs
+  socials: {
+    linkedin: "https://www.linkedin.com/in/gopibhatnagar/",
+    twitter: "https://x.com/BhatnagarGopi",
+    resume: "https://drive.google.com/file/d/1tws4WgJ8PrAxY4QqtYWyBDtLgO6rch3A/view",
+  },
   timeZone: "Asia/Kolkata",
   tzLabel: "GMT+5:30",
   location: "Chennai", // ← shown in the footer "Currently"
