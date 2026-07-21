@@ -119,9 +119,9 @@ export const CONFIG = {
 
   photos: [
     "/photos/hero-closeup.jpg",
-    "/photos/hero-speaking.jpg",
-    "/photos/hero-mirror.jpg",
     "/photos/hero-thumbsup.jpg",
+    "/photos/hero-mirror.jpg",
+    "/photos/hero-emoji.jpg",
   ] as string[], // avatar fan (last = front)
 };
 
