@@ -74,7 +74,7 @@ export function Hero() {
         {copied ? (<>Email copied&nbsp;✓</>) : (<>Press <kbd>C</kbd> to copy my email</>)}
       </button>
 
-      {(veil || fanned) && <div className="blur-veil" aria-hidden="true" />}
+      <div className={"blur-veil" + (veil || fanned ? " visible" : "")} aria-hidden="true" />
     </main>
   );
 }
