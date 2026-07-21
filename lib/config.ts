@@ -9,12 +9,15 @@ export interface CanvasItem {
   y: number;
   w: number;
   h: number;
-  kind: "card" | "circle" | "rect" | "square" | "sticker" | "polaroid";
+  kind: "card" | "circle" | "rect" | "square" | "sticker" | "polaroid" | "video";
   g?: number;
   emoji?: string;
   bg?: string;
   rot?: number;
   caption?: string;
+  img?: string; // photo/artwork, shown as the card's background image
+  video?: string; // kind: "video" — autoplaying, muted, looping clip
+  poster?: string; // poster frame for kind: "video"
 }
 
 export const CONFIG = {
@@ -55,13 +58,37 @@ export const CONFIG = {
     { title: "Onboarding", thumb: "/work/onboarding-mini.png", preview: "/work/onboarding-maxi.png" },
   ],
 
-  // draggable placeholders — swap the greys for images/embeds later
+  // pinned to the cutting mat — sketches, renders and clips pulled from Figma
   tidbits: [
-    { id: "t1", x: 24, y: 44, w: 210, h: 140, kind: "card", g: 0 },
-    { id: "t2", x: 300, y: 24, w: 178, h: 208, kind: "card", g: 1 },
-    { id: "t3", x: 540, y: 66, w: 220, h: 150, kind: "card", g: 2 },
-    { id: "t4", x: 150, y: 224, w: 190, h: 120, kind: "card", g: 3 },
-    { id: "t5", x: 440, y: 246, w: 160, h: 112, kind: "card", g: 4 },
+    { id: "t1", x: 20, y: 36, w: 210, h: 104, kind: "card", img: "/tidbits/sketches.png", rot: -2 },
+    { id: "t2", x: 250, y: 14, w: 170, h: 113, kind: "card", img: "/tidbits/device-render.png", rot: 3 },
+    { id: "t3", x: 440, y: 36, w: 230, h: 58, kind: "card", img: "/tidbits/spotify-strip.png", rot: -1 },
+    { id: "t4", x: 36, y: 150, w: 170, h: 134, kind: "card", img: "/tidbits/alphabet.png", rot: 2 },
+    { id: "t5", x: 560, y: 110, w: 190, h: 140, kind: "card", img: "/tidbits/comic.png", rot: -3 },
+    { id: "t6", x: 240, y: 160, w: 150, h: 155, kind: "card", img: "/tidbits/expression-poster.png", rot: 4 },
+    { id: "t7", x: 420, y: 140, w: 150, h: 156, kind: "card", img: "/tidbits/spiral.png", rot: -2 },
+    {
+      id: "t8",
+      x: 560,
+      y: 10,
+      w: 190,
+      h: 90,
+      kind: "video",
+      video: "/tidbits/adventure.mp4",
+      poster: "/tidbits/adventure-poster.jpg",
+      rot: 2,
+    },
+    {
+      id: "t9",
+      x: 40,
+      y: 275,
+      w: 170,
+      h: 113,
+      kind: "video",
+      video: "/tidbits/paper-boat.mp4",
+      poster: "/tidbits/paper-boat-poster.jpg",
+      rot: -3,
+    },
   ] as CanvasItem[],
 
   // pegboard — polaroids + stickers pinned to a fixed Personal board (not an

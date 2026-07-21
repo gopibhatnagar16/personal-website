@@ -134,6 +134,7 @@ export function DraggableCanvas({ items, height, variant, pannable = true }: Pro
       </div>
       {items.map((it) => {
         const isPolaroid = it.kind === "polaroid";
+        const isVideo = it.kind === "video";
         return (
           <div
             key={it.id}
@@ -147,9 +148,11 @@ export function DraggableCanvas({ items, height, variant, pannable = true }: Pro
               transform: it.rot ? `rotate(${it.rot}deg)` : undefined,
               ...(it.emoji
                 ? { background: it.bg }
-                : isPolaroid
+                : isPolaroid || isVideo
                 ? {}
-                : { backgroundImage: SHAPE_GREYS[(it.g || 0) % SHAPE_GREYS.length] }),
+                : {
+                    backgroundImage: it.img ? `url(${it.img})` : SHAPE_GREYS[(it.g || 0) % SHAPE_GREYS.length],
+                  }),
             }}
             onPointerDown={(e) => onDown(e, it.id)}
             onPointerMove={onMove}
@@ -165,6 +168,9 @@ export function DraggableCanvas({ items, height, variant, pannable = true }: Pro
                 />
                 {it.caption && <span className="ci-cap">{it.caption}</span>}
               </>
+            )}
+            {isVideo && it.video && (
+              <video src={it.video} poster={it.poster} autoPlay loop muted playsInline />
             )}
           </div>
         );
