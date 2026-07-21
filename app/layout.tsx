@@ -1,8 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
+import { CONFIG } from "@/lib/config";
+import { SITE_URL } from "@/lib/seo";
 import "./globals.css";
 
 // Neue Montreal / Monument Grotesk Mono are commercial type families we
@@ -16,10 +18,57 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+const description =
+  "Design builder — partly in canvas, rest in codebase. Product design and front-end work across Razorpay, Scaler, and more.";
+
 export const metadata: Metadata = {
-  title: "Gopi Bhatnagar — Design Builder",
-  description:
-    "Design builder — partly in canvas, rest in codebase. Product design and front-end work across Razorpay, Scaler, and more.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: `${CONFIG.name} — Design Builder`,
+    template: `%s — ${CONFIG.name}`,
+  },
+  description,
+  keywords: ["Gopi Bhatnagar", "Product Designer", "Design Engineer", "UX Design", "Razorpay", "Portfolio"],
+  authors: [{ name: CONFIG.name, url: SITE_URL }],
+  creator: CONFIG.name,
+  publisher: CONFIG.name,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: `${CONFIG.name} — Design Builder`,
+    title: `${CONFIG.name} — Design Builder`,
+    description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${CONFIG.name} — Design Builder`,
+    description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fbfbf9" },
+    { media: "(prefers-color-scheme: dark)", color: "#0e0e0c" },
+  ],
+};
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: CONFIG.name,
+  url: SITE_URL,
+  jobTitle: "Product Designer",
+  email: `mailto:${CONFIG.email}`,
+  sameAs: [CONFIG.socials.linkedin, CONFIG.socials.twitter],
 };
 
 const themeInit = `try{var t=localStorage.getItem("theme");if(t==="dark")document.documentElement.setAttribute("data-theme","dark")}catch(e){}`;
@@ -33,6 +82,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        />
       </head>
       <body>
         <ThemeProvider>{children}</ThemeProvider>
