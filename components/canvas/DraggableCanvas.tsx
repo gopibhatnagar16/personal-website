@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RotateCcw } from "lucide-react";
 import { SHAPE_GREYS, type CanvasItem } from "@/lib/config";
 
@@ -31,13 +31,40 @@ export const MAT_COLORS = [
 
 export type MatColor = (typeof MAT_COLORS)[number];
 
+const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+const RESET_MS = 380;
+
 // shared pan + mat-color state for one canvas instance, lifted out of
 // DraggableCanvas so the controls can render in the section header instead
 // of floating over the canvas itself.
 export function useCanvasControls() {
   const [pan, setPan] = useState({ x: 0, y: 0 });
   const [matColor, setMatColor] = useState<MatColor>(MAT_COLORS[0]);
-  return { pan, setPan, matColor, setMatColor };
+  const panRef = useRef(pan);
+  panRef.current = pan;
+  const rafRef = useRef<number | null>(null);
+
+  useEffect(() => () => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+  }, []);
+
+  // eases the pan back to the origin instead of snapping there instantly —
+  // tweens the same state everything else reads (grid, ruler, items).
+  const resetPan = () => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    const from = panRef.current;
+    if (from.x === 0 && from.y === 0) return;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const t = Math.min((now - start) / RESET_MS, 1);
+      const e = easeOutCubic(t);
+      setPan({ x: from.x * (1 - e), y: from.y * (1 - e) });
+      rafRef.current = t < 1 ? requestAnimationFrame(tick) : null;
+    };
+    rafRef.current = requestAnimationFrame(tick);
+  };
+
+  return { pan, setPan, matColor, setMatColor, resetPan };
 }
 
 /* color swatches (mat only) + reset button — rendered in the section header,
@@ -47,13 +74,13 @@ export function CanvasControls({
   matColor,
   setMatColor,
   pan,
-  setPan,
+  resetPan,
 }: {
   variant?: "mat" | "board";
   matColor?: MatColor;
   setMatColor?: React.Dispatch<React.SetStateAction<MatColor>>;
   pan: { x: number; y: number };
-  setPan: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>;
+  resetPan: () => void;
 }) {
   const isPanned = pan.x !== 0 || pan.y !== 0;
   return (
@@ -76,7 +103,7 @@ export function CanvasControls({
       <button
         type="button"
         className={"canvas-reset" + (isPanned ? " visible" : "")}
-        onClick={() => setPan({ x: 0, y: 0 })}
+        onClick={resetPan}
         aria-label="Reset canvas position"
         tabIndex={isPanned ? 0 : -1}
       >

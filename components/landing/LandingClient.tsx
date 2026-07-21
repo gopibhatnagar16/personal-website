@@ -34,7 +34,13 @@ export function LandingClient({ work, writing }: Props) {
             <section className="section" id="tidbits">
               <div className="section-head">
                 <span className="section-label">Tidbits</span>
-                <CanvasControls variant="mat" {...tidbitsControls} />
+                <CanvasControls
+                  variant="mat"
+                  matColor={tidbitsControls.matColor}
+                  setMatColor={tidbitsControls.setMatColor}
+                  pan={tidbitsControls.pan}
+                  resetPan={tidbitsControls.resetPan}
+                />
               </div>
               <DraggableCanvas
                 items={CONFIG.tidbits}
@@ -50,7 +56,7 @@ export function LandingClient({ work, writing }: Props) {
             <section className="section" id="personal">
               <div className="section-head">
                 <span className="section-label">Personal</span>
-                <CanvasControls variant="board" pan={personalControls.pan} setPan={personalControls.setPan} />
+                <CanvasControls variant="board" pan={personalControls.pan} resetPan={personalControls.resetPan} />
               </div>
               <p className="section-intro">{CONFIG.personalIntro}</p>
               <ul className="section-hobbies">
