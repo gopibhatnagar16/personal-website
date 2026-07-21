@@ -104,8 +104,11 @@ body {
 .section-tight{padding-bottom:0;}
 .section-label{display:block;font-family:var(--font-geist-mono),monospace;font-size:11px;
   text-transform:uppercase;letter-spacing:.16em;color:var(--faint);margin-bottom:26px;}
+.section-heading{font-family:var(--font-geist-sans),system-ui,sans-serif;font-weight:700;
+  letter-spacing:-.02em;font-size:clamp(1.4rem,3vw,1.9rem);line-height:1.24;
+  margin:-14px 0 16px;text-wrap:balance;}
 .section-intro{color:var(--muted);font-size:clamp(1rem,1.5vw,1.1rem);line-height:1.55;
-  max-width:60ch;margin:-14px 0 26px;}
+  max-width:60ch;margin:0 0 26px;}
 .section-hobbies{color:var(--muted);font-size:clamp(1rem,1.5vw,1.1rem);line-height:1.55;
   max-width:60ch;margin:-16px 0 26px;padding-left:1.2em;list-style:disc;}
 .section-hobbies li{margin-bottom:4px;}

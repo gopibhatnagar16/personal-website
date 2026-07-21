@@ -36,6 +36,7 @@ export function LandingClient({ work, writing }: Props) {
             {/* PERSONAL — pegboard */}
             <section className="section" id="personal">
               <span className="section-label">Personal</span>
+              <h2 className="section-heading">{CONFIG.personalHeader}</h2>
               <p className="section-intro">{CONFIG.personalIntro}</p>
               <ul className="section-hobbies">
                 {CONFIG.personalHobbies.map((hobby) => (

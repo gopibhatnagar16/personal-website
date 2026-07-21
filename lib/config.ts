@@ -34,15 +34,16 @@ export const CONFIG = {
   location: "Chennai", // ← shown in the footer "Currently"
   lastUpdated: "July 2026", // ← footer "Last updated"
   title: "Design Builder.",
-  titleLine2: "Partly in canvas, rest in codebase.",
+  titleLine2: "Partly in canvas, partly in codebase.",
   ideology: [
-    "I'm Gopi Bhatnagar, a designer who loves to vibe code and has experience working on complex, enterprise-scale products.",
-    "I consider myself a creator who loves crafting user-centered solutions based on great storytelling and visual craft. A deep curiosity about human behaviour, products, and the future of technology has helped me become this person.",
+    "I'm Gopi Bhatnagar. Somewhere between designing and vibe-coding, I stopped picking a lane and just started doing both.",
+    "Most of my experience is on complex, enterprise-scale products - the kind where good intentions meet real constraints. I'm curious about people, products, and how technology shapes both, and I'm still figuring a lot of it out.",
   ],
 
+  personalHeader: "Off duty, not off imagination.",
   personalIntro:
-    "I fell in love with design because it lets me turn imagination into something people can actually experience. Outside of work, you'll find me:",
-  personalHobbies: ["Playing sports", "Reading non-fiction (yes, really)", "Trying new beverages"],
+    'Design pulled me in because it turns "what if" into something real. When I\'m not working, I\'m probably:',
+  personalHobbies: ["Out playing sports", "Buried in a non-fiction book", "Hunting down a new drink to try"],
 
   // logo: each company's own brand mark, exported from Figma.
   // initial stays as the fallback if a logo ever fails to load.
