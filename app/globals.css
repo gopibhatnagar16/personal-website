@@ -217,27 +217,28 @@ body {
 .ci-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit;pointer-events:none;}
 
 /* polaroid — for the Personal pegboard: photo + printed caption strip, clipped to the board */
-.ci-polaroid{border-radius:2px;background:#F7F5F0;background-image:none;padding:10px 10px 30px;
-  display:flex;box-shadow:0 4px 10px rgba(0,0,0,.18);}
-.ci-polaroid:active{box-shadow:0 8px 18px rgba(0,0,0,.22);}
-.ci-polaroid::before{content:"";position:absolute;top:-7px;left:50%;transform:translateX(-50%);
-  width:22px;height:10px;border-radius:5px;background:linear-gradient(180deg,#fff,#e2e2dc);
-  box-shadow:0 1px 3px rgba(0,0,0,.2);pointer-events:none;}
-[data-theme="dark"] .ci-polaroid::before{background:linear-gradient(180deg,#3a3a35,#232320);}
-.ci-photo{flex:1;border-radius:3px;background-size:cover;background-position:center;object-fit:cover;pointer-events:none;}
+.ci-polaroid{border-radius:8px;background:#F9F8F4;background-image:none;padding:10px 10px 30px;
+  display:flex;box-shadow:0 10px 24px -6px rgba(0,0,0,.16),0 2px 6px rgba(0,0,0,.08);}
+.ci-polaroid:active{box-shadow:0 14px 30px -6px rgba(0,0,0,.2),0 4px 8px rgba(0,0,0,.1);}
+.ci-polaroid::before{content:"";position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+  width:22px;height:22px;border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,#fff,#dedcd4 70%,#c3c1b8);
+  box-shadow:0 3px 7px rgba(0,0,0,.2);pointer-events:none;}
+[data-theme="dark"] .ci-polaroid::before{background:radial-gradient(circle at 32% 28%,#57564e,#37362f 70%,#232320);}
+.ci-photo{flex:1;border-radius:4px;background-size:cover;background-position:center;object-fit:cover;pointer-events:none;}
 .ci-cap{position:absolute;left:10px;right:10px;bottom:8px;font-family:var(--font-geist-mono),monospace;
   font-size:10px;letter-spacing:.03em;color:#6b665c;text-align:center;white-space:nowrap;
   overflow:hidden;text-overflow:ellipsis;pointer-events:none;}
 
 /* magnet — small fridge-photo snapshot, flatter and lighter than a polaroid */
-.ci-magnet{border-radius:9px;background:#fff;padding:5px;display:flex;box-shadow:0 2px 6px rgba(0,0,0,.16);}
-.ci-magnet:active{box-shadow:0 4px 10px rgba(0,0,0,.2);}
-.ci-magnet::before{content:"";position:absolute;top:-6px;left:50%;transform:translateX(-50%);
-  width:13px;height:13px;border-radius:50%;
-  background:radial-gradient(circle at 35% 30%,#fff,#cfcfcf 70%,#a3a3a3);
-  box-shadow:0 1px 3px rgba(0,0,0,.25);pointer-events:none;}
+.ci-magnet{border-radius:12px;background:#fff;padding:8px;display:flex;box-shadow:0 8px 20px -5px rgba(0,0,0,.14),0 2px 5px rgba(0,0,0,.07);}
+.ci-magnet:active{box-shadow:0 12px 26px -5px rgba(0,0,0,.18),0 3px 7px rgba(0,0,0,.09);}
+.ci-magnet::before{content:"";position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+  width:20px;height:20px;border-radius:50%;
+  background:radial-gradient(circle at 32% 28%,#fff,#dedcd4 70%,#c3c1b8);
+  box-shadow:0 3px 7px rgba(0,0,0,.2);pointer-events:none;}
 [data-theme="dark"] .ci-magnet{background:#2b2b27;}
-[data-theme="dark"] .ci-magnet::before{background:radial-gradient(circle at 35% 30%,#5a5a54,#38382f 70%,#242420);}
+[data-theme="dark"] .ci-magnet::before{background:radial-gradient(circle at 32% 28%,#57564e,#37362f 70%,#232320);}
 
 /* cutting-mat variant — for the Tidbits canvas. surface + grid colors are exact
    presets from https://cutting-mat-generator.vercel.app/, swapped via --mat-color/--mat-grid */
@@ -273,20 +274,30 @@ body {
 .mat-protractor text{fill:var(--mat-grid,#E5E55A);font-family:var(--font-geist-mono),monospace;}
 
 /* pegboard variant — a fixed board (no pan) for the Personal canvas, styled
-   after a real perforated pegboard: light panel, rows of slot-shaped holes */
+   after a real perforated pegboard: light panel, rows of slot-shaped holes.
+   holes are drawn as a light capsule + a 1px darker capsule offset above it,
+   giving a soft embossed/punched look instead of a flat dot. */
 .canvas.board{
   cursor:default;
-  border-color:rgba(0,0,0,.10);
-  background-color:#F3F1EA;
-  background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='32'%20height='20'%3E%3Crect%20x='6'%20y='5'%20width='3'%20height='7'%20rx='1.5'%20fill='rgba(0,0,0,.15)'/%3E%3Crect%20x='22'%20y='11'%20width='3'%20height='7'%20rx='1.5'%20fill='rgba(0,0,0,.15)'/%3E%3C/svg%3E");
-  background-size:32px 20px;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 0 0 1px rgba(0,0,0,.03);
+  border:none;
+  border-radius:28px;
+  background-color:#EDECE5;
+  background-image:
+    radial-gradient(ellipse 900px 520px at 20% 6%, rgba(255,255,255,.9), transparent 65%),
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='40'%3E%3Crect%20x='12'%20y='11'%20width='6'%20height='14'%20rx='3'%20fill='rgba(255,255,255,.75)'/%3E%3Crect%20x='12'%20y='10'%20width='6'%20height='14'%20rx='3'%20fill='rgba(0,0,0,.09)'/%3E%3Crect%20x='44'%20y='17'%20width='6'%20height='14'%20rx='3'%20fill='rgba(255,255,255,.75)'/%3E%3Crect%20x='44'%20y='16'%20width='6'%20height='14'%20rx='3'%20fill='rgba(0,0,0,.09)'/%3E%3C/svg%3E");
+  background-size:100% 100%, 64px 40px;
+  background-repeat:no-repeat, repeat;
+  box-shadow:0 40px 70px -24px rgba(0,0,0,.16),0 10px 26px -12px rgba(0,0,0,.1),
+    inset 0 1px 0 rgba(255,255,255,.7), inset 0 0 0 1px rgba(0,0,0,.03);
 }
 .canvas.board:active{cursor:default;}
 [data-theme="dark"] .gp .canvas.board{
-  background-color:#232320;
-  background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='32'%20height='20'%3E%3Crect%20x='6'%20y='5'%20width='3'%20height='7'%20rx='1.5'%20fill='rgba(255,255,255,.14)'/%3E%3Crect%20x='22'%20y='11'%20width='3'%20height='7'%20rx='1.5'%20fill='rgba(255,255,255,.14)'/%3E%3C/svg%3E");
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+  background-color:#201F1B;
+  background-image:
+    radial-gradient(ellipse 900px 520px at 20% 6%, rgba(255,255,255,.05), transparent 65%),
+    url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='40'%3E%3Crect%20x='12'%20y='10'%20width='6'%20height='14'%20rx='3'%20fill='rgba(0,0,0,.4)'/%3E%3Crect%20x='12'%20y='11'%20width='6'%20height='14'%20rx='3'%20fill='rgba(255,255,255,.13)'/%3E%3Crect%20x='44'%20y='16'%20width='6'%20height='14'%20rx='3'%20fill='rgba(0,0,0,.4)'/%3E%3Crect%20x='44'%20y='17'%20width='6'%20height='14'%20rx='3'%20fill='rgba(255,255,255,.13)'/%3E%3C/svg%3E");
+  box-shadow:0 40px 70px -24px rgba(0,0,0,.4),0 10px 26px -12px rgba(0,0,0,.3),
+    inset 0 1px 0 rgba(255,255,255,.05);
 }
 
 /* emoji-cursor zones — hide the native cursor entirely */
