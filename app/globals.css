@@ -202,9 +202,17 @@ body {
 .canvas.board .canvas-reset{background:var(--panel);}
 
 .ci{position:absolute;border-radius:16px;cursor:grab;background-size:cover;background-position:center;
-  box-shadow:0 2px 6px rgba(0,0,0,.1);transition:box-shadow .2s ease;touch-action:none;}
+  box-shadow:0 2px 6px rgba(0,0,0,.1);transition:box-shadow .2s ease,transform .2s ease;touch-action:none;
+  transform:rotate(var(--rot,0deg));}
 .ci:hover{box-shadow:0 4px 10px rgba(0,0,0,.13);}
 .ci:active{cursor:grabbing;box-shadow:0 7px 16px rgba(0,0,0,.17);}
+
+/* mat items lift, grow and tilt a touch further right on hover/drag —
+   reinforces the "pick it up off the pile" feel of the cutting mat */
+.canvas.mat .ci:hover,.canvas.mat .ci:active{
+  transform:rotate(calc(var(--rot,0deg) + 4deg)) scale(1.06);
+  box-shadow:0 14px 28px rgba(0,0,0,.32);
+}
 .ci-circle{border-radius:50%;}
 
 /* card — sticker-style cutout for the Tidbits mat: thick white stroke standing in
