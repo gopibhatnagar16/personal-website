@@ -81,10 +81,10 @@ export const CONFIG = {
   ] as CanvasItem[],
 
   photos: [
-    "/photos/hero-closeup.jpg",
+    "/photos/hero-thumbsup.jpg",
     "/photos/hero-speaking.jpg",
     "/photos/hero-mirror.jpg",
-    "/photos/hero-thumbsup.jpg",
+    "/photos/hero-closeup.jpg",
   ] as string[], // avatar fan (last = front)
 };
 
