@@ -33,15 +33,16 @@ export const CONFIG = {
   tzLabel: "GMT+5:30",
   location: "Chennai", // ← shown in the footer "Currently"
   lastUpdated: "July 2026", // ← footer "Last updated"
-  title: "Design Builder.",
-  titleLine2: "Partly in canvas, rest in codebase.",
+  title: "I'm Gopi Bhatnagar,",
+  titleLine2: "a designer who loves to vibe code and has experience working on complex, enterprise-scale products.",
   ideology: [
-    "I care about craft more than category. Whether it's a Figma frame or a component in the codebase, I sweat the same details — the easing on a transition, the tension in a wordmark, the reason a flow feels effortless when nobody can say why.",
-    "Good work is mostly patience: the unglamorous back-and-forth of making something feel obvious. I like living close to the pixels and close to the code, because that's where the craft actually happens.",
+    "I consider myself a creator who loves crafting user-centered solutions based on great storytelling and visual craft.",
+    "A deep curiosity about human behaviour, products, and the future of technology has helped me become this person.",
   ],
 
   personalIntro:
-    "Outside of work I'm usually chasing a sunrise hike, pulling a bad shot of coffee, or losing an evening to a game I have no business being this invested in. This is a rough pinboard of that half of my life — drag things around.",
+    "I fell in love with design because it lets me turn imagination into something people can actually experience. Outside of work, you'll find me:",
+  personalHobbies: ["Playing sports", "Reading non-fiction (yes, really)", "Trying new beverages"],
 
   // logo: each company's own brand mark, exported from Figma.
   // initial stays as the fallback if a logo ever fails to load.

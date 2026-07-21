@@ -106,6 +106,9 @@ body {
   text-transform:uppercase;letter-spacing:.16em;color:var(--faint);margin-bottom:26px;}
 .section-intro{color:var(--muted);font-size:clamp(1rem,1.5vw,1.1rem);line-height:1.55;
   max-width:60ch;margin:-14px 0 26px;}
+.section-hobbies{color:var(--muted);font-size:clamp(1rem,1.5vw,1.1rem);line-height:1.55;
+  max-width:60ch;margin:-16px 0 26px;padding-left:1.2em;}
+.section-hobbies li{margin-bottom:4px;}
 
 /* experience — brand logos + name */
 .exp-row{display:flex;flex-wrap:wrap;gap:18px;}
