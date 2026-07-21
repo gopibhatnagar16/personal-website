@@ -22,7 +22,11 @@ The goal was simple: understand where merchants were getting stuck, design an in
 - **Activation** — starts accepting payments and needs transaction momentum.
 - **Growth** — returns, transacts again, claims value, and scales usage.
 
-<ImagePlaceholder />
+<CaseImage
+  src="/work/growth-experiments/merchant-journey-cover.png"
+  alt="Razorpay marketing homepage promoting zero platform fees for 90 days"
+  caption="The visitor-facing entry point into the journey — pricing, credibility, and the offer all compete for attention before signup."
+/>
 
 ## Experiment 01 — Gamification
 
@@ -44,7 +48,46 @@ The journey we wanted:
 - **Reward moment** — the merchant reaches a claim, reveal, no-reward, or completed state. *Make the reward feel earned.*
 - **Re-entry** — dashboard, WhatsApp, and email bring the merchant back. *Don't lose the journey after one visit.*
 
-<ImagePlaceholder />
+<MediaSwitcher
+  slides={[
+    {
+      label: "Iterations",
+      src: "/work/growth-experiments/gamification/iterations.png",
+      alt: "Grid of gamification exploration iterations covering challenge tiers, streaks, and claim states",
+      caption: "Iteration sheet across reward tiers, streak formats, and claim states.",
+    },
+    {
+      label: "The journey",
+      src: "/work/growth-experiments/gamification/journey.png",
+      alt: "Journey diagram from FTUX complete to re-entry with the reward moment highlighted",
+      caption: "The reward moment was the fulcrum of the loop — it had to feel earned, not automatic.",
+    },
+    {
+      label: "Plotline: challenge live",
+      src: "/work/growth-experiments/gamification/plotline-start.png",
+      alt: "In-app Plotline surface announcing the May Challenge is live",
+      caption: "A Plotline surface announces the challenge as soon as it goes live.",
+    },
+    {
+      label: "Plotline: reward",
+      src: "/work/growth-experiments/gamification/plotline-reward.png",
+      alt: "In-app Plotline surface revealing a claimed reward",
+      caption: "Completing the challenge reveals the reward moment in-app.",
+    },
+    {
+      label: "Live on the dashboard",
+      src: "/work/growth-experiments/gamification/dashboard-widget.png",
+      alt: "March Challenge progress widget live on the Razorpay merchant dashboard",
+      caption: "The challenge widget live on the dashboard, tracking transaction milestones toward the reward.",
+    },
+    {
+      label: "Email re-entry",
+      src: "/work/growth-experiments/gamification/email-reentry.png",
+      alt: "Re-entry email inviting a merchant back to complete the May Challenge",
+      caption: "One of the re-entry channels — email brings merchants back to an unfinished challenge.",
+    },
+  ]}
+/>
 
 **Result: 5 of 7 early experiments were positive.** The early tests generated ₹45.3 lakh incremental GMV from 595 incremental merchants. The April scale-up reported **₹22.3 crore incremental GMV**, ₹23.9 lakh incremental NR, and **1.3 lakh incremental transactions** across 18 experiments.
 
@@ -68,7 +111,40 @@ The journey we wanted:
 - **Top bar / menu** — keep the benefit retrievable after go-live without interrupting work. *Make it easy to find again.*
 - **Campaign banner** — use lifecycle reminders when the merchant needs a nudge back. *Remind without interrupting.*
 
-<ImagePlaceholder />
+<MediaSwitcher
+  slides={[
+    {
+      label: "The journey",
+      src: "/work/growth-experiments/freepg/journey.png",
+      alt: "Journey diagram from signup to campaign banner with the setup checklist highlighted",
+      caption: "The setup checklist is where the offer meets the moment of going live.",
+    },
+    {
+      label: "Signup",
+      src: "/work/growth-experiments/freepg/signup-offer.png",
+      alt: "Signup screen with a 0% platform fees ribbon",
+      caption: "The offer surfaces on the signup screen, before the merchant has committed to anything.",
+    },
+    {
+      label: "Setup checklist",
+      src: "/work/growth-experiments/freepg/setup-checklist-banner.png",
+      alt: "Onboarding checklist banner reminding the merchant of zero platform fees while setting up their website",
+      caption: "The benefit stays visible inside the setup checklist, tying the offer to the action of going live.",
+    },
+    {
+      label: "Top bar / menu",
+      src: "/work/growth-experiments/freepg/credits-tracker.png",
+      alt: "Free payment credits tracker opened from a persistent top-bar pill",
+      caption: "A persistent \"20 Free* Days\" pill in the top bar keeps the benefit retrievable after go-live.",
+    },
+    {
+      label: "Campaign banner",
+      src: "/work/growth-experiments/freepg/campaign-banner.png",
+      alt: "Lifecycle campaign banner advertising Razorpay free for 90 days",
+      caption: "A lifecycle campaign banner brings merchants back when they need a nudge.",
+    },
+  ]}
+/>
 
 **Result: credit assignment reached 95.7% success at 100% ramp.** 1,238 of 1,294 activation requests received credits successfully, while 56 expected eligibility rejections were classified correctly. This validates rollout health; revenue, GMV, and retention impact remain follow-up reads.
 
@@ -92,7 +168,22 @@ The journey we wanted:
 - **Fallback** — mic-blocked users move toward chat with Ray. *Voice will not work for everyone.*
 - **Signup** — the visitor proceeds if the assistant resolves uncertainty. *Confidence should lead to action.*
 
-<ImagePlaceholder />
+<MediaSwitcher
+  slides={[
+    {
+      label: "The journey",
+      src: "/work/growth-experiments/smartassist/journey.png",
+      alt: "Journey diagram from static pricing to signup with the conversation step highlighted",
+      caption: "Uncertainty needed to resolve before commitment, not after.",
+    },
+    {
+      label: "Smart Assist live",
+      src: "/work/growth-experiments/smartassist/smart-assist-live.png",
+      alt: "Smart Assist video-call-style widget on the pricing page, with an assistant greeting the visitor",
+      caption: "Smart Assist live on the pricing page, greeting the visitor before they ask.",
+    },
+  ]}
+/>
 
 **Result: the early lift became a validation lesson.** Smart Assist initially showed 6.7% signup versus 5.9% control — a +14% signal. A later 33/33/34 split showed 4.7% versus 4.4% with overlapping confidence intervals, so there was no clear winner. Mic permission remained a major friction, with about 44% declining.
 
