@@ -122,9 +122,8 @@ export const CONFIG = {
     { id: "p5", x: 50, y: 34, w: 105, h: 130, kind: "polaroid", rot: -8, src: "/personal/quiet-dusk.jpg", caption: "quiet dusk" },
     { id: "p6", x: 83, y: 38, w: 105, h: 130, kind: "polaroid", rot: 4, src: "/personal/studio-days.jpg", caption: "studio days" },
 
-    { id: "p7", x: 5, y: 65, w: 105, h: 130, kind: "polaroid", rot: -6, src: "/personal/match-day.jpg", caption: "match day" },
-    { id: "p8", x: 38, y: 68, w: 105, h: 130, kind: "polaroid", rot: 7, video: "/personal/one-more-turn.mp4", caption: "one more turn" },
-    { id: "p9", x: 71, y: 64, w: 105, h: 130, kind: "polaroid", rot: -4, src: "/personal/window-flowers.png", caption: "window sill" },
+    { id: "p7", x: 8, y: 65, w: 105, h: 130, kind: "polaroid", rot: -6, src: "/personal/match-day.jpg", caption: "match day" },
+    { id: "p9", x: 62, y: 65, w: 105, h: 130, kind: "polaroid", rot: -4, src: "/personal/window-flowers.png", caption: "window sill" },
 
     // laptop-sticker cutouts — transparent die-cut PNGs, no card/frame, just
     // the image + a drop shadow (see .ci-sticker), scattered in the gaps
@@ -136,7 +135,9 @@ export const CONFIG = {
     { id: "s5", x: 30, y: 20, w: 62, h: 110, kind: "sticker", rot: 9, src: "/personal/coffee-note.png" },
     { id: "s6", x: 60, y: 18, w: 80, h: 107, kind: "sticker", rot: -6, src: "/personal/rose-bouquet.png" },
     { id: "s7", x: 2, y: 48, w: 136, h: 51, kind: "sticker", rot: 5, src: "/personal/sneakers.png" },
-    { id: "s8", x: 62, y: 50, w: 124, h: 47, kind: "sticker", rot: -4, src: "/personal/team-note.png" },
+    // slack screenshot — sized up from its original 124x47 (kept aspect) and
+    // recentered into the gap left by the removed "one more turn" polaroid.
+    { id: "s8", x: 33, y: 50, w: 170, h: 65, kind: "sticker", rot: -4, src: "/personal/team-note.png" },
   ] as CanvasItem[],
 
   photos: [
