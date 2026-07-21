@@ -110,8 +110,8 @@ body {
 /* experience — brand logos + name */
 .exp-row{display:flex;flex-wrap:wrap;gap:18px;}
 .exp-item{position:relative;cursor:none;}
-.exp-badge{width:35px;height:35px;border-radius:10px;display:grid;place-items:center;overflow:hidden;
-  color:#fff;font-family:var(--font-geist-sans),sans-serif;font-weight:800;font-size:14px;
+.exp-badge{width:46px;height:46px;border-radius:9px;display:grid;place-items:center;overflow:hidden;
+  color:#fff;font-family:var(--font-geist-sans),sans-serif;font-weight:800;font-size:16px;
   cursor:default;}
 .exp-badge img{width:100%;height:100%;object-fit:contain;
   opacity:0;filter:blur(4px);transition:opacity .4s ease,filter .4s ease;}
@@ -136,9 +136,9 @@ body {
 .thumb{width:46px;height:46px;border-radius:9px;flex:0 0 auto;background-size:cover;background-position:center;
   border:1px solid var(--line);box-shadow:0 0 0 rgba(0,0,0,0);transform:rotate(-5deg);
   transition:transform .22s ease,box-shadow .22s ease;}
-.rowx:hover .thumb{transform:rotate(0) scale(1.05);box-shadow:0 3px 9px rgba(0,0,0,.15);}
+.rowx:not(.rowx-disabled):hover .thumb{transform:rotate(0) scale(1.05);box-shadow:0 3px 9px rgba(0,0,0,.15);}
 .rx-title{font-size:16px;color:var(--ink);}
-.rowx:hover .rx-title{text-decoration:underline;text-underline-offset:3px;}
+.rowx:not(.rowx-disabled):hover .rx-title{text-decoration:underline;text-underline-offset:3px;}
 .rx-date{font-family:var(--font-geist-mono),monospace;font-size:13px;color:var(--faint);white-space:nowrap;text-align:right;}
 .rx-badge{justify-self:end;font-family:var(--font-geist-mono),monospace;font-size:11px;letter-spacing:.04em;
   padding:4px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);white-space:nowrap;}

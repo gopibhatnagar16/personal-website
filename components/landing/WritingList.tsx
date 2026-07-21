@@ -11,11 +11,12 @@ export interface WritingRow {
   title: string;
   year?: string;
   readTime?: string;
+  preview?: string;
 }
 
 export function WritingList({ items }: { items: WritingRow[] }) {
   const bind = useEyes();
-  const [prev, setPrev] = useState({ show: false, x: 0, y: 0, g: 0 });
+  const [prev, setPrev] = useState({ show: false, x: 0, y: 0, g: 0, preview: "" });
 
   return (
     <section className="section" id="writing">
@@ -25,11 +26,11 @@ export function WritingList({ items }: { items: WritingRow[] }) {
           const eyes = bind("✍️");
           const handlers = {
             onMouseEnter: (e: React.MouseEvent) => {
-              setPrev({ show: true, x: e.clientX, y: e.clientY, g: i });
+              setPrev({ show: true, x: e.clientX, y: e.clientY, g: i, preview: a.preview ?? "" });
               eyes.onMouseEnter(e);
             },
             onMouseMove: (e: React.MouseEvent) => {
-              setPrev({ show: true, x: e.clientX, y: e.clientY, g: i });
+              setPrev({ show: true, x: e.clientX, y: e.clientY, g: i, preview: a.preview ?? "" });
               eyes.onMouseMove(e);
             },
             onMouseLeave: () => {
@@ -59,7 +60,9 @@ export function WritingList({ items }: { items: WritingRow[] }) {
         >
           <span
             className="wp-img"
-            style={{ backgroundImage: SHAPE_GREYS[prev.g % SHAPE_GREYS.length] }}
+            style={{
+              backgroundImage: prev.preview ? `url(${prev.preview})` : SHAPE_GREYS[prev.g % SHAPE_GREYS.length],
+            }}
           />
         </div>
       )}
