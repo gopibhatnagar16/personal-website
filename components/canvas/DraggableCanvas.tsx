@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { RotateCcw } from "lucide-react";
 import { SHAPE_GREYS, type CanvasItem } from "@/lib/config";
 
@@ -11,18 +11,107 @@ interface Props {
   // false = a fixed board: items are positioned in % and clamped to stay
   // on it, no background panning. true (default) = infinite pan, world-space px.
   pannable?: boolean;
+  // pan + (for mat) mat color now live in the parent so the controls can be
+  // rendered outside the canvas, alongside the section title — see CanvasControls.
+  pan: { x: number; y: number };
+  setPan: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>;
+  matColor?: MatColor;
 }
 
 // mat surface + grid/guide color presets — classic is the exact
 // cutting-mat-generator.vercel.app default, the rest match the palette pairs
 // from the personal-site Figma color system.
-const MAT_COLORS = [
+export const MAT_COLORS = [
   { id: "classic", label: "Classic", bg: "#00332A", grid: "#E5E55A" },
   { id: "pink", label: "Pink", bg: "#C4279C", grid: "#F0A0E8" },
   { id: "coral", label: "Coral", bg: "#EE4028", grid: "#FBDFDA" },
   { id: "mint", label: "Mint", bg: "#2A6B40", grid: "#A3E8AC" },
   { id: "blue", label: "Blue", bg: "#28579E", grid: "#BFE1FA" },
 ] as const;
+
+export type MatColor = (typeof MAT_COLORS)[number];
+
+const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const RESET_MS = 380;
+
+// shared pan + mat-color state for one canvas instance, lifted out of
+// DraggableCanvas so the controls can render in the section header instead
+// of floating over the canvas itself.
+export function useCanvasControls() {
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [matColor, setMatColor] = useState<MatColor>(MAT_COLORS[0]);
+  const panRef = useRef(pan);
+  panRef.current = pan;
+  const rafRef = useRef<number | null>(null);
+
+  useEffect(() => () => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+  }, []);
+
+  // eases the pan back to the origin instead of snapping there instantly —
+  // tweens the same state everything else reads (grid, ruler, items).
+  const resetPan = () => {
+    if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    const from = panRef.current;
+    if (from.x === 0 && from.y === 0) return;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const t = Math.min((now - start) / RESET_MS, 1);
+      const e = easeInOutCubic(t);
+      setPan({ x: from.x * (1 - e), y: from.y * (1 - e) });
+      rafRef.current = t < 1 ? requestAnimationFrame(tick) : null;
+    };
+    rafRef.current = requestAnimationFrame(tick);
+  };
+
+  return { pan, setPan, matColor, setMatColor, resetPan };
+}
+
+/* color swatches (mat only) + reset button — rendered in the section header,
+   aligned with the title, rather than floating over the canvas. */
+export function CanvasControls({
+  variant,
+  matColor,
+  setMatColor,
+  pan,
+  resetPan,
+}: {
+  variant?: "mat" | "board";
+  matColor?: MatColor;
+  setMatColor?: React.Dispatch<React.SetStateAction<MatColor>>;
+  pan: { x: number; y: number };
+  resetPan: () => void;
+}) {
+  const isPanned = pan.x !== 0 || pan.y !== 0;
+  return (
+    <div className={"canvas-controls" + (variant ? " " + variant : "")}>
+      {variant === "mat" && matColor && setMatColor && (
+        <div className="canvas-colors" role="group" aria-label="Cutting mat color">
+          {MAT_COLORS.map((c) => (
+            <button
+              key={c.id}
+              type="button"
+              className={"canvas-swatch" + (c.id === matColor.id ? " active" : "")}
+              style={{ background: c.bg }}
+              aria-label={`${c.label} mat`}
+              aria-pressed={c.id === matColor.id}
+              onClick={() => setMatColor(c)}
+            />
+          ))}
+        </div>
+      )}
+      <button
+        type="button"
+        className={"canvas-reset" + (isPanned ? " visible" : "")}
+        onClick={resetPan}
+        aria-label="Reset canvas position"
+        tabIndex={isPanned ? 0 : -1}
+      >
+        <RotateCcw size={13} strokeWidth={1.9} />
+      </button>
+    </div>
+  );
+}
 
 const clamp = (v: number, min: number, max: number) => Math.min(Math.max(v, min), max);
 
@@ -58,7 +147,7 @@ function protractorSvg() {
 const PROTRACTOR_SVG = protractorSvg();
 
 /* draggable canvas — infinite pan (mat) or a fixed, bounded board */
-export function DraggableCanvas({ items, height, variant, pannable = true }: Props) {
+export function DraggableCanvas({ items, height, variant, pannable = true, pan, setPan, matColor }: Props) {
   const canvasRef = useRef<HTMLDivElement>(null);
   const drag = useRef<{ id: string; ox: number; oy: number } | null>(null);
   const panDrag = useRef<{ x: number; y: number; panX: number; panY: number } | null>(null);
@@ -68,8 +157,6 @@ export function DraggableCanvas({ items, height, variant, pannable = true }: Pro
     items.forEach((it, i) => (o[it.id] = { x: it.x, y: it.y, z: i + 1 }));
     return o;
   });
-  const [pan, setPan] = useState({ x: 0, y: 0 });
-  const [matColor, setMatColor] = useState<(typeof MAT_COLORS)[number]>(MAT_COLORS[0]);
 
   // card drag — world-space px when pannable, else % of the board, clamped to its bounds
   const onDown = (e: React.PointerEvent, id: string) => {
@@ -122,8 +209,6 @@ export function DraggableCanvas({ items, height, variant, pannable = true }: Pro
   };
   const onCanvasUp = () => (panDrag.current = null);
 
-  const isPanned = pan.x !== 0 || pan.y !== 0;
-
   return (
     <div
       className={"canvas" + (variant ? " " + variant : "")}
@@ -132,7 +217,7 @@ export function DraggableCanvas({ items, height, variant, pannable = true }: Pro
           height: height + 20,
           "--pan-x": pan.x + "px",
           "--pan-y": pan.y + "px",
-          ...(variant === "mat" ? { "--mat-color": matColor.bg, "--mat-grid": matColor.grid } : {}),
+          ...(variant === "mat" && matColor ? { "--mat-color": matColor.bg, "--mat-grid": matColor.grid } : {}),
         } as React.CSSProperties
       }
       ref={canvasRef}
@@ -141,32 +226,6 @@ export function DraggableCanvas({ items, height, variant, pannable = true }: Pro
       onPointerUp={pannable ? onCanvasUp : undefined}
       onPointerCancel={pannable ? onCanvasUp : undefined}
     >
-      <div className="canvas-controls" onPointerDown={(e) => e.stopPropagation()}>
-        {variant === "mat" && (
-          <div className="canvas-colors" role="group" aria-label="Cutting mat color">
-            {MAT_COLORS.map((c) => (
-              <button
-                key={c.id}
-                type="button"
-                className={"canvas-swatch" + (c.id === matColor.id ? " active" : "")}
-                style={{ background: c.bg }}
-                aria-label={`${c.label} mat`}
-                aria-pressed={c.id === matColor.id}
-                onClick={() => setMatColor(c)}
-              />
-            ))}
-          </div>
-        )}
-        <button
-          type="button"
-          className={"canvas-reset" + (isPanned ? " visible" : "")}
-          onClick={() => setPan({ x: 0, y: 0 })}
-          aria-label="Reset canvas position"
-          tabIndex={isPanned ? 0 : -1}
-        >
-          <RotateCcw size={13} strokeWidth={1.9} />
-        </button>
-      </div>
       {variant === "mat" && (
         <>
           <div className="mat-ruler" aria-hidden="true">

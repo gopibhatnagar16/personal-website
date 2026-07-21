@@ -30,3 +30,11 @@ Vercel project settings for production.
 
 Import the repo — Vercel auto-detects Next.js. Add `CASE_STUDY_PASSWORD` and
 `AUTH_SECRET` under Project → Settings → Environment Variables.
+
+## SEO
+
+`NEXT_PUBLIC_SITE_URL` drives `metadataBase`, `sitemap.xml`, `robots.txt`, and
+OG/Twitter tags (`lib/seo.ts`). Set it once a custom domain is attached —
+without it, these fall back to the current Vercel deployment URL. Per-page
+metadata for case studies comes from their MDX frontmatter (`title`,
+`tagline`); OG images are generated on the fly (`app/**/opengraph-image.tsx`).

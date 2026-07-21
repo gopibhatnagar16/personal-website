@@ -2,7 +2,7 @@
 
 import { CONFIG } from "@/lib/config";
 import { EyesProvider } from "@/components/shared/EyesCursor";
-import { DraggableCanvas } from "@/components/canvas/DraggableCanvas";
+import { DraggableCanvas, CanvasControls, useCanvasControls } from "@/components/canvas/DraggableCanvas";
 import { TopBar } from "@/components/layout/TopBar";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { Hero } from "./Hero";
@@ -16,6 +16,9 @@ interface Props {
 }
 
 export function LandingClient({ work, writing }: Props) {
+  const tidbitsControls = useCanvasControls();
+  const personalControls = useCanvasControls();
+
   return (
     <EyesProvider>
       <div className="gp">
@@ -29,20 +32,47 @@ export function LandingClient({ work, writing }: Props) {
 
             {/* TIDBITS — draggable canvas */}
             <section className="section" id="tidbits">
-              <span className="section-label">Tidbits</span>
-              <DraggableCanvas items={CONFIG.tidbits} height={400} variant="mat" />
+              <div className="section-head">
+                <span className="section-label">Tidbits</span>
+                <CanvasControls
+                  variant="mat"
+                  matColor={tidbitsControls.matColor}
+                  setMatColor={tidbitsControls.setMatColor}
+                  pan={tidbitsControls.pan}
+                  resetPan={tidbitsControls.resetPan}
+                />
+              </div>
+              <DraggableCanvas
+                items={CONFIG.tidbits}
+                height={400}
+                variant="mat"
+                pan={tidbitsControls.pan}
+                setPan={tidbitsControls.setPan}
+                matColor={tidbitsControls.matColor}
+              />
             </section>
 
             {/* PERSONAL — pegboard */}
             <section className="section" id="personal">
-              <span className="section-label">Personal</span>
+              <div className="section-head">
+                <span className="section-label">Personal</span>
+                <CanvasControls variant="board" pan={personalControls.pan} resetPan={personalControls.resetPan} />
+              </div>
+              <h2 className="section-heading">{CONFIG.personalHeader}</h2>
               <p className="section-intro">{CONFIG.personalIntro}</p>
               <ul className="section-hobbies">
                 {CONFIG.personalHobbies.map((hobby) => (
                   <li key={hobby}>{hobby}</li>
                 ))}
               </ul>
-              <DraggableCanvas items={CONFIG.pegboard} height={520} variant="board" pannable={false} />
+              <DraggableCanvas
+                items={CONFIG.pegboard}
+                height={520}
+                variant="board"
+                pannable={false}
+                pan={personalControls.pan}
+                setPan={personalControls.setPan}
+              />
             </section>
           </div>
         </div>
