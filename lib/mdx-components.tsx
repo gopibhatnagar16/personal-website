@@ -8,6 +8,7 @@ import { MediaSwitcher } from "@/components/case-study/MediaSwitcher";
 import { Accordion } from "@/components/case-study/Accordion";
 import { ResultsViz } from "@/components/case-study/ResultsViz";
 import { OutcomeCards } from "@/components/case-study/OutcomeCards";
+import { InsightCards } from "@/components/case-study/InsightCards";
 
 /* Components available inside the content MDX files.
    ImagePlaceholder is CaseImage without a src — the same grey slot the
@@ -23,5 +24,6 @@ export const mdxComponents: MDXComponents = {
   Accordion,
   ResultsViz,
   OutcomeCards,
+  InsightCards,
   DraggableCanvas,
 };
