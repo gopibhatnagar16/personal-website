@@ -58,6 +58,7 @@ export function LandingClient({ work, writing }: Props) {
                 <span className="section-label">Personal</span>
                 <CanvasControls variant="board" pan={personalControls.pan} resetPan={personalControls.resetPan} />
               </div>
+              <h2 className="section-heading">{CONFIG.personalHeader}</h2>
               <p className="section-intro">{CONFIG.personalIntro}</p>
               <ul className="section-hobbies">
                 {CONFIG.personalHobbies.map((hobby) => (
