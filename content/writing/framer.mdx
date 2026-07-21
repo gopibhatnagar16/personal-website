@@ -14,15 +14,17 @@ thumb: /writing/framer/thumb.png
 
 The pages people saw are only half the story: the system underneath is the real one. The shipped surfaces came out of a production path that ran: **requirements → Figma handoff → engineering → QA → launch**. This piece is about what it took to make that path fast and safe at Razorpay's scale.
 
-<CaseImage src="/writing/framer/design-exploration.png" alt="Exploration board of landing-page folds, hero variants, and layout patterns" />
+<CaseImage
+  src="/writing/framer/user-flow.png"
+  alt="Production path: requirements, Figma handoff, Framer migration, QC, and launch"
+  caption="The production path every landing page follows: requirements, Figma handoff, Framer migration, QC, and launch."
+/>
 
 ## Context
 
 Razorpay's landing pages are the main funnel for acquisition. Millions of visitors a month. Every campaign, every launch, every growth experiment lands here first.
 
 The intent was to move this surface to Framer so the team could ship faster. But the moment we started moving, a deeper issue became visible: there was no defined structure for how a Razorpay landing page should be built.
-
-<CaseImage src="/writing/framer/landing-page-example.png" alt="A Razorpay Payment Links landing page shown across desktop, annotated, and mobile-web states" />
 
 ## Problem
 
@@ -36,9 +38,11 @@ As more work moved into Framer, I was becoming the bottleneck. I knew the patter
 
 The gaps were inside the page, inside the team, and behind the launch:
 
-- **There were no shared criteria for landing-page folds:** designers were solving hero sections, CTAs, social proof, and feature folds from scratch, with no common answer for what each fold should do or when it was ready.
-- **Framer had a learning curve for everyone:** components alone did not teach the decisions behind the page. Designers needed to understand structure, interactions, motion, content rules, and the quality bar before they could ship confidently.
-- **Launch had a backstage system to protect:** approvals, deployments, SEO, analytics, QA, and tracking all had to stay intact when more people started shipping. Without visibility, pages could go live with missing metadata, broken tracking, or unclear ownership.
+<InsightCards items={[
+  { title: "No shared criteria for landing-page folds", body: "Designers were solving hero sections, CTAs, social proof, and feature folds from scratch, with no common answer for what each fold should do or when it was ready." },
+  { title: "Framer had a learning curve for everyone", body: "Components alone did not teach the decisions behind the page. Designers needed to understand structure, interactions, motion, content rules, and the quality bar before they could ship confidently." },
+  { title: "Launch had a backstage system to protect", body: "Approvals, deployments, SEO, analytics, QA, and tracking all had to stay intact when more people started shipping. Without visibility, pages could go live with missing metadata, broken tracking, or unclear ownership." },
+]} />
 
 ## Solution
 
@@ -46,15 +50,51 @@ I built three connected systems. Each solved the bottleneck created by the previ
 
 **1. Design-system foundation.** To make Framer usable beyond a few specialists, I built the reusable foundation: components, tokens, patterns, fold templates, and a quality bar for what a Razorpay landing page should feel like. Designers were no longer starting from an empty canvas or rebuilding the same sections from memory.
 
-<CaseImage src="/writing/framer/component-system.png" alt="Button and link component states, plus an FAQ accordion checked across desktop, tablet, and phone breakpoints" />
+<CaseImage
+  src="/writing/framer/design-system-components.png"
+  alt="Button and link component states, plus an FAQ accordion checked across desktop, tablet, and phone breakpoints"
+  caption="Button and link states, plus the FAQ accordion, checked across desktop, tablet, and phone."
+/>
+
+<CaseImage
+  src="/writing/framer/design-system-navbars.png"
+  alt="Navbar variants by market: India, Malaysia, Singapore, and US, in light, dark, and transparent states"
+  caption="Navbar variants by market — India, Malaysia, Singapore, US — in light, dark, and transparent states."
+/>
+
+<CaseImage
+  src="/writing/framer/design-system-patterns.png"
+  alt="Content fold library: hero explorations, layout templates, and background assets"
+  caption="The content fold library: hero explorations, layout templates, and background assets."
+/>
+
+<CaseImage
+  src="/writing/framer/design-system-fold.png"
+  alt="A Payment Links landing-page fold across its step, desktop, and mobile-web states"
+  caption="A Payment Links fold carried across its step, desktop, and mobile-web states."
+/>
 
 **2. Learning system.** Once the design system existed, the next gap was learning. People could see the components, but they still needed the decisions behind them: which fold to use, how motion should behave, what to avoid, and how to judge launch readiness. So I turned walkthroughs, jam sessions, and repeated explanations into a reusable learning system: zoom out to the full page flow, zoom in to fold decisions, motion rules, content checks, and review notes.
 
-<CaseImage src="/writing/framer/learning-sop.png" alt="The Framer SOP video library: onboarding, landing-page walkthroughs, and go-live readiness checks" />
+<CaseImage
+  src="/writing/framer/learning-sop-library.png"
+  alt="The Framer SOP video library: onboarding, landing-page walkthroughs, and go-live readiness checks"
+  caption="The Framer SOP video library: onboarding, landing-page walkthroughs, and go-live checks."
+/>
+
+<CaseImage
+  src="/writing/framer/learning-decisions.png"
+  alt="Fold decision reference, FAQ and QC checks, PageSpeed and metadata audits, and the landing-page requirement doc"
+  caption="Fold decisions, FAQ and QC checks, PageSpeed and metadata audits, and the landing-page requirement doc."
+/>
 
 **3. Tooling system.** The learning system unlocked scale, and a new risk. With more people publishing, unintentional breakages became easier: the wrong version going live, unclear deployment ownership, no shared log of what changed. So I built a Slack bot and pre-flight tooling around launch. Every deployment created visibility for the team, and every page had to clear the launch checklist before it went live.
 
-<CaseImage src="/writing/framer/editor-system.png" alt="The production Framer file: page structure, navbar variants by market, and responsive breakpoints" />
+<CaseImage
+  src="/writing/framer/tooling-checks.png"
+  alt="The launch Slack bot logging cache-clear deployments, next to the pre-flight scanner and link checker"
+  caption="The launch Slack bot logging deployments, next to the pre-flight scanner and link checker."
+/>
 
 ## Outcomes
 
