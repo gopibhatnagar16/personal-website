@@ -33,11 +33,11 @@ export const CONFIG = {
   tzLabel: "GMT+5:30",
   location: "Chennai", // ← shown in the footer "Currently"
   lastUpdated: "July 2026", // ← footer "Last updated"
-  title: "I'm Gopi Bhatnagar,",
-  titleLine2: "a designer who loves to vibe code and has experience working on complex, enterprise-scale products.",
+  title: "Design Builder.",
+  titleLine2: "Partly in canvas, rest in codebase.",
   ideology: [
-    "I consider myself a creator who loves crafting user-centered solutions based on great storytelling and visual craft.",
-    "A deep curiosity about human behaviour, products, and the future of technology has helped me become this person.",
+    "I'm Gopi Bhatnagar, a designer who loves to vibe code and has experience working on complex, enterprise-scale products.",
+    "I consider myself a creator who loves crafting user-centered solutions based on great storytelling and visual craft. A deep curiosity about human behaviour, products, and the future of technology has helped me become this person.",
   ],
 
   personalIntro:
