@@ -185,7 +185,7 @@ body {
 @keyframes wpin{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
 
 /* draggable canvas — infinite pan: --pan-x/--pan-y drive the background scroll */
-.canvas{position:relative;width:100%;border:1px solid var(--line);border-radius:18px;overflow:hidden;
+.canvas{position:relative;isolation:isolate;width:100%;border:1px solid var(--line);border-radius:18px;overflow:hidden;
   background-color:var(--canvas-bg);
   background-image:radial-gradient(var(--dot) 1px, transparent 1px);background-size:22px 22px;
   background-position:var(--pan-x,0px) var(--pan-y,0px);
@@ -421,18 +421,19 @@ a.ft-note-mail:hover{text-decoration-color:#fff;}
   font-size:clamp(2rem,5vw,3rem);line-height:1.05;margin:14px 0 0;}
 .cs-tagline{font-size:clamp(1.05rem,2vw,1.3rem);color:var(--muted);line-height:1.5;margin:16px 0 0;max-width:60ch;}
 
-.cs-meta{display:flex;gap:36px;flex-wrap:wrap;margin:30px 0 0;padding:20px 0;
+.cs-meta{display:flex;gap:48px;flex-wrap:wrap;margin:36px 0 0;padding:26px 0;
   border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
-.cs-m{display:flex;flex-direction:column;gap:5px;}
+.cs-m{display:flex;flex-direction:column;gap:8px;}
 .cs-mk{font-family:var(--font-geist-mono),monospace;font-size:10px;text-transform:uppercase;
   letter-spacing:.14em;color:var(--faint);}
 .cs-mv{font-size:14px;font-weight:500;}
 
-.cs-hero{height:clamp(220px,42vw,420px);border-radius:16px;margin:0 0 36px;border:1px solid var(--line);
+.cs-hero{display:block;width:100%;height:auto;border-radius:16px;margin:0 0 36px;border:1px solid var(--line);}
+.cs-hero-placeholder{height:clamp(220px,42vw,420px);
   background-image:linear-gradient(135deg,#EDEDE8,#D9D8D1);background-size:cover;background-position:center;}
-[data-theme="dark"] .cs-hero{background-image:linear-gradient(135deg,#22221D,#191914);}
+[data-theme="dark"] .cs-hero-placeholder{background-image:linear-gradient(135deg,#22221D,#191914);}
 .cs-body h2{font-family:var(--font-geist-sans),sans-serif;font-weight:700;letter-spacing:-.01em;
-  font-size:1.5rem;margin:44px 0 14px;}
+  font-size:1.5rem;margin:60px 0 16px;}
 .cs-body p{font-size:1.05rem;line-height:1.65;color:var(--body);margin:0 0 16px;}
 .cs-body strong{font-weight:600;color:var(--ink);}
 .cs-body em{font-style:italic;}

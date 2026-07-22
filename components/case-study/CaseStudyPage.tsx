@@ -44,10 +44,12 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
             body is never sent while locked, so it's stubbed with skeleton
             blocks — inert and unselectable since there's nothing to read. */}
         <div className="cs-col cs-locked-preview" aria-hidden="true" inert>
-          <div
-            className="cs-hero"
-            style={meta.cover ? { backgroundImage: `url(${meta.cover})` } : undefined}
-          />
+          {meta.cover ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img className="cs-hero" src={meta.cover} alt="" />
+          ) : (
+            <div className="cs-hero cs-hero-placeholder" />
+          )}
           <span className="cs-eyebrow">{meta.role} · {meta.year}</span>
           <h1 className="cs-title">{meta.title}</h1>
           <p className="cs-tagline">{meta.tagline}</p>
@@ -116,11 +118,12 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
       </header>
 
       <div className="cs-col">
-        <div
-          className="cs-hero"
-          aria-hidden={meta.cover ? undefined : "true"}
-          style={meta.cover ? { backgroundImage: `url(${meta.cover})` } : undefined}
-        />
+        {meta.cover ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img className="cs-hero" src={meta.cover} alt={meta.title} />
+        ) : (
+          <div className="cs-hero cs-hero-placeholder" aria-hidden="true" />
+        )}
 
         <span className="cs-eyebrow">{meta.role} · {meta.year}</span>
         <h1 className="cs-title">{meta.title}</h1>
