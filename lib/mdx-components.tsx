@@ -9,6 +9,9 @@ import { Accordion } from "@/components/case-study/Accordion";
 import { ResultsViz } from "@/components/case-study/ResultsViz";
 import { OutcomeCards } from "@/components/case-study/OutcomeCards";
 import { InsightCards } from "@/components/case-study/InsightCards";
+import { StageCards } from "@/components/case-study/StageCards";
+import { ExperimentMap } from "@/components/case-study/ExperimentMap";
+import { ExperimentHeader } from "@/components/case-study/ExperimentHeader";
 
 /* Components available inside the content MDX files.
    ImagePlaceholder is CaseImage without a src — the same grey slot the
@@ -25,5 +28,8 @@ export const mdxComponents: MDXComponents = {
   ResultsViz,
   OutcomeCards,
   InsightCards,
+  StageCards,
+  ExperimentMap,
+  ExperimentHeader,
   DraggableCanvas,
 };
