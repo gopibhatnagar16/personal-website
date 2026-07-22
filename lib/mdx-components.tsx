@@ -21,6 +21,10 @@ import { QuoteCards } from "@/components/case-study/QuoteCards";
 import { PersonaIntro } from "@/components/case-study/PersonaIntro";
 import { MetaRow } from "@/components/case-study/MetaRow";
 import { SplitCards } from "@/components/case-study/SplitCards";
+import { ExperimentSignal } from "@/components/case-study/ExperimentSignal";
+import { JourneyFlow } from "@/components/case-study/JourneyFlow";
+import { DecisionNote } from "@/components/case-study/DecisionNote";
+import { DotList } from "@/components/case-study/DotList";
 
 /* Components available inside the content MDX files.
    ImagePlaceholder is CaseImage without a src — the same grey slot the
@@ -49,5 +53,9 @@ export const mdxComponents: MDXComponents = {
   PersonaIntro,
   MetaRow,
   SplitCards,
+  ExperimentSignal,
+  JourneyFlow,
+  DecisionNote,
+  DotList,
   DraggableCanvas,
 };
