@@ -12,10 +12,9 @@ interface Slide {
 
 const AUTOPLAY_MS = 5000;
 
-/* Left/right media switcher — numbered vertical tab list on the left (each
-   with an autoplay progress indicator), image/figure panel on the right.
-   Clicking a tab jumps directly and resets the timer; hovering the tab
-   list pauses autoplay. */
+/* Media switcher — numbered horizontal tab row above an image/figure panel,
+   each tab with a pill-shaped autoplay progress bar. Clicking a tab jumps
+   directly and resets the timer; hovering the tab row pauses autoplay. */
 export function MediaSwitcher({ slides }: { slides: Slide[] }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);

@@ -650,22 +650,21 @@ a.ft-note-mail:hover{text-decoration-color:#fff;}
   text-align:center;font-size:.98rem;color:var(--muted);}
 
 /* media switcher */
-.cs-switcher{margin:28px 0;display:grid;grid-template-columns:minmax(200px,280px) 1fr;
-  gap:8px 32px;align-items:start;}
-.cs-sw-tabs{display:flex;flex-direction:column;}
-.cs-sw-tab{display:flex;align-items:baseline;gap:9px;padding:13px 0 13px 16px;text-align:left;
-  border:none;border-left:2px solid var(--line);background:none;cursor:pointer;min-width:0;
-  position:relative;}
+.cs-switcher{margin:28px 0;display:flex;flex-direction:column;gap:22px;}
+.cs-sw-tabs{display:flex;flex-wrap:wrap;gap:2px 8px;}
+.cs-sw-tab{display:flex;align-items:baseline;gap:7px;padding:10px 6px 14px;text-align:left;
+  border:none;background:none;cursor:pointer;min-width:0;position:relative;}
 .cs-sw-num{font-family:var(--font-geist-mono),monospace;font-size:11px;color:var(--faint);flex:0 0 auto;}
-.cs-sw-label{font-size:.98rem;color:var(--muted);transition:color .2s;line-height:1.35;}
+.cs-sw-label{font-size:.92rem;color:var(--muted);transition:color .2s;line-height:1.35;white-space:nowrap;}
 .cs-sw-tab:hover .cs-sw-label{color:var(--ink);}
 .cs-sw-tab.active .cs-sw-label{color:var(--accent);font-weight:500;}
 .cs-sw-tab.active .cs-sw-num{color:var(--accent);}
-.cs-sw-track{position:absolute;left:-2px;top:0;bottom:0;width:2px;}
-.cs-sw-fill{display:block;width:100%;height:0;background:var(--accent);
+.cs-sw-track{position:absolute;left:6px;right:6px;bottom:4px;height:3px;border-radius:999px;
+  background:var(--line);overflow:hidden;}
+.cs-sw-fill{display:block;width:0;height:100%;background:var(--accent);border-radius:999px;
   animation-name:swFill;animation-timing-function:linear;animation-fill-mode:forwards;}
-.cs-sw-fill.static{height:100%;}
-@keyframes swFill{from{height:0}to{height:100%}}
+.cs-sw-fill.static{width:100%;}
+@keyframes swFill{from{width:0}to{width:100%}}
 .cs-sw-panel{animation:rfIn .25s ease;min-width:0;}
 
 /* accordion */
@@ -728,7 +727,9 @@ a.ft-note-mail:hover{text-decoration-color:#fff;}
   .cs-rf-cluster.faded{display:none;}
   .cs-rf-visual{min-height:190px;}
   .cs-rf-cards{max-width:none;}
-  .cs-switcher{grid-template-columns:1fr;gap:18px;}
+  .cs-sw-tabs{gap:0 4px;}
+  .cs-sw-tab{padding:8px 4px 12px;}
+  .cs-sw-label{font-size:.85rem;}
   .cs-viz{grid-template-columns:1fr;}
   .cs-viz-list{flex-direction:row;flex-wrap:wrap;}
   .cs-viz-metric{flex:1 1 40%;}
