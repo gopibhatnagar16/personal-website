@@ -3,19 +3,37 @@
 import { useEffect, useState } from "react";
 import { CaseImage } from "./CaseImage";
 
+interface MetaItem {
+  label: string;
+  text: string;
+}
+
 interface Slide {
   label: string;
   caption?: string;
   src?: string;
   alt?: string;
+  /* Per-slide read-out below the image, e.g. Hypothesis / What changed /
+     What we learned — rendered as an even multi-column row. */
+  meta?: MetaItem[];
 }
 
 const AUTOPLAY_MS = 5000;
 
 /* Media switcher — numbered horizontal tab row above an image/figure panel,
    each tab with a pill-shaped autoplay progress bar. Clicking a tab jumps
-   directly and resets the timer; hovering the tab row pauses autoplay. */
-export function MediaSwitcher({ slides }: { slides: Slide[] }) {
+   directly and resets the timer; hovering the tab row pauses autoplay.
+   `aspectRatio` reserves the panel's box so switching slides never shifts
+   the layout; `chrome` frames each image as a browser window. */
+export function MediaSwitcher({
+  slides,
+  aspectRatio,
+  chrome,
+}: {
+  slides: Slide[];
+  aspectRatio?: string;
+  chrome?: boolean;
+}) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const current = slides[active];
@@ -68,7 +86,23 @@ export function MediaSwitcher({ slides }: { slides: Slide[] }) {
         ))}
       </div>
       <div className="cs-sw-panel" key={active}>
-        <CaseImage src={current.src} alt={current.alt ?? current.label} caption={current.caption} />
+        <CaseImage
+          src={current.src}
+          alt={current.alt ?? current.label}
+          caption={current.caption}
+          aspectRatio={aspectRatio}
+          chrome={chrome}
+        />
+        {current.meta && (
+          <div className="cs-sw-meta">
+            {current.meta.map((m) => (
+              <div className="cs-sw-meta-col" key={m.label}>
+                <span className="cs-mk">{m.label}</span>
+                <p className="cs-sw-meta-text">{m.text}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

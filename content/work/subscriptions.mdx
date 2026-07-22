@@ -237,61 +237,130 @@ That translated into three shifts the design had to make:
   ]}
 />
 
-## Iterations
-
-We changed the amount of choice, the value frame, and the payment model to learn which explanation felt easiest to understand:
-
-- **Four distinct offerings:** tested free limits, discounted rates, benefits, and monthly or yearly prices. The range made value visible, but made the decision heavier when volume was unclear.
-- **Savings-first hierarchy:** prioritised the amount saved and made the recommended plan easier to notice. Savings sparked interest, but merchants still needed the plan to feel right for their volume.
-- **Prepaid vs postpaid:** framed one route as postpaid settlement deductions and another as a prepaid plan. Payment timing turned out to be part of the decision, not just the commercial model.
-- **Volume-led recommendation:** asked for expected volume, then revealed a recommendation. It helps when the volume assumption is transparent and easy to revisit.
-- **0% platform-fee framing:** led with the fee a merchant could avoid. A strong hook earns attention, but boundaries must be clear enough to build trust.
-- **One plan + top-ups:** collapsed the comparison into one personalised plan with included usage. Simplicity works when the future path remains visible and under the merchant's control.
+<SectionIntro
+  eyebrow="Iterations"
+  title="Approaches explored the pricing decision"
+  subtitle="We changed the amount of choice, the value frame, and the payment model to learn which explanation felt easiest to understand."
+/>
 
 <MediaSwitcher
+  aspectRatio="816/510"
+  chrome
   slides={[
     {
       label: "Four distinct offerings",
       src: "/work/subscriptions/iteration-four-plan-tiers.png",
       alt: "Four-plan pricing cards: Trial, Basic, Plus, and Pro",
       caption: "Four-plan subscription-pricing exploration with transaction limits, reduced rates, benefits, and monthly or yearly prices.",
+      meta: [
+        { label: "Hypothesis", text: "A broader comparison could help a new business find a suitable starting point." },
+        { label: "What changed", text: "Tested free limits, discounted rates, benefits, and monthly or yearly prices." },
+        { label: "What we learned", text: "The range made value visible, but made the decision heavier when volume was unclear." },
+      ],
     },
     {
       label: "Savings-first hierarchy",
       src: "/work/subscriptions/iteration-savings-popup.png",
       alt: "Pricing cards with a savings breakdown popup over the recommended Plus plan",
       caption: "Savings-led hierarchy with the recommended plan made easier to notice.",
+      meta: [
+        { label: "Hypothesis", text: "Leading with the amount saved could make the recommended plan easier to choose." },
+        { label: "What changed", text: "Prioritised the amount saved and made the recommended plan easier to notice." },
+        { label: "What we learned", text: "Savings sparked interest, but merchants still needed the plan to feel right for their volume." },
+      ],
     },
     {
       label: "Prepaid vs postpaid",
       src: "/work/subscriptions/iteration-postpaid-vs-prepaid.png",
       alt: "Postpaid versus Prepaid Plus platform-fee comparison",
       caption: "Postpaid settlement deductions framed against a prepaid plan.",
+      meta: [
+        { label: "Hypothesis", text: "Framing the payment model explicitly could resolve hesitation around commitment." },
+        { label: "What changed", text: "Framed one route as postpaid settlement deductions and another as a prepaid plan." },
+        { label: "What we learned", text: "Payment timing turned out to be part of the decision, not just the commercial model." },
+      ],
     },
     {
       label: "Volume-led recommendation",
       src: "/work/subscriptions/iteration-volume-slider.png",
       alt: "Monthly business volume slider revealing a recommended Plus plan",
       caption: "Expected-volume input revealing a recommendation or relevant plan.",
+      meta: [
+        { label: "Hypothesis", text: "Asking for expected volume upfront could make the right plan obvious." },
+        { label: "What changed", text: "Asked for expected volume, then revealed a recommendation." },
+        { label: "What we learned", text: "It helps when the volume assumption is transparent and easy to revisit." },
+      ],
     },
     {
       label: "0% platform-fee framing",
       src: "/work/subscriptions/iteration-platform-fee-framing.png",
       alt: "Plans framed around 0% platform fee by payment method",
       caption: "0% platform fee as the primary message, with clear boundaries on where it applied.",
+      meta: [
+        { label: "Hypothesis", text: "Leading with a strong fee-based hook could earn more attention than a feature list." },
+        { label: "What changed", text: "Led with the fee a merchant could avoid." },
+        { label: "What we learned", text: "A strong hook earns attention, but boundaries must be clear enough to build trust." },
+      ],
     },
     {
       label: "One plan + top-ups",
       src: "/work/subscriptions/iteration-personalised-plan.png",
       alt: "Personalised pricing plan with selectable fee items and top-ups",
       caption: "One personalised plan with included usage and top-ups.",
+      meta: [
+        { label: "Hypothesis", text: "Collapsing the comparison into one plan could remove the need to choose at all." },
+        { label: "What changed", text: "Collapsed the comparison into one personalised plan with included usage." },
+        { label: "What we learned", text: "Simplicity works when the future path remains visible and under the merchant's control." },
+      ],
     },
   ]}
 />
 
-## MVP experiment
+<SectionIntro
+  eyebrow="MVP experiment"
+  title="We tested two pricing frames in a controlled onboarding MVP"
+  subtitle="The MVP compared a softer savings frame with a stronger value contrast to see whether a clearer plan choice could move plan selection."
+/>
 
-We tested pricing frames in a controlled onboarding MVP: a softer savings frame (**Variant A:** standard option kept close to paid plans, modest savings labels), a stronger value contrast (**Variant B:** savings contrast and recommended option made prominent), and plan-order changes (**Variant C:** hierarchy and ordering rather than price).
+<MediaSwitcher
+  aspectRatio="816/510"
+  chrome
+  slides={[
+    {
+      label: "Softer savings",
+      alt: "Variant A pricing screen: standard option kept close to paid plans with modest savings labels",
+      meta: [
+        { label: "Hypothesis", text: "A gentler savings frame could make a paid plan feel useful without making the decision feel forced." },
+        { label: "What changed", text: "Kept the standard option close to paid plans and used modest savings labels." },
+        { label: "What we learned", text: "Lower pressure helped comparison, but merchants still needed a clearer sense of fit." },
+      ],
+    },
+    {
+      label: "Stronger contrast",
+      alt: "Variant B pricing screen: savings contrast with the recommended option made prominent",
+      meta: [
+        { label: "Hypothesis", text: "A stronger contrast between savings and the recommended plan could make the better option obvious at a glance." },
+        { label: "What changed", text: "Added savings contrast and made the recommended option visually prominent." },
+        { label: "What we learned", text: "Fewer plans and stronger value framing increased selection, especially among registered businesses." },
+      ],
+    },
+    {
+      label: "Plan order",
+      alt: "Variant C pricing screen: plans reordered by hierarchy rather than price",
+      meta: [
+        { label: "Hypothesis", text: "Changing the order and hierarchy of plans, not just the price, could guide businesses to the right fit faster." },
+        { label: "What changed", text: "Reordered plans by hierarchy and positioning rather than leading with price." },
+        { label: "What we learned", text: "Ordering shaped attention, but businesses still needed to know what they'd gain and that a paid plan was optional." },
+      ],
+    },
+  ]}
+/>
+
+We reached a cohort of 500 base merchants in the onboarding funnel over a two-week window:
+
+- **F1** — 0.9% adoption across the Basic, Plus, and Pro plans (the base experience).
+- **F2** — 3.48% adoption for the prepaid plan (Variant A).
+- **F3** — 3.83% adoption across the Plus and Pro plans (Variant B).
 
 <Accordion
   title="What the first experiment tested"
@@ -434,6 +503,7 @@ In practice the solution worked across five moments: introduce the optional choi
 The final solution had to act like a bridge, not a gate: it helped merchants compare value during onboarding and still gave them control later through dashboard plan management.
 
 <MediaSwitcher
+  aspectRatio="1671/857"
   slides={[
     {
       label: "Home page",

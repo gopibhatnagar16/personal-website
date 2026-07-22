@@ -445,8 +445,8 @@ a.ft-note-mail:hover{text-decoration-color:#fff;}
 .cs-hero-placeholder{height:clamp(220px,42vw,420px);
   background-image:linear-gradient(135deg,#EDEDE8,#D9D8D1);background-size:cover;background-position:center;}
 [data-theme="dark"] .cs-hero-placeholder{background-image:linear-gradient(135deg,#22221D,#191914);}
-.cs-body h2{font-family:var(--font-geist-sans),sans-serif;font-weight:700;letter-spacing:-.01em;
-  font-size:1.5rem;margin:60px 0 16px;}
+.cs-body h2{font-family:var(--font-geist-sans),sans-serif;font-weight:800;letter-spacing:-.02em;
+  font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.2;margin:60px 0 16px;}
 .cs-body p{font-size:1.05rem;line-height:1.65;color:var(--body);margin:0 0 16px;}
 .cs-body strong{font-weight:600;color:var(--ink);}
 .cs-body em{font-style:italic;}
@@ -488,6 +488,24 @@ a.ft-note-mail:hover{text-decoration-color:#fff;}
 .cs-fig-img.img-loaded{opacity:1;filter:blur(0);}
 [data-theme="dark"] .cs-fig-img{background:linear-gradient(135deg,#22221D,#191914);}
 .cs-fig-video{display:block;width:100%;border-radius:14px;border:1px solid var(--line);}
+
+/* aspect-ratio reservation — keeps a switcher's box size fixed across
+   slides so changing the active image never shifts surrounding layout */
+.cs-fig-btn-ratio{overflow:hidden;border-radius:14px;}
+.cs-fig-btn-ratio .cs-fig-img{height:100%;object-fit:cover;border-radius:0;}
+.cs-img-ratio{height:auto;}
+
+/* browser-window chrome — frames a product screenshot with traffic-light
+   dots and an address bar so tabbed slides read as "inside the browser" */
+.cs-chrome{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel);}
+.cs-chrome .cs-fig-btn-ratio,.cs-chrome .cs-img{border-radius:0;border:none;}
+.cs-chrome-bar{display:flex;align-items:center;gap:14px;padding:10px 14px;
+  border-bottom:1px solid var(--line);background:var(--bg);}
+.cs-chrome-dots{display:flex;gap:6px;flex:0 0 auto;}
+.cs-chrome-dots span{width:9px;height:9px;border-radius:50%;background:var(--line);}
+.cs-chrome-url{display:flex;align-items:center;gap:6px;flex:1;padding:5px 12px;border-radius:999px;
+  background:var(--panel);border:1px solid var(--line);color:var(--faint);
+  font-family:var(--font-geist-mono),monospace;font-size:11px;}
 
 /* outcome cards */
 .cs-outcomes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0;}
@@ -680,6 +698,10 @@ a.ft-note-mail:hover{text-decoration-color:#fff;}
 .cs-sw-fill.static{width:100%;}
 @keyframes swFill{from{width:0}to{width:100%}}
 .cs-sw-panel{animation:rfIn .25s ease;min-width:0;}
+.cs-sw-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:22px;
+  padding-top:22px;border-top:1px solid var(--line);}
+.cs-sw-meta-col{display:flex;flex-direction:column;gap:8px;}
+.cs-sw-meta-text{font-size:.98rem;line-height:1.55;color:var(--body);margin:0;}
 
 /* accordion */
 .cs-acc{border:1px solid var(--line);border-radius:12px;background:var(--panel);margin:28px 0;}
@@ -860,6 +882,8 @@ a.ft-note-mail:hover{text-decoration-color:#fff;}
   .cs-sw-tabs{gap:0 4px;}
   .cs-sw-tab{padding:8px 4px 12px;}
   .cs-sw-label{font-size:.85rem;}
+  .cs-sw-meta{grid-template-columns:1fr;gap:16px;}
+  .cs-chrome-url{font-size:10px;}
   .cs-viz{grid-template-columns:1fr;}
   .cs-viz-list{flex-direction:row;flex-wrap:wrap;}
   .cs-viz-metric{flex:1 1 40%;}
