@@ -320,9 +320,39 @@ We tested pricing frames in a controlled onboarding MVP: a softer savings frame 
   note="The whitelisted rollout also exposed a lifecycle gap: changing or cancelling a plan still required manual support."
 />
 
-Variant B was the strongest direction for plan selection, especially among registered businesses. The qualitative read mattered just as much: presentation worked (fewer plans and stronger value framing increased selection), but drop-off was mixed (pricing confusion, setup blockers, and low intent were different problems), and businesses needed to know what they gained and that a paid plan was optional.
+**The experiment moved plan selection, then revealed the next question.** The variants proved that pricing presentation could change behaviour. The remaining drop-off made the next question clear: what was still stopping some businesses from choosing confidently?
 
-The decision: scale the strongest pricing frame, then build the touchpoints and self-serve controls around it.
+<ExperimentSignal
+  quantSub="Share of users selecting a plan"
+  bars={[
+    { label: "Base", sublabel: "Control experience", percent: 0.90, group: "base" },
+    { label: "Variant A", sublabel: "All users", percent: 3.48, group: "base" },
+    { label: "Variant A", sublabel: "Registered businesses", percent: 4.23, group: "base" },
+    { label: "Variant B", sublabel: "All users", percent: 3.83, group: "b" },
+    { label: "Variant B", sublabel: "Registered businesses", percent: 6.71, group: "highlight" },
+  ]}
+  legend={[
+    { swatch: "base", label: "Base & Variant A" },
+    { swatch: "b", label: "Variant B, all users" },
+    { swatch: "highlight", label: "Variant B, registered businesses" },
+  ]}
+  summary="Variant B lifts plan selection to 3.83% overall and 6.71% among registered businesses, against a 0.90% base and Variant A's 3.48% (4.23% among registered businesses)."
+  qualItems={[
+    {
+      title: "Presentation worked",
+      body: "Fewer plans and stronger value framing increased selection.",
+    },
+    {
+      title: "Drop-off was mixed",
+      body: "Pricing confusion, setup blockers, and low intent were different problems.",
+    },
+    {
+      title: "Clarity still mattered",
+      body: "Businesses needed to know what they gained and that a paid plan was optional.",
+    },
+  ]}
+  decision="Scale the strongest pricing frame, then build the touchpoints and self-serve controls around it."
+/>
 
 <CaseImage
   src="/work/subscriptions/final-plan-cards.png"
@@ -330,15 +360,49 @@ The decision: scale the strongest pricing frame, then build the touchpoints and 
   caption="The scaled direction: Standard, Plus, and Pro, with Plus recommended and savings shown against Standard."
 />
 
-## Final solution
-
-We made pricing an explicit step after onboarding. Before taking a first payment, every eligible business chooses a route: stay on the standard rate or select a subscription plan. **The decision is required; a paid plan is not.** The final journey: a relevant pricing route prepared from business details → an explicit choice, Standard or a plan, upfront → usage nudges, with change or cancel anytime.
-
-<CaseImage
-  src="/work/subscriptions/solution-flow.png"
-  alt="Merchant journey diagram annotated with the final solution: relevant route, explicit choice, and usage nudges"
-  caption="A relevant pricing route prepared from business details, an explicit choice upfront, then usage nudges with change or cancel anytime."
+<SectionIntro
+  eyebrow="Final solution"
+  title="We turned the winning pricing version into a journey that could scale"
+  subtitle="The MVP identified the strongest plan presentation. The final solution defined where it should appear, how every business makes a clear choice, and when the product should bring pricing back later."
 />
+
+<DecisionNote
+  label="Product decision"
+  title="Make pricing an explicit step after onboarding."
+  body="Before taking a first payment, every eligible business chooses a route: stay on the standard rate or select a subscription plan. The decision is required; a paid plan is not."
+/>
+
+**The final journey**
+
+<JourneyFlow
+  steps={[
+    { icon: "search", title: "Discovery", sub: "Explore Razorpay" },
+    { icon: "userPlus", title: "Sign up", sub: "Create an account" },
+    {
+      icon: "fileText",
+      title: "Onboarding",
+      sub: "Share business details",
+      highlight: true,
+      callout: "Relevant pricing route prepared from business details.",
+    },
+    {
+      icon: "sliders",
+      title: "Setup",
+      sub: "Choose a pricing route",
+      highlight: true,
+      callout: "Explicit choice: Standard or a plan, upfront.",
+    },
+    {
+      icon: "grid",
+      title: "Dashboard",
+      sub: "Start and manage payments",
+      highlight: true,
+      callout: "Usage nudges; change or cancel anytime.",
+    },
+  ]}
+/>
+
+*A relevant pricing route prepared from business details, an explicit choice upfront, then usage nudges with change or cancel anytime.*
 
 The plan story then lives wherever a business already works, across six touchpoints, each answering a different question:
 
@@ -349,7 +413,21 @@ The plan story then lives wherever a business already works, across six touchpoi
 - **In-product nudges:** dismissible cards after a business starts processing payments, testing social proof and value framing against real transaction intent.
 - **Account & settings:** a permanent Manage Plans home combining utilization, the full plan ladder, and compare/upgrade/change/cancel controls, with no need to contact a team.
 
-How this supports the business goal: **prompt a real decision** (every eligible business considers pricing before its first payment), **scale beyond onboarding** (stage-based touchpoints reach businesses again when plan value becomes more relevant), and **retain more value** (self-serve controls reduce manual dependency and support longer-term payment use).
+**How this supports the business goal**
+
+<DotList
+  items={[
+    { lead: "Prompt a real decision", text: "Every eligible business considers pricing before its first payment." },
+    { lead: "Scale beyond onboarding", text: "Stage-based touchpoints reach businesses again when plan value becomes more relevant." },
+    { lead: "Retain more value", text: "Self-serve controls reduce manual dependency and support longer-term payment use." },
+  ]}
+/>
+
+<CaseVideo
+  src="/work/subscriptions/complete-journey.mp4"
+  alt="Screen recording of the complete subscription pricing journey: choosing a plan after onboarding, taking a first payment, seeing a dashboard nudge, then managing the plan"
+  caption="The complete journey in motion: choose a pricing route after onboarding, take the first payment, see a relevant dashboard nudge, then change or manage the plan."
+/>
 
 In practice the solution worked across five moments: introduce the optional choice after essential payment setup; make options easy to read with simple plans, savings, limits, and a clear standard path; make the trade-off understandable without blocking the default; keep plan control visible on the dashboard (status, change, cancel, resume); and reintroduce value later, after payment activity gives the business more confidence.
 
@@ -406,12 +484,12 @@ The clearest outcome was merchant action: more businesses selected a plan, gener
   baseDots={190}
   legend="The grid is the 1,900 subscribed merchants (190 dots). Other metrics highlight their share of this base. Monthly revenue uses its own scale: 1 dot = Rs. 10K."
   metrics={[
-    { label: "Subscribed merchants", value: "1,900", dots: 190, sub: "Each dot = 10 merchants · all 190 dots" },
-    { label: "Annual merchants", value: "200", dots: 20, sub: "Each dot = 10 merchants · 20 dots" },
-    { label: "Monthly revenue", value: "Rs. 6.2L/mo", dots: 62, sub: "Each dot = Rs. 10K · 62 dots" },
-    { label: "Eligible-base adoption", value: "9%", dots: 17, sub: "9% of the eligible base, shown on the grid" },
-    { label: "Net revenue movement", value: "+81%", dots: 154, sub: "81% of the grid, as a relative movement" },
-    { label: "Payment-volume movement", value: "+61%", dots: 116, sub: "61% of the grid, as a relative movement" },
+    { label: "Subscribed merchants", value: "1,900", dots: 190, sub: "Each dot = 10 merchants · all 190 dots", onEmoji: "👥" },
+    { label: "Annual merchants", value: "200", dots: 20, sub: "Each dot = 10 merchants · 20 dots", onEmoji: "🗓️" },
+    { label: "Monthly revenue", value: "Rs. 6.2L/mo", dots: 62, sub: "Each dot = Rs. 10K · 62 dots", onEmoji: "💰" },
+    { label: "Eligible-base adoption", value: "9%", dots: 17, sub: "9% of the eligible base, shown on the grid", onEmoji: "🎯" },
+    { label: "Net revenue movement", value: "+81%", dots: 154, sub: "81% of the grid, as a relative movement", onEmoji: "📈" },
+    { label: "Payment-volume movement", value: "+61%", dots: 116, sub: "61% of the grid, as a relative movement", onEmoji: "🔁" },
   ]}
 />
 

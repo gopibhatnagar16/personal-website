@@ -41,6 +41,8 @@ export function ResultsViz({ metrics, baseDots, legend }: Props) {
             aria-selected={i === active}
             className={"cs-viz-metric" + (i === active ? " active" : "")}
             onClick={() => setActive(i)}
+            onMouseEnter={() => setActive(i)}
+            onFocus={() => setActive(i)}
           >
             <span className="cs-viz-metric-label">{m.label}</span>
             <span className="cs-viz-metric-value">{m.value}</span>
