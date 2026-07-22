@@ -9,7 +9,7 @@ export interface CanvasItem {
   y: number;
   w: number;
   h: number;
-  kind: "card" | "circle" | "rect" | "square" | "polaroid" | "sticker";
+  kind: "card" | "circle" | "rect" | "square" | "polaroid" | "sticker" | "html";
   g?: number;
   rot?: number;
   caption?: string;
@@ -17,6 +17,9 @@ export interface CanvasItem {
   // with src used as its poster frame if both are set.
   src?: string;
   video?: string;
+  // kind:"html" only — path to a self-contained HTML file (own CSS/JS), rendered
+  // in an iframe. Interactive on hover only; never draggable.
+  html?: string;
 }
 
 export const CONFIG = {
@@ -34,7 +37,7 @@ export const CONFIG = {
   title: "Design Builder.",
   titleLine2: "Partly in canvas, partly in codebase.",
   ideology: [
-    "I'm Gopi Bhatnagar. Somewhere between designing and vibe-coding, I stopped picking a lane and just started doing both.",
+    "Hi, I'm Gopi Bhatnagar. Somewhere between designing and vibe-coding, I stopped picking a lane and just started doing both.",
     "Most of my experience is on complex, enterprise-scale products - the kind where good intentions meet real constraints. I'm curious about people, products, and how technology shapes both, and I'm still figuring a lot of it out.",
   ],
 
@@ -107,37 +110,47 @@ export const CONFIG = {
     },
   ] as CanvasItem[],
 
-  // pegboard — polaroids + laptop-sticker cutouts pinned to a fixed Personal
-  // board (not an infinite-pan canvas). x/y are percentages of the board's
-  // own width/height so the layout holds regardless of the board's rendered
-  // size; w/h stay px. src (image) or video (mp4/webm) is resolved from
-  // /public/personal/. Positions are hand-scattered (not a grid) for an
-  // organic, pinned-to-a-corkboard feel.
+  // pegboard — rebuilt from the "Peg board" frame in the Figma file
+  // (design/MS7NHmuW2sxQjm35x4k501, "June - July 2026" page). Polaroids +
+  // laptop-sticker cutouts pinned to a fixed Personal board (not an
+  // infinite-pan canvas). x/y are percentages of the board's own
+  // width/height so the layout holds regardless of the board's rendered
+  // size; w/h stay px. src (image) is resolved from /public/personal/.
+  // html items are the two interactive widgets shared alongside the design —
+  // rendered as sandboxed iframes, hover-only (see DraggableCanvas), never
+  // draggable, so they're excluded from the drag-handler wiring.
   pegboard: [
-    { id: "p1", x: 2, y: 4, w: 105, h: 130, kind: "polaroid", rot: -7, src: "/personal/closing-time.jpg", caption: "closing time" },
-    { id: "p2", x: 35, y: 6, w: 105, h: 130, kind: "polaroid", rot: 8, src: "/personal/long-table.jpg", caption: "long table" },
-    { id: "p3", x: 68, y: 2, w: 105, h: 130, kind: "polaroid", rot: -5, src: "/personal/morning-brew.jpg", caption: "morning brew" },
+    // -- top row: chat screenshots + the two shared HTML widgets --
+    { id: "charmie", x: 2, y: 3, w: 190, h: 72, kind: "rect", rot: -3, src: "/personal/slack-charmie.png" },
+    { id: "pouch", x: 30, y: 1, w: 190, h: 180, kind: "html", html: "/personal/widgets/pouch.html" },
+    { id: "unconventional", x: 57, y: 1, w: 300, h: 125, kind: "html", html: "/personal/widgets/unconventional.html" },
 
-    { id: "p4", x: 18, y: 37, w: 105, h: 130, kind: "polaroid", rot: 6, src: "/personal/lunch-break.jpg", caption: "lunch break" },
-    { id: "p5", x: 50, y: 34, w: 105, h: 130, kind: "polaroid", rot: -8, src: "/personal/quiet-dusk.jpg", caption: "quiet dusk" },
-    { id: "p6", x: 83, y: 38, w: 105, h: 130, kind: "polaroid", rot: 4, src: "/personal/studio-days.jpg", caption: "studio days" },
+    // -- second row: food/lifestyle stickers, "closing time", tote, flowers, window sill --
+    { id: "coffee-hand", x: 1, y: 19, w: 95, h: 150, kind: "sticker", rot: -6, src: "/personal/coffee-hand.png" },
+    { id: "sandwich", x: 15, y: 18, w: 130, h: 130, kind: "sticker", rot: 5, src: "/personal/sandwich-plate.png" },
+    { id: "closing-time", x: 33, y: 16, w: 135, h: 137, kind: "polaroid", rot: -4, src: "/personal/closing-time.png", caption: "closing time" },
+    { id: "tote-bag", x: 53, y: 14, w: 130, h: 155, kind: "sticker", rot: 12, src: "/personal/tote-bag.png" },
+    { id: "flower-bouquet", x: 70, y: 16, w: 120, h: 117, kind: "sticker", rot: 7, src: "/personal/flower-bouquet.png" },
+    { id: "window-sill", x: 84, y: 21, w: 170, h: 172, kind: "polaroid", rot: -20, src: "/personal/window-sill.png", caption: "window sill" },
 
-    { id: "p7", x: 8, y: 65, w: 105, h: 130, kind: "polaroid", rot: -6, src: "/personal/match-day.jpg", caption: "match day" },
-    { id: "p9", x: 62, y: 65, w: 105, h: 130, kind: "polaroid", rot: -4, src: "/personal/window-flowers.png", caption: "window sill" },
+    // -- third row: chalkboard, mug, Soni screenshot, shoe, oatmeal bowl --
+    { id: "chalkboard", x: 2, y: 41, w: 110, h: 145, kind: "sticker", rot: -5, src: "/personal/chalkboard-quote.png" },
+    { id: "coffee-mug", x: 19, y: 45, w: 90, h: 91, kind: "sticker", rot: 0, src: "/personal/coffee-mug.png" },
+    { id: "soni", x: 29, y: 41, w: 190, h: 54, kind: "rect", rot: 3, src: "/personal/slack-soni.png" },
+    { id: "sneaker", x: 47, y: 47, w: 150, h: 83, kind: "sticker", rot: -8, src: "/personal/sneaker.png" },
+    { id: "oatmeal-bowl", x: 64, y: 43, w: 140, h: 114, kind: "sticker", rot: 6, src: "/personal/oatmeal-bowl.png" },
 
-    // laptop-sticker cutouts — transparent die-cut PNGs, no card/frame, just
-    // the image + a drop shadow (see .ci-sticker), scattered in the gaps
-    // between the polaroid rows.
-    { id: "s1", x: 20, y: 3, w: 80, h: 110, kind: "sticker", rot: 10, src: "/personal/tote-bag.png" },
-    { id: "s2", x: 52, y: 8, w: 108, h: 92, kind: "sticker", rot: -9, src: "/personal/balloon-letters.png" },
-    { id: "s3", x: 87, y: 8, w: 86, h: 86, kind: "sticker", rot: 6, src: "/personal/latte-art.png" },
-    { id: "s4", x: 3, y: 22, w: 60, h: 107, kind: "sticker", rot: -8, src: "/personal/sandwich.png" },
-    { id: "s5", x: 30, y: 20, w: 62, h: 110, kind: "sticker", rot: 9, src: "/personal/coffee-note.png" },
-    { id: "s6", x: 60, y: 18, w: 80, h: 107, kind: "sticker", rot: -6, src: "/personal/rose-bouquet.png" },
-    { id: "s7", x: 2, y: 48, w: 136, h: 51, kind: "sticker", rot: 5, src: "/personal/sneakers.png" },
-    // slack screenshot — sized up from its original 124x47 (kept aspect) and
-    // recentered into the gap left by the removed "one more turn" polaroid.
-    { id: "s8", x: 33, y: 50, w: 170, h: 65, kind: "sticker", rot: -4, src: "/personal/team-note.png" },
+    // -- fourth row: camera, paper bag, vinil screenshot, match day --
+    { id: "instax-camera", x: 1, y: 59, w: 100, h: 106, kind: "sticker", rot: -9, src: "/personal/instax-camera.png" },
+    { id: "paper-bag", x: 15, y: 57, w: 110, h: 132, kind: "polaroid", rot: 4, src: "/personal/paper-bag.png" },
+    { id: "vinil", x: 31, y: 59, w: 210, h: 44, kind: "rect", rot: -3, src: "/personal/slack-vinil.png" },
+    { id: "match-day", x: 77, y: 57, w: 140, h: 150, kind: "polaroid", rot: 5, src: "/personal/match-day.png", caption: "match day" },
+
+    // -- bottom row: studio days, cosmic sticker, dinner table, mango --
+    { id: "studio-days", x: 1, y: 79, w: 115, h: 142, kind: "polaroid", rot: -7, src: "/personal/studio-days.png", caption: "studio days" },
+    { id: "cosmic-text", x: 16, y: 83, w: 110, h: 92, kind: "sticker", rot: 8, src: "/personal/cosmic-text.png" },
+    { id: "dinner-table", x: 31, y: 81, w: 105, h: 140, kind: "polaroid", rot: -5, src: "/personal/dinner-table.png" },
+    { id: "mango-hand", x: 51, y: 78, w: 100, h: 133, kind: "polaroid", rot: 6, src: "/personal/mango-hand.png" },
   ] as CanvasItem[],
 
   photos: [

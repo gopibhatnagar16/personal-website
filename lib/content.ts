@@ -18,6 +18,7 @@ export interface ContentMeta {
   protected?: boolean;
   thumb?: string;
   preview?: string;
+  previewVideo?: string;
   cover?: string;
   coverVideo?: string;
   order?: number;
@@ -38,6 +39,7 @@ function toMeta(kind: ContentKind, slug: string, data: Record<string, unknown>):
     protected: data.protected === true,
     thumb: data.thumb ? String(data.thumb) : undefined,
     preview: data.preview ? String(data.preview) : undefined,
+    previewVideo: data.previewVideo ? String(data.previewVideo) : undefined,
     cover: data.cover ? String(data.cover) : undefined,
     coverVideo: data.coverVideo ? String(data.coverVideo) : undefined,
     order: typeof data.order === "number" ? data.order : undefined,
