@@ -24,7 +24,7 @@ export interface CanvasItem {
 
 export const CONFIG = {
   name: "Gopi Bhatnagar",
-  email: "gopibhatnagar@gmail.com", // ← change me
+  email: "gopibhatnagar16@gmail.com", // ← change me
   socials: {
     linkedin: "https://www.linkedin.com/in/gopibhatnagar/",
     twitter: "https://x.com/BhatnagarGopi",
@@ -121,7 +121,7 @@ export const CONFIG = {
   // draggable, so they're excluded from the drag-handler wiring.
   pegboard: [
     // -- top row: chat screenshots + the two shared HTML widgets --
-    { id: "charmie", x: 2, y: 3, w: 190, h: 72, kind: "rect", rot: -3, src: "/personal/slack-charmie.png" },
+    { id: "charmie", x: 2, y: 3, w: 218, h: 83, kind: "rect", rot: -3, src: "/personal/slack-charmie.png" },
     { id: "pouch", x: 30, y: 1, w: 190, h: 180, kind: "html", html: "/personal/widgets/pouch.html" },
     { id: "unconventional", x: 57, y: 1, w: 300, h: 125, kind: "html", html: "/personal/widgets/unconventional.html" },
 
@@ -134,23 +134,27 @@ export const CONFIG = {
     { id: "window-sill", x: 84, y: 21, w: 170, h: 172, kind: "polaroid", rot: -20, src: "/personal/window-sill.png", caption: "window sill" },
 
     // -- third row: chalkboard, mug, Soni screenshot, shoe, oatmeal bowl --
-    { id: "chalkboard", x: 2, y: 41, w: 110, h: 145, kind: "sticker", rot: -5, src: "/personal/chalkboard-quote.png" },
+    { id: "chalkboard", x: 2, y: 41, w: 132, h: 174, kind: "sticker", rot: -5, src: "/personal/chalkboard-quote.png" },
     { id: "coffee-mug", x: 19, y: 45, w: 90, h: 91, kind: "sticker", rot: 0, src: "/personal/coffee-mug.png" },
-    { id: "soni", x: 29, y: 41, w: 190, h: 54, kind: "rect", rot: 3, src: "/personal/slack-soni.png" },
+    { id: "soni", x: 29, y: 41, w: 218, h: 62, kind: "rect", rot: 3, src: "/personal/slack-soni.png" },
     { id: "sneaker", x: 47, y: 47, w: 150, h: 83, kind: "sticker", rot: -8, src: "/personal/sneaker.png" },
     { id: "oatmeal-bowl", x: 64, y: 43, w: 140, h: 114, kind: "sticker", rot: 6, src: "/personal/oatmeal-bowl.png" },
 
     // -- fourth row: camera, paper bag, vinil screenshot, match day --
     { id: "instax-camera", x: 1, y: 59, w: 100, h: 106, kind: "sticker", rot: -9, src: "/personal/instax-camera.png" },
     { id: "paper-bag", x: 15, y: 57, w: 110, h: 132, kind: "polaroid", rot: 4, src: "/personal/paper-bag.png" },
-    { id: "vinil", x: 31, y: 59, w: 210, h: 44, kind: "rect", rot: -3, src: "/personal/slack-vinil.png" },
-    { id: "match-day", x: 77, y: 57, w: 140, h: 150, kind: "polaroid", rot: 5, src: "/personal/match-day.png", caption: "match day" },
+    { id: "vinil", x: 31, y: 59, w: 241, h: 50, kind: "rect", rot: -3, src: "/personal/slack-vinil.png" },
+    { id: "match-day", x: 77, y: 57, w: 140, h: 150, kind: "polaroid", rot: 5, src: "/personal/match-day.jpg", caption: "match day" },
 
-    // -- bottom row: studio days, cosmic sticker, dinner table, mango --
+    // -- bottom row: studio days, cosmic sticker, dinner table, mango, lunch break --
     { id: "studio-days", x: 1, y: 79, w: 115, h: 142, kind: "polaroid", rot: -7, src: "/personal/studio-days.png", caption: "studio days" },
     { id: "cosmic-text", x: 16, y: 83, w: 110, h: 92, kind: "sticker", rot: 8, src: "/personal/cosmic-text.png" },
     { id: "dinner-table", x: 31, y: 81, w: 105, h: 140, kind: "polaroid", rot: -5, src: "/personal/dinner-table.png" },
     { id: "mango-hand", x: 51, y: 78, w: 100, h: 133, kind: "polaroid", rot: 6, src: "/personal/mango-hand.png" },
+    { id: "lunch-break", x: 68, y: 77, w: 115, h: 135, kind: "polaroid", rot: -6, src: "/personal/lunch-break.png", caption: "lunch break" },
+
+    // -- sixth row: Nikhil's conversion-lift screenshot --
+    { id: "nikhil", x: 68, y: 93, w: 230, h: 58, kind: "rect", rot: -2, src: "/personal/slack-nikhil.png" },
   ] as CanvasItem[],
 
   photos: [
