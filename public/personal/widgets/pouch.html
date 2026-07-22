@@ -5,8 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sticker pouch</title>
 <style>
-  html,body{margin:0;padding:0;background:#f5f4f0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-  .pz-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:2rem 0}
+  html,body{margin:0;padding:0;height:100%;overflow:hidden;background:#f5f4f0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  .pz-viewport{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+  .pz-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;padding:10px 0;
+    transform-origin:center center;visibility:hidden}
   .pz-scene{position:relative;width:360px;height:340px;cursor:pointer}
   .pz-card{position:absolute;left:0;top:0;width:80px;height:80px;border-radius:15px;background:#fff;box-shadow:0 5px 14px rgba(0,0,0,.2);overflow:hidden;border:4px solid #fff;transition:transform .55s cubic-bezier(.34,1.45,.55,1);will-change:transform}
   .pz-card svg{width:100%;height:100%;display:block;border-radius:9px}
@@ -21,7 +23,8 @@
 </style>
 </head>
 <body>
-<div class="pz-wrap">
+<div class="pz-viewport" id="pzViewport">
+<div class="pz-wrap" id="pzWrap">
   <div class="pz-scene" id="pzScene">
     <svg class="pz-back" width="340" height="340" viewBox="0 0 340 340" aria-hidden="true">
       <ellipse cx="170" cy="316" rx="140" ry="12" fill="#000" opacity=".10"/>
@@ -93,8 +96,11 @@
   </div>
   <span class="pz-hint">hover over the pouch</span>
 </div>
+</div>
 <script>
 (function(){
+  var viewport=document.getElementById('pzViewport');
+  var wrap=document.getElementById('pzWrap');
   var scene=document.getElementById('pzScene');
   var cards=[1,2,3,4].map(function(n){return document.getElementById('pzC'+n);});
   var p1=document.getElementById('pzP1'),p2=document.getElementById('pzP2');
@@ -137,6 +143,20 @@
   scene.addEventListener('mouseenter',function(){if(!touch)setPopped();});
   scene.addEventListener('mouseleave',function(){if(!touch)unpop();});
   scene.addEventListener('touchstart',function(){touch=true;open?unpop():setPopped();open=!open;},{passive:true});
+
+  // the scene is a fixed-size illustration — scale the whole thing to fit
+  // whatever box it's embedded in (like object-fit:contain) instead of
+  // letting it overflow and get clipped by the host page.
+  function fit(){
+    wrap.style.transform='none';
+    var w=wrap.offsetWidth,h=wrap.offsetHeight;
+    if(!w||!h)return;
+    var scale=Math.min(viewport.clientWidth/w,viewport.clientHeight/h);
+    wrap.style.transform='scale('+scale+')';
+    wrap.style.visibility='visible';
+  }
+  fit();
+  window.addEventListener('resize',fit);
 })();
 </script>
 </body>

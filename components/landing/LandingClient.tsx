@@ -67,7 +67,7 @@ export function LandingClient({ work, writing }: Props) {
               </ul>
               <DraggableCanvas
                 items={CONFIG.pegboard}
-                height={700}
+                height={820}
                 variant="board"
                 pannable={false}
                 pan={personalControls.pan}

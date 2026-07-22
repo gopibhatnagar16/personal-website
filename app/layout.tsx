@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Caveat } from "next/font/google";
+import { Inter, Caveat, Playwrite_MX, JetBrains_Mono } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
@@ -23,6 +23,19 @@ const caveat = Caveat({
   subsets: ["latin"],
   weight: ["600"],
   variable: "--font-caveat",
+});
+
+// handwritten note in the site footer
+const playwriteMX = Playwrite_MX({
+  weight: ["400"],
+  variable: "--font-playwrite-mx",
+});
+
+// footer chip tooltip labels ("Email", "LinkedIn" …)
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-jetbrains-mono",
 });
 
 const description =
@@ -85,7 +98,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${GeistSans.variable} ${GeistMono.variable} ${caveat.variable}`}
+      className={`${inter.variable} ${GeistSans.variable} ${GeistMono.variable} ${caveat.variable} ${playwriteMX.variable} ${jetbrainsMono.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
