@@ -37,10 +37,12 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
             type="application/ld+json"
             dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
           />
-          <header className="cs-bar">
-            <Link className="cs-back" href="/">← {CONFIG.name}</Link>
-            <span className="cs-kind">{kindLabel}</span>
-          </header>
+          <div className="cs-topnav">
+            <header className="cs-bar">
+              <Link className="cs-back" href="/">Home</Link>
+              <span className="cs-kind">{kindLabel}</span>
+            </header>
+          </div>
 
           {/* Real chrome + metadata behind the modal, so it reads as the actual
               case-study page rather than a blank placeholder. The compiled MDX
@@ -53,7 +55,6 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
             ) : (
               <div className="cs-hero cs-hero-placeholder" />
             )}
-            <span className="cs-eyebrow">{meta.role} · {meta.year}</span>
             <h1 className="cs-title">{meta.title}</h1>
             <p className="cs-tagline">{meta.tagline}</p>
             <div className="cs-meta">
@@ -90,7 +91,7 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
             </div>
           </div>
         </div>
-        <SiteFooter variant="static" />
+        <SiteFooter />
       </EyesProvider>
     );
   }
@@ -118,10 +119,16 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
-        <header className="cs-bar">
-          <Link className="cs-back" href="/">← {CONFIG.name}</Link>
-          <span className="cs-kind">{kindLabel}</span>
-        </header>
+        <div className="cs-topnav">
+          <header className="cs-bar">
+            <Link className="cs-back" href="/">Home</Link>
+            {next ? (
+              <Link className="cs-back cs-back-next" href={`/${kind}/${next.slug}`}>Next project →</Link>
+            ) : (
+              <span className="cs-kind">{kindLabel}</span>
+            )}
+          </header>
+        </div>
 
         <div className="cs-col">
           {meta.coverVideo ? (
@@ -143,7 +150,6 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
             <div className="cs-hero cs-hero-placeholder" aria-hidden="true" />
           )}
 
-          <span className="cs-eyebrow">{meta.role} · {meta.year}</span>
           <h1 className="cs-title">{meta.title}</h1>
           <p className="cs-tagline">{meta.tagline}</p>
 
@@ -175,7 +181,7 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
           )}
         </div>
       </div>
-      <SiteFooter variant="static" />
+      <SiteFooter />
     </EyesProvider>
   );
 }

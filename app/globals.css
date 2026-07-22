@@ -33,6 +33,7 @@ body {
 }
 /* content layer — sits above the footer and reveals it on scroll */
 .content{position:relative;z-index:2;background-color:var(--bg);margin-bottom:var(--footH);
+  border-radius:0 0 28px 28px;overflow:hidden;
   transition:background-color .35s ease;}
 [data-theme="dark"] .gp .content{
   background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='54'%20height='54'%3E%3Cpath%20d='M0%200H54'%20stroke='%23ffffff'%20stroke-opacity='.09'%20stroke-dasharray='2%206'/%3E%3Cpath%20d='M0%200V54'%20stroke='%23ffffff'%20stroke-opacity='.09'%20stroke-dasharray='2%206'/%3E%3C/svg%3E");
@@ -459,16 +460,32 @@ body {
 }
 
 /* ---------------- case study ---------------- */
-.cs{min-height:100vh;background:var(--bg);color:var(--ink);
+/* position:relative + z-index + margin-bottom reserve the same scroll-reveal
+   footer trick as the landing page's .content — the fixed SiteFooter sits
+   behind this layer and only shows through the reserved gap at the end. */
+.cs{--footH:500px;min-height:100vh;position:relative;z-index:2;background:var(--bg);color:var(--ink);
+  margin-bottom:var(--footH);border-radius:0 0 28px 28px;overflow:hidden;
   font-family:var(--font-geist-sans),system-ui,sans-serif;-webkit-font-smoothing:antialiased;
   transition:background-color .35s ease,color .35s ease;}
 .cs *{box-sizing:border-box;}
+@media (max-width:640px){
+  .cs{--footH:480px;}
+}
+@media (max-width:420px){
+  .cs{--footH:400px;}
+}
 
+.cs-topnav{position:sticky;top:0;z-index:30;}
+.cs-topnav::before{content:"";position:absolute;inset:0;bottom:-32px;z-index:-1;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 55%,transparent 100%);
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 55%,transparent 100%);}
 .cs-bar{max-width:940px;margin:0 auto;padding:26px clamp(20px,5vw,32px);
   display:flex;justify-content:space-between;align-items:center;}
 .cs-back{font-family:var(--font-geist-mono),monospace;font-size:12px;text-transform:uppercase;
   letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .18s ease;}
 .cs-back:hover{color:var(--ink);}
+.cs-back-next{display:inline-flex;align-items:center;gap:6px;}
 .cs-kind{font-family:var(--font-geist-mono),monospace;font-size:11px;text-transform:uppercase;
   letter-spacing:.16em;color:var(--faint);}
 
@@ -490,9 +507,12 @@ body {
 .cs-hero-placeholder{height:clamp(220px,42vw,420px);
   background-image:linear-gradient(135deg,#EDEDE8,#D9D8D1);background-size:cover;background-position:center;}
 [data-theme="dark"] .cs-hero-placeholder{background-image:linear-gradient(135deg,#22221D,#191914);}
-.cs-body h2{font-family:var(--font-geist-sans),sans-serif;font-weight:800;letter-spacing:-.02em;
+/* :where() keeps these plain-tag defaults at zero specificity so any
+   component's own single-class rule (declared later in this file) wins the
+   cascade by source order, instead of silently losing to "type + class". */
+.cs-body :where(h2){font-family:var(--font-geist-sans),sans-serif;font-weight:800;letter-spacing:-.02em;
   font-size:clamp(1.5rem,3.4vw,2.1rem);line-height:1.2;margin:60px 0 16px;}
-.cs-body p{font-size:1.05rem;line-height:1.65;color:var(--body);margin:0 0 16px;}
+.cs-body :where(p){font-size:1.05rem;line-height:1.65;color:var(--body);margin:0 0 16px;}
 .cs-body strong{font-weight:600;color:var(--ink);}
 .cs-body em{font-style:italic;}
 .cs-body a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--faint);}
@@ -504,8 +524,8 @@ body {
 .cs-body li{position:relative;padding-left:22px;margin-bottom:11px;
   font-size:1.02rem;line-height:1.6;color:var(--body);}
 .cs-body li::before{content:"";position:absolute;left:2px;top:.7em;width:6px;height:1px;background:var(--faint);}
-.cs-body blockquote{margin:28px 0;padding:4px 0 4px 22px;border-left:2px solid var(--ink);}
-.cs-body blockquote p{font-family:var(--font-geist-sans),sans-serif;font-weight:500;
+.cs-body blockquote{margin:28px 0;padding:4px 0 4px 22px;border-left:2px solid var(--accent);}
+.cs-body blockquote p{font-family:var(--font-ibm-plex-serif),serif;font-weight:500;font-style:italic;
   font-size:1.25rem;line-height:1.45;color:var(--ink);margin:0;}
 .cs-img{height:clamp(200px,36vw,360px);border-radius:14px;margin:26px 0 16px;border:1px solid var(--line);
   background:linear-gradient(135deg,#F0EFEA,#E1E0D9);}
@@ -522,8 +542,8 @@ body {
 .cs-nav-title{font-size:1.02rem;font-weight:600;color:var(--ink);line-height:1.35;}
 
 /* ---- case-study blocks ---- */
-.cs-figcap{font-family:var(--font-geist-mono),monospace;font-size:11px;letter-spacing:.04em;
-  color:var(--faint);text-align:center;margin-top:10px;}
+.cs-figcap{font-family:var(--font-inter),sans-serif;font-size:12.5px;font-style:italic;
+  color:var(--muted);text-align:center;margin-top:10px;}
 .cs-fig{margin:26px 0 16px;}
 .cs-fig .cs-img{margin:0;}
 .cs-fig-btn{display:block;width:100%;padding:0;border:none;background:none;cursor:zoom-in;}
@@ -533,6 +553,8 @@ body {
 .cs-fig-img.img-loaded{opacity:1;filter:blur(0);}
 [data-theme="dark"] .cs-fig-img{background:linear-gradient(135deg,#22221D,#191914);}
 .cs-fig-video{display:block;width:100%;border-radius:14px;border:1px solid var(--line);}
+.cs-fig-video-crop-wrap{overflow:hidden;border-radius:14px;border:1px solid var(--line);}
+.cs-fig-video-crop-wrap .cs-fig-video-crop{border:none;border-radius:0;transform:scale(1.035) translateX(-1.5%);}
 
 /* aspect-ratio reservation — keeps a switcher's box size fixed across
    slides so changing the active image never shifts surrounding layout */
@@ -589,30 +611,32 @@ body {
 }
 
 /* experiment map — overview cards linking into each experiment section */
-.cs-map{margin:40px 0;padding:30px 0 6px;border-top:1px solid var(--line);}
+.cs-map{margin:40px 0;padding:6px 0;}
 .cs-map-eyebrow{display:block;font-family:var(--font-geist-mono),monospace;font-size:11px;
   text-transform:uppercase;letter-spacing:.16em;color:var(--faint);margin-bottom:14px;}
 .cs-map-heading{font-family:var(--font-geist-sans),sans-serif;font-weight:700;
   letter-spacing:-.02em;font-size:clamp(1.4rem,3.4vw,1.9rem);line-height:1.2;
-  margin:0 0 10px;text-wrap:balance;}
+  margin:0 0 32px;text-wrap:balance;}
 .cs-map-subtitle{font-size:1rem;color:var(--muted);line-height:1.5;margin:0 0 24px;}
 .cs-map-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);}
 .cs-map-card{display:flex;flex-direction:column;gap:8px;padding:22px 22px 24px;
   border-left:1px solid var(--line);text-decoration:none;color:inherit;transition:background .18s ease;}
-.cs-map-card:first-child{border-left:none;}
+.cs-map-card:first-child{border-left:none;padding-left:0;}
 .cs-map-card:hover{background:var(--panel);}
 .cs-map-num{font-family:var(--font-geist-mono),monospace;font-size:10.5px;
-  text-transform:uppercase;letter-spacing:.1em;color:var(--faint);}
+  text-transform:uppercase;letter-spacing:.1em;color:var(--faint);text-decoration:none;}
 .cs-map-title{font-family:var(--font-geist-sans),sans-serif;font-weight:700;
-  font-size:1.15rem;letter-spacing:-.01em;color:var(--ink);}
-.cs-map-desc{font-size:.9rem;line-height:1.55;color:var(--body);margin:0;flex:1;}
+  font-size:1.15rem;letter-spacing:-.01em;color:var(--ink);text-decoration:none;}
+.cs-map-desc{font-size:.9rem;line-height:1.55;color:var(--body);margin:0;flex:1;text-decoration:none;}
 .cs-map-link{font-family:var(--font-geist-mono),monospace;font-size:11.5px;
-  text-transform:uppercase;letter-spacing:.06em;font-weight:600;color:var(--ink);margin-top:4px;}
+  text-transform:uppercase;letter-spacing:.06em;font-weight:600;color:#D9205B;margin-top:4px;
+  text-decoration:underline;text-underline-offset:3px;}
+[data-theme="dark"] .cs-map-link{color:#F0538A;}
 .cs-map-card:hover .cs-map-link{color:var(--accent);}
 @media (max-width:720px){
   .cs-map-grid{grid-template-columns:1fr;}
-  .cs-map-card{border-left:none;border-top:1px solid var(--line);}
-  .cs-map-card:first-child{border-top:none;}
+  .cs-map-card{border-left:none;border-top:1px solid var(--line);padding-left:22px;}
+  .cs-map-card:first-child{padding-left:22px;border-top:none;}
 }
 
 /* experiment section header — label/heading/intro, landing-page style */
@@ -621,8 +645,8 @@ body {
   text-transform:uppercase;letter-spacing:.16em;color:var(--faint);margin-bottom:14px;}
 .cs-exp-title{font-family:var(--font-geist-sans),sans-serif;font-weight:800;
   letter-spacing:-.02em;font-size:clamp(1.8rem,4.4vw,2.5rem);line-height:1.15;
-  margin:0 0 12px;text-wrap:balance;}
-.cs-exp-subtitle{font-size:1.05rem;color:var(--muted);line-height:1.5;margin:0;max-width:60ch;}
+  margin:0 0 6px;text-wrap:balance;}
+.cs-exp-subtitle{font-size:1.05rem;color:var(--muted);line-height:1.5;margin:0 0 28px;max-width:60ch;}
 
 /* lightbox */
 .cs-lightbox{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;
@@ -633,7 +657,7 @@ body {
   box-shadow:0 30px 80px rgba(0,0,0,.5);
   opacity:0;filter:blur(10px);transition:opacity .4s ease,filter .4s ease;}
 .cs-lightbox-img.img-loaded{opacity:1;filter:blur(0);}
-.cs-lightbox-cap{font-family:var(--font-geist-mono),monospace;font-size:12px;color:rgba(245,244,240,.75);
+.cs-lightbox-cap{font-family:var(--font-inter),sans-serif;font-style:italic;font-size:13px;color:rgba(245,244,240,.75);
   max-width:70ch;text-align:center;}
 .cs-lightbox-close{position:absolute;top:18px;right:22px;width:44px;height:44px;border:none;
   border-radius:50%;background:rgba(255,255,255,.12);color:#F5F4F0;font-size:26px;line-height:1;
@@ -677,16 +701,10 @@ body {
   color:var(--accent);font-size:14px;}
 .cs-whw-card{flex:1;min-width:0;background:var(--canvas-bg);border:1px solid var(--line);
   border-radius:12px;padding:22px 24px;}
-.cs-whw-card-0{background:#FBEEE6;}
-.cs-whw-card-1{background:#EDECF9;}
-.cs-whw-card-2{background:#E8F4EA;}
-[data-theme="dark"] .cs-whw-card-0{background:rgba(232,140,80,.1);}
-[data-theme="dark"] .cs-whw-card-1{background:rgba(140,130,240,.12);}
-[data-theme="dark"] .cs-whw-card-2{background:rgba(100,200,140,.1);}
 .cs-whw-k{display:block;font-family:var(--font-geist-mono),monospace;font-size:10px;
   letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
-.cs-whw-title{display:block;font-family:var(--font-geist-mono),monospace;font-weight:600;
-  font-size:1.05rem;line-height:1.35;color:var(--ink);margin-bottom:10px;}
+.cs-whw-title{display:block;font-family:var(--font-ibm-plex-serif),serif;font-weight:600;
+  font-size:1.1rem;line-height:1.35;color:var(--ink);margin-bottom:10px;}
 .cs-whw-body{font-size:.9rem;line-height:1.55;color:var(--muted);margin:0;}
 
 /* research flow */
@@ -839,15 +857,15 @@ body {
   .cs-split-col + .cs-split-col{border-left:none;border-top:1px solid var(--line);}}
 
 /* results viz */
-.cs-viz{display:grid;grid-template-columns:200px 1fr;gap:16px;margin:30px 0;}
-.cs-viz-list{display:flex;flex-direction:column;gap:10px;}
-.cs-viz-metric{border:1px solid var(--line);border-radius:10px;background:var(--panel);
+.cs-viz{display:grid;grid-template-columns:200px 1fr;gap:16px;margin:30px 0;align-items:stretch;}
+.cs-viz-list{display:flex;flex-direction:column;gap:10px;height:100%;}
+.cs-viz-metric{flex:1;border:1px solid var(--line);border-radius:10px;background:var(--panel);
   padding:14px 16px;text-align:left;cursor:pointer;transition:background .2s,border-color .2s;}
 .cs-viz-metric:hover{border-color:var(--faint);}
 .cs-viz-metric.active{background:var(--canvas-bg);border-color:var(--faint);}
 .cs-viz-metric-label{display:block;font-size:12.5px;color:var(--muted);margin-bottom:5px;}
 .cs-viz-metric-value{display:block;font-weight:700;font-size:1.1rem;color:var(--ink);}
-.cs-viz-panel{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:22px 24px;}
+.cs-viz-panel{border:1px solid var(--line);border-radius:12px;background:var(--panel);padding:22px 24px 16px;}
 .cs-viz-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:18px;}
 .cs-viz-title{display:block;font-weight:700;font-size:1.05rem;color:var(--ink);}
 .cs-viz-sub{display:block;font-size:12.5px;color:var(--muted);margin-top:4px;}
@@ -869,7 +887,7 @@ body {
 .cs-viz-bar{height:3px;border-radius:2px;background:var(--dot-off);margin-top:18px;overflow:hidden;}
 .cs-viz-bar span{display:block;height:100%;background:var(--accent);border-radius:2px;
   transition:width .35s ease;}
-.cs-viz-legend{margin:14px 0 0;font-size:12.5px;line-height:1.55;color:var(--faint);}
+.cs-viz-legend{margin:26px 0 0;font-size:12.5px;line-height:1.55;color:var(--faint);}
 
 /* experiment signal: quantitative bar chart + qualitative numbered read + decision */
 .cs-exps{border:1px solid var(--line);border-radius:14px;background:var(--panel);
