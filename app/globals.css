@@ -731,6 +731,38 @@ a.ft-note-mail:hover{text-decoration-color:#fff;}
   font-style:italic;font-size:.92rem;line-height:1.5;color:var(--ink);}
 @media (max-width:640px){.cs-qc{grid-template-columns:1fr;}}
 
+/* persona intro: eyebrow + spaced name + body, opens a composite persona */
+.cs-pi{margin:28px 0 20px;}
+.cs-pi-eyebrow{display:block;font-family:var(--font-geist-mono),monospace;font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:6px;}
+.cs-pi-name{font-family:var(--font-geist-mono),monospace;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;font-size:1.3rem;color:var(--ink);margin:0 0 14px;}
+.cs-pi-body{font-size:1rem;line-height:1.6;color:var(--muted);margin:0;max-width:70ch;}
+
+/* meta row reused inline, e.g. Business / Signal / Need */
+.cs-meta-inline{margin:0 0 28px;padding:22px 0;}
+
+/* split cards: two equal-height columns for a compare pair */
+.cs-split{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:28px 0;
+  border-top:1px solid var(--line);}
+.cs-split-col{padding:24px 28px;}
+.cs-split-col + .cs-split-col{border-left:1px solid var(--line);}
+.cs-split-label{display:block;font-family:var(--font-geist-mono),monospace;font-size:10px;
+  letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px;}
+.cs-split-warn .cs-split-label{color:#C2662D;}
+.cs-split-positive .cs-split-label{color:#2F7D5F;}
+[data-theme="dark"] .cs-split-warn .cs-split-label{color:#E0925A;}
+[data-theme="dark"] .cs-split-positive .cs-split-label{color:#5FBF97;}
+.cs-split-title{font-size:1.15rem;font-weight:700;color:var(--ink);margin:0 0 16px;}
+.cs-split-list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px;}
+.cs-split-list li{position:relative;padding-left:18px;font-size:.95rem;line-height:1.55;color:var(--muted);}
+.cs-split-list li::before{content:"";position:absolute;left:0;top:.55em;width:6px;height:6px;border-radius:50%;}
+.cs-split-warn .cs-split-list li::before{background:#C2662D;}
+.cs-split-positive .cs-split-list li::before{background:#2F7D5F;}
+.cs-split-list li strong{color:var(--ink);}
+@media (max-width:640px){.cs-split{grid-template-columns:1fr;}
+  .cs-split-col + .cs-split-col{border-left:none;border-top:1px solid var(--line);}}
+
 /* results viz */
 .cs-viz{display:grid;grid-template-columns:200px 1fr;gap:16px;margin:30px 0;}
 .cs-viz-list{display:flex;flex-direction:column;gap:10px;}

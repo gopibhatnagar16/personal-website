@@ -101,19 +101,48 @@ The subscription opportunity sat in the short window after setup: the product un
   ]}
 />
 
-A composite from merchant calls made the moment concrete. Meet **Arjun**: he has completed onboarding for his online apparel business and is ready to take payments. Before choosing a pricing route, he needs to know what is optional, what fits his expected volume, and whether he can change his mind later. His journey through the decision:
+<PersonaIntro
+  eyebrow="A composite from merchant calls"
+  name="Meet Arjun"
+  body="He has completed onboarding for his online apparel business and is ready to take payments. Before choosing a pricing route, he needs to know what is optional, what fits his expected volume, and whether he can change his mind later."
+/>
 
-- **Relieved:** setup complete, ready to begin taking payments.
-- **Unsure:** "Is 2% my only choice?" One standard rate gives him no way to judge a better route.
-- **Comparing:** Standard and a relevant subscription need to appear as clear alternatives.
-- **Understanding:** volume cues make the value of each plan easier to judge.
-- **Confident:** Standard stays valid alongside optional pricing routes.
-- **In control:** he can revisit or manage the choice once real payment use grows.
+<MetaRow
+  items={[
+    { label: "Business", value: "Online apparel seller" },
+    { label: "Signal", value: "Ready to accept payments" },
+    { label: "Need", value: "A pricing route he can understand" },
+  ]}
+/>
 
 <CaseImage
-  src="/work/subscriptions/journey-map.png"
-  alt="Merchant journey mapped by stage and emotion, from Discovery through Dashboard"
+  alt="Six-panel illustrated strip of Arjun's journey: setup complete, is 2% my only choice, which plan fits, see savings at my volume, choose a route, manage it later"
   caption="Arjun's journey mapped by stage and emotion: confidence drops after Setup, where only the flat rate appears, and stays low through Dashboard."
+/>
+
+<SplitCards
+  cards={[
+    {
+      label: "Pain points",
+      title: "What merchants told us",
+      accent: "warn",
+      items: [
+        { text: "Cautious starters wanted to begin safely and upgrade later if needed." },
+        { text: "Value-conscious merchants wanted savings they could remember and compare." },
+        { text: "Some people mistook a paid plan for a requirement to take payments." },
+      ],
+    },
+    {
+      label: "Design response",
+      title: "What this meant for the experience",
+      accent: "positive",
+      items: [
+        { lead: "Clear choice", text: "make it explicit that Standard remains available." },
+        { lead: "Visible fit", text: "show how a plan connects to expected payment volume." },
+        { lead: "Flexible control", text: "let merchants return and manage the decision later." },
+      ],
+    },
+  ]}
 />
 
 <SectionIntro
@@ -388,11 +417,9 @@ The clearest outcome was merchant action: more businesses selected a plan, gener
 
 ## My learnings
 
-My role went beyond designing pricing cards. I used analytics to frame the opportunity, merchant conversations to explain the funnel, and product strategy to turn a winning variant into a journey that could scale.
+Pricing cards turned out to be the smallest part of this. The real work was reading the data, listening to merchants, and turning one winning variant into a journey people could actually live with.
 
-- **A lift is a signal:** pair conversion movement with research before deciding why a design worked.
-- **The journey is the design:** a winning screen is only useful when discovery, first use, and plan management work together.
-- **Growth still needs trust:** keeping the standard rate explicit made the nudge persuasive without making payment feel mandatory.
-- **Designers should know the metric:** understanding cohorts, events, and guardrails helped me shape the strategy, not only the interface.
-
-In one line: I turned a one-rate onboarding moment into a clearer subscription journey that helps a new business understand its options, choose with confidence, and manage its plan later.
+- **A lift is a signal, not an answer.** I paired conversion movement with research before deciding why a design worked.
+- **The journey is the design.** A winning screen only matters when discovery, first use, and plan management hold together.
+- **Growth still needs trust.** Keeping the standard rate explicit made the nudge persuasive without making payment feel mandatory.
+- **Know the metric, not just the screen.** Understanding cohorts, events, and guardrails shaped the strategy as much as the interface.
