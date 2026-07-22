@@ -31,14 +31,14 @@ export const CONFIG = {
   socials: {
     linkedin: "https://www.linkedin.com/in/gopibhatnagar/",
     twitter: "https://x.com/BhatnagarGopi",
-    resume: "https://drive.google.com/file/d/1tws4WgJ8PrAxY4QqtYWyBDtLgO6rch3A/view",
+    resume: "https://drive.google.com/file/d/1KIZ3gY2z7KhnayKv9bmh7TBDCgMLLrxa/view?usp=drivesdk",
   },
   timeZone: "Asia/Kolkata",
   tzLabel: "GMT+5:30",
   location: "Bangalore", // ← shown in the footer "Currently"
   lastUpdated: "July 2026", // ← footer "Last updated"
-  title: "Design Builder.",
-  titleLine2: "Partly in canvas, partly in codebase.",
+  title: "Designing in canvas, building in codebase",
+  titleLine2: "",
   ideology: [
     "Hi, I'm Gopi Bhatnagar. Somewhere between designing and vibe-coding, I stopped picking a lane and just started doing both.",
     "Most of my experience is on complex, enterprise-scale products - the kind where good intentions meet real constraints. I'm curious about people, products, and how technology shapes both, and I'm still figuring a lot of it out.",

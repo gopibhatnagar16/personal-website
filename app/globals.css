@@ -137,6 +137,11 @@ body {
   opacity:0;filter:blur(4px);transition:opacity .4s ease,filter .4s ease;}
 .exp-badge img.img-loaded{opacity:1;filter:blur(0);}
 .exp-badge.has-logo{background:var(--panel);border:1px solid var(--line);}
+/* shrink so all logos stay on one line on narrow phones instead of wrapping */
+@media (max-width:480px){
+  .exp-row{gap:10px;}
+  .exp-badge{width:34px;height:34px;border-radius:7px;font-size:12px;}
+}
 
 /* one tooltip instance shared by every item — it slides left/right to the
    hovered badge instead of each item mounting its own, so it reads as a
