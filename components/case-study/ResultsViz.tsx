@@ -52,7 +52,14 @@ export function ResultsViz({ metrics, baseDots, legend }: Props) {
 
         <div className="cs-viz-grid" key={active} role="img" aria-label={`${metric.label}: ${metric.value}`}>
           {Array.from({ length: baseDots }, (_, i) => (
-            <span key={i} className={"cs-viz-dot" + (i < filled ? " on" : "")} />
+            <span
+              key={i}
+              className={"cs-viz-dot" + (i < filled ? " on" : "")}
+              style={{ "--i": i } as React.CSSProperties}
+              aria-hidden="true"
+            >
+              {i < filled ? "🟣" : "⚪"}
+            </span>
           ))}
         </div>
 
