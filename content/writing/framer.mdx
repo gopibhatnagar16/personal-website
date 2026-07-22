@@ -49,7 +49,9 @@ The gaps were inside the page, inside the team, and behind the launch:
 
 I built three connected systems. Each solved the bottleneck created by the previous stage: first the page structure, then the learning gap, then the operational tooling needed when many people started shipping.
 
-**1. Design-system foundation.** To make Framer usable beyond a few specialists, I built the reusable foundation: components, tokens, patterns, fold templates, and a quality bar for what a Razorpay landing page should feel like. Designers were no longer starting from an empty canvas or rebuilding the same sections from memory.
+### 1. Design-system foundation
+
+To make Framer usable beyond a few specialists, I built the reusable foundation: components, tokens, patterns, fold templates, and a quality bar for what a Razorpay landing page should feel like. Designers were no longer starting from an empty canvas or rebuilding the same sections from memory.
 
 <CaseImage
   src="/writing/framer/design-system-components.png"
@@ -75,7 +77,9 @@ I built three connected systems. Each solved the bottleneck created by the previ
   caption="A Payment Links fold carried across its step, desktop, and mobile-web states."
 />
 
-**2. Learning system.** Once the design system existed, the next gap was learning. People could see the components, but they still needed the decisions behind them: which fold to use, how motion should behave, what to avoid, and how to judge launch readiness. So I turned walkthroughs, jam sessions, and repeated explanations into a reusable learning system: zoom out to the full page flow, zoom in to fold decisions, motion rules, content checks, and review notes.
+### 2. Learning system
+
+Once the design system existed, the next gap was learning. People could see the components, but they still needed the decisions behind them: which fold to use, how motion should behave, what to avoid, and how to judge launch readiness. So I turned walkthroughs, jam sessions, and repeated explanations into a reusable learning system: zoom out to the full page flow, zoom in to fold decisions, motion rules, content checks, and review notes.
 
 <CaseImage
   src="/writing/framer/learning-sop-library.png"
@@ -89,7 +93,9 @@ I built three connected systems. Each solved the bottleneck created by the previ
   caption="Fold decisions, FAQ and QC checks, PageSpeed and metadata audits, and the landing-page requirement doc."
 />
 
-**3. Tooling system.** The learning system unlocked scale, and a new risk. With more people publishing, unintentional breakages became easier: the wrong version going live, unclear deployment ownership, no shared log of what changed. So I built a Slack bot and pre-flight tooling around launch. Every deployment created visibility for the team, and every page had to clear the launch checklist before it went live.
+### 3. Tooling system
+
+The learning system unlocked scale, and a new risk. With more people publishing, unintentional breakages became easier: the wrong version going live, unclear deployment ownership, no shared log of what changed. So I built a Slack bot and pre-flight tooling around launch. Every deployment created visibility for the team, and every page had to clear the launch checklist before it went live.
 
 <CaseImage
   src="/writing/framer/tooling-checks.png"
@@ -99,15 +105,15 @@ I built three connected systems. Each solved the bottleneck created by the previ
 
 ## Outcomes
 
-<CaseVideo src="/writing/framer/outcomes-demo.mp4" alt="Walkthrough of shipped Razorpay landing pages built on the Framer system" />
+<CaseVideo src="/writing/framer/outcomes-demo.mp4" alt="Walkthrough of shipped Razorpay landing pages built on the Framer system" noBorder />
 
 The system started powering Razorpay's landing-page structure:
 
 <OutcomeCards items={[
   { stat: "3 weeks → 4 days", description: "Page shipping time, by making landing-page production reusable." },
   { stat: "1 month → 1 week", description: "Designer onboarding, by turning Framer knowledge into a repeatable learning path." },
-  { stat: "[N] pages", description: "Shipped this year: proving the system worked across repeated launches, not one-off pages." },
-  { stat: "[N] designers", description: "In the function: scaling page ownership beyond a few Framer-fluent specialists." },
+  { stat: "163 pages", description: "Shipped this year: proving the system worked across repeated launches, not one-off pages." },
+  { stat: "12 designers", description: "In the function: scaling page ownership beyond a few Framer-fluent specialists." },
 ]} />
 
 What started as a move to Framer became the operating system for landing pages: a design foundation, a learning layer, and tooling that made shipping visible and safer.
