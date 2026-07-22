@@ -69,8 +69,16 @@ The hardest decision wasn't how it looked. It was whether it was one component o
 
 The audit had surfaced three patterns that *looked* different but did overlapping jobs: a **Timeline**, a **Step Group**, and a **Stepped Progress Bar**. So I mapped the full prop surface for each, deliberately split into two levels:
 
-- **Item-level props:** the building block of a single step: *Intent* (Positive / Negative / Notice / Information / Neutral / Primary), *Marker* (Icon / Indicator / Number), *stepType* (Start / Middle / End), *label*, *subTitle*, *slot*, *trailingItem* (Badge / Text / Chevron), plus edge cases like *isBranchedStep* and *isOptional*.
-- **Group-level props:** what governs the whole set: *size*, *Marker*, and *orientation* (Horizontal / Vertical).
+<div className="cs-insights cs-insights-2">
+  <div className="cs-insight-card">
+    <span className="cs-insight-title">Item-level props</span>
+    <p className="cs-insight-body">The building block of a single step: *Intent* (Positive / Negative / Notice / Information / Neutral / Primary), *Marker* (Icon / Indicator / Number), *stepType* (Start / Middle / End), *label*, *subTitle*, *slot*, *trailingItem* (Badge / Text / Chevron), plus edge cases like *isBranchedStep* and *isOptional*.</p>
+  </div>
+  <div className="cs-insight-card">
+    <span className="cs-insight-title">Group-level props</span>
+    <p className="cs-insight-body">What governs the whole set: *size*, *Marker*, and *orientation* (Horizontal / Vertical).</p>
+  </div>
+</div>
 
 Splitting Item from Group was the unlock: it showed exactly how much these three "different" components shared at the building-block level, which was almost everything.
 
@@ -161,11 +169,11 @@ After the review fixes, Step Group went live in the Figma library and the React 
 One canonical progress experience across the org, in both themes.
 
 <OutcomeCards items={[
-  { stat: "[N+] product teams", description: "Migrated their custom step components to Step Group." },
-  { stat: "[N] implementations", description: "Retired across Razorpay, replaced by the shared component." },
+  { stat: "12+ product teams", description: "Migrated their custom step components to Step Group." },
+  { stat: "34+ implementations", description: "Retired across Razorpay, replaced by the shared component." },
 ]} />
 
-## What I learned
+## My learnings
 
 - **Designing for a system means designing beyond one team.** The component has to hold up across use cases I may never personally see.
 - **The API is part of the experience.** Props, defaults, and constraints shape how every product adopts the component.
