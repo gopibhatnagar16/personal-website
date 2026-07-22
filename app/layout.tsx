@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Caveat, Playwrite_MX, JetBrains_Mono } from "next/font/google";
+import { Inter, Caveat, Playwrite_MX, JetBrains_Mono, IBM_Plex_Serif } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
@@ -36,6 +36,14 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--font-jetbrains-mono",
+});
+
+// case-study blockquotes and Why/How/What callout titles
+const ibmPlexSerif = IBM_Plex_Serif({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  style: ["italic", "normal"],
+  variable: "--font-ibm-plex-serif",
 });
 
 const description =
@@ -98,7 +106,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${GeistSans.variable} ${GeistMono.variable} ${caveat.variable} ${playwriteMX.variable} ${jetbrainsMono.variable}`}
+      className={`${inter.variable} ${GeistSans.variable} ${GeistMono.variable} ${caveat.variable} ${playwriteMX.variable} ${jetbrainsMono.variable} ${ibmPlexSerif.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />

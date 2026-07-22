@@ -21,23 +21,23 @@ The goal was simple: understand where merchants were getting stuck, design an in
   items={[
     {
       title: "Visitor",
-      description: "compares pricing, products, and credibility signals.",
+      description: "Compares pricing, products, and credibility signals.",
     },
     {
       title: "Signup",
-      description: "creates an account but may not understand value yet.",
+      description: "Creates an account but may not understand value yet.",
     },
     {
       title: "Onboarding",
-      description: "completes setup, KYC, dashboard tasks, or offer steps.",
+      description: "Completes setup, KYC, dashboard tasks, or offer steps.",
     },
     {
       title: "Activation",
-      description: "starts accepting payments and needs transaction momentum.",
+      description: "Starts accepting payments and needs transaction momentum.",
     },
     {
       title: "Growth",
-      description: "returns, transacts again, claims value, and scales usage.",
+      description: "Returns, transacts again, claims value, and scales usage.",
     },
   ]}
 />
@@ -84,15 +84,15 @@ The goal was simple: understand where merchants were getting stuck, design an in
   items={[
     {
       title: "Problem",
-      body: "merchants reached setup or payment enablement, but still lacked a clear reason to keep transacting.",
+      body: "Merchants reached setup or payment enablement, but still lacked a clear reason to keep transacting.",
     },
     {
       title: "OKR",
-      body: "increase MTU and GMV by helping payment-enabled merchants complete meaningful transactions.",
+      body: "Increase MTU and GMV by helping payment-enabled merchants complete meaningful transactions.",
     },
     {
-      title: "Success signal",
-      body: "positive experiment read across 5 of 7 early tests, followed by scaled GMV impact in April.",
+      title: "Success metric",
+      body: "Positive experiment read across 5 of 7 early tests, followed by scaled GMV impact in April.",
     },
   ]}
 />
@@ -149,11 +149,13 @@ The goal was simple: understand where merchants were getting stuck, design an in
   caption="Emailer Cover iterations"
 />
 
+## Results
+
 **5 of 7 early experiments were positive, and the April scale-up delivered real GMV impact.**
 
 <ResultsViz
   baseDots={130}
-  legend="The grid is the 1.3 lakh incremental transactions from the April scale-up (130 dots, each dot ≈ 1,000 transactions). Money metrics use their own per-dot scale; the positive-read ratio and experiment count show their literal share of the same 130-dot canvas."
+  legend="The grid is 130 dots ≈ the April scale-up. Money metrics use their own per-dot scale."
   metrics={[
     { label: "April incremental GMV", value: "₹22.3 Cr", dots: 112, sub: "The April scale-up · own scale, each dot ≈ ₹20L", onEmoji: "💰" },
     { label: "Incremental transactions", value: "1.3L", dots: 130, sub: "April scale-up, the full grid · each dot ≈ 1,000 transactions", onEmoji: "🧾" },
@@ -179,15 +181,15 @@ The goal was simple: understand where merchants were getting stuck, design an in
   items={[
     {
       title: "Problem",
-      body: "cost hesitation and offer invisibility could slow merchants during signup, onboarding, and go-live.",
+      body: "Cost hesitation and offer invisibility could slow merchants during signup, onboarding, and go-live.",
     },
     {
       title: "OKR",
-      body: "increase new merchant activation by giving eligible PG merchants a visible free-credit offer.",
+      body: "Increase new merchant activation by giving eligible PG merchants a visible free-credit offer.",
     },
     {
-      title: "Success signal",
-      body: "credit assignment reached 100% ramp with 95.7% successful assignment across processed requests.",
+      title: "Success metric",
+      body: "Credit assignment reached 100% ramp with 95.7% successful assignment across processed requests.",
     },
   ]}
 />
@@ -238,11 +240,13 @@ The goal was simple: understand where merchants were getting stuck, design an in
   caption="Touchpoint updating all Onboarding flow, Setup and Dashboard"
 />
 
+## Results
+
 **Credit assignment reached 95.7% success at 100% ramp.** Revenue, GMV, and retention impact remain follow-up reads.
 
 <ResultsViz
   baseDots={130}
-  legend="The grid is the 1,294 activation requests processed (130 dots, each dot ≈ 10 requests). Ramp and rejection metrics use their own scale to show reach and precision alongside volume."
+  legend="The grid is 130 dots ≈ the 1,294 requests processed. Ramp and rejection use their own scale."
   metrics={[
     { label: "Requests processed", value: "1,294", dots: 130, sub: "Every activation request evaluated · each dot ≈ 10 requests, all 130 dots", onEmoji: "📥" },
     { label: "Credits assigned", value: "1,238", dots: 124, sub: "Successfully credited · same per-dot scale as requests", onEmoji: "✅" },
@@ -268,15 +272,15 @@ The goal was simple: understand where merchants were getting stuck, design an in
   items={[
     {
       title: "Problem",
-      body: "pricing visitors had questions a static page could not answer, but AI widgets had to prove real lift.",
+      body: "Pricing visitors had questions a static page could not answer, but AI widgets had to prove real lift.",
     },
     {
       title: "OKR",
-      body: "improve visitor-to-signup conversion on the pricing page by reducing decision uncertainty.",
+      body: "Improve visitor-to-signup conversion on the pricing page by reducing decision uncertainty.",
     },
     {
-      title: "Success signal",
-      body: "initial Smart Assist lift was promising, then stricter validation clarified the real confidence level.",
+      title: "Success metric",
+      body: "Initial Smart Assist lift was promising, then stricter validation clarified the real confidence level.",
     },
   ]}
 />
@@ -313,12 +317,7 @@ The goal was simple: understand where merchants were getting stuck, design an in
   src="/work/growth-experiments/smartassist/recording.mp4"
   alt="Screen recording of the Ray AI voice assistant connecting as a fallback when microphone access is blocked"
   caption="The Ray fallback: when the mic is blocked, visitors connect through an AI voice assistant instead."
-/>
-
-<CaseImage
-  src="/work/growth-experiments/smartassist/pricing-page-live.png"
-  alt="Smart Assist widget live on the Razorpay pricing page, greeting the visitor before they ask"
-  caption="Smart Assist live on the pricing page, ready to answer before the visitor has to ask."
+  crop
 />
 
 <CaseImage
@@ -327,11 +326,13 @@ The goal was simple: understand where merchants were getting stuck, design an in
   caption="Widget states across the conversation: from consent capture to session timeout and high-demand fallback."
 />
 
+## Results
+
 **The early lift became a validation lesson.** A first read looked like a win; a larger, later split showed no clear winner.
 
 <ResultsViz
   baseDots={100}
-  legend="The grid is a 100-dot canvas at 1% per dot. The first read looked like a win; the later, larger validation split showed overlapping ranges — a measurement lesson, not a launch."
+  legend="The grid is 100 dots at 1% each. The first read looked like a win; the later split showed no clear winner."
   metrics={[
     { label: "Initial signup signal", value: "+14%", dots: 14, sub: "6.7% Smart Assist vs 5.9% control, the first read", onEmoji: "📈" },
     { label: "Validation: Smart Assist", value: "4.7%", dots: 5, sub: "33/33/34 validation split, the later read", onEmoji: "🤖" },
@@ -340,10 +341,8 @@ The goal was simple: understand where merchants were getting stuck, design an in
   ]}
 />
 
-## What I would carry forward
+## My learnings
 
 - Growth design worked best when it reduced uncertainty at a real user decision point, not when it simply added another nudge.
 - The strongest case-study moments are the decisions behind the screens: why a banner is persistent, why a reward needs re-entry, why a voice widget needs a chat fallback.
 - Measurement design matters as much as visual design. Smart Assist is a useful example of how early lift can turn into sharper learning after better validation.
-
-[Design directions](https://www.figma.com/design/CgmBuWSXG4CfgIIuSUvnaG/Gopi-2026?node-id=421-9&t=OOMTgPaIrbJ1GJkw-1) · [Gamification journey](https://www.figma.com/design/VeXIPFXbRsIzdfjYjhB9fE/%F0%9F%8E%81-Streak-Gamification--Design-?node-id=485-38130&t=8OhJC0p9ZJzhIkiE-1) · [Free PG direction](https://www.figma.com/design/MSXcrRiBMNVT9nW6s9rCsQ/New-Merchant-Offer?node-id=282-11252&t=yODmMFHQLCOx8ZGw-1)
