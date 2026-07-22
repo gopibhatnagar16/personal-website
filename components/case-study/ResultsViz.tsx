@@ -7,6 +7,8 @@ interface Metric {
   value: string;
   dots: number;
   sub: string;
+  onEmoji?: string;
+  offEmoji?: string;
 }
 
 interface Props {
@@ -15,13 +17,18 @@ interface Props {
   legend?: string;
 }
 
+const DEFAULT_ON = "🟣";
+const DEFAULT_OFF = "⚪";
+
 /* Results dot-grid viz: metric cards on the left, a waffle grid on the
    right. The grid always renders `baseDots` dots; the selected metric
-   fills its share in the accent color. */
+   fills its share with its emoji (falls back to a plain dot pair). */
 export function ResultsViz({ metrics, baseDots, legend }: Props) {
   const [active, setActive] = useState(0);
   const metric = metrics[active];
   const filled = Math.max(0, Math.min(metric.dots, baseDots));
+  const onEmoji = metric.onEmoji ?? DEFAULT_ON;
+  const offEmoji = metric.offEmoji ?? DEFAULT_OFF;
 
   return (
     <div className="cs-viz">
@@ -58,7 +65,7 @@ export function ResultsViz({ metrics, baseDots, legend }: Props) {
               style={{ "--i": i } as React.CSSProperties}
               aria-hidden="true"
             >
-              {i < filled ? "🟣" : "⚪"}
+              {i < filled ? onEmoji : offEmoji}
             </span>
           ))}
         </div>

@@ -9,6 +9,9 @@ import { Accordion } from "@/components/case-study/Accordion";
 import { ResultsViz } from "@/components/case-study/ResultsViz";
 import { OutcomeCards } from "@/components/case-study/OutcomeCards";
 import { InsightCards } from "@/components/case-study/InsightCards";
+import { StageCards } from "@/components/case-study/StageCards";
+import { ExperimentMap } from "@/components/case-study/ExperimentMap";
+import { ExperimentHeader } from "@/components/case-study/ExperimentHeader";
 import { SectionIntro } from "@/components/case-study/SectionIntro";
 import { GoalCards } from "@/components/case-study/GoalCards";
 
@@ -27,6 +30,9 @@ export const mdxComponents: MDXComponents = {
   ResultsViz,
   OutcomeCards,
   InsightCards,
+  StageCards,
+  ExperimentMap,
+  ExperimentHeader,
   SectionIntro,
   GoalCards,
   DraggableCanvas,
