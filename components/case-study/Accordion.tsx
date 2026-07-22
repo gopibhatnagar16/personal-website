@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 interface AccItem {
-  title: string;
+  title?: string;
   body: string;
 }
 
@@ -32,15 +32,21 @@ export function Accordion({ title, items, note, defaultOpen = true }: Props) {
       </button>
       {open && (
         <div className="cs-acc-body">
-          {items.map((it, i) => (
-            <div className="cs-acc-item" key={it.title}>
-              <span className="cs-acc-num">{String(i + 1).padStart(2, "0")}</span>
-              <div>
-                <span className="cs-acc-item-title">{it.title}</span>
-                <p className="cs-acc-item-body">{it.body}</p>
+          {items.map((it, i) =>
+            it.title ? (
+              <div className="cs-acc-item" key={it.title}>
+                <span className="cs-acc-num">{String(i + 1).padStart(2, "0")}</span>
+                <div>
+                  <span className="cs-acc-item-title">{it.title}</span>
+                  <p className="cs-acc-item-body">{it.body}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            ) : (
+              <p className="cs-acc-item-body cs-acc-item-body-plain" key={i}>
+                {it.body}
+              </p>
+            )
+          )}
           {note && <p className="cs-acc-note">{note}</p>}
         </div>
       )}

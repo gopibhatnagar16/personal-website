@@ -14,6 +14,10 @@ import { ExperimentMap } from "@/components/case-study/ExperimentMap";
 import { ExperimentHeader } from "@/components/case-study/ExperimentHeader";
 import { SectionIntro } from "@/components/case-study/SectionIntro";
 import { GoalCards } from "@/components/case-study/GoalCards";
+import { ProblemStatement } from "@/components/case-study/ProblemStatement";
+import { DirectionList } from "@/components/case-study/DirectionList";
+import { ShiftList } from "@/components/case-study/ShiftList";
+import { QuoteCards } from "@/components/case-study/QuoteCards";
 
 /* Components available inside the content MDX files.
    ImagePlaceholder is CaseImage without a src — the same grey slot the
@@ -35,5 +39,9 @@ export const mdxComponents: MDXComponents = {
   ExperimentHeader,
   SectionIntro,
   GoalCards,
+  ProblemStatement,
+  DirectionList,
+  ShiftList,
+  QuoteCards,
   DraggableCanvas,
 };
