@@ -118,7 +118,19 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
       </header>
 
       <div className="cs-col">
-        {meta.cover ? (
+        {meta.coverVideo ? (
+          <video
+            className="cs-hero"
+            src={meta.coverVideo}
+            poster={meta.cover}
+            aria-label={meta.title}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+          />
+        ) : meta.cover ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img className="cs-hero" src={meta.cover} alt={meta.title} />
         ) : (
