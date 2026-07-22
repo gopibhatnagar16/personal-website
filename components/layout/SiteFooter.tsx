@@ -14,7 +14,7 @@ export function SiteFooter({ variant = "fixed" }: Props) {
   const bind = useEyes();
 
   return (
-    <footer className={"site-footer" + (variant === "static" ? " site-footer-static" : "")} {...bind("📩")}>
+    <footer className={"site-footer" + (variant === "static" ? " site-footer-static" : "")}>
       <div className="ft-inner">
         <div className="ft-note">
           <span className="ft-tape" aria-hidden="true" />
@@ -33,7 +33,7 @@ export function SiteFooter({ variant = "fixed" }: Props) {
         <div className="ft-veil" aria-hidden="true" />
 
         <div className="ft-social">
-          <a className="ft-chip r1" href={`mailto:${CONFIG.email}`} aria-label="Email">
+          <a className="ft-chip r1" href={`mailto:${CONFIG.email}`} aria-label="Email" {...bind("📩")}>
             <span className="ft-label">Email</span>
             <span className="mailicon" aria-hidden="true">
               <span className="mi-open" />
@@ -47,6 +47,7 @@ export function SiteFooter({ variant = "fixed" }: Props) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
+            {...bind("📩")}
           >
             <span className="ft-label">LinkedIn</span>
             <svg width="48" height="48" viewBox="0 0 448 512" fill="currentColor">
@@ -63,6 +64,7 @@ export function SiteFooter({ variant = "fixed" }: Props) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Twitter"
+            {...bind("📩")}
           >
             <span className="ft-label">Twitter</span>
             <svg width="46" height="46" viewBox="0 0 512 512" fill="currentColor">
@@ -75,6 +77,7 @@ export function SiteFooter({ variant = "fixed" }: Props) {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open resume"
+            {...bind("📩")}
           >
             <span className="ft-label">Open resume</span>
             <svg className="envsvg" viewBox="22 20 56 64" aria-hidden="true">

@@ -73,6 +73,7 @@ export function LandingClient({ work, writing }: Props) {
                 pan={personalControls.pan}
                 setPan={personalControls.setPan}
               />
+              <span className="canvas-hint">Drag &amp; move items in the board</span>
             </section>
           </div>
         </div>

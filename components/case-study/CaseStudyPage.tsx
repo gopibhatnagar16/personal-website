@@ -17,6 +17,11 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
   const meta = await getContentMeta(kind, slug);
   if (!meta) notFound();
 
+  const siblings = await listContent(kind);
+  const index = siblings.findIndex((s) => s.slug === slug);
+  const prev = index > 0 ? siblings[index - 1] : null;
+  const next = index >= 0 && index < siblings.length - 1 ? siblings[index + 1] : null;
+
   const kindLabel = kind === "work" ? "Work" : "Writing";
   const jsonLd = {
     "@context": "https://schema.org",
@@ -40,54 +45,60 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
           <div className="cs-topnav">
             <header className="cs-bar">
               <Link className="cs-back" href="/">Home</Link>
-              <span className="cs-kind">{kindLabel}</span>
+              {next ? (
+                <Link className="cs-back cs-back-next" href={`/${kind}/${next.slug}`}>Next project →</Link>
+              ) : (
+                <span className="cs-kind">{kindLabel}</span>
+              )}
             </header>
           </div>
 
-          {/* Real chrome + metadata behind the modal, so it reads as the actual
-              case-study page rather than a blank placeholder. The compiled MDX
-              body is never sent while locked, so it's stubbed with skeleton
-              blocks — inert and unselectable since there's nothing to read. */}
-          <div className="cs-col cs-locked-preview" aria-hidden="true" inert>
-            {meta.cover ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img className="cs-hero" src={meta.cover} alt="" />
-            ) : (
-              <div className="cs-hero cs-hero-placeholder" />
-            )}
-            <h1 className="cs-title">{meta.title}</h1>
-            <p className="cs-tagline">{meta.tagline}</p>
-            <div className="cs-meta">
-              <div className="cs-m"><span className="cs-mk">Role</span><span className="cs-mv">{meta.role}</span></div>
-              <div className="cs-m"><span className="cs-mk">Year</span><span className="cs-mv">{meta.year}</span></div>
-              <div className="cs-m"><span className="cs-mk">Team</span><span className="cs-mv">{meta.team}</span></div>
-            </div>
-            <div className="cs-skel">
-              <span className="cs-skel-line" style={{ width: "94%" }} />
-              <span className="cs-skel-line" style={{ width: "88%" }} />
-              <span className="cs-skel-line" style={{ width: "60%" }} />
-              <span className="cs-skel-block" />
-              <span className="cs-skel-line" style={{ width: "91%" }} />
-              <span className="cs-skel-line" style={{ width: "82%" }} />
-              <span className="cs-skel-line" style={{ width: "70%" }} />
-            </div>
-          </div>
-
-          <div className="cs-lock-overlay">
-            <div className="cs-lock-card">
-              <div className="cs-lock-icon" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                  <rect x="5" y="11" width="14" height="10" rx="2.5" stroke="currentColor" strokeWidth="2" />
-                  <path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                  <circle cx="12" cy="16" r="1.6" fill="currentColor" />
-                </svg>
+          <div className="cs-shell">
+            {/* Real chrome + metadata behind the modal, so it reads as the actual
+                case-study page rather than a blank placeholder. The compiled MDX
+                body is never sent while locked, so it's stubbed with skeleton
+                blocks — inert and unselectable since there's nothing to read. */}
+            <div className="cs-col cs-locked-preview" aria-hidden="true" inert>
+              {meta.cover ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img className="cs-hero" src={meta.cover} alt="" />
+              ) : (
+                <div className="cs-hero cs-hero-placeholder" />
+              )}
+              <h1 className="cs-title">{meta.title}</h1>
+              <p className="cs-tagline">{meta.tagline}</p>
+              <div className="cs-meta">
+                <div className="cs-m"><span className="cs-mk">Role</span><span className="cs-mv">{meta.role}</span></div>
+                <div className="cs-m"><span className="cs-mk">Year</span><span className="cs-mv">{meta.year}</span></div>
+                <div className="cs-m"><span className="cs-mk">Team</span><span className="cs-mv">{meta.team}</span></div>
               </div>
-              <span className="cs-eyebrow cs-lock-eyebrow">Protected</span>
-              <h1 className="cs-title cs-lock-title">{meta.title}</h1>
-              <p className="cs-tagline cs-lock-tagline">
-                This case study is password protected. Enter the password to continue.
-              </p>
-              <PasswordGate />
+              <div className="cs-skel">
+                <span className="cs-skel-line" style={{ width: "94%" }} />
+                <span className="cs-skel-line" style={{ width: "88%" }} />
+                <span className="cs-skel-line" style={{ width: "60%" }} />
+                <span className="cs-skel-block" />
+                <span className="cs-skel-line" style={{ width: "91%" }} />
+                <span className="cs-skel-line" style={{ width: "82%" }} />
+                <span className="cs-skel-line" style={{ width: "70%" }} />
+              </div>
+            </div>
+
+            <div className="cs-lock-overlay">
+              <div className="cs-lock-card">
+                <div className="cs-lock-icon" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <rect x="5" y="11" width="14" height="10" rx="2.5" stroke="currentColor" strokeWidth="2" />
+                    <path d="M8 11V7a4 4 0 0 1 8 0v4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+                    <circle cx="12" cy="16" r="1.6" fill="currentColor" />
+                  </svg>
+                </div>
+                <span className="cs-eyebrow cs-lock-eyebrow">Protected</span>
+                <h1 className="cs-title cs-lock-title">{meta.title}</h1>
+                <p className="cs-tagline cs-lock-tagline">
+                  This case study is password protected. Enter the password to continue.
+                </p>
+                <PasswordGate />
+              </div>
             </div>
           </div>
         </div>
@@ -99,10 +110,6 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
   const body = await getContentBody(kind, slug);
   if (body === null) notFound();
 
-  const siblings = await listContent(kind);
-  const index = siblings.findIndex((s) => s.slug === slug);
-  const prev = index > 0 ? siblings[index - 1] : null;
-  const next = index >= 0 && index < siblings.length - 1 ? siblings[index + 1] : null;
   // blockJS:false re-enables JSX expression props ({...}) which v6 strips
   // by default — safe here because the source is our own committed content,
   // never user input; blockDangerousJS stays on as a guard.
@@ -130,6 +137,7 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
           </header>
         </div>
 
+        <div className="cs-shell">
         <div className="cs-col">
           {meta.coverVideo ? (
             <video
@@ -179,6 +187,7 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
               </nav>
             </div>
           )}
+        </div>
         </div>
       </div>
       <SiteFooter />

@@ -70,7 +70,7 @@ export function Hero() {
       <p className="ideology">{CONFIG.ideology[0]}</p>
       <p className="ideology">{CONFIG.ideology[1]}</p>
 
-      <button className="pressc" onClick={copyEmail}>
+      <button className={"pressc" + (copied ? " pressc-copied" : "")} onClick={copyEmail}>
         {copied ? (<>Email copied&nbsp;✓</>) : (<>Press <kbd>C</kbd> to copy my email</>)}
       </button>
 

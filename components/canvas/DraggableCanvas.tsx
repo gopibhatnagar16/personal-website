@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { RotateCcw } from "lucide-react";
+import { RotateCcw, ArrowUpRight } from "lucide-react";
 import { SHAPE_GREYS, type CanvasItem } from "@/lib/config";
 
 interface Props {
@@ -149,7 +149,9 @@ const PROTRACTOR_SVG = protractorSvg();
 /* draggable canvas — infinite pan (mat) or a fixed, bounded board */
 export function DraggableCanvas({ items, height, variant, pannable = true, pan, setPan, matColor }: Props) {
   const canvasRef = useRef<HTMLDivElement>(null);
-  const drag = useRef<{ id: string; ox: number; oy: number } | null>(null);
+  const drag = useRef<{ id: string; ox: number; oy: number; startX: number; startY: number; moved: boolean } | null>(
+    null
+  );
   const panDrag = useRef<{ x: number; y: number; panX: number; panY: number } | null>(null);
   const zTop = useRef(items.length);
   const [pos, setPos] = useState<Record<string, { x: number; y: number; z: number }>>(() => {
@@ -166,17 +168,36 @@ export function DraggableCanvas({ items, height, variant, pannable = true, pan, 
     if (pannable) {
       const screenX = pos[id].x + pan.x;
       const screenY = pos[id].y + pan.y;
-      drag.current = { id, ox: e.clientX - r.left - screenX, oy: e.clientY - r.top - screenY };
+      drag.current = {
+        id,
+        ox: e.clientX - r.left - screenX,
+        oy: e.clientY - r.top - screenY,
+        startX: e.clientX,
+        startY: e.clientY,
+        moved: false,
+      };
     } else {
       const curX = (pos[id].x / 100) * r.width;
       const curY = (pos[id].y / 100) * r.height;
-      drag.current = { id, ox: e.clientX - r.left - curX, oy: e.clientY - r.top - curY };
+      drag.current = {
+        id,
+        ox: e.clientX - r.left - curX,
+        oy: e.clientY - r.top - curY,
+        startX: e.clientX,
+        startY: e.clientY,
+        moved: false,
+      };
     }
     zTop.current += 1;
     setPos((s) => ({ ...s, [id]: { ...s[id], z: zTop.current } }));
   };
   const onMove = (e: React.PointerEvent) => {
     if (!drag.current) return;
+    if (!drag.current.moved) {
+      const dx = e.clientX - drag.current.startX;
+      const dy = e.clientY - drag.current.startY;
+      if (Math.abs(dx) > 4 || Math.abs(dy) > 4) drag.current.moved = true;
+    }
     const r = canvasRef.current!.getBoundingClientRect();
     const id = drag.current.id;
     if (pannable) {
@@ -194,7 +215,16 @@ export function DraggableCanvas({ items, height, variant, pannable = true, pan, 
       setPos((s) => ({ ...s, [id]: { ...s[id], x: xPct, y: yPct } }));
     }
   };
-  const onUp = () => (drag.current = null);
+  // a plain click (no drag) on a card with a link opens it in a new tab —
+  // gated on the same movement threshold that flips `moved`, so dragging a
+  // tidbit off the pile never doubles as a navigation.
+  const onUp = () => {
+    const d = drag.current;
+    drag.current = null;
+    if (!d || d.moved) return;
+    const it = items.find((i) => i.id === d.id);
+    if (it?.href) window.open(it.href, "_blank", "noopener,noreferrer");
+  };
 
   // background drag — pans the whole mat, unbounded in every direction (pannable only)
   const onCanvasDown = (e: React.PointerEvent) => {
@@ -320,6 +350,12 @@ export function DraggableCanvas({ items, height, variant, pannable = true, pan, 
                 />
               ))}
             {isPolaroid && it.caption && <span className="ci-cap">{it.caption}</span>}
+            {it.tip && (
+              <span className="ci-tip">
+                <span className="ci-tip-text">{it.tip}</span>
+                <ArrowUpRight size={13} strokeWidth={2} />
+              </span>
+            )}
           </div>
         );
       })}

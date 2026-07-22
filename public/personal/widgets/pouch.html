@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sticker pouch</title>
 <style>
-  html,body{margin:0;padding:0;height:100%;overflow:hidden;background:#f5f4f0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  html,body{margin:0;padding:0;height:100%;overflow:hidden;background:transparent;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
   .pz-viewport{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
   .pz-wrap{display:flex;flex-direction:column;align-items:center;gap:14px;padding:10px 0;
     transform-origin:center center;visibility:hidden}
@@ -16,7 +16,6 @@
   .pz-inside{position:absolute;left:85px;top:118px;width:200px;height:70px;border-radius:14px 14px 0 0;background:#7d3410;z-index:1}
   .pz-front{position:absolute;left:10px;top:0;z-index:3;pointer-events:none}
   .pz-c{z-index:2}
-  .pz-hint{font-size:13px;color:#8a8a85}
   @media (prefers-reduced-motion: reduce){
     .pz-card{transition:none}
   }
@@ -94,7 +93,6 @@
       </g>
     </svg>
   </div>
-  <span class="pz-hint">hover over the pouch</span>
 </div>
 </div>
 <script>
