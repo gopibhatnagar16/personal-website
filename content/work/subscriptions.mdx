@@ -11,9 +11,25 @@ preview: /work/subscriptions/preview.png
 cover: /work/subscriptions/cover.png
 ---
 
-## Context
+<SectionIntro
+  eyebrow="Context"
+  title="Build a clear pricing route for new businesses"
+  subtitle="Most Razorpay products are charged at the standard transaction rate — here's how each goal shaped what came next."
+/>
 
-Most Razorpay products are charged at standard transaction rates. **Business goal:** one standard rate was simple, but gave payment-ready businesses little reason to choose or deepen their use of Razorpay. **Product goal:** give businesses a clear route: stay on the standard rate, or choose a subscription plan they can manage later.
+<GoalCards
+  items={[
+    {
+      label: "Business goal",
+      body: "One standard rate was simple, but gave payment-ready businesses little reason to choose or deepen their use of Razorpay.",
+      highlight: true,
+    },
+    {
+      label: "Product goal",
+      body: "Give businesses a clear route: stay on the standard rate, or choose a subscription plan they can manage later.",
+    },
+  ]}
+/>
 
 The final shape of that route was a three-plan choice during onboarding, with Standard always available and no commitment required:
 
@@ -48,9 +64,11 @@ Mapping the current journey made the gaps explicit:
   caption="The same journey with the gaps marked: context collected at Onboarding went unused, Setup showed no plan choice, Dashboard offered no lifecycle."
 />
 
-## Discovery
-
-Onboarding captured useful business details, but every eligible business still saw the same rate.
+<SectionIntro
+  eyebrow="Discovery"
+  title="The product knew the business. Pricing did not use that context."
+  subtitle="Onboarding captured useful business details, but every eligible business still saw one standard rate and no clearer next step."
+/>
 
 <WhyHowWhat
   items={[
