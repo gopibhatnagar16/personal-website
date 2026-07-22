@@ -32,13 +32,10 @@ coverVideo: /work/subscriptions/cover.mp4
   ]}
 />
 
-The final shape of that route was a three-plan choice during onboarding, with Standard always available and no commitment required:
-
-- **Standard: 2%.** Start with the default rate and change later.
-- **Plus: 1.9%** *(recommended)*. Lower fees as payment volume begins to grow.
-- **Pro: 1.8%.** More value for businesses expecting higher volume.
-
-The subscription opportunity sits just after onboarding, when the business has given us enough context but has not yet formed a regular payment habit. The intended route: understand the business → offer a clear pricing route → help it make a first payment → support regular payment use over time. The existing journey offered one standard rate and no self-serve pricing choice, leaving committed businesses to switch gateways, contact Sales, or postpone the decision.
+<SectionIntro
+  title="User context"
+  subtitle="The product meets businesses in several states. The subscription opportunity sits after onboarding, when the business has given us enough context but has not yet formed a regular payment habit."
+/>
 
 <CaseImage
   src="/work/subscriptions/opportunity-window.png"
@@ -46,24 +43,37 @@ The subscription opportunity sits just after onboarding, when the business has g
   caption="The subscription opportunity sits right after onboarding, in the Setup step, before a habit forms."
 />
 
-## Problem
+<ProblemStatement
+  eyebrow="Problem"
+  segments={[
+    { text: "After a " },
+    { text: "registered business", emphasis: true },
+    { text: " completed onboarding, the product still showed " },
+    { text: "one standard rate,", emphasis: true },
+    { text: " even though we had enough context to offer a more relevant next step." },
+  ]}
+/>
 
-After a registered business completed onboarding, the product still showed one standard rate, even though we had enough context to offer a more relevant next step. In the existing design, only high-value merchants could request customized pricing through Contact Sales; everyone else saw 2% and nothing more.
+In the existing design, only high-value merchants could request customized pricing through Contact Sales; everyone else saw 2% and nothing more.
 
-The opportunity sat in the short window after setup: the product understood the business, but did not yet use that understanding to help it choose how to start. If pricing stayed unclear, merchants could leave before forming a transaction habit.
+<CaseImage
+  alt="Existing subscription pricing page: high-value merchants can request customized pricing by contacting sales"
+  caption="Existing design: high-value merchants can request customized pricing by contacting sales."
+/>
 
-Mapping the current journey made the gaps explicit:
+<CaseImage
+  alt="The existing journey offered one standard rate and no self-serve pricing choice"
+  caption="The existing journey offered one standard rate but no self-serve pricing choice, leaving committed businesses to switch gateways, contact Sales, or postpone the decision."
+/>
 
-- **Discover / Sign up:** the business compares providers, creates an account, begins setup.
-- **Onboarding:** it shares business details and expects a relevant next step. *Gap: context collected, then unused.*
-- **Setup:** it sees only the standard rate before taking payments. *Gap: no plan choice.*
-- **Dashboard:** it cannot easily revisit or manage pricing later. *Gap: no lifecycle.*
+<SectionIntro title="Where the experience broke" />
 
 <CaseImage
   src="/work/subscriptions/journey-gaps.png"
   alt="Merchant journey diagram with gaps marked at Onboarding, Setup, and Dashboard"
-  caption="The same journey with the gaps marked: context collected at Onboarding went unused, Setup showed no plan choice, Dashboard offered no lifecycle."
 />
+
+The subscription opportunity sat in the short window after setup: the product understood the business, but did not yet use that understanding to help it choose how to start.
 
 <SectionIntro
   eyebrow="Discovery"
@@ -91,22 +101,65 @@ Mapping the current journey made the gaps explicit:
   ]}
 />
 
-A composite from merchant calls made the moment concrete. Meet **Arjun**: he has completed onboarding for his online apparel business and is ready to take payments. Before choosing a pricing route, he needs to know what is optional, what fits his expected volume, and whether he can change his mind later. His journey through the decision:
+<PersonaIntro
+  eyebrow="A composite from merchant calls"
+  name="Meet Arjun"
+  body="He has completed onboarding for his online apparel business and is ready to take payments. Before choosing a pricing route, he needs to know what is optional, what fits his expected volume, and whether he can change his mind later."
+/>
 
-- **Relieved:** setup complete, ready to begin taking payments.
-- **Unsure:** "Is 2% my only choice?" One standard rate gives him no way to judge a better route.
-- **Comparing:** Standard and a relevant subscription need to appear as clear alternatives.
-- **Understanding:** volume cues make the value of each plan easier to judge.
-- **Confident:** Standard stays valid alongside optional pricing routes.
-- **In control:** he can revisit or manage the choice once real payment use grows.
+<MetaRow
+  items={[
+    { label: "Business", value: "Online apparel seller" },
+    { label: "Signal", value: "Ready to accept payments" },
+    { label: "Need", value: "A pricing route he can understand" },
+  ]}
+/>
 
 <CaseImage
-  src="/work/subscriptions/journey-map.png"
-  alt="Merchant journey mapped by stage and emotion, from Discovery through Dashboard"
+  alt="Six-panel illustrated strip of Arjun's journey: setup complete, is 2% my only choice, which plan fits, see savings at my volume, choose a route, manage it later"
   caption="Arjun's journey mapped by stage and emotion: confidence drops after Setup, where only the flat rate appears, and stays low through Dashboard."
 />
 
-To explain what the funnel couldn't, Ishan and I called around **120 merchants** and had **30 meaningful conversations** across merchants who paused, stayed on the default path, and chose a paid plan. We used calls because the funnel only showed what happened, not why. We deliberately spoke to drop-offs, free-plan choosers, and paid choosers so the research did not become only a drop-off audit.
+<SplitCards
+  cards={[
+    {
+      label: "Pain points",
+      title: "What merchants told us",
+      accent: "warn",
+      items: [
+        { text: "Cautious starters wanted to begin safely and upgrade later if needed." },
+        { text: "Value-conscious merchants wanted savings they could remember and compare." },
+        { text: "Some people mistook a paid plan for a requirement to take payments." },
+      ],
+    },
+    {
+      label: "Design response",
+      title: "What this meant for the experience",
+      accent: "positive",
+      items: [
+        { lead: "Clear choice", text: "make it explicit that Standard remains available." },
+        { lead: "Visible fit", text: "show how a plan connects to expected payment volume." },
+        { lead: "Flexible control", text: "let merchants return and manage the decision later." },
+      ],
+    },
+  ]}
+/>
+
+<SectionIntro
+  eyebrow="Merchant research"
+  title="Merchant calls explained what the funnel could not"
+  subtitle="Ishan and I called around 120 merchants and had 30 meaningful conversations across merchants who paused, stayed on the default path, and chose a paid plan. The goal was to learn whether hesitation came from value, understanding, or a setup issue outside the pricing experience."
+/>
+
+<Accordion
+  title="How we approached the research"
+  defaultOpen={false}
+  items={[
+    {
+      body: "We used calls because the funnel only showed what happened, not why. We deliberately spoke to drop-offs, free-plan choosers, and paid choosers so the research did not become only a drop-off audit. We listened for value calculation, free-plan anxiety, setup blockers, and whether paid plans felt mandatory.",
+    },
+  ]}
+/>
 
 <ResearchFlow
   steps={[
@@ -135,24 +188,54 @@ To explain what the funnel couldn't, Ishan and I called around **120 merchants**
   ]}
 />
 
-Four situations kept repeating:
+<SectionIntro title="Who we heard from, and what they said" />
 
-- **Cautious starters:** "I am just starting out. I will upgrade later if needed."
-- **Value-conscious comparers:** "The rate is better, but I do not remember the exact calculation."
-- **Confused buyers:** "Do I need to pay to start accepting payments?"
-- **Setup-blocked merchants:** "I was still stuck on setup, so the plan did not matter yet."
+<QuoteCards
+  items={[
+    {
+      label: "Cautious starter",
+      body: "Starting small and unsure of their future payment volume.",
+      quote: "I am just starting out. I will upgrade later if needed.",
+    },
+    {
+      label: "Value-conscious comparer",
+      body: "Interested in lower fees, but unable to recall the actual saving.",
+      quote: "The rate is better, but I do not remember the exact calculation.",
+    },
+    {
+      label: "Confused buyer",
+      body: "Unsure whether paying for a plan was required to accept payments.",
+      quote: "Do I need to pay to start accepting payments?",
+    },
+    {
+      label: "Setup-blocked merchant",
+      body: "Still resolving payment setup, so pricing was not yet the real barrier.",
+      quote: "I was still stuck on setup, so the plan did not matter yet.",
+    },
+  ]}
+/>
 
 That translated into three shifts the design had to make:
 
-- From **one standard rate for every business** → to **a relevant plan based on business context**.
-- From **working out fees and value alone** → to **seeing savings at the expected payment volume**.
-- From **a one-time onboarding decision** → to **a plan they can revisit and manage later**.
+<ShiftList
+  items={[
+    { from: "One standard rate for every business", to: "A relevant plan based on business context" },
+    { from: "Working out fees and value alone", to: "Seeing savings at the expected payment volume" },
+    { from: "A one-time onboarding decision", to: "A plan they can revisit and manage later" },
+  ]}
+/>
 
-## How might we
+<SectionIntro eyebrow="How might we" />
 
 > Help a new business choose the right pricing option with confidence.
 
-Three directions shaped the solution: **clear choice** (show Standard and optional plans as distinct, understandable routes), **visible fit** (connect expected payment volume to savings and benefits a business can judge), and **flexible control** (let merchants start now, then revisit, change, or cancel as their needs evolve).
+<DirectionList
+  items={[
+    { number: "01", title: "Clear choice", body: "Show Standard and optional plans as distinct, understandable routes." },
+    { number: "02", title: "Visible fit", body: "Connect expected payment volume to savings and benefits a business can judge." },
+    { number: "03", title: "Flexible control", body: "Let merchants start now, then revisit, change, or cancel as their needs evolve." },
+  ]}
+/>
 
 ## Iterations
 
@@ -334,11 +417,9 @@ The clearest outcome was merchant action: more businesses selected a plan, gener
 
 ## My learnings
 
-My role went beyond designing pricing cards. I used analytics to frame the opportunity, merchant conversations to explain the funnel, and product strategy to turn a winning variant into a journey that could scale.
+Pricing cards turned out to be the smallest part of this. The real work was reading the data, listening to merchants, and turning one winning variant into a journey people could actually live with.
 
-- **A lift is a signal:** pair conversion movement with research before deciding why a design worked.
-- **The journey is the design:** a winning screen is only useful when discovery, first use, and plan management work together.
-- **Growth still needs trust:** keeping the standard rate explicit made the nudge persuasive without making payment feel mandatory.
-- **Designers should know the metric:** understanding cohorts, events, and guardrails helped me shape the strategy, not only the interface.
-
-In one line: I turned a one-rate onboarding moment into a clearer subscription journey that helps a new business understand its options, choose with confidence, and manage its plan later.
+- **A lift is a signal, not an answer.** I paired conversion movement with research before deciding why a design worked.
+- **The journey is the design.** A winning screen only matters when discovery, first use, and plan management hold together.
+- **Growth still needs trust.** Keeping the standard rate explicit made the nudge persuasive without making payment feel mandatory.
+- **Know the metric, not just the screen.** Understanding cohorts, events, and guardrails shaped the strategy as much as the interface.

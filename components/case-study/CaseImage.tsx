@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Props {
   src?: string;
@@ -14,6 +14,13 @@ interface Props {
 export function CaseImage({ src, alt = "", caption }: Props) {
   const [open, setOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  useEffect(() => {
+    // Cached images can finish loading before this effect (and the onLoad
+    // listener) attaches, which would otherwise leave opacity stuck at 0.
+    if (imgRef.current?.complete) setLoaded(true);
+  }, [src]);
 
   useEffect(() => {
     if (!open) return;
@@ -39,6 +46,7 @@ export function CaseImage({ src, alt = "", caption }: Props) {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
+            ref={imgRef}
             className={"cs-fig-img" + (loaded ? " img-loaded" : "")}
             src={src}
             alt={alt}
