@@ -12,6 +12,8 @@ import { InsightCards } from "@/components/case-study/InsightCards";
 import { StageCards } from "@/components/case-study/StageCards";
 import { ExperimentMap } from "@/components/case-study/ExperimentMap";
 import { ExperimentHeader } from "@/components/case-study/ExperimentHeader";
+import { SectionIntro } from "@/components/case-study/SectionIntro";
+import { GoalCards } from "@/components/case-study/GoalCards";
 
 /* Components available inside the content MDX files.
    ImagePlaceholder is CaseImage without a src — the same grey slot the
@@ -31,5 +33,7 @@ export const mdxComponents: MDXComponents = {
   StageCards,
   ExperimentMap,
   ExperimentHeader,
+  SectionIntro,
+  GoalCards,
   DraggableCanvas,
 };

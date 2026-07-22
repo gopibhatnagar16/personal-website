@@ -11,7 +11,7 @@ export function WhyHowWhat({ items }: { items: WhwItem[] }) {
       {items.map((it, i) => (
         <div className="cs-whw-item" key={it.k}>
           {i > 0 && <span className="cs-whw-arrow" aria-hidden="true">→</span>}
-          <div className="cs-whw-card">
+          <div className={"cs-whw-card cs-whw-card-" + (i % 3)}>
             <span className="cs-whw-k">{it.k}</span>
             <span className="cs-whw-title">{it.title}</span>
             <p className="cs-whw-body">{it.body}</p>
