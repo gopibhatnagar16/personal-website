@@ -44,7 +44,7 @@ export function LandingClient({ work, writing }: Props) {
               </div>
               <DraggableCanvas
                 items={CONFIG.tidbits}
-                height={400}
+                height={412}
                 variant="mat"
                 pan={tidbitsControls.pan}
                 setPan={tidbitsControls.setPan}
@@ -67,7 +67,7 @@ export function LandingClient({ work, writing }: Props) {
               </ul>
               <DraggableCanvas
                 items={CONFIG.pegboard}
-                height={520}
+                height={700}
                 variant="board"
                 pannable={false}
                 pan={personalControls.pan}

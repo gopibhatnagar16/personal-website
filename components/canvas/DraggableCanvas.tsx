@@ -250,6 +250,33 @@ export function DraggableCanvas({ items, height, variant, pannable = true, pan, 
       )}
       {items.map((it) => {
         const isPolaroid = it.kind === "polaroid";
+        const isHtml = it.kind === "html";
+
+        // html items are shared interactive widgets with their own hover
+        // behavior — sandboxed in an iframe, positioned like everything else
+        // but never wired to the drag handlers, so they stay pinned in place
+        // and only respond to hover.
+        if (isHtml) {
+          return (
+            <div
+              key={it.id}
+              className="ci ci-html"
+              style={
+                {
+                  left: pannable ? pos[it.id].x + pan.x : pos[it.id].x + "%",
+                  top: pannable ? pos[it.id].y + pan.y : pos[it.id].y + "%",
+                  zIndex: pos[it.id].z,
+                  width: it.w,
+                  height: it.h,
+                  ...(it.rot ? { "--rot": `${it.rot}deg` } : {}),
+                } as React.CSSProperties
+              }
+            >
+              <iframe className="ci-html-frame" src={it.html} title={it.id} loading="lazy" />
+            </div>
+          );
+        }
+
         // polaroids frame their media in an inner .ci-photo box (clip/pin +
         // optional caption) instead of a plain background-image.
         return (

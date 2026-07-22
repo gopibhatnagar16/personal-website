@@ -18,6 +18,7 @@ export default async function Home() {
     year: a.year,
     readTime: a.readTime,
     preview: a.preview,
+    previewVideo: a.previewVideo,
   }));
 
   return <LandingClient work={work} writing={writing} />;

@@ -12,11 +12,12 @@ export interface WritingRow {
   year?: string;
   readTime?: string;
   preview?: string;
+  previewVideo?: string;
 }
 
 export function WritingList({ items }: { items: WritingRow[] }) {
   const bind = useEyes();
-  const [prev, setPrev] = useState({ show: false, x: 0, y: 0, g: 0, preview: "" });
+  const [prev, setPrev] = useState({ show: false, x: 0, y: 0, g: 0, preview: "", previewVideo: "" });
 
   return (
     <section className="section" id="writing">
@@ -26,11 +27,11 @@ export function WritingList({ items }: { items: WritingRow[] }) {
           const eyes = bind("✍️");
           const handlers = {
             onMouseEnter: (e: React.MouseEvent) => {
-              setPrev({ show: true, x: e.clientX, y: e.clientY, g: i, preview: a.preview ?? "" });
+              setPrev({ show: true, x: e.clientX, y: e.clientY, g: i, preview: a.preview ?? "", previewVideo: a.previewVideo ?? "" });
               eyes.onMouseEnter(e);
             },
             onMouseMove: (e: React.MouseEvent) => {
-              setPrev({ show: true, x: e.clientX, y: e.clientY, g: i, preview: a.preview ?? "" });
+              setPrev({ show: true, x: e.clientX, y: e.clientY, g: i, preview: a.preview ?? "", previewVideo: a.previewVideo ?? "" });
               eyes.onMouseMove(e);
             },
             onMouseLeave: () => {
@@ -58,12 +59,16 @@ export function WritingList({ items }: { items: WritingRow[] }) {
             top: Math.max(14, prev.y - 92),
           }}
         >
-          <span
-            className="wp-img"
-            style={{
-              backgroundImage: prev.preview ? `url(${prev.preview})` : SHAPE_GREYS[prev.g % SHAPE_GREYS.length],
-            }}
-          />
+          {prev.previewVideo ? (
+            <video className="wp-img" src={prev.previewVideo} poster={prev.preview} autoPlay loop muted playsInline />
+          ) : (
+            <span
+              className="wp-img"
+              style={{
+                backgroundImage: prev.preview ? `url(${prev.preview})` : SHAPE_GREYS[prev.g % SHAPE_GREYS.length],
+              }}
+            />
+          )}
         </div>
       )}
     </section>
