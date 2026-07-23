@@ -48,7 +48,7 @@ export function WorkList({ items }: { items: WorkRow[] }) {
               />
               <span className="rx-title">{w.title}</span>
               {w.upcoming ? (
-                <span className="rx-badge">Upcoming</span>
+                <span className="rx-badge">Coming soon</span>
               ) : (
                 <span className="rx-date">{w.year}</span>
               )}

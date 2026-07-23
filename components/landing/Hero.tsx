@@ -10,6 +10,13 @@ export function Hero() {
   const [veil, setVeil] = useState(false);
   const [copied, setCopied] = useState(false);
   const copyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  // see EyesCursor — touch taps fire a synthetic mouseenter with no matching
+  // mouseleave, which would otherwise leave the background blur stuck on.
+  const hoverCapable = useRef(true);
+
+  useEffect(() => {
+    hoverCapable.current = window.matchMedia("(hover: hover)").matches;
+  }, []);
 
   const copyEmail = () => {
     const done = () => {
@@ -47,8 +54,16 @@ export function Hero() {
         onClick={() => {
           setFanned((v) => !v);
           document.getElementById("personal")?.scrollIntoView({ behavior: "smooth" });
+          // touch has no mouseleave to settle the fan/veil back down after the
+          // tap scrolls away, so clear them on a timer instead.
+          if (!hoverCapable.current) {
+            window.setTimeout(() => {
+              setFanned(false);
+              setVeil(false);
+            }, 700);
+          }
         }}
-        onMouseEnter={(e) => { eyesHandlers.onMouseEnter(e); setVeil(true); }}
+        onMouseEnter={(e) => { eyesHandlers.onMouseEnter(e); if (hoverCapable.current) setVeil(true); }}
         onMouseMove={eyesHandlers.onMouseMove}
         onMouseLeave={() => { setFanned(false); eyesHandlers.onMouseLeave(); setVeil(false); }}
         role="img"

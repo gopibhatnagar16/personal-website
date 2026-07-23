@@ -67,22 +67,22 @@ export function MediaSwitcher({
             <span className="cs-sw-pill">
               <span className="cs-sw-num">{String(i + 1).padStart(2, "0")}</span>
               <span className="cs-sw-label">{s.label}</span>
-            </span>
-            <span className="cs-sw-track" aria-hidden="true">
-              {i === active && (
-                <span
-                  key={active}
-                  className={"cs-sw-fill" + (autoplay ? "" : " static")}
-                  style={
-                    autoplay
-                      ? {
-                          animationDuration: `${AUTOPLAY_MS}ms`,
-                          animationPlayState: paused ? "paused" : "running",
-                        }
-                      : undefined
-                  }
-                />
-              )}
+              <span className="cs-sw-track" aria-hidden="true">
+                {i === active && (
+                  <span
+                    key={active}
+                    className={"cs-sw-fill" + (autoplay ? "" : " static")}
+                    style={
+                      autoplay
+                        ? {
+                            animationDuration: `${AUTOPLAY_MS}ms`,
+                            animationPlayState: paused ? "paused" : "running",
+                          }
+                        : undefined
+                    }
+                  />
+                )}
+              </span>
             </span>
           </button>
         ))}
