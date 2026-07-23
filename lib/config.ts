@@ -224,7 +224,7 @@ export const CONFIG = {
     // -- fourth row: camera, paper bag, vinil screenshot, match day --
     { id: "instax-camera", x: 1, y: 59, w: 115, h: 122, kind: "sticker", rot: -9, src: "/personal/instax-camera.png" },
     { id: "paper-bag", x: 15, y: 57, w: 143, h: 172, kind: "polaroid", rot: 4, src: "/personal/paper-bag.png", caption: "paper bag" },
-    { id: "vinil", x: 31, y: 59, w: 289, h: 60, kind: "rect", rot: -3, src: "/personal/slack-vinil.png" },
+    { id: "vinil", x: 31, y: 67, w: 289, h: 60, kind: "rect", rot: -3, src: "/personal/slack-vinil.png" },
     { id: "match-day", x: 77, y: 57, w: 182, h: 195, kind: "polaroid", rot: 5, src: "/personal/match-day.jpg", caption: "match day" },
 
     // -- bottom row: studio days, cosmic sticker, dinner table, mango, lunch break --
