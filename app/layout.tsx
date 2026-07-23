@@ -46,13 +46,13 @@ const ibmPlexSerif = IBM_Plex_Serif({
   variable: "--font-ibm-plex-serif",
 });
 
-const description =
-  "Design builder — partly in canvas, rest in codebase. Product design and front-end work across Razorpay, Scaler, and more.";
+const title = `Hey, I'm ${CONFIG.name}.`;
+const description = "Designing in canvas, building in codebase.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${CONFIG.name} — Design Builder`,
+    default: title,
     template: `%s — ${CONFIG.name}`,
   },
   description,
@@ -64,13 +64,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "/",
-    siteName: `${CONFIG.name} — Design Builder`,
-    title: `${CONFIG.name} — Design Builder`,
+    siteName: title,
+    title,
     description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${CONFIG.name} — Design Builder`,
+    title,
     description,
   },
   robots: {

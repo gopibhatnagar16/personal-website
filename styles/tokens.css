@@ -15,6 +15,7 @@
   --accent-soft: rgba(158, 44, 106, 0.12);
   --dot-off: rgba(20, 20, 15, 0.09);
   --row-hover: rgba(186, 224, 203, 0.3);
+  --row-hover-work: rgba(186, 224, 203, 0.2);
 }
 
 [data-theme="dark"] {

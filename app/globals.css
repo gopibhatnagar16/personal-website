@@ -34,6 +34,8 @@ body {
 /* content layer — sits above the footer and reveals it on scroll */
 .content{position:relative;z-index:2;background-color:var(--bg);margin-bottom:var(--footH);
   border-radius:0 0 28px 28px;overflow:hidden;
+  background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='54'%20height='54'%3E%3Cpath%20d='M0%200H54'%20stroke='%23000000'%20stroke-opacity='.055'%20stroke-dasharray='2%206'/%3E%3Cpath%20d='M0%200V54'%20stroke='%23000000'%20stroke-opacity='.055'%20stroke-dasharray='2%206'/%3E%3C/svg%3E");
+  background-size:54px 54px;
   transition:background-color .35s ease;}
 [data-theme="dark"] .gp .content{
   background-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='54'%20height='54'%3E%3Cpath%20d='M0%200H54'%20stroke='%23ffffff'%20stroke-opacity='.09'%20stroke-dasharray='2%206'/%3E%3Cpath%20d='M0%200V54'%20stroke='%23ffffff'%20stroke-opacity='.09'%20stroke-dasharray='2%206'/%3E%3C/svg%3E");
@@ -104,12 +106,16 @@ body {
   min-width:22px;height:22px;padding:0 6px;display:inline-flex;align-items:center;justify-content:center;
   background:var(--kbd-bg);border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;color:var(--ink);}
 .pressc:hover{color:var(--ink);}
+.pressc-copied,.pressc-copied:hover{color:#2e9e4f;}
+[data-theme="dark"] .pressc-copied,[data-theme="dark"] .pressc-copied:hover{color:#4ade80;}
 
 /* sections */
 .section{padding:clamp(22px,3.5vh,38px) 0;}
 .section-tight{padding-bottom:0;}
 .section-label{display:block;font-family:var(--font-geist-mono),monospace;font-size:11px;
   text-transform:uppercase;letter-spacing:.16em;color:var(--faint);margin-bottom:26px;}
+/* tighter gap when a label sits directly above its intro line (e.g. Experience) */
+.section-label:has(+ .section-intro){margin-bottom:12px;}
 .section-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:26px;}
 .section-head .section-label{margin-bottom:0;}
 .section-heading{font-family:var(--font-geist-sans),system-ui,sans-serif;font-weight:700;
@@ -118,7 +124,7 @@ body {
 .section-intro{color:var(--muted);font-size:clamp(1rem,1.5vw,1.1rem);line-height:1.55;
   max-width:60ch;margin:0 0 26px;}
 .section-hobbies{color:var(--muted);font-size:clamp(1rem,1.5vw,1.1rem);line-height:1.55;
-  max-width:60ch;margin:-16px 0 26px;padding-left:1.2em;list-style:disc;}
+  max-width:60ch;margin:-16px 0 42px;padding-left:1.2em;list-style:disc;}
 .section-hobbies li{margin-bottom:4px;}
 
 /* experience — brand logos + name */
@@ -131,6 +137,11 @@ body {
   opacity:0;filter:blur(4px);transition:opacity .4s ease,filter .4s ease;}
 .exp-badge img.img-loaded{opacity:1;filter:blur(0);}
 .exp-badge.has-logo{background:var(--panel);border:1px solid var(--line);}
+/* shrink so all logos stay on one line on narrow phones instead of wrapping */
+@media (max-width:480px){
+  .exp-row{gap:10px;}
+  .exp-badge{width:34px;height:34px;border-radius:7px;font-size:12px;}
+}
 
 /* one tooltip instance shared by every item — it slides left/right to the
    hovered badge instead of each item mounting its own, so it reads as a
@@ -162,13 +173,13 @@ body {
   padding:12px 4px;border-bottom:1px solid var(--line);}
 .rowx::before{content:"";position:absolute;inset:0;z-index:-1;background:transparent;
   transition:background .18s ease;}
-.rowx:not(.rowx-disabled):hover::before{background:var(--row-hover);}
+.rowx:not(.rowx-disabled):hover::before{background:var(--row-hover-work);}
 .thumb{width:46px;height:46px;border-radius:9px;flex:0 0 auto;background-size:cover;background-position:center;
   border:1px solid var(--line);box-shadow:0 0 0 rgba(0,0,0,0);transform:rotate(-5deg);
   transition:transform .22s ease,box-shadow .22s ease;}
 .rowx:not(.rowx-disabled):hover .thumb{transform:rotate(0) scale(1.05);box-shadow:0 3px 9px rgba(0,0,0,.15);}
-.rx-title{font-size:16px;color:var(--ink);}
-.rowx:not(.rowx-disabled):hover .rx-title{text-decoration:underline;text-underline-offset:3px;}
+.rx-title{font-size:clamp(1rem,1.5vw,1.1rem);color:var(--muted);transition:color .18s ease;}
+.rowx:not(.rowx-disabled):hover .rx-title{color:var(--ink);}
 .rx-date{font-family:var(--font-geist-mono),monospace;font-size:13px;color:var(--faint);white-space:nowrap;text-align:right;}
 .rx-badge{justify-self:end;font-family:var(--font-geist-mono),monospace;font-size:11px;letter-spacing:.04em;
   padding:4px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent);white-space:nowrap;}
@@ -181,7 +192,8 @@ body {
   transition:background .18s ease;}
 .wrow:hover::before{background:var(--row-hover);}
 .w-date{font-family:var(--font-geist-mono),monospace;font-size:13px;color:var(--faint);white-space:nowrap;}
-.w-title{font-size:16px;color:var(--ink);}
+.w-title{font-size:clamp(1rem,1.5vw,1.1rem);color:var(--muted);transition:color .18s ease;}
+.wrow:hover .w-title{color:var(--ink);}
 .w-read{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-geist-mono),monospace;
   font-size:13px;color:var(--faint);white-space:nowrap;}
 
@@ -193,6 +205,12 @@ body {
   background-size:contain;background-repeat:no-repeat;background-position:center;
   object-fit:contain;object-position:center;}
 @keyframes wpin{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+
+.canvas-hint{display:block;margin-top:14px;font-family:var(--font-geist-mono),monospace;font-size:12px;
+  letter-spacing:.02em;color:var(--faint);text-align:center;}
+/* Personal is the last section before the footer reveal — a bit more
+   breathing room than the shared .section padding gives every other section */
+#personal{padding-bottom:72px;}
 
 /* draggable canvas — infinite pan: --pan-x/--pan-y drive the background scroll */
 .canvas{position:relative;isolation:isolate;width:100%;border:1px solid var(--line);border-radius:18px;overflow:hidden;
@@ -226,17 +244,20 @@ body {
 .canvas-reset:hover{color:var(--ink);border-color:var(--faint);}
 
 .ci{position:absolute;border-radius:16px;cursor:grab;background-size:cover;background-position:center;
-  box-shadow:0 2px 6px rgba(0,0,0,.1);transition:box-shadow .2s ease,transform .2s ease;touch-action:none;
+  box-shadow:0 2px 6px rgba(0,0,0,.1);transition:box-shadow .2s ease,transform .2s ease,filter .2s ease;touch-action:none;
   transform:rotate(var(--rot,0deg));}
 .ci:hover{box-shadow:0 4px 10px rgba(0,0,0,.13);}
 .ci:active{cursor:grabbing;box-shadow:0 7px 16px rgba(0,0,0,.17);}
 
-/* mat items lift, grow and tilt a touch further right on hover/drag —
-   reinforces the "pick it up off the pile" feel of the cutting mat */
+/* mat items straighten to 0deg, lift and grow on hover/drag — reads as
+   "pick it up off the pile and look at it straight-on" */
 .canvas.mat .ci:hover,.canvas.mat .ci:active{
-  transform:rotate(calc(var(--rot,0deg) + 4deg)) scale(1.06);
+  transform:rotate(0deg) scale(1.06);
   box-shadow:0 14px 28px rgba(0,0,0,.32);
 }
+/* hovering one tidbit blurs the rest of the pile so the hovered card (and
+   its tooltip) reads clearly against the mat */
+.canvas.mat:has(.ci:hover) .ci:not(:hover){filter:blur(3px);}
 .ci-circle{border-radius:50%;}
 
 /* rect — chat/screenshot cutouts pinned to the Personal pegboard: tighter
@@ -250,8 +271,21 @@ body {
 .ci-card:active{box-shadow:0 14px 30px rgba(0,0,0,.36);}
 .ci-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit;pointer-events:none;}
 
+/* tidbit hover tooltip — caption + an outbound-link arrow, centered under
+   the card. sits outside the card's own rotation-reset transition so it
+   only ever appears once the card has already straightened to 0deg. */
+.ci-tip{position:absolute;left:50%;bottom:-14px;transform:translate(-50%,100%);
+  display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;
+  background:var(--ink);color:var(--bg);white-space:nowrap;
+  font-family:var(--font-geist-mono),monospace;font-size:12px;letter-spacing:.01em;
+  box-shadow:0 8px 20px rgba(0,0,0,.24);
+  opacity:0;pointer-events:none;z-index:30;
+  transition:opacity .18s ease;}
+.ci:hover .ci-tip{opacity:1;}
+.ci-tip svg{flex:0 0 auto;color:var(--bg);}
+
 /* polaroid — for the Personal pegboard: photo + printed caption strip, clipped to the board */
-.ci-polaroid{border-radius:7px;background:#F9F8F4;background-image:none;padding:7px 7px 22px;
+.ci-polaroid{border-radius:3px;background:#F9F8F4;background-image:none;padding:7px 7px 22px;
   display:flex;box-shadow:0 10px 24px -6px rgba(0,0,0,.16),0 2px 6px rgba(0,0,0,.08);}
 .ci-polaroid:active{box-shadow:0 14px 30px -6px rgba(0,0,0,.2),0 4px 8px rgba(0,0,0,.1);}
 .ci-polaroid::before{content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%);
@@ -278,6 +312,7 @@ body {
    in DraggableCanvas, so these never drag — only their own hover behavior
    runs, inside the iframe's isolated document. */
 .ci-html{cursor:default;background:none;box-shadow:none;border-radius:0;}
+.ci-html:hover{box-shadow:none;}
 .ci-html-frame{width:100%;height:100%;border:0;background:transparent;display:block;pointer-events:auto;}
 
 /* cutting-mat variant — for the Tidbits canvas. surface + grid colors are exact
@@ -342,13 +377,15 @@ body {
 
 /* emoji-cursor zones — hide the native cursor entirely */
 .ava, .ava *, .exp-item, .exp-item *, .rowx, .rowx *, .wrow, .wrow *,
-.site-footer, .site-footer *{cursor:none;}
+.ft-chip, .ft-chip *{cursor:none;}
 
 /* scroll-reveal footer — fixed beneath the content layer on the landing
    page; .site-footer-static (case-study / writing pages) drops the fixed
    positioning and just renders in normal flow at the end of the page. */
 .site-footer{position:fixed;left:0;right:0;bottom:0;width:100%;overflow:hidden;z-index:1;
-  background:#000;color:#F5F4F0;display:flex;align-items:stretch;justify-content:center;}
+  background:#000;color:#F5F4F0;display:flex;align-items:stretch;justify-content:center;
+  transition:background-color .35s ease,color .35s ease;}
+[data-theme="dark"] .site-footer{background:#fff;color:#17170f;}
 .site-footer.site-footer-static{position:static;height:auto;}
 .ft-inner{position:relative;width:100%;max-width:1040px;
   padding:56px clamp(20px,5vw,40px) 44px;display:flex;flex-direction:column;align-items:center;}
@@ -464,7 +501,7 @@ body {
    footer trick as the landing page's .content — the fixed SiteFooter sits
    behind this layer and only shows through the reserved gap at the end. */
 .cs{--footH:500px;min-height:100vh;position:relative;z-index:2;background:var(--bg);color:var(--ink);
-  margin-bottom:var(--footH);border-radius:0 0 28px 28px;overflow:hidden;
+  margin-bottom:var(--footH);
   font-family:var(--font-geist-sans),system-ui,sans-serif;-webkit-font-smoothing:antialiased;
   transition:background-color .35s ease,color .35s ease;}
 .cs *{box-sizing:border-box;}
@@ -475,12 +512,17 @@ body {
   .cs{--footH:400px;}
 }
 
+/* the rounded-bottom-corner/scroll-reveal clip lives on its own wrapper
+   (not on .cs) — an ancestor with overflow:hidden breaks position:sticky
+   for .cs-topnav below, since it stops being the viewport's own scrollport */
+.cs-shell{background:var(--bg);border-radius:0 0 28px 28px;overflow:hidden;}
+
 .cs-topnav{position:sticky;top:0;z-index:30;}
-.cs-topnav::before{content:"";position:absolute;inset:0;bottom:-32px;z-index:-1;
+.cs-topnav::before{content:"";position:absolute;inset:0;z-index:-1;
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
-  mask-image:linear-gradient(to bottom,#000 0%,#000 55%,transparent 100%);
-  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 55%,transparent 100%);}
-.cs-bar{max-width:940px;margin:0 auto;padding:26px clamp(20px,5vw,32px);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 100%);
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 100%);}
+.cs-bar{max-width:940px;margin:0 auto;padding:16px clamp(20px,5vw,32px);
   display:flex;justify-content:space-between;align-items:center;}
 .cs-back{font-family:var(--font-geist-mono),monospace;font-size:12px;text-transform:uppercase;
   letter-spacing:.1em;color:var(--muted);text-decoration:none;transition:color .18s ease;}

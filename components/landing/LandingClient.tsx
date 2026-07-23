@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { CONFIG } from "@/lib/config";
 import { EyesProvider } from "@/components/shared/EyesCursor";
 import { DraggableCanvas, CanvasControls, useCanvasControls } from "@/components/canvas/DraggableCanvas";
@@ -18,6 +19,18 @@ interface Props {
 export function LandingClient({ work, writing }: Props) {
   const tidbitsControls = useCanvasControls();
   const personalControls = useCanvasControls();
+
+  // the pegboard's polaroids/stickers are pinned at fixed pixel sizes on a
+  // percentage-positioned board — on narrow phones that same layout reads as
+  // cramped/overlapping, so the board itself grows taller to spread them out.
+  const [pegboardHeight, setPegboardHeight] = useState(820);
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width:640px)");
+    const apply = () => setPegboardHeight(mq.matches ? 1300 : 820);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
 
   return (
     <EyesProvider>
@@ -67,12 +80,13 @@ export function LandingClient({ work, writing }: Props) {
               </ul>
               <DraggableCanvas
                 items={CONFIG.pegboard}
-                height={820}
+                height={pegboardHeight}
                 variant="board"
                 pannable={false}
                 pan={personalControls.pan}
                 setPan={personalControls.setPan}
               />
+              <span className="canvas-hint">Drag &amp; move items in the board</span>
             </section>
           </div>
         </div>
