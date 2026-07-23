@@ -414,12 +414,19 @@ body {
 /* focus veil — blurs the footer behind the tiles on hover */
 .ft-veil{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;
   -webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);
-  background:rgba(0,0,0,.38);transition:opacity .28s ease;}
+  background:rgba(0,0,0,.38);transition:opacity .28s ease,background-color .35s ease;}
 .ft-inner:has(.ft-chip:hover) .ft-veil{opacity:1;}
+/* .site-footer inverts to a white background in dark mode (see above), so
+   the veil needs to darken a light surface there instead of a black one. */
+[data-theme="dark"] .ft-veil{background:rgba(255,255,255,.55);}
 
 /* overlapping tiles */
 .ft-social{display:flex;gap:0;margin-top:max(-52px,-7.8vw);position:relative;z-index:2;}
-.ft-chip{position:relative;width:min(150px,22vw);aspect-ratio:1;border-radius:min(38px,5.6vw);border:3px solid #F5F4F0;
+/* "a.ft-chip" (not just ".ft-chip") so this ties .gp a's specificity and,
+   being later in source order, wins — otherwise .gp a{color:inherit} pulls
+   in .site-footer's inverted dark-mode text color and the icons go
+   near-invisible (dark-on-black) instead of staying #F5F4F0. */
+a.ft-chip{position:relative;width:min(150px,22vw);aspect-ratio:1;border-radius:min(38px,5.6vw);border:3px solid #F5F4F0;
   background:#000;color:#F5F4F0;display:grid;place-items:center;box-shadow:0 16px 34px rgba(0,0,0,.3);
   margin-left:max(-36px,-5.3vw);transition:transform .25s ease;}
 .ft-chip svg{width:min(48px,7.1vw);height:auto;}
