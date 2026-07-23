@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { DirectionList } from "./DirectionList";
+import { Callout } from "./Callout";
 
 type Group = "base" | "b" | "highlight";
 
@@ -65,77 +66,79 @@ export function ExperimentSignal({
   const fmt = (v: number) => (mode === "percent" ? `${v.toFixed(2)}%` : `${v.toFixed(2)}×`);
 
   return (
-    <div className="cs-exps">
-      <div className="cs-exps-head">
-        <span className="cs-exps-label">{quantLabel}</span>
-        <div className="cs-exps-toggle" role="tablist" aria-label="Chart view">
-          {(["percent", "lift"] as Mode[]).map((m) => (
-            <button
-              key={m}
-              type="button"
-              role="tab"
-              aria-selected={mode === m}
-              className={"cs-exps-toggle-btn" + (mode === m ? " active" : "")}
-              onClick={() => setMode(m)}
-            >
-              {m === "percent" ? "%" : "× lift"}
-            </button>
-          ))}
-        </div>
-      </div>
-      <p className="cs-exps-sub">{quantSub}</p>
-
-      <div className="cs-exps-chart">
-        {bars.map((bar, i) => {
-          const widthPct = axisMax > 0 ? (values[i] / axisMax) * 100 : 0;
-          return (
-            <div className="cs-exps-row" key={bar.label + bar.sublabel}>
-              <div className="cs-exps-rowlabel">
-                <span className="cs-exps-rowtitle">{bar.label}</span>
-                <span className="cs-exps-rowsub">{bar.sublabel}</span>
-              </div>
-              <div className="cs-exps-track">
-                <span
-                  className={"cs-exps-fill cs-exps-fill-" + bar.group}
-                  style={{ width: `${widthPct}%` }}
-                  aria-hidden="true"
-                />
-                <span className="cs-exps-badge" style={{ left: `calc(${widthPct}% + 8px)` }}>
-                  {fmt(values[i])}
-                </span>
-              </div>
-            </div>
-          );
-        })}
-        <div className="cs-exps-axis" aria-hidden="true">
-          <span />
-          <div className="cs-exps-axis-ticks">
-            {ticks.map((t, i) => (
-              <span key={i}>{mode === "percent" ? `${t.toFixed(1)}%` : `${t.toFixed(1)}×`}</span>
+    <div className="cs-exps-group">
+      <div className="cs-exps">
+        <div className="cs-exps-head">
+          <span className="cs-exps-label">{quantLabel}</span>
+          <div className="cs-exps-toggle" role="tablist" aria-label="Chart view">
+            {(["percent", "lift"] as Mode[]).map((m) => (
+              <button
+                key={m}
+                type="button"
+                role="tab"
+                aria-selected={mode === m}
+                className={"cs-exps-toggle-btn" + (mode === m ? " active" : "")}
+                onClick={() => setMode(m)}
+              >
+                {m === "percent" ? "%" : "× lift"}
+              </button>
             ))}
           </div>
         </div>
+        <p className="cs-exps-sub">{quantSub}</p>
+
+        <div className="cs-exps-chart">
+          {bars.map((bar, i) => {
+            const widthPct = axisMax > 0 ? (values[i] / axisMax) * 100 : 0;
+            return (
+              <div className="cs-exps-row" key={bar.label + bar.sublabel}>
+                <div className="cs-exps-rowlabel">
+                  <span className="cs-exps-rowtitle">{bar.label}</span>
+                  <span className="cs-exps-rowsub">{bar.sublabel}</span>
+                </div>
+                <div className="cs-exps-track">
+                  <span
+                    className={"cs-exps-fill cs-exps-fill-" + bar.group}
+                    style={{ width: `${widthPct}%` }}
+                    aria-hidden="true"
+                  />
+                  <span className="cs-exps-badge" style={{ left: `calc(${widthPct}% + 8px)` }}>
+                    {fmt(values[i])}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
+          <div className="cs-exps-axis" aria-hidden="true">
+            <span />
+            <div className="cs-exps-axis-ticks">
+              {ticks.map((t, i) => (
+                <span key={i}>{mode === "percent" ? `${t.toFixed(1)}%` : `${t.toFixed(1)}×`}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="cs-exps-legend">
+          {legend.map((l) => (
+            <span className="cs-exps-legend-item" key={l.label}>
+              <span className={"cs-exps-swatch cs-exps-swatch-" + l.swatch} aria-hidden="true" />
+              {l.label}
+            </span>
+          ))}
+        </div>
+
+        <p className="cs-exps-summary">{summary}</p>
       </div>
 
-      <div className="cs-exps-legend">
-        {legend.map((l) => (
-          <span className="cs-exps-legend-item" key={l.label}>
-            <span className={"cs-exps-swatch cs-exps-swatch-" + l.swatch} aria-hidden="true" />
-            {l.label}
-          </span>
-        ))}
+      <div className="cs-exps">
+        <span className="cs-exps-label">{qualLabel}</span>
+        <DirectionList
+          items={qualItems.map((it, i) => ({ number: String(i + 1).padStart(2, "0"), ...it }))}
+        />
       </div>
 
-      <p className="cs-exps-summary">{summary}</p>
-
-      <span className="cs-exps-label cs-exps-quallabel">{qualLabel}</span>
-      <DirectionList
-        items={qualItems.map((it, i) => ({ number: String(i + 1).padStart(2, "0"), ...it }))}
-      />
-
-      <div className="cs-exps-decision">
-        <strong>Decision:</strong> {decision}
-      </div>
+      <Callout segments={[{ text: "Decision: ", emphasis: true }, { text: decision }]} />
     </div>
   );
 }

@@ -13,8 +13,7 @@ coverVideo: /work/subscriptions/cover.mp4
 ---
 
 <SectionIntro
-  eyebrow="Context"
-  title="Build a clear pricing route for new businesses"
+  title="Context"
   subtitle="Most Razorpay products are charged at the standard transaction rate — here's how each goal shaped what came next."
 />
 
@@ -33,7 +32,6 @@ coverVideo: /work/subscriptions/cover.mp4
 />
 
 <SectionIntro
-  title="User context"
   subtitle="The product meets businesses in several states. The subscription opportunity sits after onboarding, when the business has given us enough context but has not yet formed a regular payment habit."
 />
 
@@ -43,8 +41,9 @@ coverVideo: /work/subscriptions/cover.mp4
   caption="The subscription opportunity sits right after onboarding, in the Setup step, before a habit forms."
 />
 
-<ProblemStatement
-  eyebrow="Problem"
+<SectionIntro title="Problem" />
+
+<Callout
   segments={[
     { text: "After a " },
     { text: "registered business", emphasis: true },
@@ -56,12 +55,14 @@ coverVideo: /work/subscriptions/cover.mp4
 
 In the existing design, only high-value merchants could request customized pricing through Contact Sales; everyone else saw 2% and nothing more.
 
-<CaseImage
+<CaseVideo
+  src="/work/subscriptions/existing-design-sales-contact.mp4"
   alt="Existing subscription pricing page: high-value merchants can request customized pricing by contacting sales"
   caption="Existing design: high-value merchants can request customized pricing by contacting sales."
 />
 
 <CaseImage
+  src="/work/subscriptions/existing-journey.png"
   alt="The existing journey offered one standard rate and no self-serve pricing choice"
   caption="The existing journey offered one standard rate but no self-serve pricing choice, leaving committed businesses to switch gateways, contact Sales, or postpone the decision."
 />
@@ -76,9 +77,8 @@ In the existing design, only high-value merchants could request customized prici
 The subscription opportunity sat in the short window after setup: the product understood the business, but did not yet use that understanding to help it choose how to start.
 
 <SectionIntro
-  eyebrow="Discovery"
-  title="The product knew the business. Pricing did not use that context."
-  subtitle="Onboarding captured useful business details, but every eligible business still saw one standard rate and no clearer next step."
+  title="Discovery"
+  subtitle="The product knew the business. Pricing did not use that context."
 />
 
 <WhyHowWhat
@@ -102,7 +102,6 @@ The subscription opportunity sat in the short window after setup: the product un
 />
 
 <PersonaIntro
-  eyebrow="A composite from merchant calls"
   name="Meet Arjun"
   body="He has completed onboarding for his online apparel business and is ready to take payments. Before choosing a pricing route, he needs to know what is optional, what fits his expected volume, and whether he can change his mind later."
 />
@@ -116,6 +115,7 @@ The subscription opportunity sat in the short window after setup: the product un
 />
 
 <CaseImage
+  src="/work/subscriptions/arjun-journey-map.png"
   alt="Six-panel illustrated strip of Arjun's journey: setup complete, is 2% my only choice, which plan fits, see savings at my volume, choose a route, manage it later"
   caption="Arjun's journey mapped by stage and emotion: confidence drops after Setup, where only the flat rate appears, and stays low through Dashboard."
 />
@@ -146,9 +146,8 @@ The subscription opportunity sat in the short window after setup: the product un
 />
 
 <SectionIntro
-  eyebrow="Merchant research"
-  title="Merchant calls explained what the funnel could not"
-  subtitle="Ishan and I called around 120 merchants and had 30 meaningful conversations across merchants who paused, stayed on the default path, and chose a paid plan. The goal was to learn whether hesitation came from value, understanding, or a setup issue outside the pricing experience."
+  title="Merchant research"
+  subtitle="Merchant calls explained what the funnel could not. We called around 120 merchants and had 30 meaningful conversations across merchants who paused, stayed on the default path, and chose a paid plan. The goal was to learn whether hesitation came from value, understanding, or a setup issue outside the pricing experience."
 />
 
 <Accordion
@@ -188,7 +187,7 @@ The subscription opportunity sat in the short window after setup: the product un
   ]}
 />
 
-<SectionIntro title="Who we heard from, and what they said" />
+### Who we heard from, and what they said
 
 <QuoteCards
   items={[
@@ -225,7 +224,7 @@ That translated into three shifts the design had to make:
   ]}
 />
 
-<SectionIntro eyebrow="How might we" />
+<SectionIntro title="How might we" />
 
 > Help a new business choose the right pricing option with confidence.
 
@@ -238,9 +237,8 @@ That translated into three shifts the design had to make:
 />
 
 <SectionIntro
-  eyebrow="Iterations"
-  title="Approaches explored the pricing decision"
-  subtitle="We changed the amount of choice, the value frame, and the payment model to learn which explanation felt easiest to understand."
+  title="Iterations"
+  subtitle="Approaches explored the pricing decision. We changed the amount of choice, the value frame, and the payment model to learn which explanation felt easiest to understand."
 />
 
 <MediaSwitcher
@@ -317,9 +315,8 @@ That translated into three shifts the design had to make:
 />
 
 <SectionIntro
-  eyebrow="MVP experiment"
-  title="We tested two pricing frames in a controlled onboarding MVP"
-  subtitle="The MVP compared a softer savings frame with a stronger value contrast to see whether a clearer plan choice could move plan selection."
+  title="MVP experiment"
+  subtitle="We tested two pricing frames in a controlled onboarding MVP. The MVP compared a softer savings frame with a stronger value contrast to see whether a clearer plan choice could move plan selection."
 />
 
 <MediaSwitcher
@@ -328,42 +325,31 @@ That translated into three shifts the design had to make:
   slides={[
     {
       label: "Softer savings",
+      src: "/work/subscriptions/mvp-softer-savings.png",
       alt: "Variant A pricing screen: standard option kept close to paid plans with modest savings labels",
-      meta: [
-        { label: "Hypothesis", text: "A gentler savings frame could make a paid plan feel useful without making the decision feel forced." },
-        { label: "What changed", text: "Kept the standard option close to paid plans and used modest savings labels." },
-        { label: "What we learned", text: "Lower pressure helped comparison, but merchants still needed a clearer sense of fit." },
-      ],
     },
     {
       label: "Stronger contrast",
+      src: "/work/subscriptions/mvp-stronger-contrast.png",
       alt: "Variant B pricing screen: savings contrast with the recommended option made prominent",
-      meta: [
-        { label: "Hypothesis", text: "A stronger contrast between savings and the recommended plan could make the better option obvious at a glance." },
-        { label: "What changed", text: "Added savings contrast and made the recommended option visually prominent." },
-        { label: "What we learned", text: "Fewer plans and stronger value framing increased selection, especially among registered businesses." },
-      ],
     },
     {
       label: "Plan order",
+      src: "/work/subscriptions/mvp-plan-order.png",
       alt: "Variant C pricing screen: plans reordered by hierarchy rather than price",
-      meta: [
-        { label: "Hypothesis", text: "Changing the order and hierarchy of plans, not just the price, could guide businesses to the right fit faster." },
-        { label: "What changed", text: "Reordered plans by hierarchy and positioning rather than leading with price." },
-        { label: "What we learned", text: "Ordering shaped attention, but businesses still needed to know what they'd gain and that a paid plan was optional." },
-      ],
     },
   ]}
 />
 
 We reached a cohort of 500 base merchants in the onboarding funnel over a two-week window:
 
-- **F1** — 0.9% adoption across the Basic, Plus, and Pro plans (the base experience).
-- **F2** — 3.48% adoption for the prepaid plan (Variant A).
-- **F3** — 3.83% adoption across the Plus and Pro plans (Variant B).
+- **v1** — 0.9% adoption across the Basic, Plus, and Pro plans (the base experience).
+- **v2** — 3.48% adoption for the prepaid plan (Variant A).
+- **v3** — 3.83% adoption across the Plus and Pro plans (Variant B).
 
 <Accordion
   title="What the first experiment tested"
+  defaultOpen={false}
   items={[
     {
       title: "Plan architecture",
@@ -430,9 +416,8 @@ We reached a cohort of 500 base merchants in the onboarding funnel over a two-we
 />
 
 <SectionIntro
-  eyebrow="Final solution"
-  title="We turned the winning pricing version into a journey that could scale"
-  subtitle="The MVP identified the strongest plan presentation. The final solution defined where it should appear, how every business makes a clear choice, and when the product should bring pricing back later."
+  title="Final solution"
+  subtitle="We turned the winning pricing version into a journey that could scale. The MVP identified the strongest plan presentation. The final solution defined where it should appear, how every business makes a clear choice, and when the product should bring pricing back later."
 />
 
 <DecisionNote
@@ -443,60 +428,12 @@ We reached a cohort of 500 base merchants in the onboarding funnel over a two-we
 
 **The final journey**
 
-<JourneyFlow
-  steps={[
-    { icon: "search", title: "Discovery", sub: "Explore Razorpay" },
-    { icon: "userPlus", title: "Sign up", sub: "Create an account" },
-    {
-      icon: "fileText",
-      title: "Onboarding",
-      sub: "Share business details",
-      highlight: true,
-      callout: "Relevant pricing route prepared from business details.",
-    },
-    {
-      icon: "sliders",
-      title: "Setup",
-      sub: "Choose a pricing route",
-      highlight: true,
-      callout: "Explicit choice: Standard or a plan, upfront.",
-    },
-    {
-      icon: "grid",
-      title: "Dashboard",
-      sub: "Start and manage payments",
-      highlight: true,
-      callout: "Usage nudges; change or cancel anytime.",
-    },
-  ]}
+<CaseImage
+  src="/work/subscriptions/final-journey-flow.png"
+  alt="Final journey diagram: Discovery, Sign up, Onboarding, Setup, and Dashboard, with the last three steps highlighted and annotated with their pricing callouts"
 />
 
 *A relevant pricing route prepared from business details, an explicit choice upfront, then usage nudges with change or cancel anytime.*
-
-The plan story then lives wherever a business already works, across six touchpoints, each answering a different question:
-
-- **Home page:** A full-width banner on the highest-traffic surface, after alerts and quick actions: plan awareness from the first login, without requiring a pricing-page visit.
-- **Top navigation:** A persistent Get Plus action for businesses on Standard. The upgrade stays one click away, but disappears after the business upgrades.
-- **Profile dropdown:** Shows the current plan and a direct management link, answering "what plan am I on?" in one click.
-- **Transactions page:** A subtle single-line banner beneath the payments overview, so businesses judge better pricing against their own usage, not an abstract estimate.
-- **In-product nudges:** Dismissible cards after a business starts processing payments, testing social proof and value framing against real transaction intent.
-- **Account & settings:** A permanent Manage Plans home combining utilization, the full plan ladder, and compare/upgrade/change/cancel controls, with no need to contact a team.
-
-**How this supports the business goal**
-
-<DotList
-  items={[
-    { lead: "Prompt a real decision", text: "Every eligible business considers pricing before its first payment." },
-    { lead: "Scale beyond onboarding", text: "Stage-based touchpoints reach businesses again when plan value becomes more relevant." },
-    { lead: "Retain more value", text: "Self-serve controls reduce manual dependency and support longer-term payment use." },
-  ]}
-/>
-
-<CaseVideo
-  src="/work/subscriptions/complete-journey.mp4"
-  alt="Screen recording of the complete subscription pricing journey: choosing a plan after onboarding, taking a first payment, seeing a dashboard nudge, then managing the plan"
-  caption="The complete journey in motion: choose a pricing route after onboarding, take the first payment, see a relevant dashboard nudge, then change or manage the plan."
-/>
 
 In practice the solution worked across five moments: introduce the optional choice after essential payment setup; make options easy to read with simple plans, savings, limits, and a clear standard path; make the trade-off understandable without blocking the default; keep plan control visible on the dashboard (status, change, cancel, resume); and reintroduce value later, after payment activity gives the business more confidence.
 
@@ -509,25 +446,30 @@ The final solution had to act like a bridge, not a gate: it helped merchants com
       label: "Home page",
       src: "/work/subscriptions/homepage-banner.png",
       alt: "Full-width Plus plan banner on the Razorpay Home dashboard",
-      caption: "A full-width banner on the highest-traffic surface, after alerts and quick actions.",
+      caption: "A full-width banner on the highest-traffic surface, after alerts and quick actions: plan awareness from the first login, without requiring a pricing-page visit.",
     },
     {
       label: "Top navigation",
       src: "/work/subscriptions/top-nav-get-plus.png",
       alt: "Persistent Get Plus action in the top navigation, shown only to Standard-plan users",
-      caption: "A persistent Get Plus action for businesses on Standard: one click away, gone once they upgrade.",
+      caption: "A persistent Get Plus action for businesses on Standard. The upgrade stays one click away, but disappears after the business upgrades.",
     },
     {
       label: "Profile dropdown",
       src: "/work/subscriptions/profile-dropdown.png",
       alt: "Profile dropdown showing the current plan and a Manage link",
-      caption: "The current plan and a direct management link, answering \"what plan am I on?\" in one click.",
+      caption: "Shows the current plan and a direct management link, answering \"what plan am I on?\" in one click.",
     },
     {
       label: "Transactions page",
       src: "/work/subscriptions/transactions-banner.png",
       alt: "Subtle single-line Plus plan banner beneath the transactions overview",
-      caption: "A subtle single-line banner beneath the payments overview, judged against real usage.",
+      caption: "A subtle single-line banner beneath the payments overview, so businesses judge better pricing against their own usage, not an abstract estimate.",
+    },
+    {
+      label: "In-product nudges",
+      alt: "Dismissible in-product nudge cards shown after a business starts processing payments",
+      caption: "Dismissible cards after a business starts processing payments, testing social proof and value framing against real transaction intent.",
     },
     {
       label: "Account & settings: utilization",
@@ -544,11 +486,25 @@ The final solution had to act like a bridge, not a gate: it helped merchants com
   ]}
 />
 
+<SectionIntro subtitle="How this supports the business goal" />
+
+<DirectionList
+  items={[
+    { number: "01", title: "Prompt a real decision", body: "Every eligible business considers pricing before its first payment." },
+    { number: "02", title: "Scale beyond onboarding", body: "Stage-based touchpoints reach businesses again when plan value becomes more relevant." },
+    { number: "03", title: "Retain more value", body: "Self-serve controls reduce manual dependency and support longer-term payment use." },
+  ]}
+/>
+
+<CaseVideo
+  src="/work/subscriptions/complete-journey.mp4"
+  alt="Screen recording of the complete subscription pricing journey: choosing a plan after onboarding, taking a first payment, seeing a dashboard nudge, then managing the plan"
+  caption="The complete journey in motion: choose a pricing route after onboarding, take the first payment, see a relevant dashboard nudge, then change or manage the plan."
+/>
+
 ## Results
 
-**1,900 merchants chose subscriptions. Early cohorts grew payment volume by 61%.**
-
-The clearest outcome was merchant action: more businesses selected a plan, generated recurring subscription revenue, and processed more payments with Razorpay.
+**1,900 merchants chose subscriptions. Early cohorts grew payment volume by 61%.** The clearest outcome was merchant action: more businesses selected a plan, generated recurring subscription revenue, and processed more payments with Razorpay.
 
 <ResultsViz
   baseDots={190}

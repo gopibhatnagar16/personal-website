@@ -64,8 +64,10 @@ export function MediaSwitcher({
             className={"cs-sw-tab" + (i === active ? " active" : "")}
             onClick={() => setActive(i)}
           >
-            <span className="cs-sw-num">{String(i + 1).padStart(2, "0")}</span>
-            <span className="cs-sw-label">{s.label}</span>
+            <span className="cs-sw-pill">
+              <span className="cs-sw-num">{String(i + 1).padStart(2, "0")}</span>
+              <span className="cs-sw-label">{s.label}</span>
+            </span>
             <span className="cs-sw-track" aria-hidden="true">
               {i === active && (
                 <span
@@ -86,13 +88,6 @@ export function MediaSwitcher({
         ))}
       </div>
       <div className="cs-sw-panel" key={active}>
-        <CaseImage
-          src={current.src}
-          alt={current.alt ?? current.label}
-          caption={current.caption}
-          aspectRatio={aspectRatio}
-          chrome={chrome}
-        />
         {current.meta && (
           <div className="cs-sw-meta">
             {current.meta.map((m) => (
@@ -103,6 +98,13 @@ export function MediaSwitcher({
             ))}
           </div>
         )}
+        <CaseImage
+          src={current.src}
+          alt={current.alt ?? current.label}
+          caption={current.caption}
+          aspectRatio={aspectRatio}
+          chrome={chrome}
+        />
       </div>
     </div>
   );

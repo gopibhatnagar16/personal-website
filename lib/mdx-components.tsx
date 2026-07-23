@@ -14,7 +14,7 @@ import { ExperimentMap } from "@/components/case-study/ExperimentMap";
 import { ExperimentHeader } from "@/components/case-study/ExperimentHeader";
 import { SectionIntro } from "@/components/case-study/SectionIntro";
 import { GoalCards } from "@/components/case-study/GoalCards";
-import { ProblemStatement } from "@/components/case-study/ProblemStatement";
+import { Callout } from "@/components/case-study/Callout";
 import { DirectionList } from "@/components/case-study/DirectionList";
 import { ShiftList } from "@/components/case-study/ShiftList";
 import { QuoteCards } from "@/components/case-study/QuoteCards";
@@ -22,7 +22,6 @@ import { PersonaIntro } from "@/components/case-study/PersonaIntro";
 import { MetaRow } from "@/components/case-study/MetaRow";
 import { SplitCards } from "@/components/case-study/SplitCards";
 import { ExperimentSignal } from "@/components/case-study/ExperimentSignal";
-import { JourneyFlow } from "@/components/case-study/JourneyFlow";
 import { DecisionNote } from "@/components/case-study/DecisionNote";
 import { DotList } from "@/components/case-study/DotList";
 
@@ -46,7 +45,7 @@ export const mdxComponents: MDXComponents = {
   ExperimentHeader,
   SectionIntro,
   GoalCards,
-  ProblemStatement,
+  Callout,
   DirectionList,
   ShiftList,
   QuoteCards,
@@ -54,7 +53,6 @@ export const mdxComponents: MDXComponents = {
   MetaRow,
   SplitCards,
   ExperimentSignal,
-  JourneyFlow,
   DecisionNote,
   DotList,
   DraggableCanvas,
