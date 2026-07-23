@@ -199,7 +199,7 @@ export const CONFIG = {
   pegboard: [
     // -- top row: chat screenshots + the two shared HTML widgets --
     { id: "charmie", x: 2, y: 3, w: 218, h: 83, kind: "rect", rot: -3, src: "/personal/slack-charmie.png" },
-    { id: "pouch", x: 30, y: 1, w: 190, h: 180, kind: "html", html: "/personal/widgets/pouch.html" },
+    { id: "soni", x: 30, y: 1, w: 262, h: 74, kind: "rect", rot: 3, src: "/personal/slack-soni.png" },
     { id: "unconventional", x: 57, y: 1, w: 300, h: 125, kind: "html", html: "/personal/widgets/unconventional.html" },
 
     // -- second row: food/lifestyle stickers, "closing time", tote, flowers, window sill --
@@ -214,7 +214,10 @@ export const CONFIG = {
     // -- third row: chalkboard, mug, Soni screenshot, shoe, oatmeal bowl --
     { id: "chalkboard", x: 2, y: 41, w: 152, h: 200, kind: "sticker", rot: -5, src: "/personal/chalkboard-quote.png" },
     { id: "coffee-mug", x: 19, y: 45, w: 104, h: 105, kind: "sticker", rot: 0, src: "/personal/coffee-mug.png" },
-    { id: "soni", x: 29, y: 41, w: 262, h: 74, kind: "rect", rot: 3, src: "/personal/slack-soni.png" },
+    // pouch sits centrally rather than at the very top edge, with extra y
+    // clearance above it (row2 ends well before y:44) so its hover pop-out
+    // fan has room instead of butting against the board's top edge.
+    { id: "pouch", x: 29, y: 44, w: 190, h: 180, kind: "html", html: "/personal/widgets/pouch.html" },
     { id: "sneaker", x: 47, y: 47, w: 173, h: 95, kind: "sticker", rot: -8, src: "/personal/sneaker.png" },
     { id: "oatmeal-bowl", x: 64, y: 43, w: 161, h: 131, kind: "sticker", rot: 6, src: "/personal/oatmeal-bowl.png" },
 

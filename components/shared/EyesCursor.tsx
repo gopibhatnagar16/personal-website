@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useCallback, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react";
 
 interface EyesState {
   show: boolean;
@@ -26,12 +26,26 @@ const EyesContext = createContext<Bind>(() => ({
    to spread the tracking handlers. */
 export function EyesProvider({ children }: { children: React.ReactNode }) {
   const [eyes, setEyes] = useState<EyesState>({ show: false, x: 0, y: 0, icon: "👀" });
+  // touch browsers fire synthetic mouseenter/mousemove on tap but never a
+  // matching mouseleave, which would otherwise leave the emoji stuck on
+  // screen — so hover tracking only engages on pointers that support it.
+  const hoverCapable = useRef(true);
+
+  useEffect(() => {
+    hoverCapable.current = window.matchMedia("(hover: hover)").matches;
+  }, []);
 
   const bind = useCallback<Bind>(
     (icon) => ({
-      onMouseEnter: (e) => setEyes({ show: true, x: e.clientX, y: e.clientY, icon }),
-      onMouseMove: (e) => setEyes({ show: true, x: e.clientX, y: e.clientY, icon }),
-      onMouseLeave: () => setEyes((s) => ({ ...s, show: false })),
+      onMouseEnter: (e) => {
+        if (hoverCapable.current) setEyes({ show: true, x: e.clientX, y: e.clientY, icon });
+      },
+      onMouseMove: (e) => {
+        if (hoverCapable.current) setEyes({ show: true, x: e.clientX, y: e.clientY, icon });
+      },
+      onMouseLeave: () => {
+        if (hoverCapable.current) setEyes((s) => ({ ...s, show: false }));
+      },
     }),
     []
   );

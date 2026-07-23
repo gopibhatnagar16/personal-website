@@ -13,12 +13,16 @@ interface Props {
   /* Wraps the image in a browser-window frame (traffic lights + address
      bar) — used for product-screenshot slides inside a tabbed switcher. */
   chrome?: boolean;
+  /* Caps and centers the figure — for screenshots that are mostly
+     whitespace around a narrower component and would otherwise stretch
+     to the full column width. Any CSS width value, e.g. "480px" or "60%". */
+  width?: string;
 }
 
 /* Case-study figure. Without `src` it renders the grey placeholder block.
    With `src`, clicking opens a full-page lightbox (Escape / click / ×
    to close). */
-export function CaseImage({ src, alt = "", caption, aspectRatio, chrome }: Props) {
+export function CaseImage({ src, alt = "", caption, aspectRatio, chrome, width }: Props) {
   const [open, setOpen] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
@@ -71,7 +75,7 @@ export function CaseImage({ src, alt = "", caption, aspectRatio, chrome }: Props
   );
 
   return (
-    <figure className="cs-fig">
+    <figure className="cs-fig" style={width ? { maxWidth: width, marginLeft: "auto", marginRight: "auto" } : undefined}>
       {chrome ? (
         <div className="cs-chrome">
           <div className="cs-chrome-bar" aria-hidden="true">
