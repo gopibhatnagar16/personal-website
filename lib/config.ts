@@ -37,11 +37,11 @@ export const CONFIG = {
   tzLabel: "GMT+5:30",
   location: "Bangalore", // ← shown in the footer "Currently"
   lastUpdated: "July 2026", // ← footer "Last updated"
-  title: "Designing in canvas, building in codebase",
+  title: "Obsessed about creating design details that awe you.",
   titleLine2: "",
   ideology: [
-    "Hi, I'm Gopi Bhatnagar. Somewhere between designing and vibe-coding, I stopped picking a lane and just started doing both.",
-    "Most of my experience is on complex, enterprise-scale products - the kind where good intentions meet real constraints. I'm curious about people, products, and how technology shapes both, and I'm still figuring a lot of it out.",
+    "Hi, I'm Gopi Bhatnagar, a creator who cares a little too much about thoughtful solutions that transform problem statements into wilder ideas and finer intricacies. I believe great products earn trust through uncovering the correct 'why' and thoughtful craft which builds experiences with details people rarely notice, but always feel.",
+    "Along the way with engineering sprints being full, I learnt to ship them myself because why should engineers have all the fun?",
   ],
 
   personalHeader: "Off duty, not off imagination.",
