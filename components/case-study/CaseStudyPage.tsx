@@ -106,16 +106,16 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
             <div className="cs-locked-foot">
               <div className="cs-foot">
                 <nav className="cs-nav" aria-label="Case study navigation">
-                  {prev && (
+                  {prev ? (
                     <Link className="cs-nav-link cs-nav-prev" href={`/${kind}/${prev.slug}`}>
-                      <span className="cs-nav-dir">← Previous</span>
+                      <span className="cs-nav-arrow" aria-hidden="true">←</span>
                       <span className="cs-nav-title">{prev.title}</span>
                     </Link>
-                  )}
+                  ) : <span />}
                   {next && (
                     <Link className="cs-nav-link cs-nav-next" href={`/${kind}/${next.slug}`}>
-                      <span className="cs-nav-dir">Next →</span>
                       <span className="cs-nav-title">{next.title}</span>
+                      <span className="cs-nav-arrow" aria-hidden="true">→</span>
                     </Link>
                   )}
                 </nav>
@@ -193,16 +193,16 @@ export async function CaseStudyPage({ kind, slug }: { kind: ContentKind; slug: s
           {(prev || next) && (
             <div className="cs-foot">
               <nav className="cs-nav" aria-label="Case study navigation">
-                {prev && (
+                {prev ? (
                   <Link className="cs-nav-link cs-nav-prev" href={`/${kind}/${prev.slug}`}>
-                    <span className="cs-nav-dir">← Previous</span>
+                    <span className="cs-nav-arrow" aria-hidden="true">←</span>
                     <span className="cs-nav-title">{prev.title}</span>
                   </Link>
-                )}
+                ) : <span />}
                 {next && (
                   <Link className="cs-nav-link cs-nav-next" href={`/${kind}/${next.slug}`}>
-                    <span className="cs-nav-dir">Next →</span>
                     <span className="cs-nav-title">{next.title}</span>
+                    <span className="cs-nav-arrow" aria-hidden="true">→</span>
                   </Link>
                 )}
               </nav>

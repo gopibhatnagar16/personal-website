@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Caveat, Playwrite_MX, JetBrains_Mono, IBM_Plex_Serif } from "next/font/google";
+import { Inter, Caveat, JetBrains_Mono, IBM_Plex_Serif } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { ThemeProvider } from "@/components/ui/ThemeProvider";
@@ -18,17 +18,12 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-// handwritten caption font for the Personal pegboard's polaroid captions
+// handwritten font for the Personal pegboard's polaroid captions and the
+// footer note
 const caveat = Caveat({
   subsets: ["latin"],
   weight: ["600"],
   variable: "--font-caveat",
-});
-
-// handwritten note in the site footer
-const playwriteMX = Playwrite_MX({
-  weight: ["400"],
-  variable: "--font-playwrite-mx",
 });
 
 // footer chip tooltip labels ("Email", "LinkedIn" …)
@@ -106,7 +101,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${inter.variable} ${GeistSans.variable} ${GeistMono.variable} ${caveat.variable} ${playwriteMX.variable} ${jetbrainsMono.variable} ${ibmPlexSerif.variable}`}
+      className={`${inter.variable} ${GeistSans.variable} ${GeistMono.variable} ${caveat.variable} ${jetbrainsMono.variable} ${ibmPlexSerif.variable}`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
