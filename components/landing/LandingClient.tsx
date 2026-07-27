@@ -86,7 +86,18 @@ export function LandingClient({ work, writing }: Props) {
                 pan={personalControls.pan}
                 setPan={personalControls.setPan}
               />
-              <span className="canvas-hint">Drag &amp; move items in the board</span>
+              <div className="canvas-hint">
+                <svg className="canvas-hint-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path
+                    d="M12 2v20M2 12h20M5 9l-3 3 3 3M19 9l3 3-3 3M9 5l3-3 3 3M9 19l3 3 3-3"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                <span>Drag to move</span>
+              </div>
             </section>
           </div>
         </div>
