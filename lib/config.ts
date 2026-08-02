@@ -47,7 +47,7 @@ export const CONFIG = {
   personalHeader: "Off duty, not off imagination.",
   personalIntro:
     'Design pulled me in because it turns "what if" into something real. When I\'m not working, I\'m probably:',
-  personalHobbies: ["Out playing sports", "Buried in a non-fiction book", "Hunting down a new drink to try"],
+  personalHobbies: ["Out playing sports", "Buried in a non-fiction book", "Trying out new beverages"],
 
   // logo: each company's own brand mark, exported from Figma.
   // initial stays as the fallback if a logo ever fails to load.
