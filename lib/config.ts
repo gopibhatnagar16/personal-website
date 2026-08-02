@@ -206,10 +206,10 @@ export const CONFIG = {
     // stickers scaled 1.15x, polaroids scaled 1.3x (both up from the original Figma sizes)
     { id: "coffee-hand", x: 1, y: 19, w: 109, h: 173, kind: "sticker", rot: -6, src: "/personal/coffee-hand.png" },
     { id: "sandwich", x: 15, y: 18, w: 150, h: 150, kind: "sticker", rot: 5, src: "/personal/sandwich-plate.png" },
-    { id: "closing-time", x: 33, y: 16, w: 176, h: 178, kind: "polaroid", rot: -4, src: "/personal/closing-time.png", caption: "closing time" },
+    { id: "closing-time", x: 33, y: 16, w: 176, h: 178, kind: "polaroid", rot: -4, src: "/personal/closing-time.png", caption: "Sunset did the color grading" },
     { id: "tote-bag", x: 53, y: 14, w: 150, h: 178, kind: "sticker", rot: 12, src: "/personal/tote-bag.png" },
     { id: "flower-bouquet", x: 70, y: 16, w: 138, h: 135, kind: "sticker", rot: 7, src: "/personal/flower-bouquet.png" },
-    { id: "window-sill", x: 84, y: 21, w: 221, h: 224, kind: "polaroid", rot: -20, src: "/personal/window-sill.png", caption: "window sill" },
+    { id: "window-sill", x: 84, y: 21, w: 221, h: 224, kind: "polaroid", rot: -20, src: "/personal/window-sill.png", caption: "Bloomin' szn" },
 
     // -- third row: chalkboard, mug, Soni screenshot, shoe, oatmeal bowl --
     { id: "chalkboard", x: 2, y: 41, w: 152, h: 200, kind: "sticker", rot: -5, src: "/personal/chalkboard-quote.png" },
@@ -223,16 +223,16 @@ export const CONFIG = {
 
     // -- fourth row: camera, paper bag, vinil screenshot, match day --
     { id: "instax-camera", x: 1, y: 59, w: 115, h: 122, kind: "sticker", rot: -9, src: "/personal/instax-camera.png" },
-    { id: "paper-bag", x: 15, y: 57, w: 143, h: 172, kind: "polaroid", rot: 4, src: "/personal/paper-bag.png", caption: "paper bag" },
+    { id: "paper-bag", x: 15, y: 57, w: 143, h: 172, kind: "polaroid", rot: 4, src: "/personal/paper-bag.png", caption: "Packed with ♡" },
     { id: "vinil", x: 31, y: 67, w: 289, h: 60, kind: "rect", rot: -3, src: "/personal/slack-vinil.png" },
-    { id: "match-day", x: 77, y: 57, w: 182, h: 195, kind: "polaroid", rot: 5, src: "/personal/match-day.jpg", caption: "match day" },
+    { id: "match-day", x: 77, y: 57, w: 182, h: 195, kind: "polaroid", rot: 5, src: "/personal/match-day.jpg", caption: "Love trying new workouts" },
 
     // -- bottom row: studio days, cosmic sticker, dinner table, mango, lunch break --
-    { id: "studio-days", x: 1, y: 79, w: 150, h: 185, kind: "polaroid", rot: -7, src: "/personal/studio-days.png", caption: "studio days" },
+    { id: "studio-days", x: 1, y: 79, w: 150, h: 185, kind: "polaroid", rot: -7, src: "/personal/studio-days.png", caption: "Handmade = heartmade" },
     { id: "cosmic-text", x: 16, y: 83, w: 127, h: 106, kind: "sticker", rot: 8, src: "/personal/cosmic-text.png" },
-    { id: "dinner-table", x: 31, y: 81, w: 137, h: 182, kind: "polaroid", rot: -5, src: "/personal/dinner-table.png", caption: "dinner table" },
-    { id: "mango-hand", x: 51, y: 78, w: 130, h: 173, kind: "polaroid", rot: 6, src: "/personal/mango-hand.png", caption: "mango hand" },
-    { id: "lunch-break", x: 68, y: 77, w: 150, h: 176, kind: "polaroid", rot: -6, src: "/personal/lunch-break.png", caption: "lunch break" },
+    { id: "dinner-table", x: 31, y: 81, w: 137, h: 182, kind: "polaroid", rot: -5, src: "/personal/dinner-table.png", caption: "Golden hour, golden company" },
+    { id: "mango-hand", x: 51, y: 78, w: 130, h: 173, kind: "polaroid", rot: 6, src: "/personal/mango-hand.png", caption: "Sunshine, but make it edible" },
+    { id: "lunch-break", x: 68, y: 77, w: 150, h: 176, kind: "polaroid", rot: -6, src: "/personal/lunch-break.png", caption: "Your gut said - thank you" },
 
     // -- sixth row: Nikhil's conversion-lift screenshot --
     { id: "nikhil", x: 68, y: 93, w: 230, h: 58, kind: "rect", rot: -2, src: "/personal/slack-nikhil.png" },
