@@ -41,7 +41,7 @@ const ibmPlexSerif = IBM_Plex_Serif({
   variable: "--font-ibm-plex-serif",
 });
 
-const title = `Hey, I'm ${CONFIG.name}.`;
+const title = `${CONFIG.name} - Design Builder`;
 const description = "Designing in canvas, building in codebase.";
 
 export const metadata: Metadata = {

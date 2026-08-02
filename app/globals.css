@@ -286,19 +286,21 @@ body {
 .ci:hover .ci-tip{opacity:1;transform:translate(-50%,0);}
 .ci-tip svg{flex:0 0 auto;color:var(--bg);}
 
-/* polaroid — for the Personal pegboard: photo + printed caption strip, clipped to the board */
-.ci-polaroid{border-radius:3px;background:#F9F8F4;background-image:none;padding:7px 7px 22px;
-  display:flex;box-shadow:0 10px 24px -6px rgba(0,0,0,.16),0 2px 6px rgba(0,0,0,.08);}
+/* polaroid — for the Personal pegboard: photo + printed caption strip, clipped to the board.
+   caption sits in normal flow below the photo (not absolutely positioned) so it wraps to a
+   second line and pushes the photo up instead of truncating or overlapping it. */
+.ci-polaroid{border-radius:3px;background:#F9F8F4;background-image:none;padding:7px;
+  display:flex;flex-direction:column;box-shadow:0 10px 24px -6px rgba(0,0,0,.16),0 2px 6px rgba(0,0,0,.08);}
 .ci-polaroid:active{box-shadow:0 14px 30px -6px rgba(0,0,0,.2),0 4px 8px rgba(0,0,0,.1);}
 .ci-polaroid::before{content:"";position:absolute;top:-9px;left:50%;transform:translateX(-50%);
   width:17px;height:17px;border-radius:50%;
   background:radial-gradient(circle at 32% 28%,#fff,#dedcd4 70%,#c3c1b8);
   box-shadow:0 3px 7px rgba(0,0,0,.2);pointer-events:none;}
 [data-theme="dark"] .ci-polaroid::before{background:radial-gradient(circle at 32% 28%,#57564e,#37362f 70%,#232320);}
-.ci-photo{flex:1;border-radius:4px;background-size:cover;background-position:center;object-fit:cover;pointer-events:none;}
-.ci-cap{position:absolute;left:7px;right:7px;bottom:4px;font-family:var(--font-caveat),cursive;
-  font-size:15px;font-weight:600;letter-spacing:.01em;color:#524e42;text-align:center;white-space:nowrap;
-  overflow:hidden;text-overflow:ellipsis;pointer-events:none;}
+.ci-photo{flex:1;min-height:0;border-radius:4px;background-size:cover;background-position:center;object-fit:cover;pointer-events:none;}
+.ci-cap{flex:0 0 auto;margin-top:8px;font-family:var(--font-caveat),cursive;
+  font-size:15px;font-weight:600;letter-spacing:.01em;color:#524e42;text-align:center;white-space:normal;
+  pointer-events:none;}
 
 /* sticker — laptop-sticker style photo cutouts pinned to the Personal pegboard:
    transparent die-cut PNGs, no card/frame, just the image + a shape-hugging
