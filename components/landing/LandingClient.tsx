@@ -96,7 +96,7 @@ export function LandingClient({ work, writing }: Props) {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <span>Drag to move</span>
+                <span>Try moving things around</span>
               </div>
             </section>
           </div>
