@@ -409,7 +409,7 @@ body {
 .ft-tape{position:absolute;top:calc(-1*min(16px,2.3vw));left:50%;width:min(116px,16.2vw);height:min(34px,4.8vw);z-index:2;
   background:rgba(180,205,188,.92);transform:translateX(-50%) rotate(-3deg);border-radius:2px;
   box-shadow:0 2px 5px rgba(0,0,0,.2);pointer-events:none;}
-.ft-note-body{position:relative;z-index:1;font-family:var(--font-just-another-hand),cursive;font-weight:400;letter-spacing:.01em;
+.ft-note-body{position:relative;z-index:1;font-family:var(--font-playwrite-us-trad),cursive;font-weight:400;letter-spacing:.01em;
   font-size:min(1.35rem,3.1vw);line-height:var(--lh);color:#26241F;margin:var(--lh) 0 0;width:100%;
   padding-bottom:var(--lh);}
 .ft-note-body a{color:inherit;font-weight:600;}
