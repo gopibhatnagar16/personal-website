@@ -410,7 +410,7 @@ body {
   background:rgba(180,205,188,.92);transform:translateX(-50%) rotate(-3deg);border-radius:2px;
   box-shadow:0 2px 5px rgba(0,0,0,.2);pointer-events:none;}
 .ft-note-body{position:relative;z-index:1;font-family:var(--font-playwrite-us-trad),cursive;font-weight:400;letter-spacing:.01em;
-  font-size:min(1.35rem,3.1vw);line-height:var(--lh);color:#26241F;margin:var(--lh) 0 0;width:100%;
+  font-size:min(1.225rem,2.81vw);line-height:var(--lh);color:#26241F;margin:var(--lh) 0 0;width:100%;
   padding-bottom:var(--lh);}
 .ft-note-body a{color:inherit;font-weight:600;}
 .ft-note-body .num{font-size:.76em;letter-spacing:.02em;}
